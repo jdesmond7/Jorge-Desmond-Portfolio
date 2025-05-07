@@ -58,27 +58,10 @@
   --black-950: #02111B;
   --white-950: #FFFFFF;
 
-    /* === Font Family === */
-    --font-family-base: 'Almarai', sans-serif;
-
-    /* === Typography Tokens === */
-  
-    /* Hero Section */
-    --font-hero-size: 64px;
-    --font-hero-weight: 800;
-    --font-hero-lineheight: 72px;
-  
-    /* Card Titles */
-    --font-h1-size: 48px;
-    --font-h1-weight: 700;
-    --font-h1-lineheight: 48px;
-  
-    /* Body Text */
-    --font-body-size: 20px;
-    --font-body-weight: 400;
-    --font-body-lineheight: 28px;
 
     /* === Alias Tokens === */
+
+    /* === Colores === */
 
       /* Core UI Colors */
   --color-primary: var(--green-600);
@@ -93,19 +76,10 @@
 
   /* Text Colors */
   --text-main: var(--black-950);
-  --text-muted: var(--blue-700);
+  --text-muted: var(--blue-800);
   --text-inverse: var(--white-950);
 
   /* Borders */
   --border-color: var(--blue-200);
 
-  /* Buttons (optional) */
-  --button-primary-bg: var(--color-primary);
-  --button-primary-text: var(--text-inverse);
-  --button-secondary-bg: var(--color-secondary);
-  --button-secondary-text: var(--text-inverse);
 }
-
-
-
-

@@ -1,30 +1,118 @@
-@import url('./tokens.css');
+@import url('./tokens-colors.css');
+@import url('./tokens-typography.css');
 
-/* === Base Styles === */
+/* ===================== */
+/*       Base Styles     */
+/* ===================== */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background-color: var(--color-bg);
-    color: var(--text-main);
-    font-family: var(--font-family-base);
-    font-size: var(--font-body-size);
-    font-weight: var(--font-body-weight);
-    line-height: var(--font-body-lineheight);
-  }
-  
-  h1 {
-    font-size: var(--font-h1-size);
-    font-weight: var(--font-h1-weight);
-    line-height: var(--font-h1-lineheight);
-  }
-  
-  a {
-    color: var(--color-primary);
-    text-decoration: none;
-  }
-q
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--text-main);
+  font-family: var(--font-family-base);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  line-height: var(--leading-xl);
+}
+
+/* ===================== */
+/*     Typography        */
+/* ===================== */
+
+h1 {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  line-height: var(--leading-5xl);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* ===================== */
+/*       Wrapper         */
+/* ===================== */
+
+.wrapper {
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+/* ===================== */
+/*       Navbar          */
+/* ===================== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 24px;
+  background-color: var(--green-50);
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar.scrolled {
+  background-color: var(--green-100);
+}
+
+.logo {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* ===================== */
+/*     Hero Section      */
+/* ===================== */
+
+.hero {
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hero-title {
+  font-size: var(--text-6xl);
+  font-weight: 800;
+  line-height: var(--leading-6xl);
+  color: var(--text-main);
+}
+
+.hero-subtitle {
+  font-size: var(--text-xl);
+  font-weight: 400;
+  line-height: var(--leading-xl);
+  color: var(--text-main);
+}
+
+/* ===================== */
+/*       Footer          */
+/* ===================== */
+
+footer {
+  background-color: var(--green-100);
+  color: var(--text-main);
+  text-align: center;
+  padding: 2rem 0;
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.footer-note {
+  font-size: var(--text-sm);
+  color: var(--text-main);
+  font-weight: 400;
+  margin-top: 0rem;
+}

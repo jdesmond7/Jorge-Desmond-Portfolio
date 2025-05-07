@@ -1,0 +1,51 @@
+/* === Typographic Scale Tokens (Tailwind-style) === */
+
+:root {
+
+      /* === Font Family === */
+      --font-family-base: 'Almarai', sans-serif;
+  
+  /* Extra Small */
+  --text-xs: 0.75rem;         /* 12px */
+  --leading-xs: 1rem;         /* 16px */
+
+  /* Small */
+  --text-sm: 0.875rem;        /* 14px */
+  --leading-sm: 1.25rem;      /* 20px */
+
+  /* Base */
+  --text-base: 1rem;          /* 16px */
+  --leading-base: 1.5rem;     /* 24px */
+
+  /* Large */
+  --text-lg: 1.125rem;        /* 18px */
+  --leading-lg: 1.75rem;      /* 28px */
+
+  /* Extra Large */
+  --text-xl: 1.25rem;         /* 20px */
+  --leading-xl: 1.75rem;      /* 28px */
+
+  --text-2xl: 1.5rem;         /* 24px */
+  --leading-2xl: 2rem;        /* 32px */
+
+  --text-3xl: 1.875rem;       /* 30px */
+  --leading-3xl: 2.25rem;     /* 36px */
+
+  --text-4xl: 2.25rem;        /* 36px */
+  --leading-4xl: 2.5rem;      /* 40px */
+
+  --text-5xl: 3rem;           /* 48px */
+  --leading-5xl: 1;           /* unitless */
+
+  --text-6xl: 3.75rem;        /* 60px */
+  --leading-6xl: 1;
+
+  --text-7xl: 4.5rem;         /* 72px */
+  --leading-7xl: 1;
+
+  --text-8xl: 6rem;           /* 96px */
+  --leading-8xl: 1;
+
+  --text-9xl: 8rem;           /* 128px */
+  --leading-9xl: 1;
+}
