@@ -1,0 +1,30 @@
+@import url('./tokens.css');
+
+/* === Base Styles === */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: var(--color-bg);
+    color: var(--text-main);
+    font-family: var(--font-family-base);
+    font-size: var(--font-body-size);
+    font-weight: var(--font-body-weight);
+    line-height: var(--font-body-lineheight);
+  }
+  
+  h1 {
+    font-size: var(--font-h1-size);
+    font-weight: var(--font-h1-weight);
+    line-height: var(--font-h1-lineheight);
+  }
+  
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+q

@@ -1,0 +1,111 @@
+:root {
+
+  /* === Primitive Color Tokens === */
+    
+    /* === Blue === */
+      --blue-50: #F6F8FB;
+      --blue-100: #D8DEE6;
+      --blue-200: #BFC8D5;
+      --blue-300: #9FADC0;
+      --blue-400: #7E91AA;
+      --blue-500: #5E7695;
+      --blue-600: #3E5A80;
+      --blue-700: #344B6B;
+      --blue-800: #293C55;
+      --blue-900: #1F2D40;
+      --blue-950: #151E2B;
+    
+    /* === Yellow === */
+      --yellow-50: #FFF8E6;
+      --yellow-100: #FFF2CF;
+      --yellow-200: #FFE9AF;
+      --yellow-300: #FFDE88;
+      --yellow-400: #FFD360;
+      --yellow-500: #FFC838;
+      --yellow-600: #FFBD10;
+      --yellow-700: #D59E0D;
+      --yellow-800: #AA7E0B;
+      --yellow-900: #805F08;
+      --yellow-950: #553F05;
+
+    /* === Red === */
+      --red-50: #FEF2F2;
+      --red-100: #FBD4D5;
+      --red-200: #F8B8B9;
+      --red-300: #F59597;
+      --red-400: #F17174;
+      --red-500: #EE4E51;
+      --red-600: #EA2A2E;
+      --red-700: #C32326;
+      --red-800: #9C1C1F;
+      --red-900: #751517;
+      --red-950: #4E0E0F;
+
+    /* === Green === */
+      --green-50: #FDFEFD;
+      --green-100: #E9F1E5;
+      --green-200: #DAE7D4;
+      --green-300: #C7DBBE;
+      --green-400: #B4CFA8;
+      --green-500: #A2C393;
+      --green-600: #8FB77D;
+      --green-700: #779968;
+      --green-800: #5F7A53;
+      --green-900: #485C3F;
+      --green-950: #1D2519;
+ 
+    /* === Black & White === */
+  --black-950: #02111B;
+  --white-950: #FFFFFF;
+
+    /* === Font Family === */
+    --font-family-base: 'Almarai', sans-serif;
+
+    /* === Typography Tokens === */
+  
+    /* Hero Section */
+    --font-hero-size: 64px;
+    --font-hero-weight: 800;
+    --font-hero-lineheight: 72px;
+  
+    /* Card Titles */
+    --font-h1-size: 48px;
+    --font-h1-weight: 700;
+    --font-h1-lineheight: 48px;
+  
+    /* Body Text */
+    --font-body-size: 20px;
+    --font-body-weight: 400;
+    --font-body-lineheight: 28px;
+
+    /* === Alias Tokens === */
+
+      /* Core UI Colors */
+  --color-primary: var(--green-600);
+  --color-secondary: var(--yellow-500);
+  --color-accent: var(--blue-600);
+  --color-danger: var(--red-500);
+
+  /* Backgrounds */
+  --color-bg: var(--green-50);
+  --color-surface: var(--blue-50);
+  --color-card: var(--blue-100);
+
+  /* Text Colors */
+  --text-main: var(--black-950);
+  --text-muted: var(--blue-700);
+  --text-inverse: var(--white-950);
+
+  /* Borders */
+  --border-color: var(--blue-200);
+
+  /* Buttons (optional) */
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--text-inverse);
+  --button-secondary-bg: var(--color-secondary);
+  --button-secondary-text: var(--text-inverse);
+}
+
+
+
+
