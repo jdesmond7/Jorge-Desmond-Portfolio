@@ -79,4 +79,4 @@ Gracias por visitar 🙌
 Sígueme o contáctame en:
 
 - [LinkedIn](https://www.linkedin.com/in/jorge-desmond)
-- [Instagram](https://www.instagram.com/tuusuario) *(opcional)*
+- [Instagram](https://www.instagram.com/tuusuario)
