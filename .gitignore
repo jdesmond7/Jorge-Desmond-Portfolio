@@ -16,5 +16,12 @@ desktop.ini
 # Archivos de Live Server (si llegaran a aparecer)
 .liveserver*
 
+# Future tools
+node_modules/
+dist/
+build/
+.env
+.idea/
+
 # Archivos generados por Figma plugins (opcional)
 *.json
