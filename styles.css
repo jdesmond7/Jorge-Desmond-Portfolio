@@ -183,6 +183,22 @@ a {
   display: block;
 }
 
+.project-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 48px;
+  height: 406px;
+  background-color: var(--color-card); /* opcional si quieres un fondo */
+}
+
+.project-hero-image {
+  width: 310px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .project-text-light,
 .project-text-light .project-title,
 .project-text-light .project-description {
