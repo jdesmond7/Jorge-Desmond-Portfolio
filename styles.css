@@ -177,6 +177,12 @@ a {
 /*     Projectos         */
 /* ===================== */
 
+.project-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .project-text-light,
 .project-text-light .project-title,
 .project-text-light .project-description {
@@ -371,7 +377,7 @@ footer {
 
 
 /* ===================== */
-/*   Project Page Styles */
+/*  Project Page Styles  */
 /* ===================== */
 .project-hero {
   width: 100%;
