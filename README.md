@@ -1,82 +1,59 @@
 # Portafolio – Jorge Desmond
 
-![Status](https://img.shields.io/badge/status-en%20desarrollo-yellow)
-![Made with](https://img.shields.io/badge/Made%20with-HTML%20%26%20CSS-blue)
-![Design Tokens](https://img.shields.io/badge/Design%20System-Tokens%20CSS-8a2be2)
-![Live Server](https://img.shields.io/badge/Preview-Live%20Server-green)
-
 👋 Hola, soy Jorge, Senior Product Designer. Este proyecto es mi portafolio personal donde muestro algunos de mis trabajos, exploraciones de diseño e ilustración, y mi evolución como diseñador de productos digitales.
 
----
+## ✨ Features
+
+- Diseño responsive con `max-width: 1440px` y márgenes internos de 80px
+- Navbar sticky con efecto de desvanecido para mejorar el enfoque visual
+- Sección de héroe con animación de tipografías y estilo dinámico
+- Cards de proyectos con gradientes personalizados y efecto de énfasis al hover
+- Galería de ilustraciones con interacción visual
+- Layout centrado y limpio con enfoque UX/UI profesional
 
 ## 🚀 Tecnologías utilizadas
 
 - HTML5
 - CSS3
-- Design Tokens (custom)
+- JavaScript
+- Design Tokens (`tokens-colors.css` y `tokens-typography.css`)
 - [Google Fonts – Almarai](https://fonts.google.com/specimen/Almarai)
 - Figma (como fuente de diseño)
 - Git & GitHub
 
----
-
 ## 🎨 Design System
 
-El proyecto está construido a partir de un sistema de diseño basado en tokens (`tokens.css`) con separación clara entre:
+El proyecto está construido a partir de un sistema de diseño basado en tokens con separación clara entre:
 
-- **Primitive tokens** – valores como colores escalados (`blue-50` a `blue-950`).
-- **Alias tokens** – valores semánticos como `--color-primary` o `--text-main`.
-
----
+- **Primitive tokens** – valores como colores escalados (`blue-50` a `blue-950`)
+- **Alias tokens** – valores semánticos como `--color-primary`, `--text-main`, etc.
 
 ## 📁 Estructura del proyecto
 
 ```
 portafolio/
 │
-├── index.html         # Página principal
-├── styles.css         # Estilos base
-├── tokens.css         # Design tokens (colores, tipografía, etc.)
-└── README.md          # Este archivo
+├── index.html
+├── styles.css
+├── main.js
+│
+├── tokens-colors.css
+├── tokens-typography.css
+│
+├── images/
+│   ├── projects/
+│   └── illustrations/
 ```
 
----
+## 🔗 Demo
 
-## 🛠 Cómo ver el proyecto localmente
+_(Próximamente disponible)_
 
-Si tú (o alguien más) desea ver este portafolio en su computadora:
-
-1. Clonar el repositorio:
+## 🛠 Instalación local (opcional)
 
 ```bash
 git clone https://github.com/jdesmond7/portafolio.git
-```
-
-2. Ir a la carpeta del proyecto:
-
-```bash
 cd portafolio
 ```
 
-3. Abrir `index.html` en tu navegador o usar la extensión **Live Server** en VS Code para previsualizarlo con recarga automática.
-
----
-
-## ✨ Próximamente
-
-Este portafolio irá creciendo con nuevas secciones como:
-
-- Proyectos destacados
-- Ilustraciones
-- Página “Sobre mí”
-- Artículos de diseño
-
----
-
-## 📬 Contacto
-
-Gracias por visitar 🙌  
-Sígueme o contáctame en:
-
-- [LinkedIn](https://www.linkedin.com/in/jorge-desmond)
-- [Instagram](https://www.instagram.com/tuusuario)
+¡Gracias por visitar mi portafolio!
