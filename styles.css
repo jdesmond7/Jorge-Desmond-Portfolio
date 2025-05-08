@@ -369,6 +369,36 @@ footer {
   margin-top: 0rem;
 }
 
+
+/* ===================== */
+/*   Project Page Styles */
+/* ===================== */
+.project-hero {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-title {
+  font-family: 'Almarai', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 48px;
+  color: var(--text-main);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.project-text {
+  font-family: 'Almarai', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--text-main);
+  max-width: 1440px;
+  margin-bottom: 2rem;
+}
+
 /* ===================== */
 /*      Breakpoints      */
 /* ===================== */
