@@ -188,6 +188,7 @@ a {
   justify-content: center;
   align-items: center;
   max-height: 406px;
+  width: 100%;
 }
 
 .project-text-light,
