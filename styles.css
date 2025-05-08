@@ -36,47 +36,121 @@ a {
 }
 
 /* ===================== */
-/*       Wrapper         */
+/*    Card Gradients     */
 /* ===================== */
 
-.wrapper {
-  margin-left: 80px;
-  margin-right: 80px;
-}
+.gradient-growrk {
+    background: linear-gradient(97deg, #FFE3A5 21.02%, #FFB100 85.35%, #FC3A2F 129.58%);
+  }
+
+  .gradient-spin {
+    background: linear-gradient(97deg, #28154E 21.02%, #7F61BF 85.35%, #A9A0BE 129.58%);
+  }
+
+  .gradient-salinas {
+    background: linear-gradient(97deg, #FFF3C7 21.02%, #FFC900 85.35%, #8D7000 129.58%);
+  }
+
+  .gradient-oxxo {
+    background: linear-gradient(97deg, #C71B2F 21.02%, #75212B 85.35%, #421319 129.58%);
+  }
+
+/* ===================== */
+/*       Hero            */
+/* ===================== */
+
+/* Base highlight */
+.highlight {
+    display: inline-block;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    padding: 2px 6px; /* ← más aire horizontal */
+    transition:
+      color 0.4s ease-in-out,
+      background-color 0.4s ease-in-out,
+      font-family 0.6s ease-in-out,
+      transform 0.3s ease;
+  }
 
 /* ===================== */
 /*       Navbar          */
 /* ===================== */
 
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 24px;
-  background-color: var(--green-50);
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
+    position: sticky;
+    top: 40px; /* comienza 40px desde el top */
+    z-index: 1000;
+    max-width: 1440px; /* ← igual que el contenido principal */
+    margin: 0 auto; /* centra horizontalmente */
+    background-color: var(--green-50);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar.scrolled {
+    background-color: var(--green-100);
+  }
+  
+  .logo {
+      font-size: var(--text-lg);
+      font-weight: 800; /* extrabold */
+      color: var(--text-main);
+    }
+  
+  .nav-links {
+      display: flex;
+      gap: 2rem; /* Espacio entre los links */
+      list-style: none;
+      margin-left: auto; /* Esto los empuja hacia la derecha */
+    }
+    
+    .nav-links li a {
+      font-size: var(--text-lg);
+      font-weight: 700; /* bold */
+      color: var(--text-main);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-links li a:hover {
+      color: var(--color-primary);
+    }
 
-.navbar.scrolled {
-  background-color: var(--green-100);
-}
+    .navbar-fade-overlay {
+        position: fixed;
+        top: 0; /* 40px del top + 64px del navbar */
+        left: 0;
+        width: 100%;
+        height: 180px;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 1), 140px,
+          rgba(255, 255, 255, 0) 100%
+        );
+        pointer-events: none;
+        z-index: 999;
+      }
 
-.logo {
-  font-weight: 700;
-  color: var(--text-main);
-}
+/* ===================== */
+/*       Wrapper         */
+/* ===================== */
+
+.wrapper {
+    max-width: 1440px;
+    margin: 40px auto 0 auto; /* top 40px, auto en lados para centrar */
+  }
+
 
 /* ===================== */
 /*     Hero Section      */
 /* ===================== */
 
 .hero {
-  margin-top: 5rem;
+  margin-top: 8rem;
   margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
@@ -86,8 +160,9 @@ a {
 .hero-title {
   font-size: var(--text-6xl);
   font-weight: 800;
-  line-height: var(--leading-6xl);
+  line-height: var(--leading-7xl);
   color: var(--text-main);
+  
 }
 
 .hero-subtitle {
@@ -96,6 +171,183 @@ a {
   line-height: var(--leading-xl);
   color: var(--text-main);
 }
+
+
+/* ===================== */
+/*     Projectos         */
+/* ===================== */
+
+.project-text-light,
+.project-text-light .project-title,
+.project-text-light .project-description {
+  color: var(--text-inverse);
+}
+
+.project-text-dark,
+.project-text-dark .project-title,
+.project-text-dark .project-description {
+  color: var(--text-main);
+}
+
+/* ===================== */
+/*   Featured Projects   */
+/* ===================== */
+
+.featured-projects {
+    margin-top: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .section-title {
+    font-size: var(--text-5xl);
+    font-weight: 800;
+    color: var(--text-main);
+  }
+
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* ← fuerza 2 columnas */
+    gap: 2rem;
+  }
+
+  .project-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 2rem;
+    border-radius: 1rem;
+    transition: transform 0.3s ease, opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 310px;
+    width: 100%;
+    max-width: 100%;
+    gap: 40px;
+    cursor: pointer;
+  }
+  
+  /* Eleva la card */
+  .project-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Cuando se hace hover en la lista de proyectos */
+  .project-list:hover .project-card {
+    opacity: 0.25;
+  }
+  
+  /* La card activa se mantiene nítida */
+  .project-list:hover .project-card:hover {
+    opacity: 1;
+  }
+  
+  .project-image img {
+    width: 246px;
+    height: 310px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
+  .project-image img {
+    width: 246px;
+    height: 310px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
+  .project-title {
+    font-size: var(--text-5xl);
+    line-height: var(--leading-5xl);
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-description {
+    font-size: var(--text-xl);
+    font-weight: 400;
+    color: var(--text-main);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;        /* ← límite de líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+/* ===================== */
+/* illustrations Section */
+/* ===================== */
+
+.illustrations-section {
+    margin-top: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .illustration-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* siempre 3 */
+    gap: 2rem;
+  }
+  
+  .illustration-item {
+    width: 100%;
+    height: 310px;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Hover individual */
+  .illustration-item {
+    transition: transform 0.3s ease, opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 0.75rem;
+    object-fit: cover;
+    display: block;
+    width: 100%;
+    height: 310px;
+    cursor: pointer;
+  }
+  
+  /* Eleva la imagen */
+  .illustration-item:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Si hay hover en la lista, todas bajan a 25% */
+  .illustration-list:hover .illustration-item {
+    opacity: 0.25;
+  }
+  
+  /* ... excepto la que tiene hover */
+  .illustration-list:hover .illustration-item:hover {
+    opacity: 1;
+  }
+
+
+/* ===================== */
+/*     Contact Section   */
+/* ===================== */
+
+.contact {
+    margin-top: 140px;       /* separación desde featured-projects */
+    margin-bottom: 140px;     /* separación antes del footer */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .contact-text {
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: var(--leading-xl);
+    color: var(--text-main);
+    max-width: 100%;
+  }
+
 
 /* ===================== */
 /*       Footer          */
@@ -116,3 +368,72 @@ footer {
   font-weight: 400;
   margin-top: 0rem;
 }
+
+/* ===================== */
+/*      Breakpoints      */
+/* ===================== */
+
+@media (max-width: 1166px) {
+    .project-list {
+      grid-template-columns: 1fr; /* fuerza una sola tarjeta por fila */
+    }
+  
+    .project-card {
+      flex-direction: row;         /* mantiene diseño horizontal */
+      align-items: center;
+      max-width: 100%;             /* asegura que ocupe todo el ancho disponible */
+    }
+  
+    .project-image img {
+      width: 246px;                /* mantiene proporción de imagen */
+      height: auto;
+    }
+  
+    .project-info {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-list {
+      grid-template-columns: 1fr; /* una sola columna */
+    }
+  
+    .project-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.5rem;
+      gap: 1.5rem; /* menos espacio entre imagen y texto */
+      min-height: auto; /* permite que se ajuste en vertical */
+    }
+  
+    .project-image {
+      padding: 0; /* quitamos el padding lateral en mobile */
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  
+    .project-image img {
+      width: 100%;
+      height: auto;
+      max-width: 246px;
+      object-fit: contain;
+    }
+  
+    .project-info {
+      width: 100%;
+    }
+  
+    .project-title,
+    .project-description {
+      text-align: left;
+    }
+
+    .illustration-list {
+        grid-template-columns: 1fr;
+      }
+
+  }
+
+  

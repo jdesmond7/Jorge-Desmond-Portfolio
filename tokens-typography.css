@@ -35,17 +35,17 @@
   --leading-4xl: 2.5rem;      /* 40px */
 
   --text-5xl: 3rem;           /* 48px */
-  --leading-5xl: 1;           /* unitless */
+  --leading-5xl: 3rem;           /* unitless */
 
   --text-6xl: 3.75rem;        /* 60px */
-  --leading-6xl: 1;
+  --leading-6xl: 3.75rem;
 
   --text-7xl: 4.5rem;         /* 72px */
-  --leading-7xl: 1;
+  --leading-7xl: 4.5rem;
 
   --text-8xl: 6rem;           /* 96px */
-  --leading-8xl: 1;
+  --leading-8xl: 6rem;
 
   --text-9xl: 8rem;           /* 128px */
-  --leading-9xl: 1;
+  --leading-9xl: 8rem;
 }

@@ -7,37 +7,152 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/portafolio/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Chicle&family=DynaPuff:wght@400..700&family=Fontdiner+Swanky&family=Londrina+Shadow&family=Mogra&display=swap" rel="stylesheet">
     </head>
 
+<body>
 
-<div class="wrapper">     <!-- Wrapper para margenes de 80px por lado -->
+ <!-- Navbar -->
+
+ <nav class="navbar">
+    <div class="logo">Jorge Desmond</div>
+    <ul class="nav-links">
+      <li><a href="#works">Casos de estudio</a></li>
+      <li><a href="#illustrations">Ilustración</a></li>
+    </ul>
+  </nav>
+
+  <div class="navbar-fade-overlay" aria-hidden="true"></div>
+
+</header>
+
+    <div class="wrapper">     <!-- Wrapper para margenes de 80px por lado -->
     <header>
-
-    <!-- Navbar -->
-
-      <nav class="navbar">
-        <div class="logo">Jorge Desmond</div>
-        <ul class="nav-links">
-          <li><a href="#works">Casos de estudio</a></li>
-          <li><a href="#illustrations">Ilustración</a></li>
-        </ul>
-      </nav>
-    </header>
 
     <!-- Hero Section -->
 
     <section class="hero">
         <h1 class="hero-title">
-        👋🏽👋🏽 <br>
-        Hola, soy Jorge Desmond<br>
-        Diseño, ilustro, hago animaciones, entreno calistenia y creo cosas digitales.
-        </h1>
+            👋🏽👋🏽 <br>
+            Hola, soy Jorge Desmond<br>
+            <span class="highlight">Diseño</span>,
+            <span class="highlight">ilustro</span>,
+            <span class="highlight">hago animaciones</span>,
+            <span class="highlight">entreno calistenia</span> y
+            <span class="highlight">creo cosas digitales</span>.
+          </h1>
         <p class="hero-subtitle">
           Soy diseñador de producto con base en Monterrey, México 🇲🇽, y tengo más de 10 años de experiencia en UX/UI creando productos digitales. Me apasiona ayudar a las personas a través del diseño y siempre busco nuevas formas de aprender, crecer y crear mejores experiencias.
         </p>
       </section>
 
-    <!-- Más secciones aquí -->
+    <!-- Preyectos destacados -->
+
+      <section class="featured-projects">
+        <h2 class="section-title">Proyectos destacados</h2>
+      
+        <div class="project-list">
+          <!-- GroWrk -->
+          <article class="project-card gradient-growrk" data-type="estudio" data-featured="true">
+            <div class="project-image">
+              <img
+                src="images/projects/growrk-dashboard.webp"
+                alt="Dashboard del sistema de diseño de GroWrk Remote"
+                loading="lazy"
+                width="400"
+                height="250"
+              />
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">GroWrk Remote</h2>
+              <p class="project-description">
+                Optimizando el trabajo remoto global mediante sistemas de diseño escalables que mejoran la eficiencia y la experiencia del usuario.
+              </p>
+            </div>
+          </article>
+      
+          <!-- Spin by OXXO -->
+          <article class="project-card gradient-spin project-text-light" data-type="estudio" data-featured="true">
+            <div class="project-image">
+              <img
+                src="images/projects/spinbyoxxo-mobile-dashboard.webp"
+                alt="App financiera de Spin by OXXO"
+                loading="lazy"
+                width="400"
+                height="250"
+              />
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Spin by OXXO</h2>
+              <p class="project-description">
+                Desarrollo de una app financiera escalable, accesible y centrada en el usuario para ampliar el acceso a servicios financieros en México.
+              </p>
+            </div>
+          </article>
+      
+            <!-- OXXOClUB -->
+            <article class="project-card gradient-oxxo project-text-light" data-type="estudio" data-featured="true">
+                <div class="project-image">
+                    <img
+                    src="images/projects/oxxoclub-ecommerce.webp"
+                    alt="E-commerce de beneficios para empleados de OXXO"
+                    loading="lazy"
+                    width="400"
+                    height="250"
+                    />
+                </div>
+                <div class="project-info">
+                    <h2 class="project-title">OXXO CLUB</h2>
+                    <p class="project-description">
+                    Diseño de plataformas accesibles y fáciles de usar para la gestión de beneficios de empleados, mejorando la experiencia y participación del usuario.
+                    </p>
+                </div>
+                </article>
+
+            <!-- Grupo Salinas -->
+            <article class="project-card gradient-salinas" data-type="estudio" data-featured="true">
+                <div class="project-image">
+                <img
+                    src="images/projects/grupo-salinas-rewards.webp"
+                    alt="Diseño del programa de lealtad de Grupo Salinas"
+                    loading="lazy"
+                    width="400"
+                    height="250"
+                />
+                </div>
+                <div class="project-info">
+                <h2 class="project-title">Grupo Salinas</h2>
+                <p class="project-description">
+                    Diseño de un ecosistema de lealtad para múltiples marcas, impulsando la fidelización del cliente a través de experiencias digitales conectadas.
+                </p>
+                </div>
+            </article>
+
+        </div>
+      </section>
+
+    <!-- Ilustraciones destacados -->
+
+
+    <section class="illustrations-section">
+        <h2 class="section-title">Ilustraciones</h2>
+      
+        <div class="illustration-list">
+          <img src="images/illustrations/Jorgedesmond.webp" alt="Jorge Desmond" class="illustration-item" />
+          <img src="images/illustrations/chica-calistenia.webp" alt="Chica calistenia" class="illustration-item" />
+          <img src="images/illustrations/turbo-abuela.webp" alt="Turbo abuela" class="illustration-item" />
+        </div>
+      </section>
+
+    <!-- Contáctame -->
+
+
+      <section class="contact">
+        <h2 class="section-title">Contáctame</h2>
+        <p class="contact-text">
+          Actualmente estoy aceptando nuevos proyectos y me encantaría conocer el tuyo. No dudes en compartir todos los detalles posibles: alcance, tiempos y presupuesto.
+        </p>
+      </section>
 
 </div>
 
