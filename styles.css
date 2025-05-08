@@ -189,12 +189,24 @@ a {
 
 .project-hero.gradient-growrk {
   width: 100%;
-  height: 406px;
+  padding: 24px 0; /* padding arriba y abajo */
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(97deg, #FFE3A5 21.02%, #FFB100 85.35%, #FC3A2F 129.58%);
-  overflow: hidden;
+}
+
+.project-banner-wrapper {
+  max-width: 620px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-banner-image {
+  width: 620px;
+  height: 310px;
+  object-fit: contain;
 }
 
 .project-banner-wrapper {
