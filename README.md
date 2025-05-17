@@ -1,59 +1,45 @@
-# Portafolio – Jorge Desmond
+# Jorge Desmond – Portafolio (Redesign Branch)
 
-👋 Hola, soy Jorge, Senior Product Designer. Este proyecto es mi portafolio personal donde muestro algunos de mis trabajos, exploraciones de diseño e ilustración, y mi evolución como diseñador de productos digitales.
+Este repositorio contiene el rediseño de mi portafolio personal, centrado en mejorar la experiencia visual, el rendimiento y la escalabilidad del sitio para reflejar mejor mi evolución como Product Designer y Digital Superhuman ⚡.
 
-## ✨ Features
+## ✨ Objetivos del Rediseño
 
-- Diseño responsive con `max-width: 1440px` y márgenes internos de 80px
-- Navbar sticky con efecto de desvanecido para mejorar el enfoque visual
-- Sección de héroe con animación de tipografías y estilo dinámico
-- Cards de proyectos con gradientes personalizados y efecto de énfasis al hover
-- Galería de ilustraciones con interacción visual
-- Layout centrado y limpio con enfoque UX/UI profesional
+- Reorganizar la estructura del sitio con una jerarquía más clara.
+- Mejorar la estética visual utilizando un nuevo hero, componentes reutilizables y un sistema más limpio.
+- Optimizar la navegación, destacando los proyectos más relevantes.
+- Implementar un banner final de contacto más potente ("Let’s make things that matter →").
 
-## 🚀 Tecnologías utilizadas
-
-- HTML5
-- CSS3
-- JavaScript
-- Design Tokens (`tokens-colors.css` y `tokens-typography.css`)
-- [Google Fonts – Almarai](https://fonts.google.com/specimen/Almarai)
-- Figma (como fuente de diseño)
-- Git & GitHub
-
-## 🎨 Design System
-
-El proyecto está construido a partir de un sistema de diseño basado en tokens con separación clara entre:
-
-- **Primitive tokens** – valores como colores escalados (`blue-50` a `blue-950`)
-- **Alias tokens** – valores semánticos como `--color-primary`, `--text-main`, etc.
-
-## 📁 Estructura del proyecto
+## 🧱 Estructura del Proyecto
 
 ```
-portafolio/
-│
-├── index.html
-├── styles.css
-├── main.js
-│
-├── tokens-colors.css
-├── tokens-typography.css
-│
-├── images/
-│   ├── projects/
-│   └── illustrations/
+/images
+/projects
+├── growrk.html
+├── spin.html
+...
+/styles
+  ├── styles.css
+  ├── tokens-typography.css
+  ├── tokens-colors.css
+/scripts
+  ├── main.js
+README.md
+index.html
 ```
 
-## 🔗 Demo
+## 🛠️ Herramientas utilizadas
 
-_(Próximamente disponible)_
+- HTML, CSS, JavaScript
+- Figma (para prototipos)
+- GitHub Pages (hosting)
+- Git Graph (control de versiones visual)
+- Zoho Mail (correo profesional)
 
-## 🛠 Instalación local (opcional)
+## 🚀 Cómo contribuir
 
-```bash
-git clone https://github.com/jdesmond7/portafolio.git
-cd portafolio
-```
+Este rediseño aún está en desarrollo. Si deseas sugerir mejoras, por favor crea un pull request sobre esta rama `redesign`.
 
-¡Gracias por visitar mi portafolio!
+---
+
+🔗 Sitio en producción: [www.jorgedesmond.com](https://www.jorgedesmond.com)  
+📫 Contacto: hola@jorgedesmond.com
