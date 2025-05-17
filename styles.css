@@ -127,7 +127,7 @@ a {
   justify-content: space-between;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 2rem;
   gap: 56px;
   flex-wrap: wrap;
 }
@@ -334,7 +334,7 @@ a {
 /*    Card Gradients     */
 /* ===================== */
 
-.gradient-growrk {
+.gradient-growrk2 {
     background: linear-gradient(97deg, #FFE3A5 21.02%, #FFB100 85.35%, #FC3A2F 129.58%);
   }
 
