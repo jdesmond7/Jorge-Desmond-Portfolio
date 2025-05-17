@@ -211,26 +211,6 @@ a {
 }
 
 /* ===================== */
-/*    Card Gradients     */
-/* ===================== */
-
-.gradient-growrk {
-    background: linear-gradient(97deg, #FFE3A5 21.02%, #FFB100 85.35%, #FC3A2F 129.58%);
-  }
-
-  .gradient-spin {
-    background: linear-gradient(97deg, #28154E 21.02%, #7F61BF 85.35%, #A9A0BE 129.58%);
-  }
-
-  .gradient-salinas {
-    background: linear-gradient(97deg, #FFF3C7 21.02%, #FFC900 85.35%, #8D7000 129.58%);
-  }
-
-  .gradient-oxxo {
-    background: linear-gradient(97deg, #C71B2F 21.02%, #75212B 85.35%, #421319 129.58%);
-  }
-
-/* ===================== */
 /*       Hero            */
 /* ===================== */
 
@@ -348,6 +328,28 @@ a {
 }
 
 
+}
+
+/* ===================== */
+/*    Card Gradients     */
+/* ===================== */
+
+.gradient-growrk {
+    background: linear-gradient(97deg, #FFE3A5 21.02%, #FFB100 85.35%, #FC3A2F 129.58%);
+  }
+
+  .gradient-spin {
+    background: linear-gradient(97deg, #28154E 21.02%, #7F61BF 85.35%, #A9A0BE 129.58%);
+  }
+
+  .gradient-salinas {
+    background: linear-gradient(97deg, #FFF3C7 21.02%, #FFC900 85.35%, #8D7000 129.58%);
+  }
+
+  .gradient-oxxo {
+    background: linear-gradient(97deg, #C71B2F 21.02%, #75212B 85.35%, #421319 129.58%);
+  }
+
 /* ===================== */
 /*     Projectos         */
 /* ===================== */
@@ -358,11 +360,45 @@ a {
   display: block;
 }
 
-.project-hero {
+/* ===================== */
+/*        Growrk         */
+/* ===================== */
+
+.project-hero.gradient-growrk {
+  width: 100%;
+  padding: 24px 0; /* padding arriba y abajo */
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 406px;
+}
+
+.project-banner-wrapper {
+  max-width: 620px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-banner-image {
+  width: 620px;
+  height: 310px;
+  object-fit: contain;
+}
+
+.project-banner-wrapper {
+  max-width: 620px;
+  width: 100%;
+  height: 310px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-banner-image {
+  width: 620px;
+  height: 310px;
+  object-fit: contain;
 }
 
 .project-text-light,
