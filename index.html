@@ -57,9 +57,14 @@
 </section>
     <!------- Fin del Hero Section --------->
 
-    <div class="project-list">
+      <!-- Preyectos destacados -->
+
+      <section class="featured-projects">
+        <h2 class="section-title">Proyectos destacados</h2>
+      
+        <div class="project-list">
           <!-- GroWrk -->
-          <a href="growrk.html" class="project-link">
+          <a href="projects/growrk.html" class="project-link">
           <article class="project-card gradient-growrk" data-type="estudio" data-featured="true">
             <div class="project-image">
               <img
@@ -80,6 +85,7 @@
           </a>
       
           <!-- Spin by OXXO -->
+          <a href="projects/spin.html" class="project-link">
           <article class="project-card gradient-spin project-text-light" data-type="estudio" data-featured="true">
             <div class="project-image">
               <img
@@ -97,8 +103,10 @@
               </p>
             </div>
           </article>
+          </a>
       
             <!-- OXXOClUB -->
+            <a href="projects/oxxoclub.html" class="project-link">
             <article class="project-card gradient-oxxo project-text-light" data-type="estudio" data-featured="true">
                 <div class="project-image">
                     <img
@@ -116,8 +124,64 @@
                     </p>
                 </div>
                 </article>
+            </a>
+
+            <!-- TPremia - Grupo Salinas -->
+
+            <a href="projects/tpremia.html" class="project-link">
+            <article class="project-card gradient-salinas" data-type="estudio" data-featured="true">
+                <div class="project-image">
+                <img
+                    src="images/projects/tpremia-grupo-salinas.webp"
+                    alt="Diseño del programa de lealtad de Grupo Salinas"
+                    loading="lazy"
+                    width="400"
+                    height="250"
+                />
+                </div>
+                <div class="project-info">
+                <h2 class="project-title">Grupo Salinas</h2>
+                <p class="project-description">
+                    Diseño de un ecosistema de lealtad para múltiples marcas, impulsando la fidelización del cliente a través de experiencias digitales conectadas.
+                </p>
+                </div>
+            </article>
+          </a>
+
+        </div>
+      </section>
+
+    <!-- Ilustraciones destacados -->
 
 
-    <script src="main.js"></script>
-  </body>
+    <section class="illustrations-section">
+        <h2 class="section-title">Ilustraciones</h2>
+      
+        <div class="illustration-list">
+          <img src="images/illustrations/Jorgedesmond.webp" alt="Jorge Desmond" class="illustration-item" />
+          <img src="images/illustrations/chica-calistenia.webp" alt="Chica calistenia" class="illustration-item" />
+          <img src="images/illustrations/turbo-abuela.webp" alt="Turbo abuela" class="illustration-item" />
+        </div>
+      </section>
+
+    <!-- Contáctame -->
+
+
+      <section class="contact">
+        <h2 class="section-title">Contáctame</h2>
+        <p class="contact-text">
+          Actualmente estoy aceptando nuevos proyectos y me encantaría conocer el tuyo. No dudes en compartir todos los detalles posibles: alcance, tiempos y presupuesto.
+        </p>
+      </section>
+
+</div>
+
+<footer>
+    <p>© <span id="date"></span> - Jorge Desmond</p>
+    <p class="footer-note">Este sitio no utiliza cookies ni rastreo. Justo como debería ser la web 🍪</p>
+  </footer>
+
+  <script src="main.js" defer></script>
+
+</body>
 </html>
