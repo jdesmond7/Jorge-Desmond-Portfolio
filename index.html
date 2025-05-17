@@ -1,176 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Jorge Desmond – UI Lead & Product Designer</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
-        <link href="https://fonts.googleapis.com/css2?family=Chicle&family=DynaPuff:wght@400..700&family=Fontdiner+Swanky&family=Londrina+Shadow&family=Mogra&display=swap" rel="stylesheet">
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Jorge Desmond – UI Lead & Product Designer</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Wrapper para margenes de 80px por lado -->
+      <header>
+        <div id="navbar-placeholder"></div>
+      </header>
 
-<body>
+      <!------- Inicio delHero Section --------->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="intro">Hola hola, soy 👋🏽👋🏽</p>
+      <h1 class="name">JORGE<br />DESMOND</h1>
+      <p class="tagline">
+        Diseñador digital Monterrey ⛰️ 🇲🇽 con <strong>10+ años</strong> de
+        experiencia. Apasionado por crear, aprender y mejorar experiencias.
+      </p>
+    </div>
 
- <!-- Navbar -->
+    <div class="hero-photos">
+      <div class="photo-stack">
+        <img src="images/hero-polaroids/polaroid-01.webp" class="polaroid" alt="Polaroid-01" />
+        <img src="images/hero-polaroids/polaroid-02.webp" class="polaroid" alt="Polaroid-02" />
+        <img src="images/hero-polaroids/polaroid-03.webp" class="polaroid" alt="Polaroid-03" />
+        <img src="images/hero-polaroids/polaroid-04.webp" class="polaroid" alt="Polaroid-04" />
+        <img src="images/hero-polaroids/polaroid-05.webp" class="polaroid" alt="Polaroid-05" />
+        <img src="images/hero-polaroids/polaroid-06.webp" class="polaroid" alt="Polaroid-06" />
+        <img src="images/hero-polaroids/polaroid-07.webp" class="polaroid" alt="Polaroid-07" />
+        <img src="images/hero-polaroids/polaroid-08.webp" class="polaroid" alt="Polaroid-08" />
+        <img src="images/hero-polaroids/polaroid-09.webp" class="polaroid" alt="Polaroid-09" />
+        <img src="images/hero-polaroids/polaroid-10.webp" class="polaroid" alt="Polaroid-10" />
+      </div>
 
- <nav class="navbar">
-    <div class="logo">Jorge Desmond</div>
-    <ul class="nav-links">
-      <li><a href="#works">Casos de estudio</a></li>
-      <li><a href="#illustrations">Ilustración</a></li>
-    </ul>
-  </nav>
+      <!-- Tooltips -->
+        <div class="tooltip" id="tooltip-1">Diseñador UX / UI</div>
+        <div class="tooltip" id="tooltip-2">Diseñador de producto</div>
+        <div class="tooltip" id="tooltip-3">Creador de experiencias digitales</div>
+      </div>
+</section>
+    <!------- Fin del Hero Section --------->
 
-  <div class="navbar-fade-overlay" aria-hidden="true"></div>
-
-</header>
-
-    <div class="wrapper">     <!-- Wrapper para margenes de 80px por lado -->
-    <header>
-
-    <!-- Hero Section -->
-
-    <section class="hero">
-        <h1 class="hero-title">
-            👋🏽👋🏽 <br>
-            Hola, soy Jorge Desmond<br>
-            <span class="highlight">Diseño</span>,
-            <span class="highlight">ilustro</span>,
-            <span class="highlight">hago animaciones</span>,
-            <span class="highlight">entreno calistenia</span> y
-            <span class="highlight">creo cosas digitales</span>.
-          </h1>
-        <p class="hero-subtitle">
-          Soy diseñador de producto con base en Monterrey, México 🇲🇽, y tengo más de 10 años de experiencia en UX/UI creando productos digitales. Me apasiona ayudar a las personas a través del diseño y siempre busco nuevas formas de aprender, crecer y crear mejores experiencias.
-        </p>
-      </section>
-
-    <!-- Preyectos destacados -->
-
-      <section class="featured-projects">
-        <h2 class="section-title">Proyectos destacados</h2>
-      
-        <div class="project-list">
-          <!-- GroWrk -->
-          <a href="projects/growrk.html" class="project-link">
-          <article class="project-card gradient-growrk" data-type="estudio" data-featured="true">
-            <div class="project-image">
-              <img
-                src="images/projects/growrk-dashboard.webp"
-                alt="Dashboard del sistema de diseño de GroWrk Remote"
-                loading="lazy"
-                width="400"
-                height="250"
-              />
-            </div>
-            <div class="project-info">
-              <h2 class="project-title">GroWrk Remote</h2>
-              <p class="project-description">
-                Optimizando el trabajo remoto global mediante sistemas de diseño escalables que mejoran la eficiencia y la experiencia del usuario.
-              </p>
-            </div>
-          </article>
-          </a>
-      
-          <!-- Spin by OXXO -->
-          <a href="projects/spin.html" class="project-link">
-          <article class="project-card gradient-spin project-text-light" data-type="estudio" data-featured="true">
-            <div class="project-image">
-              <img
-                src="images/projects/spinbyoxxo-mobile-dashboard.webp"
-                alt="App financiera de Spin by OXXO"
-                loading="lazy"
-                width="400"
-                height="250"
-              />
-            </div>
-            <div class="project-info">
-              <h2 class="project-title">Spin by OXXO</h2>
-              <p class="project-description">
-                Desarrollo de una app financiera escalable, accesible y centrada en el usuario para ampliar el acceso a servicios financieros en México.
-              </p>
-            </div>
-          </article>
-          </a>
-      
-            <!-- OXXOClUB -->
-            <a href="projects/oxxoclub.html" class="project-link">
-            <article class="project-card gradient-oxxo project-text-light" data-type="estudio" data-featured="true">
-                <div class="project-image">
-                    <img
-                    src="images/projects/oxxoclub-ecommerce.webp"
-                    alt="E-commerce de beneficios para empleados de OXXO"
-                    loading="lazy"
-                    width="400"
-                    height="250"
-                    />
-                </div>
-                <div class="project-info">
-                    <h2 class="project-title">OXXO CLUB</h2>
-                    <p class="project-description">
-                    Diseño de plataformas accesibles y fáciles de usar para la gestión de beneficios de empleados, mejorando la experiencia y participación del usuario.
-                    </p>
-                </div>
-                </article>
-            </a>
-
-            <!-- TPremia - Grupo Salinas -->
-
-            <a href="projects/tpremia.html" class="project-link">
-            <article class="project-card gradient-salinas" data-type="estudio" data-featured="true">
-                <div class="project-image">
-                <img
-                    src="images/projects/tpremia-grupo-salinas.webp"
-                    alt="Diseño del programa de lealtad de Grupo Salinas"
-                    loading="lazy"
-                    width="400"
-                    height="250"
-                />
-                </div>
-                <div class="project-info">
-                <h2 class="project-title">Grupo Salinas</h2>
-                <p class="project-description">
-                    Diseño de un ecosistema de lealtad para múltiples marcas, impulsando la fidelización del cliente a través de experiencias digitales conectadas.
-                </p>
-                </div>
-            </article>
-          </a>
-
-        </div>
-      </section>
-
-    <!-- Ilustraciones destacados -->
-
-
-    <section class="illustrations-section">
-        <h2 class="section-title">Ilustraciones</h2>
-      
-        <div class="illustration-list">
-          <img src="images/illustrations/Jorgedesmond.webp" alt="Jorge Desmond" class="illustration-item" />
-          <img src="images/illustrations/chica-calistenia.webp" alt="Chica calistenia" class="illustration-item" />
-          <img src="images/illustrations/turbo-abuela.webp" alt="Turbo abuela" class="illustration-item" />
-        </div>
-      </section>
-
-    <!-- Contáctame -->
-
-
-      <section class="contact">
-        <h2 class="section-title">Contáctame</h2>
-        <p class="contact-text">
-          Actualmente estoy aceptando nuevos proyectos y me encantaría conocer el tuyo. No dudes en compartir todos los detalles posibles: alcance, tiempos y presupuesto.
-        </p>
-      </section>
-
-</div>
-
-<footer>
-    <p>© <span id="date"></span> - Jorge Desmond</p>
-    <p class="footer-note">Este sitio no utiliza cookies ni rastreo. Justo como debería ser la web 🍪</p>
-  </footer>
-
-  <script src="main.js" defer></script>
-
-</body>
+    <script src="main.js"></script>
+  </body>
 </html>

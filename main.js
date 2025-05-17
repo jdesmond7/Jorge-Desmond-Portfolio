@@ -1,58 +1,63 @@
-// === NAVBAR SCROLL EFFECT ===
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 20) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
-  
-// === INSERTAR MES Y AÑO AUTOMÁTICO EN FOOTER ===
+// === COMPONENT LOADER (Navbar y Footer) ===
+function loadComponent(id, path, callback) {
+  fetch(path)
+    .then(res => res.text())
+    .then(data => {
+      const target = document.getElementById(id);
+      if (target) {
+        target.innerHTML = data;
+        if (typeof callback === 'function') callback();
+      }
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    const dateSpan = document.getElementById("date");
-    if (dateSpan) {
-      const now = new Date();
-      const monthNames = [
-        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-      ];
-      const month = monthNames[now.getMonth()];
-      const year = now.getFullYear();
-      dateSpan.textContent = `${month} ${year}`;
+  loadComponent('navbar-placeholder', '/components/navbar.html', () => {
+    const logo = document.querySelector('.logo');
+    const currentPath = window.location.pathname;
+    if (logo && (currentPath === '/' || currentPath.endsWith('index.html'))) {
+      logo.classList.add('active');
     }
+
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+      const linkHref = link.getAttribute('href');
+      if (window.location.href.includes(linkHref)) {
+        link.classList.add('active');
+      }
+    });
   });
 
-  // === animacion hero ===
+  loadComponent('footer-placeholder', '/components/footer.html');
+});
 
-  const highlights = Array.from(document.querySelectorAll('.highlight'));
-
-  // Colores más legibles
-  const colors = ['--blue-800', '--yellow-800', '--red-800', '--green-800'];
-  const backgrounds = ['--yellow-50', 'none']; // solo amarillo o sin fondo
-  
-  const fonts = [
-    "'Londrina Shadow', cursive",
-    "'Fontdiner Swanky', cursive",
-    "'Chicle', cursive",
-    "'DynaPuff', cursive",
-    "'Mogra', sans-serif"
+// === Polaroid Hero Animation ===
+document.addEventListener("DOMContentLoaded", () => {
+  const photoStack = document.querySelector('.photo-stack');
+  const tooltipEls = [
+    document.getElementById("tooltip-1"),
+    document.getElementById("tooltip-2"),
+    document.getElementById("tooltip-3")
   ];
-  
-  // Mapa para evitar coincidencia entre fondo y texto
-  const bgToTextColor = {
-    '--blue-100': '--blue-800',
-    '--yellow-100': '--yellow-800',
-    '--red-100': '--red-800',
-    '--green-100': '--green-800'
-  };
-  
-  // Función para aleatorio
-  function randomFrom(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
-  
-  // Shuffle de Fisher-Yates
+
+  const tooltips = [
+    ["Diseñador UX / UI", "Diseñador de producto", "Creador de experiencias digitales"],
+    ["Estratega visual", "Optimiza flujos con IA", "Facilitador de DesignOps"],
+    ["Desarrollador de sistemas de diseño", "Especialista en experiencia", "Líder de innovación digital"]
+  ];
+
+  let allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
+  const firstPolaroid = allPolaroids[0];
+  let index = 0;
+  let intervalId;
+
+  // Asegura que siempre inicia con polaroid-01
+  photoStack.innerHTML = '';
+  photoStack.appendChild(firstPolaroid);
+  const rest = allPolaroids.slice(1);
+  shuffleArray(rest).forEach(p => photoStack.appendChild(p));
+  allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
+
   function shuffleArray(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -61,57 +66,68 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return a;
   }
-  
-  function cycleSingleHighlight(el) {
-    let bg = randomFrom(backgrounds);
-    let text;
-  
-    do {
-      text = randomFrom(colors);
-    } while (bg !== 'none' && bgToTextColor[bg] === text);
-  
-    const font = randomFrom(fonts);
-    const colorVal = getComputedStyle(document.documentElement).getPropertyValue(text).trim();
-    const bgVal = bg === 'none' ? 'transparent' : getComputedStyle(document.documentElement).getPropertyValue(bg).trim();
-  
-    el.style.color = colorVal;
-    el.style.backgroundColor = bgVal;
-    el.style.fontFamily = font;
+
+  function randomRotation(deg = 6) {
+    return (Math.random() * deg * 2 - deg).toFixed(2);
   }
-  
-  function runHighlightCycle() {
-    const shuffled = shuffleArray(highlights);
-  
-    shuffled.forEach((el, i) => {
-      setTimeout(() => {
-        cycleSingleHighlight(el);
-      }, i * 400); // animación desfasada
+
+  function applyRandomRotation() {
+    allPolaroids.forEach((el, i) => {
+      const rotation = randomRotation();
+      el.style.transform = `rotate(${rotation}deg)`;
     });
   }
-  
-// ⏱ Espera 4s antes de iniciar el primer ciclo
-setTimeout(() => {
-    runHighlightCycle();
-    setInterval(runHighlightCycle, 4000);
-  }, 4000);
 
-// === Hover ilustraciones ===
+  function updateTooltips() {
+    const set = tooltips[index % tooltips.length];
+    tooltipEls.forEach((el, i) => el.textContent = set[i] || "");
+    index++;
+  }
 
-  const illustrations = document.querySelectorAll('.illustration-item');
-const container = document.querySelector('.illustration-list');
+  function rotatePolaroids() {
+    const top = allPolaroids[0];
+    const clone = top.cloneNode(true);
+    clone.classList.add('out');
+    clone.style.position = 'absolute';
+    clone.style.top = '0';
+    clone.style.left = '0';
+    clone.style.zIndex = 999;
+    photoStack.appendChild(clone);
 
-illustrations.forEach(img => {
-  img.addEventListener('click', () => {
-    const isActive = img.classList.contains('active');
+    top.style.opacity = '0';
 
-    // Limpiar todas
-    illustrations.forEach(i => i.classList.remove('active'));
-    container.classList.remove('active-mode');
+    setTimeout(() => {
+      photoStack.removeChild(clone);
+      photoStack.removeChild(top);
 
-    // Si no estaba activa, activarla y entrar en modo "active"
-    if (!isActive) {
-      img.classList.add('active');
-      container.classList.add('active-mode');
-    }
+      // Reorganizar aleatoriamente sin incluir top
+      const rest = allPolaroids.slice(1);
+      const shuffled = shuffleArray(rest);
+      shuffled.forEach(p => photoStack.appendChild(p));
+      photoStack.appendChild(top);
+
+      top.style.opacity = '1';
+      allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
+      applyRandomRotation();
+      updateTooltips();
+    }, 500); // igual al tiempo de .out
+  }
+
+  function startRotation() {
+    intervalId = setInterval(rotatePolaroids, 10000);
+  }
+
+  function resetRotation() {
+    clearInterval(intervalId);
+    startRotation();
+  }
+
+  photoStack.addEventListener("click", () => {
+    rotatePolaroids();
+    resetRotation();
   });
+
+  applyRandomRotation();
+  updateTooltips();
+  startRotation();
 });

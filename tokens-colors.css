@@ -53,33 +53,39 @@
       --green-800: #5F7A53;
       --green-900: #485C3F;
       --green-950: #1D2519;
- 
+
+
+    /* === Orange === */
+      --orange-50:  #FFFCF9;
+      --orange-100: #FFF4D3;
+      --orange-200: #FFE5A5;
+      --orange-300: #FFD16D;
+      --orange-400: #FFB132;
+      --orange-500: #FF980A;
+      --orange-600: #FC7E00;
+      --orange-700: #CC5D02;
+      --orange-800: #A1480B;
+      --orange-900: #823D0C;
+      --orange-950: #461C04;
+
+    /* === Gray === */
+
+      --gray-50:   #F6F6F6;
+      --gray-100:  #E7E7E7;
+      --gray-200:  #D1D1D1;
+      --gray-300:  #B0B0B0;
+      --gray-400:  #888888;
+      --gray-500:  #6D6D6D;
+      --gray-600:  #5D5D5D;
+      --gray-700:  #4F4F4F;
+      --gray-800:  #454545;
+      --gray-900:  #3C3C3C;
+      --gray-950:  #262626;
+
     /* === Black & White === */
-  --black-950: #02111B;
-  --white-950: #FFFFFF;
-
-
-    /* === Alias Tokens === */
-
-    /* === Colores === */
-
-      /* Core UI Colors */
-  --color-primary: var(--green-600);
-  --color-secondary: var(--yellow-500);
-  --color-accent: var(--blue-600);
-  --color-danger: var(--red-500);
-
-  /* Backgrounds */
-  --color-bg: var(--green-50);
-  --color-surface: var(--blue-50);
-  --color-card: var(--blue-100);
-
-  /* Text Colors */
-  --text-main: var(--black-950);
-  --text-muted: var(--blue-800);
-  --text-inverse: var(--white-950);
-
-  /* Borders */
-  --border-color: var(--blue-200);
+      --black-950: #000000;
+      --white-950: #FFFFFF;
 
 }
+      
+
