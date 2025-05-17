@@ -1,0 +1,52 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "git.enableSmartCommit": true,
+    "editor.formatOnSave": true,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "eamodio.gitlens",
+      "mhutchie.git-graph",
+      "esbenp.prettier-vscode",
+      "formulahendry.auto-close-tag",
+      "formulahendry.auto-rename-tag"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Convertir PNG a WebP",
+        "type": "shell",
+        "command": "bash convertir-webp.sh",
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      },
+      {
+        "label": "Abrir sitio en navegador",
+        "type": "shell",
+        "command": "open index.html",
+        "problemMatcher": []
+      },
+      {
+        "label": "Git Pull Redesign",
+        "type": "shell",
+        "command": "git checkout redesign && git pull origin redesign",
+        "problemMatcher": []
+      }
+    ]
+  }
+}
