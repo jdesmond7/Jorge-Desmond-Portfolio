@@ -12,7 +12,7 @@ function loadComponent(id, path, callback) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadComponent('navbar-placeholder', '/components/navbar.html', () => {
+  loadComponent('navbar-placeholder', 'components/navbar.html', () => {
     const logo = document.querySelector('.logo');
     const currentPath = window.location.pathname;
     if (logo && (currentPath === '/' || currentPath.endsWith('index.html'))) {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  loadComponent('footer-placeholder', '/components/footer.html');
+  loadComponent('footer-placeholder', 'components/footer.html');
 });
 
 // === Polaroid Hero Animation ===
