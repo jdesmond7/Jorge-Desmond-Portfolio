@@ -121,6 +121,28 @@ a {
 /*     Hero Section      */
 /* ===================== */
 
+.hero {
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: heroEntrance 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero-content {
   display: flex;
   align-items: flex-start;
@@ -149,6 +171,7 @@ a {
   font-family: var(--font-family-heading);
   font-weight: 400;
   margin-bottom: 24px;
+  color: var(--gray-900);
 }
 
 .tagline {
@@ -180,14 +203,26 @@ a {
   background-color: white;
   box-shadow: var(--shadow-polaroid);
   border-radius: 4px;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polaroid.active {
   opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
 }
 
 .polaroid.out {
-  transform: translateX(120%) rotate(12deg) scale(0.95);
-  opacity: 0 !important;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform: translateX(60px) rotate(4deg);
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* === Tooltips === */
@@ -303,14 +338,6 @@ a {
 /* ===================== */
 /*     Hero Section      */
 /* ===================== */
-
-.hero {
-  margin-top: 8rem;
-  margin-bottom: 4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
 
 .hero-title {
   font-size: var(--text-6xl);

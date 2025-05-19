@@ -47,70 +47,86 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
-  const firstPolaroid = allPolaroids[0];
-  let index = 0;
+  let currentIndex = 0;
   let intervalId;
+  let isAnimating = false;
 
-  // Asegura que siempre inicia con polaroid-01
-  photoStack.innerHTML = '';
-  photoStack.appendChild(firstPolaroid);
-  const rest = allPolaroids.slice(1);
-  shuffleArray(rest).forEach(p => photoStack.appendChild(p));
-  allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
-
-  function shuffleArray(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+  // Función para generar una rotación aleatoria entre -8 y -4 o entre 4 y 8 grados
+  function getRandomRotation() {
+    const isPositive = Math.random() > 0.5;
+    const rotation = (Math.random() * 4 + 4).toFixed(2); // Genera número entre 4 y 8
+    return isPositive ? rotation : -rotation;
   }
 
-  function randomRotation(deg = 6) {
-    return (Math.random() * deg * 2 - deg).toFixed(2);
-  }
-
-  function applyRandomRotation() {
-    allPolaroids.forEach((el, i) => {
-      const rotation = randomRotation();
-      el.style.transform = `rotate(${rotation}deg)`;
+  // Función para aplicar rotaciones aleatorias a todas las polaroids
+  function applyRandomRotations() {
+    allPolaroids.forEach(polaroid => {
+      const rotation = getRandomRotation();
+      polaroid.style.transform = `rotate(${rotation}deg)`;
     });
   }
 
-  function updateTooltips() {
-    const set = tooltips[index % tooltips.length];
-    tooltipEls.forEach((el, i) => el.textContent = set[i] || "");
-    index++;
+  // Función para reorganizar las polaroids aleatoriamente
+  function shufflePolaroids() {
+    // Mantener la primera polaroid (polaroid-01) siempre al inicio
+    const firstPolaroid = allPolaroids[0];
+    const rest = allPolaroids.slice(1);
+    
+    // Mezclar el resto de polaroids
+    for (let i = rest.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [rest[i], rest[j]] = [rest[j], rest[i]];
+    }
+    
+    // Reconstruir el array con la primera polaroid al inicio
+    allPolaroids = [firstPolaroid, ...rest];
+    
+    // Limpiar el stack y agregar las polaroids en el nuevo orden
+    photoStack.innerHTML = '';
+    allPolaroids.forEach(polaroid => {
+      photoStack.appendChild(polaroid);
+    });
+    
+    // Aplicar rotaciones aleatorias después de reorganizar
+    applyRandomRotations();
   }
 
   function rotatePolaroids() {
-    const top = allPolaroids[0];
-    const clone = top.cloneNode(true);
-    clone.classList.add('out');
-    clone.style.position = 'absolute';
-    clone.style.top = '0';
-    clone.style.left = '0';
-    clone.style.zIndex = 999;
-    photoStack.appendChild(clone);
+    if (isAnimating) return;
+    isAnimating = true;
 
-    top.style.opacity = '0';
+    const currentPolaroid = allPolaroids[currentIndex];
+    const nextPolaroid = allPolaroids[(currentIndex + 1) % allPolaroids.length];
+    
+    // Preparar la siguiente polaroid
+    nextPolaroid.classList.add('active');
+    
+    // Aplicar la animación de salida
+    currentPolaroid.classList.add('out');
 
     setTimeout(() => {
-      photoStack.removeChild(clone);
-      photoStack.removeChild(top);
-
-      // Reorganizar aleatoriamente sin incluir top
-      const rest = allPolaroids.slice(1);
-      const shuffled = shuffleArray(rest);
-      shuffled.forEach(p => photoStack.appendChild(p));
-      photoStack.appendChild(top);
-
-      top.style.opacity = '1';
-      allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
-      applyRandomRotation();
+      // Remover las clases de animación
+      currentPolaroid.classList.remove('out', 'active');
+      nextPolaroid.classList.remove('out');
+      
+      // Actualizar el índice
+      currentIndex = (currentIndex + 1) % allPolaroids.length;
+      
+      // Si volvemos a la primera polaroid, reorganizar el resto
+      if (currentIndex === 0) {
+        shufflePolaroids();
+      }
+      
+      // Actualizar tooltips
       updateTooltips();
-    }, 500); // igual al tiempo de .out
+      
+      isAnimating = false;
+    }, 400);
+  }
+
+  function updateTooltips() {
+    const set = tooltips[currentIndex % tooltips.length];
+    tooltipEls.forEach((el, i) => el.textContent = set[i] || "");
   }
 
   function startRotation() {
@@ -122,12 +138,27 @@ document.addEventListener("DOMContentLoaded", () => {
     startRotation();
   }
 
-  photoStack.addEventListener("click", () => {
-    rotatePolaroids();
-    resetRotation();
+  // Inicialización
+  function initializePolaroids() {
+    applyRandomRotations();
+    shufflePolaroids();
+    // Activar la primera polaroid
+    allPolaroids[0].classList.add('active');
+    updateTooltips();
+    startRotation();
+  }
+
+  // Esperar a que la animación del hero termine antes de iniciar las polaroids
+  const hero = document.querySelector('.hero');
+  hero.addEventListener('animationend', () => {
+    initializePolaroids();
   });
 
-  applyRandomRotation();
-  updateTooltips();
-  startRotation();
+  // Event listener para click
+  photoStack.addEventListener("click", () => {
+    if (!isAnimating) {
+      rotatePolaroids();
+      resetRotation();
+    }
+  });
 });

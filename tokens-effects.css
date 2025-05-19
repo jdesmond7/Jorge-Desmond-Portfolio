@@ -1,9 +1,7 @@
 :root {
     
   /* === Box Shadows === */
-  --shadow-polaroid: 39px 58px 19px rgba(74, 46, 97, 0.01),
-                     25px 37px 18px rgba(74, 46, 97, 0.06),
-                     14px 21px 19.9px rgba(74, 46, 97, 0.10),
+  --shadow-polaroid: 14px 21px 19.9px rgba(74, 46, 97, 0.10),
                      6px 16px 11px rgba(74, 46, 97, 0.00),
                      2px 2px 6px rgba(74, 46, 97, 0.20);
 }
