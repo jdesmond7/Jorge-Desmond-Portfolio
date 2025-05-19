@@ -75,6 +75,60 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // === TOOLTIP DATA ===
+  const polaroidTooltips = [
+    [
+      { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-left" },
+      { text: "Diseñador de producto", icon: "palette.svg", position: "top-right" },
+      { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
+    ],
+    [
+      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-left" },
+      { text: "Diseñador UX / UI", icon: "cursor-04.svg", position: "top-right" },
+      { text: "Maestro en innovación", icon: "bezier-curve-01.svg", position: "bottom-right" }
+    ],
+    [
+      { text: "Lord Sith 🤖", icon: "roller-brush.svg", position: "top-left" },
+      { text: "Mupppet ??", icon: "type-01.svg", position: "bottom-right" },
+      { text: "Diseñador de producto", icon: "palette.svg", position: "top-right" }
+    ],
+    [
+      { text: "Diseñador UX / UI", icon: "cursor-04.svg", position: "top-left" },
+      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-right" },
+      { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
+    ],
+    [
+      { text: "Maestro en innovación", icon: "bezier-curve-01.svg", position: "top-left" },
+      { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-right" },
+      { text: "Diseñador de producto", icon: "palette.svg", position: "bottom-left" }
+    ],
+    [
+      { text: "Mupppet ??", icon: "type-01.svg", position: "top-left" },
+      { text: "Lord Sith 🤖", icon: "roller-brush.svg", position: "top-right" },
+      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "bottom-right" }
+    ],
+    [
+      { text: "Super humano digital", icon: "command.svg", position: "top-left" },
+      { text: "Diseñador UX / UI", icon: "cursor-04.svg", position: "top-right" },
+      { text: "Maestro en innovación", icon: "bezier-curve-01.svg", position: "bottom-left" }
+    ],
+    [
+      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-left" },
+      { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-right" },
+      { text: "Mupppet ??", icon: "type-01.svg", position: "bottom-right" }
+    ],
+    [
+      { text: "Diseñador de producto", icon: "palette.svg", position: "top-left" },
+      { text: "Lord Sith 🤖", icon: "roller-brush.svg", position: "top-right" },
+      { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
+    ],
+    [
+      { text: "Maestro en innovación", icon: "bezier-curve-01.svg", position: "top-left" },
+      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-right" },
+      { text: "Diseñador UX / UI", icon: "cursor-04.svg", position: "bottom-right" }
+    ]
+  ];
+
   // Initialize polaroid animations
   const photoStack = document.querySelector('.photo-stack');
   if (photoStack) {
@@ -82,12 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("tooltip-1"),
       document.getElementById("tooltip-2"),
       document.getElementById("tooltip-3")
-    ];
-
-    const tooltips = [
-      ["Diseñador UX / UI", "Diseñador de producto", "Creador de experiencias digitales"],
-      ["Estratega visual", "Optimiza flujos con IA", "Facilitador de DesignOps"],
-      ["Desarrollador de sistemas de diseño", "Especialista en experiencia", "Líder de innovación digital"]
     ];
 
     let allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
@@ -128,6 +176,30 @@ document.addEventListener("DOMContentLoaded", () => {
       applyRandomRotations();
     }
 
+    function breakText(text) {
+      return text;
+    }
+
+    function updateTooltips(polaroidIndex) {
+      const tips = polaroidTooltips[polaroidIndex % polaroidTooltips.length];
+      // Usar las nuevas posiciones ancladas
+      const positionSets = [
+        ['top-left', 'right-anchored', 'left-anchored'],
+        ['top-right', 'left-anchored', 'right-anchored'],
+        ['top-left', 'left-anchored', 'right-anchored'],
+        ['top-right', 'left-anchored', 'right-anchored']
+      ];
+      const positions = positionSets[polaroidIndex % positionSets.length];
+      tips.slice(0, 3).forEach((tip, i) => {
+        if (tooltipEls[i]) {
+          const safeText = breakText(tip.text);
+          tooltipEls[i].innerHTML = `<img src=\"images/icons/${tip.icon}\" alt=\"icon\" class=\"tooltip-icon\" loading=\"eager\" width=\"24\" height=\"24\"><span>${safeText}</span>`;
+          tooltipEls[i].className = `tooltip ${positions[i]}`;
+          tooltipEls[i].style.display = '';
+        }
+      });
+    }
+
     function rotatePolaroids() {
       if (isAnimating) return;
       isAnimating = true;
@@ -148,8 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
           shufflePolaroids();
         }
         
-        const set = tooltips[currentIndex % tooltips.length];
-        tooltipEls.forEach((el, i) => el.textContent = set[i] || "");
+        updateTooltips(currentIndex);
         
         isAnimating = false;
       }, 400);
@@ -173,8 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
       applyRandomRotations();
       shufflePolaroids();
       allPolaroids[0].classList.add('active');
-      const set = tooltips[0];
-      tooltipEls.forEach((el, i) => el.textContent = set[i] || "");
+      updateTooltips(0);
       startRotation();
     }
 

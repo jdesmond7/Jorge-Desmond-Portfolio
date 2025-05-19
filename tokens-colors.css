@@ -86,6 +86,8 @@
       --black-950: #000000;
       --white-950: #FFFFFF;
 
+      --text-main: var(var(--gray-900))
+
 }
       
 

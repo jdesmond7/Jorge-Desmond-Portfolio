@@ -276,6 +276,89 @@ a {
   border-radius: 8px;
   box-shadow: var(--shadow-md);
   font-size: var(--text-sm);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  z-index: 10;
+  text-align: left;
+  width: 260px;
+  max-width: 260px;
+}
+
+.tooltip span {
+  display: block;
+  width: 220px;
+  max-width: 220px;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.tooltip-icon {
+  width: 1.3em;
+  height: 1.3em;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+.tooltip.top-left {
+  top: 4px;
+  left: 4px;
+}
+.tooltip.top-right {
+  top: 4px;
+  right: 4px;
+}
+.tooltip.bottom-left {
+  bottom: 4px;
+  left: 4px;
+}
+.tooltip.bottom-right {
+  bottom: 4px;
+  right: 4px;
+}
+
+.tooltip.left-high {
+  top: 4px;
+  left: 4px;
+}
+.tooltip.left-low {
+  top: 40%;
+  left: 4px;
+  transform: translateY(-50%);
+}
+.tooltip.right-high {
+  top: 24px;
+  right: 4px;
+}
+.tooltip.right-low {
+  top: 60%;
+  right: 4px;
+  transform: translateY(-50%);
+}
+
+.tooltip.bottom-edge-left {
+  bottom: -16px;
+  left: 4px;
+}
+.tooltip.bottom-edge-right {
+  bottom: -16px;
+  right: 4px;
+}
+
+.tooltip.left-anchored {
+  left: 340px;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 260px;
+}
+.tooltip.right-anchored {
+  left: 80%;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 260px;
 }
 
 /* Debug Token (oculto en UI) */
