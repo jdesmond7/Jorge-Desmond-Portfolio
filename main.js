@@ -1,17 +1,40 @@
-// === COMPONENT LOADER (Navbar y Footer) ===
-function loadComponent(id, path, callback) {
-  fetch(path)
-    .then(res => res.text())
-    .then(data => {
-      const target = document.getElementById(id);
-      if (target) {
-        target.innerHTML = data;
-        if (typeof callback === 'function') callback();
-      }
-    });
+// === Load Component Function ===
+async function loadComponent(placeholderId, componentPath, callback) {
+  try {
+    const response = await fetch(componentPath);
+    const html = await response.text();
+    const placeholder = document.getElementById(placeholderId);
+    if (placeholder) {
+      placeholder.innerHTML = html;
+      if (callback) callback();
+    }
+  } catch (error) {
+    console.error(`Error loading component ${componentPath}:`, error);
+  }
 }
 
+// === Scroll to Top on Load and Refresh ===
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+});
+
+window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
+});
+
+// === Navbar Scroll Effect ===
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY >= 220) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// === Initialize All Components ===
 document.addEventListener("DOMContentLoaded", () => {
+  // Load navbar
   loadComponent('navbar-placeholder', 'components/navbar.html', () => {
     const logo = document.querySelector('.logo');
     const currentPath = window.location.pathname;
@@ -28,137 +51,145 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Load footer
   loadComponent('footer-placeholder', 'components/footer.html');
-});
 
-// === Polaroid Hero Animation ===
-document.addEventListener("DOMContentLoaded", () => {
+  // Initialize letter animations
+  const letters = document.querySelectorAll('.name .letter');
+  letters.forEach(letter => {
+    let timeoutId;
+    
+    letter.addEventListener('mouseenter', () => {
+      // Clear any existing timeout
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      letter.classList.add('letter-up');
+    });
+
+    letter.addEventListener('mouseleave', () => {
+      // Wait for the transition to complete before removing the class
+      timeoutId = setTimeout(() => {
+        letter.classList.remove('letter-up');
+      }, 400); // Match this with the CSS transition duration
+    });
+  });
+
+  // Initialize polaroid animations
   const photoStack = document.querySelector('.photo-stack');
-  const tooltipEls = [
-    document.getElementById("tooltip-1"),
-    document.getElementById("tooltip-2"),
-    document.getElementById("tooltip-3")
-  ];
+  if (photoStack) {
+    const tooltipEls = [
+      document.getElementById("tooltip-1"),
+      document.getElementById("tooltip-2"),
+      document.getElementById("tooltip-3")
+    ];
 
-  const tooltips = [
-    ["Diseñador UX / UI", "Diseñador de producto", "Creador de experiencias digitales"],
-    ["Estratega visual", "Optimiza flujos con IA", "Facilitador de DesignOps"],
-    ["Desarrollador de sistemas de diseño", "Especialista en experiencia", "Líder de innovación digital"]
-  ];
+    const tooltips = [
+      ["Diseñador UX / UI", "Diseñador de producto", "Creador de experiencias digitales"],
+      ["Estratega visual", "Optimiza flujos con IA", "Facilitador de DesignOps"],
+      ["Desarrollador de sistemas de diseño", "Especialista en experiencia", "Líder de innovación digital"]
+    ];
 
-  let allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
-  let currentIndex = 0;
-  let intervalId;
-  let isAnimating = false;
+    let allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
+    let currentIndex = 0;
+    let intervalId = null;
+    let isAnimating = false;
+    const ROTATION_INTERVAL = 10000; // 10 seconds
 
-  // Función para generar una rotación aleatoria entre -8 y -4 o entre 4 y 8 grados
-  function getRandomRotation() {
-    const isPositive = Math.random() > 0.5;
-    const rotation = (Math.random() * 4 + 4).toFixed(2); // Genera número entre 4 y 8
-    return isPositive ? rotation : -rotation;
-  }
-
-  // Función para aplicar rotaciones aleatorias a todas las polaroids
-  function applyRandomRotations() {
-    allPolaroids.forEach(polaroid => {
-      const rotation = getRandomRotation();
-      polaroid.style.transform = `rotate(${rotation}deg)`;
-    });
-  }
-
-  // Función para reorganizar las polaroids aleatoriamente
-  function shufflePolaroids() {
-    // Mantener la primera polaroid (polaroid-01) siempre al inicio
-    const firstPolaroid = allPolaroids[0];
-    const rest = allPolaroids.slice(1);
-    
-    // Mezclar el resto de polaroids
-    for (let i = rest.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [rest[i], rest[j]] = [rest[j], rest[i]];
+    function getRandomRotation() {
+      const isPositive = Math.random() > 0.5;
+      const rotation = (Math.random() * 4 + 4).toFixed(2);
+      return isPositive ? rotation : -rotation;
     }
-    
-    // Reconstruir el array con la primera polaroid al inicio
-    allPolaroids = [firstPolaroid, ...rest];
-    
-    // Limpiar el stack y agregar las polaroids en el nuevo orden
-    photoStack.innerHTML = '';
-    allPolaroids.forEach(polaroid => {
-      photoStack.appendChild(polaroid);
-    });
-    
-    // Aplicar rotaciones aleatorias después de reorganizar
-    applyRandomRotations();
-  }
 
-  function rotatePolaroids() {
-    if (isAnimating) return;
-    isAnimating = true;
+    function applyRandomRotations() {
+      allPolaroids.forEach(polaroid => {
+        const rotation = getRandomRotation();
+        polaroid.style.transform = `rotate(${rotation}deg)`;
+      });
+    }
 
-    const currentPolaroid = allPolaroids[currentIndex];
-    const nextPolaroid = allPolaroids[(currentIndex + 1) % allPolaroids.length];
-    
-    // Preparar la siguiente polaroid
-    nextPolaroid.classList.add('active');
-    
-    // Aplicar la animación de salida
-    currentPolaroid.classList.add('out');
-
-    setTimeout(() => {
-      // Remover las clases de animación
-      currentPolaroid.classList.remove('out', 'active');
-      nextPolaroid.classList.remove('out');
+    function shufflePolaroids() {
+      const firstPolaroid = allPolaroids[0];
+      const rest = allPolaroids.slice(1);
       
-      // Actualizar el índice
-      currentIndex = (currentIndex + 1) % allPolaroids.length;
-      
-      // Si volvemos a la primera polaroid, reorganizar el resto
-      if (currentIndex === 0) {
-        shufflePolaroids();
+      for (let i = rest.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [rest[i], rest[j]] = [rest[j], rest[i]];
       }
       
-      // Actualizar tooltips
-      updateTooltips();
+      allPolaroids = [firstPolaroid, ...rest];
       
-      isAnimating = false;
-    }, 400);
-  }
-
-  function updateTooltips() {
-    const set = tooltips[currentIndex % tooltips.length];
-    tooltipEls.forEach((el, i) => el.textContent = set[i] || "");
-  }
-
-  function startRotation() {
-    intervalId = setInterval(rotatePolaroids, 10000);
-  }
-
-  function resetRotation() {
-    clearInterval(intervalId);
-    startRotation();
-  }
-
-  // Inicialización
-  function initializePolaroids() {
-    applyRandomRotations();
-    shufflePolaroids();
-    // Activar la primera polaroid
-    allPolaroids[0].classList.add('active');
-    updateTooltips();
-    startRotation();
-  }
-
-  // Esperar a que la animación del hero termine antes de iniciar las polaroids
-  const hero = document.querySelector('.hero');
-  hero.addEventListener('animationend', () => {
-    initializePolaroids();
-  });
-
-  // Event listener para click
-  photoStack.addEventListener("click", () => {
-    if (!isAnimating) {
-      rotatePolaroids();
-      resetRotation();
+      photoStack.innerHTML = '';
+      allPolaroids.forEach(polaroid => {
+        photoStack.appendChild(polaroid);
+      });
+      
+      applyRandomRotations();
     }
-  });
+
+    function rotatePolaroids() {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const currentPolaroid = allPolaroids[currentIndex];
+      const nextPolaroid = allPolaroids[(currentIndex + 1) % allPolaroids.length];
+      
+      nextPolaroid.classList.add('active');
+      currentPolaroid.classList.add('out');
+
+      setTimeout(() => {
+        currentPolaroid.classList.remove('out', 'active');
+        nextPolaroid.classList.remove('out');
+        
+        currentIndex = (currentIndex + 1) % allPolaroids.length;
+        
+        if (currentIndex === 0) {
+          shufflePolaroids();
+        }
+        
+        const set = tooltips[currentIndex % tooltips.length];
+        tooltipEls.forEach((el, i) => el.textContent = set[i] || "");
+        
+        isAnimating = false;
+      }, 400);
+    }
+
+    function startRotation() {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      intervalId = setInterval(rotatePolaroids, ROTATION_INTERVAL);
+    }
+
+    function resetRotation() {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      startRotation();
+    }
+
+    function initializePolaroids() {
+      applyRandomRotations();
+      shufflePolaroids();
+      allPolaroids[0].classList.add('active');
+      const set = tooltips[0];
+      tooltipEls.forEach((el, i) => el.textContent = set[i] || "");
+      startRotation();
+    }
+
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      hero.addEventListener('animationend', () => {
+        initializePolaroids();
+      });
+    }
+
+    photoStack.addEventListener("click", () => {
+      if (!isAnimating) {
+        rotatePolaroids();
+        resetRotation();
+      }
+    });
+  }
 });

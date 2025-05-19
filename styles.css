@@ -19,6 +19,7 @@ body {
   font-size: var(--text-xl);
   font-weight: 400;
   line-height: var(--leading-xl);
+  padding-top: 42px;
 }
 
 /* ===================== */
@@ -41,22 +42,20 @@ a {
 /* ===================== */
 
 .navbar {
-  position: sticky;
-  top: 40px;
-  z-index: 1000;
   width: 100%;
   background-color: var(--orange-50);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   transition: background-color 0.3s ease;
 }
 
-.navbar-content {
-  width: 100%;
+.navbar-container {
   max-width: 1440px;
-  padding: 0 2rem;
+  margin: 0 auto;
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -64,6 +63,13 @@ a {
 
 .navbar.scrolled {
   background-color: var(--orange-100);
+}
+
+#navbar-placeholder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .logo {
@@ -75,6 +81,28 @@ a {
   color: var(--text-main);
   text-decoration: none;
   transition: color 0.3s ease;
+  display: inline-flex;
+}
+
+.logo .letter {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .letter {
+  animation: letterPop 1s ease;
+}
+
+@keyframes letterPop {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .logo:hover {
@@ -114,7 +142,7 @@ a {
 
 .wrapper {
   max-width: 1440px;
-  margin: 40px auto 0 auto;
+  margin: 0 auto;
 }
 
 /* ===================== */
@@ -122,7 +150,7 @@ a {
 /* ===================== */
 
 .hero {
-  margin-top: 8rem;
+  margin-top: 5rem;
   margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
@@ -130,6 +158,7 @@ a {
   opacity: 0;
   transform: translateY(40px);
   animation: heroEntrance 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  scroll-margin-top: 40px;
 }
 
 @keyframes heroEntrance {
@@ -172,6 +201,18 @@ a {
   font-weight: 400;
   margin-bottom: 24px;
   color: var(--gray-900);
+  display: inline-block;
+  letter-spacing: -0.08em;
+}
+
+.name .letter {
+  display: inline-block;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.name .letter.letter-up {
+  transform: translateY(-16px);
 }
 
 .tagline {
@@ -266,64 +307,20 @@ a {
 /*       Navbar          */
 /* ===================== */
 
-.navbar {
-    position: sticky;
-    top: 40px; /* comienza 40px desde el top */
-    z-index: 1000;
-    max-width: 1440px; /* ← igual que el contenido principal */
-    margin: 0 auto; /* centra horizontalmente */
-    background-color: var(--green-50);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .navbar.scrolled {
-    background-color: var(--green-100);
-  }
-  
-  .logo {
-      font-size: var(--text-lg);
-      font-weight: 800; /* extrabold */
-      color: var(--text-main);
-    }
-  
-  .nav-links {
-      display: flex;
-      gap: 2rem; /* Espacio entre los links */
-      list-style: none;
-      margin-left: auto; /* Esto los empuja hacia la derecha */
-    }
-    
-    .nav-links li a {
-      font-size: var(--text-lg);
-      font-weight: 700; /* bold */
-      color: var(--text-main);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .nav-links li a:hover {
-      color: var(--color-primary);
-    }
-
-    .navbar-fade-overlay {
-        position: fixed;
-        top: 0; /* 40px del top + 64px del navbar */
-        left: 0;
-        width: 100%;
-        height: 180px;
-        background: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 1), 140px,
-          rgba(255, 255, 255, 0) 100%
-        );
-        pointer-events: none;
-        z-index: 999;
-      }
+.navbar-fade-overlay {
+  position: fixed;
+  top: 0; /* 40px del top + 64px del navbar */
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1), 140px,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 999;
+}
 
 /* ===================== */
 /*       Wrapper         */
