@@ -79,53 +79,53 @@ document.addEventListener("DOMContentLoaded", () => {
   const polaroidTooltips = [
     [
       { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-left" },
-      { text: "Diseñador de producto", icon: "palette.svg", position: "top-right" },
+      { text: "Diseñador de productos digitales", icon: "palette.svg", position: "top-right" },
       { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
     ],
     [
       { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-left" },
-      { text: "Diseñador UX / UI", icon: "cursor-04.svg", position: "top-right" },
-      { text: "Maestro en innovación", icon: "bezier-curve-01.svg", position: "bottom-right" }
+      { text: "Diseñador Senior en UX / UI ", icon: "cursor-04.svg", position: "top-right" },
+      { text: "Maestro Jedi en innovación", icon: "bezier-curve-01.svg", position: "bottom-right" }
     ],
     [
-      { text: "Lord Sith 🤖", icon: "roller-brush.svg", position: "top-left" },
-      { text: "Mupppet ??", icon: "type-01.svg", position: "bottom-right" },
-      { text: "Diseñador de producto", icon: "palette.svg", position: "top-right" }
+      { text: "Miembros de la Orden Sith 🤖", icon: "roller-brush.svg", position: "top-left" },
+      { text: "Mupppet, Botarga, Peluche ???", icon: "type-01.svg", position: "bottom-right" },
+      { text: "Diseñador de productos digitales", icon: "palette.svg", position: "top-right" }
     ],
     [
-      { text: "Diseñador UX / UI", icon: "cursor-04.svg", position: "top-left" },
+      { text: "Diseñador Senior en UX / UI ", icon: "cursor-04.svg", position: "top-left" },
       { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-right" },
       { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
     ],
     [
-      { text: "Maestro en innovación", icon: "bezier-curve-01.svg", position: "top-left" },
+      { text: "Maestro Jedi en innovación", icon: "bezier-curve-01.svg", position: "top-left" },
       { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-right" },
-      { text: "Diseñador de producto", icon: "palette.svg", position: "bottom-left" }
+      { text: "Diseñador de productos digitales", icon: "palette.svg", position: "bottom-left" }
     ],
     [
-      { text: "Mupppet ??", icon: "type-01.svg", position: "top-left" },
-      { text: "Lord Sith 🤖", icon: "roller-brush.svg", position: "top-right" },
+      { text: "Mupppet, Botarga, Peluche ???", icon: "type-01.svg", position: "top-left" },
+      { text: "Miembros de la Orden Sith 🤖", icon: "roller-brush.svg", position: "top-right" },
       { text: "Creador de experiencias digitales", icon: "transform.svg", position: "bottom-right" }
     ],
     [
       { text: "Super humano digital", icon: "command.svg", position: "top-left" },
-      { text: "Diseñador UX / UI", icon: "cursor-04.svg", position: "top-right" },
-      { text: "Maestro en innovación", icon: "bezier-curve-01.svg", position: "bottom-left" }
+      { text: "Diseñador Senior en UX / UI ", icon: "cursor-04.svg", position: "top-right" },
+      { text: "Maestro Jedi en innovación", icon: "bezier-curve-01.svg", position: "bottom-left" }
     ],
     [
       { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-left" },
       { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-right" },
-      { text: "Mupppet ??", icon: "type-01.svg", position: "bottom-right" }
+      { text: "Mupppet, Botarga, Peluche ???", icon: "type-01.svg", position: "bottom-right" }
     ],
     [
-      { text: "Diseñador de producto", icon: "palette.svg", position: "top-left" },
-      { text: "Lord Sith 🤖", icon: "roller-brush.svg", position: "top-right" },
+      { text: "Diseñador de productos digitales", icon: "palette.svg", position: "top-left" },
+      { text: "Miembros de la Orden Sith 🤖", icon: "roller-brush.svg", position: "top-right" },
       { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
     ],
     [
-      { text: "Maestro en innovación", icon: "bezier-curve-01.svg", position: "top-left" },
+      { text: "Maestro Jedi en innovación", icon: "bezier-curve-01.svg", position: "top-left" },
       { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-right" },
-      { text: "Diseñador UX / UI", icon: "cursor-04.svg", position: "bottom-right" }
+      { text: "Diseñador Senior en UX / UI ", icon: "cursor-04.svg", position: "bottom-right" }
     ]
   ];
 
@@ -182,12 +182,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateTooltips(polaroidIndex) {
       const tips = polaroidTooltips[polaroidIndex % polaroidTooltips.length];
-      // Usar las nuevas posiciones ancladas
+      // Sets de posiciones para rotar
       const positionSets = [
-        ['top-left', 'right-anchored', 'left-anchored'],
-        ['top-right', 'left-anchored', 'right-anchored'],
-        ['top-left', 'left-anchored', 'right-anchored'],
-        ['top-right', 'left-anchored', 'right-anchored']
+        // 1era vez
+        ['left-anchored-high', 'right-anchored-mid', 'left-anchored-low'],
+        // 2nda vez
+        ['right-anchored-high', 'left-anchored-high', 'right-anchored-low'],
+        // 3ra vez
+        ['right-anchored-high', 'right-anchored-mid', 'left-anchored-low'],
+        // 4ta vez (diferente)
+        ['left-anchored-high', 'right-anchored-high', 'right-anchored-low']
       ];
       const positions = positionSets[polaroidIndex % positionSets.length];
       tips.slice(0, 3).forEach((tip, i) => {

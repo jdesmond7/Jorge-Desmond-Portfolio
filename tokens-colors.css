@@ -32,7 +32,7 @@
       --red-50: #FEF2F2;
       --red-100: #FBD4D5;
       --red-200: #F8B8B9;
-      --red-300: #F59597;
+      --red-300: #FF98A5;
       --red-400: #F17174;
       --red-500: #EE4E51;
       --red-600: #EA2A2E;
@@ -85,9 +85,6 @@
     /* === Black & White === */
       --black-950: #000000;
       --white-950: #FFFFFF;
-
-      --text-main: var(var(--gray-900))
-
 }
       
 
