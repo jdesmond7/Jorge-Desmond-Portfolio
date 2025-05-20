@@ -62,7 +62,7 @@ a {
 }
 
 .navbar.scrolled {
-  background-color: var(--orange-100);
+  background-color: var(--orange-100)
 }
 
 #navbar-placeholder {
@@ -730,7 +730,7 @@ a {
 /* ===================== */
 
 footer {
-  background-color: var(--green-100);
+  background-color: var(--orange-100);
   color: var(--gray-900);
   text-align: center;
   padding: 2rem 0;
@@ -755,16 +755,6 @@ footer {
   display: block;
 }
 
-.project-title {
-  font-family: 'Almarai', sans-serif;
-  font-weight: 700;
-  font-size: 48px;
-  line-height: 48px;
-  color: var(--gray-900);
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
 .project-text {
   font-family: 'Almarai', sans-serif;
   font-weight: 400;
@@ -773,4 +763,168 @@ footer {
   color: var(--gray-900);
   max-width: 1440px;
   margin-bottom: 2rem;
+}
+
+.project-card.recent {
+  border-radius: 24px;
+  padding: 64px;
+  position: relative;
+  min-width: 280px;
+  max-width: 340px;
+  height: 400px;
+  color: var(--gray-900);
+}
+
+.project-card.recent:nth-child(1) {
+  transform: rotate(6deg);
+}
+
+.project-card.recent:nth-child(2) {
+  transform: rotate(-4deg);
+}
+
+.project-card.recent:nth-child(3) {
+  transform: rotate(4deg);
+}
+
+.project-card.yellow { background: var(--yellow-300); }
+.project-card.red { background: var(--red-300); }
+.project-card.purple { background: var(--purple-300); }
+
+.project-badge {
+  background: white;
+  color: var(--gray-800);
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.3em 1.1em;
+  position: absolute;
+  top: 64px;
+  left: 64px;
+  width: fit-content;
+}
+
+.project-card.recent .project-logo {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  position: absolute;
+  top: 144px;
+  left: 64px;
+  filter: none;
+  color: var(--gray-800);
+  fill: var(--gray-800);
+}
+
+.project-card.recent .project-description {
+  font-weight: 600;
+  line-height: var(--leading-xl);
+  position: absolute;
+  top: 240px;
+  left: 64px;
+  right: 64px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: left;
+}
+
+.project-card.recent .show-more {
+  display: none;
+  color: var(--gray-800);
+  background: none;
+  border: none;
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  padding: 0;
+}
+
+.project-card.recent.expanded .project-description {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.project-card.recent.expanded .show-more {
+  display: none;
+}
+
+.project-card.recent .show-more.visible {
+  display: inline-block;
+}
+
+.recent-projects {
+  display: flex;
+  gap: 3.5rem;
+  justify-content: center;
+  margin: 80px 0;
+}
+
+.cta-contact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #7BA79B;
+  border-radius: 32px;
+  padding: 48px 64px;
+  color: #fff;
+  text-decoration: none;
+  margin: 120px 0 0 0;
+  transition: background 0.2s;
+  gap: 2rem;
+}
+
+.cta-contact:hover {
+  background: #6a968a;
+}
+
+.cta-contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 900px;
+  width: 100%;
+  flex: 1 1 0;
+}
+
+.cta-title,
+.cta-desc {
+  display: block;
+  width: 100%;
+}
+
+.cta-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: var(--text-5xl);
+  line-height: var(--leading-5xl);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  /* text-decoration: underline 4px #7ec3ff; */
+  /* text-underline-offset: 6px; */
+}
+
+.cta-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: var(--text-xl);
+  line-height: var(--leading-xl);
+  font-weight: 400;
+  width: 100%;
+}
+
+.cta-arrow img {
+  width: 92px;
+  height: 92px;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+.cta-contact {
+  margin-bottom: 120px;
+}
+
+footer {
+  margin-top: 120px;
 }

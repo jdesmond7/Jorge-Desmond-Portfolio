@@ -85,6 +85,19 @@
     /* === Black & White === */
       --black-950: #000000;
       --white-950: #FFFFFF;
+
+    /* === Purple === */
+      --purple-50: #F6F4FE;
+      --purple-100: #EFEBFC;
+      --purple-200: #E2DAFA;
+      --purple-300: #CBBCF6;
+      --purple-400: #B69DF0;
+      --purple-500: #976BE7;
+      --purple-600: #884CDB;
+      --purple-700: #783AC7;
+      --purple-800: #6430A7;
+      --purple-900: #542989;
+      --purple-950: #33185D;
 }
       
 
