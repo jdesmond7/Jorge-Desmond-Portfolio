@@ -32,6 +32,7 @@
               <span class="letter">R</span>
               <span class="letter">G</span>
               <span class="letter">E</span>
+              <span class="letter space">&nbsp;</span>
               <br />
               <span class="letter">D</span>
               <span class="letter">E</span>
@@ -78,14 +79,14 @@
           <div class="project-badge">2025 - Current</div>
           <img src="images/brandlogos/GrowrkLogotype.svg" alt="Growrk" class="project-logo" />
           <div class="project-description">
-            <p>Una herramienta SaaS para gestionar oficinas remotas ...</p>
+            <p>Una herramienta SaaS para gestionar oficinas remotas globales con dashboards personalizados y un sistema de diseño escalable.</p>
           </div>
         </div>
         <div class="project-card recent purple">
           <div class="project-badge">2024 - Current</div>
           <img src="images/brandlogos/Spin-logo.svg" alt="Spin" class="project-logo" />
           <div class="project-description">
-            <p>Una app financiera accesible y segura que permite enviar ...</p>
+            <p>Una app financiera accesible y segura que permite enviar y recibir dinero sin cuenta bancaria desde cualquier tienda OXXO.</p>
 
           </div>
         </div>
@@ -93,7 +94,7 @@
           <div class="project-badge">2023 - Current</div>
           <img src="images/brandlogos/Logotipo_de_Grupo_Salinas.svg" alt="Grupo Salinas" class="project-logo" />
           <div class="project-description">
-            <p>Solución integral para gestión de proyectos y recursos ...</p>
+            <p>Programa de lealtad digital unificado para marcas como Elektra y Banco Azteca, diseñado con múltiples sistemas y flujos ...</p>
           </div>
         </div>
       </section>
@@ -107,7 +108,7 @@
           </span>
         </div>
         <span class="cta-arrow">
-          <img src="images/icons/arrow-narrow-right.svg" alt="Enviar correo" width="92" height="92" />
+          <img src="images/icons/send-01.svg" alt="Enviar correo" width="92" height="92" />
         </span>
       </a>
 
@@ -126,20 +127,6 @@
       window.open('mailto:hola@jorgedesmond.com');
     });
 
-    document.querySelectorAll('.project-card.recent').forEach(card => {
-      const desc = card.querySelector('.project-description');
-      const showMoreBtn = card.querySelector('.show-more');
-      // Esperar a que el layout esté listo
-      setTimeout(() => {
-        if (desc.scrollHeight > desc.clientHeight + 2) {
-          showMoreBtn.classList.add('visible');
-          showMoreBtn.addEventListener('click', () => {
-            card.classList.add('expanded');
-          });
-        }
-      }, 100);
-    });
-
     // Actualiza el footer con mes y año en español
     (function() {
       const meses = [
@@ -153,5 +140,19 @@
       document.getElementById('footer-date').textContent = `${mes} ${anio}`;
     })();
     </script>
+
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="#" class="logo">Jorge Desmond</a>
+        <ul class="nav-links">
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li class="nav-link-ilustracion"><a href="#ilustracion">Ilustración</a></li>
+        </ul>
+        <button class="menu-toggle" aria-label="Abrir menú">
+          <img src="images/icons/menu-01.svg" alt="Menú" width="32" height="32" />
+        </button>
+      </div>
+    </nav>
+
   </body>
 </html>

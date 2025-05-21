@@ -22,16 +22,6 @@ window.addEventListener('beforeunload', () => {
   window.scrollTo(0, 0);
 });
 
-// === Navbar Scroll Effect ===
-window.addEventListener('scroll', () => {
-  const navbar = document.querySelector('.navbar');
-  if (window.scrollY >= 220) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-});
-
 // === Initialize All Components ===
 document.addEventListener("DOMContentLoaded", () => {
   // Load navbar
@@ -48,6 +38,23 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.location.href.includes(linkHref)) {
         link.classList.add('active');
       }
+    });
+
+    // Navbar scroll color (funciona en mobile y desktop)
+    window.addEventListener('scroll', function() {
+      const navbars = document.querySelectorAll('.navbar');
+      const orange50 = getComputedStyle(document.documentElement).getPropertyValue('--orange-50').trim();
+      const orange100 = getComputedStyle(document.documentElement).getPropertyValue('--orange-100').trim();
+
+      navbars.forEach(navbar => {
+        if (window.scrollY > 10) {
+          navbar.classList.add('scrolled');
+          navbar.style.backgroundColor = orange100;
+        } else {
+          navbar.classList.remove('scrolled');
+          navbar.style.backgroundColor = orange50;
+        }
+      });
     });
   });
 
@@ -266,4 +273,41 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // === Animación de aparición para cards y CTA ===
+  function animateOnScroll(selector) {
+    const elements = document.querySelectorAll(selector);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('appear')) {
+          entry.target.classList.add('appear');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    elements.forEach(el => observer.observe(el));
+  }
+
+  animateOnScroll('.project-card.recent');
+  animateOnScroll('.cta-contact');
+
+  // Forzar scroll al tope en mobile
+  if (window.innerWidth <= 640) {
+    window.scrollTo(0, 0);
+  }
 });
+
+// Deshabilita el scroll restoration automático
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+function forceScrollTop() {
+  window.scrollTo(0, 0);
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+window.addEventListener('DOMContentLoaded', forceScrollTop);
+window.addEventListener('load', forceScrollTop);
+setTimeout(forceScrollTop, 100);
