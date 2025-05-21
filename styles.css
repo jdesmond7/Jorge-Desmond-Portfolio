@@ -637,7 +637,8 @@ footer {
 }
 
 .project-card.recent .project-description {
-  margin-top: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
 }
 
 .project-card.recent.expanded .project-description {
@@ -868,5 +869,25 @@ footer {
     align-items: center;
     justify-content: center;
     margin-left: 0;
+  }
+}
+
+@media (min-width: 1025px) {
+  .navbar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navbar {
+    border-radius: 6px;
+    border: 2px solid var(--orange-600);
+    background: none !important;
+    box-shadow: none;
+  }
+  .navbar .menu-toggle img,
+  .navbar .menu-toggle svg {
+    color: var(--orange-600) !important;
+    fill: var(--orange-600) !important;
   }
 }
