@@ -1,159 +1,190 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Jorge Desmond – UI Lead & Product Designer</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jorge Desmond - Diseñador de Productos Digitales</title>
+    <meta name="description" content="Diseñador de productos digitales especializado en UX/UI, con experiencia en herramientas SaaS, apps financieras y programas de lealtad." />
+    <meta name="keywords" content="diseñador, UX, UI, productos digitales, SaaS, apps, fintech" />
+    <meta name="author" content="Jorge Desmond" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jorgedesmond.com/" />
+    <meta property="og:title" content="Jorge Desmond - Diseñador de Productos Digitales" />
+    <meta property="og:description" content="Diseñador de productos digitales especializado en UX/UI, con experiencia en herramientas SaaS, apps financieras y programas de lealtad." />
+    <meta property="og:image" content="https://jorgedesmond.com/images/illustrations/Jorgedesmond.webp" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://jorgedesmond.com/" />
+    <meta property="twitter:title" content="Jorge Desmond - Diseñador de Productos Digitales" />
+    <meta property="twitter:description" content="Diseñador de productos digitales especializado en UX/UI, con experiencia en herramientas SaaS, apps financieras y programas de lealtad." />
+    <meta property="twitter:image" content="https://jorgedesmond.com/images/illustrations/Jorgedesmond.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Almarai:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="tokens-colors.css" />
+    <link rel="stylesheet" href="tokens-typography.css" />
+    <link rel="stylesheet" href="tokens-effects.css" />
     <link rel="stylesheet" href="styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <div id="navbar-placeholder"></div>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-content">
+        <div class="loading-logo">Jorge Desmond</div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Cargando...</div>
+      </div>
+    </div>
 
-    <div class="wrapper">
-      <!-- Wrapper para margenes de 80px por lado -->
-      <!------- Inicio delHero Section --------->
-      <section class="hero">
-        <div class="hero-content">
-          <div class="hero-text">
-            <p class="intro">Hola hola, soy 👋🏽👋🏽</p>
-            <h1 class="name">
-              <span class="letter">J</span>
-              <span class="letter">O</span>
-              <span class="letter">R</span>
-              <span class="letter">G</span>
-              <span class="letter">E</span>
-              <span class="letter space">&nbsp;</span>
-              <br />
-              <span class="letter">D</span>
-              <span class="letter">E</span>
-              <span class="letter">S</span>
-              <span class="letter">M</span>
-              <span class="letter">O</span>
-              <span class="letter">N</span>
-              <span class="letter">D</span>
-            </h1>
-            <p class="tagline">
-              Diseñador digital Monterrey ⛰️ 🇲🇽 con <strong>10+ años</strong> de
-              experiencia. Apasionado por crear, aprender y mejorar experiencias.
-            </p>
-          </div>
+    <!-- Desktop Navigation Header -->
+    <header class="desktop-nav">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="#" class="logo-link">JORGE DESMOND</a>
+        </div>
+        <nav class="nav-menu">
+          <ul class="nav-list">
+            <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-          <div class="hero-photos">
-            <div class="photo-stack">
-              <img src="./images/hero-polaroids/polaroid-01.webp" class="polaroid" alt="Polaroid-01" />
-              <img src="./images/hero-polaroids/polaroid-02.webp" class="polaroid" alt="Polaroid-02" />
-              <img src="./images/hero-polaroids/polaroid-03.webp" class="polaroid" alt="Polaroid-03" />
-              <img src="./images/hero-polaroids/polaroid-04.webp" class="polaroid" alt="Polaroid-04" />
-              <img src="./images/hero-polaroids/polaroid-05.webp" class="polaroid" alt="Polaroid-05" />
-              <img src="./images/hero-polaroids/polaroid-06.webp" class="polaroid" alt="Polaroid-06" />
-              <img src="./images/hero-polaroids/polaroid-07.webp" class="polaroid" alt="Polaroid-07" />
-              <img src="./images/hero-polaroids/polaroid-08.webp" class="polaroid" alt="Polaroid-08" />
-              <img src="./images/hero-polaroids/polaroid-09.webp" class="polaroid" alt="Polaroid-09" />
-              <img src="./images/hero-polaroids/polaroid-01.webp" class="polaroid" alt="Polaroid-10" />
+    <!-- Main Content (hidden initially) -->
+    <div id="main-content" class="main-content" style="display: none;">
+
+
+      <div class="wrapper">
+        <!-- Wrapper para margenes de 80px por lado -->
+        <!------- Inicio delHero Section --------->
+        <section class="hero">
+          <div class="hero-content">
+            <div class="hero-text">
+              <p class="intro">Hola, soy 👋🏽👋🏽</p>
+              <h1 class="name">
+                <span class="letter">J</span>
+                <span class="letter">O</span>
+                <span class="letter">R</span>
+                <span class="letter">G</span>
+                <span class="letter">E</span>
+                <span class="letter space">&nbsp;</span>
+                <br />
+                <span class="letter">D</span>
+                <span class="letter">E</span>
+                <span class="letter">S</span>
+                <span class="letter">M</span>
+                <span class="letter">O</span>
+                <span class="letter">N</span>
+                <span class="letter">D</span>
+              </h1>
+              <p class="tagline">
+                Diseñador digital Monterrey ⛰️ 🇲🇽 con <strong>10+ años</strong> de
+                experiencia. Apasionado por crear, aprender y mejorar experiencias.
+              </p>
             </div>
 
-            <!-- Tooltips -->
-            <div class="tooltip" id="tooltip-1">Diseñador Senior en UX / UI </div>
-            <div class="tooltip" id="tooltip-2">Diseñador de productos digitales</div>
-            <div class="tooltip" id="tooltip-3">Creador de experiencias digitales</div>
+            <div class="hero-photos">
+              <div class="photo-stack">
+                <img src="./images/hero-polaroids/polaroid-01.webp" class="polaroid" alt="Polaroid-01" />
+                <img src="./images/hero-polaroids/polaroid-02.webp" class="polaroid" alt="Polaroid-02" />
+                <img src="./images/hero-polaroids/polaroid-03.webp" class="polaroid" alt="Polaroid-03" />
+                <img src="./images/hero-polaroids/polaroid-04.webp" class="polaroid" alt="Polaroid-04" />
+                <img src="./images/hero-polaroids/polaroid-05.webp" class="polaroid" alt="Polaroid-05" />
+                <img src="./images/hero-polaroids/polaroid-06.webp" class="polaroid" alt="Polaroid-06" />
+                <img src="./images/hero-polaroids/polaroid-07.webp" class="polaroid" alt="Polaroid-07" />
+                <img src="./images/hero-polaroids/polaroid-08.webp" class="polaroid" alt="Polaroid-08" />
+                <img src="./images/hero-polaroids/polaroid-09.webp" class="polaroid" alt="Polaroid-09" />
+                <img src="./images/hero-polaroids/polaroid-01.webp" class="polaroid" alt="Polaroid-10" />
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
-      <!------- Fin del Hero Section --------->
+        </section>
+        <!------- Fin del Hero Section --------->
 
-      <div style="height: 40px;"></div>
+        <div style="height: 40px;"></div>
 
-      <!-- Proyectos recientes -->
-      <section class="recent-projects">
-        <div class="project-card recent yellow">
-          <div class="project-badge">2025 - Current</div>
-          <img src="images/brandlogos/GrowrkLogotype.svg" alt="Growrk" class="project-logo" />
-          <div class="project-description">
-            <p>Una herramienta SaaS para gestionar oficinas remotas globales con dashboards personalizados y un sistema de diseño escalable.</p>
+        <!-- Proyectos recientes -->
+        <section class="recent-projects">
+          <div class="project-card recent yellow">
+            <div class="project-badge">2025 - Current</div>
+            <img src="images/brandlogos/GrowrkLogotype.svg" alt="Growrk" class="project-logo" />
+            <div class="project-description">
+              <p>Una herramienta SaaS para gestionar oficinas remotas globales con dashboards personalizados y un sistema de diseño escalable.</p>
+            </div>
           </div>
-        </div>
-        <div class="project-card recent purple">
-          <div class="project-badge">2024 - Current</div>
-          <img src="images/brandlogos/Spin-logo.svg" alt="Spin" class="project-logo" />
-          <div class="project-description">
-            <p>Una app financiera accesible y segura que permite enviar y recibir dinero sin cuenta bancaria desde cualquier tienda OXXO.</p>
+          <div class="project-card recent purple">
+            <div class="project-badge">2024 - Current</div>
+            <img src="images/brandlogos/Spin-logo.svg" alt="Spin" class="project-logo" />
+            <div class="project-description">
+              <p>Una app financiera accesible y segura que permite enviar y recibir dinero sin cuenta bancaria desde cualquier tienda OXXO.</p>
 
+            </div>
           </div>
-        </div>
-        <div class="project-card recent red">
-          <div class="project-badge">2023 - Current</div>
-          <img src="images/brandlogos/Logotipo_de_Grupo_Salinas.svg" alt="Grupo Salinas" class="project-logo" />
-          <div class="project-description">
-            <p>Programa de lealtad digital unificado para marcas como Elektra y Banco Azteca, diseñado con múltiples sistemas y flujos personalizados.
-            </p>
+          <div class="project-card recent red">
+            <div class="project-badge">2023 - Current</div>
+            <img src="images/brandlogos/Logotipo_de_Grupo_Salinas.svg" alt="Grupo Salinas" class="project-logo" />
+            <div class="project-description">
+              <p>Programa de lealtad digital unificado para marcas como Elektra y Banco Azteca, diseñado con múltiples sistemas y flujos personalizados.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- CTA Contacto -->
-      <a href="mailto:hola@jorgedesmond.com" class="cta-contact" id="cta-contact-btn">
-        <div class="cta-contact-text">
-          <span class="cta-title">Trabajemos juntos</span>
-          <span class="cta-desc">
-            Actualmente estoy aceptando nuevos proyectos y me encantaría conocer el tuyo. No dudes en compartir todos los detalles posibles: alcance, tiempos y presupuesto.
+        <!-- CTA Contacto -->
+        <a href="mailto:hola@jorgedesmond.com" class="cta-contact" id="cta-contact-btn">
+          <div class="cta-contact-text">
+            <span class="cta-title">Trabajemos juntos</span>
+            <span class="cta-desc">
+              Actualmente estoy aceptando nuevos proyectos y me encantaría conocer el tuyo. No dudes en compartir todos los detalles posibles: alcance, tiempos y presupuesto.
+            </span>
+          </div>
+          <span class="cta-arrow">
+            <img src="images/icons/send-01.svg" alt="Enviar correo" width="92" height="92" />
           </span>
-        </div>
-        <span class="cta-arrow">
-          <img src="images/icons/send-01.svg" alt="Enviar correo" width="92" height="92" />
-        </span>
-      </a>
+        </a>
+
+      </div>
+
+
+      <footer>
+        <p><span id="footer-date"></span> © - Jorge Desmond</p>
+        <p class="footer-note">Este sitio no utiliza cookies ni rastreo. Justo como debería ser la web 🍪</p>
+      </footer>
+
+      <script src="main.js" defer></script>
+      <script>
+      document.getElementById('cta-contact-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open('mailto:hola@jorgedesmond.com');
+      });
+
+      // Actualiza el footer con mes y año en español
+      (function() {
+        const meses = [
+          'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+        ];
+        const fecha = new Date();
+        let mes = meses[fecha.getMonth()];
+        mes = mes.charAt(0).toUpperCase() + mes.slice(1);
+        const anio = fecha.getFullYear();
+        document.getElementById('footer-date').textContent = `${mes} ${anio}`;
+      })();
+      </script>
+
 
     </div>
 
-
-    <footer>
-      <p><span id="footer-date"></span> © - Jorge Desmond</p>
-      <p class="footer-note">Este sitio no utiliza cookies ni rastreo. Justo como debería ser la web 🍪</p>
-    </footer>
-
-    <script src="main.js" defer></script>
-    <script>
-    document.getElementById('cta-contact-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      window.open('mailto:hola@jorgedesmond.com');
-    });
-
-    // Actualiza el footer con mes y año en español
-    (function() {
-      const meses = [
-        'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-      ];
-      const fecha = new Date();
-      let mes = meses[fecha.getMonth()];
-      mes = mes.charAt(0).toUpperCase() + mes.slice(1);
-      const anio = fecha.getFullYear();
-      document.getElementById('footer-date').textContent = `${mes} ${anio}`;
-    })();
-    </script>
-
-    <nav class="navbar">
-      <div class="navbar-container">
-        <a href="#" class="logo">Jorge Desmond</a>
-        <ul class="nav-links">
-          <li><a href="#proyectos">Proyectos</a></li>
-          <li class="nav-link-ilustracion"><a href="#ilustracion">Ilustración</a></li>
-        </ul>
-        <button class="menu-toggle" aria-label="Abrir menú">
-          <img src="images/icons/menu-01.svg" alt="Menú" width="32" height="32" />
-        </button>
-      </div>
-    </nav>
-
+    
   </body>
 </html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyectos - Jorge Desmond</title>
+    <meta name="description" content="Portafolio de proyectos de diseño de productos digitales por Jorge Desmond." />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Almarai:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="tokens-colors.css" />
+    <link rel="stylesheet" href="tokens-typography.css" />
+    <link rel="stylesheet" href="tokens-effects.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Desktop Navigation Header -->
+    <header class="desktop-nav">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="index.html" class="logo-link">JORGE DESMOND</a>
+        </div>
+        <nav class="nav-menu">
+          <ul class="nav-list">
+            <li><a href="projects.html" class="nav-link active">Proyectos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="wrapper">
+      <!-- Hero Section -->
+      <section class="projects-hero">
+        <h1 class="projects-title">Proyectos</h1>
+        <p class="projects-subtitle">Una selección de mi trabajo en diseño de productos digitales</p>
+      </section>
+
+      <!-- Projects Grid -->
+      <section class="projects-grid">
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <img src="images/brandlogos/GrowrkLogotype.svg" alt="Growrk" class="project-logo-full" />
+            <div class="project-meta">
+              <span class="project-date">2025 - Actual</span>
+              <span class="project-category">SaaS • UX/UI</span>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Growrk</h3>
+            <p class="project-description">
+              Una herramienta SaaS para gestionar oficinas remotas globales con dashboards personalizados y un sistema de diseño escalable. Diseñé la experiencia completa del usuario, desde la onboarding hasta las funcionalidades avanzadas de gestión de equipos distribuidos.
+            </p>
+            <div class="project-tags">
+              <span class="tag">UX Research</span>
+              <span class="tag">UI Design</span>
+              <span class="tag">Design System</span>
+              <span class="tag">SaaS</span>
+            </div>
+          </div>
+          <a href="projects/growrk.html" class="project-link">
+            <span>Ver proyecto</span>
+            <img src="images/icons/arrow-narrow-right.svg" alt="Ver proyecto" />
+          </a>
+        </div>
+
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <img src="images/brandlogos/Spin-logo.svg" alt="Spin" class="project-logo-full" />
+            <div class="project-meta">
+              <span class="project-date">2024 - Actual</span>
+              <span class="project-category">Fintech • Mobile</span>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Spin by OXXO</h3>
+            <p class="project-description">
+              Una app financiera accesible y segura que permite enviar y recibir dinero sin cuenta bancaria desde cualquier tienda OXXO. Diseñé la experiencia móvil completa, enfocándome en la inclusión financiera y la simplicidad de uso.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Mobile Design</span>
+              <span class="tag">Fintech</span>
+              <span class="tag">UX Research</span>
+              <span class="tag">Inclusión</span>
+            </div>
+          </div>
+          <a href="projects/spin.html" class="project-link">
+            <span>Ver proyecto</span>
+            <img src="images/icons/arrow-narrow-right.svg" alt="Ver proyecto" />
+          </a>
+        </div>
+
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <img src="images/brandlogos/Logotipo_de_Grupo_Salinas.svg" alt="Grupo Salinas" class="project-logo-full" />
+            <div class="project-meta">
+              <span class="project-date">2023 - Actual</span>
+              <span class="project-category">Loyalty • Digital</span>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">TPremia</h3>
+            <p class="project-description">
+              Programa de lealtad digital unificado para marcas como Elektra y Banco Azteca, diseñado con múltiples sistemas y flujos personalizados. Creé una experiencia cohesiva que conecta diferentes servicios financieros y comerciales.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Loyalty Program</span>
+              <span class="tag">Digital Banking</span>
+              <span class="tag">UX Strategy</span>
+              <span class="tag">Integration</span>
+            </div>
+          </div>
+          <a href="projects/tpremia.html" class="project-link">
+            <span>Ver proyecto</span>
+            <img src="images/icons/arrow-narrow-right.svg" alt="Ver proyecto" />
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p><span id="footer-date"></span> © - Jorge Desmond</p>
+      <p class="footer-note">Este sitio no utiliza cookies ni rastreo. Justo como debería ser la web 🍪</p>
+    </footer>
+
+    <script>
+      // Actualiza el footer con mes y año en español
+      (function() {
+        const meses = [
+          'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+        ];
+        const fecha = new Date();
+        let mes = meses[fecha.getMonth()];
+        mes = mes.charAt(0).toUpperCase() + mes.slice(1);
+        const anio = fecha.getFullYear();
+        document.getElementById('footer-date').textContent = `${mes} ${anio}`;
+      })();
+    </script>
+  </body>
+</html> 

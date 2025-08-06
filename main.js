@@ -1,3 +1,56 @@
+// =====================
+//   Image Loading Logic
+// =====================
+
+function preloadImages() {
+  return new Promise((resolve) => {
+    const imageUrls = [
+      './images/hero-polaroids/polaroid-01.webp',
+      './images/hero-polaroids/polaroid-02.webp',
+      './images/hero-polaroids/polaroid-03.webp',
+      './images/hero-polaroids/polaroid-04.webp',
+      './images/hero-polaroids/polaroid-05.webp',
+      './images/hero-polaroids/polaroid-06.webp',
+      './images/hero-polaroids/polaroid-07.webp',
+      './images/hero-polaroids/polaroid-08.webp',
+      './images/hero-polaroids/polaroid-09.webp',
+      './images/brandlogos/GrowrkLogotype.svg',
+      './images/brandlogos/Spin-logo.svg',
+      './images/brandlogos/Logotipo_de_Grupo_Salinas.svg',
+      './images/icons/send-01.svg'
+    ];
+
+    let loadedCount = 0;
+    const totalImages = imageUrls.length;
+
+    function checkAllLoaded() {
+      loadedCount++;
+      if (loadedCount === totalImages) {
+        // Add a small delay for smooth transition
+        setTimeout(() => {
+          document.getElementById('loading-screen').style.opacity = '0';
+          setTimeout(() => {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+          }, 500);
+        }, 300);
+        resolve();
+      }
+    }
+
+    imageUrls.forEach(url => {
+      const img = new Image();
+      img.onload = checkAllLoaded;
+      img.onerror = checkAllLoaded; // Continue even if some images fail
+      img.src = url;
+    });
+  });
+}
+
+// =====================
+//   Component Loading
+// =====================
+
 // === Load Component Function ===
 async function loadComponent(placeholderId, componentPath, callback) {
   try {
@@ -23,40 +76,10 @@ window.addEventListener('beforeunload', () => {
 });
 
 // === Initialize All Components ===
-document.addEventListener("DOMContentLoaded", () => {
-  // Load navbar
-  loadComponent('navbar-placeholder', 'components/navbar.html', () => {
-    const logo = document.querySelector('.logo');
-    const currentPath = window.location.pathname;
-    if (logo && (currentPath === '/' || currentPath.endsWith('index.html'))) {
-      logo.classList.add('active');
-    }
+document.addEventListener("DOMContentLoaded", async () => {
+  // Start preloading images
+  await preloadImages();
 
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-      const linkHref = link.getAttribute('href');
-      if (window.location.href.includes(linkHref)) {
-        link.classList.add('active');
-      }
-    });
-
-    // Navbar scroll color (funciona en mobile y desktop)
-    window.addEventListener('scroll', function() {
-      const navbars = document.querySelectorAll('.navbar');
-      const orange50 = getComputedStyle(document.documentElement).getPropertyValue('--orange-50').trim();
-      const orange100 = getComputedStyle(document.documentElement).getPropertyValue('--orange-100').trim();
-
-      navbars.forEach(navbar => {
-        if (window.scrollY > 10) {
-          navbar.classList.add('scrolled');
-          navbar.style.backgroundColor = orange100;
-        } else {
-          navbar.classList.remove('scrolled');
-          navbar.style.backgroundColor = orange50;
-        }
-      });
-    });
-  });
 
   // Load footer
   loadComponent('footer-placeholder', 'components/footer.html');
@@ -82,74 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // === TOOLTIP DATA ===
-  const polaroidTooltips = [
-    [
-      { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-left" },
-      { text: "Diseñador de productos digitales", icon: "palette.svg", position: "top-right" },
-      { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
-    ],
-    [
-      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-left" },
-      { text: "Diseñador Senior en UX / UI ", icon: "cursor-04.svg", position: "top-right" },
-      { text: "Maestro Jedi en innovación", icon: "bezier-curve-01.svg", position: "bottom-right" }
-    ],
-    [
-      { text: "Miembros de la Orden Sith 🤖", icon: "roller-brush.svg", position: "top-left" },
-      { text: "Mupppet, Botarga, Peluche ???", icon: "type-01.svg", position: "bottom-right" },
-      { text: "Diseñador de productos digitales", icon: "palette.svg", position: "top-right" }
-    ],
-    [
-      { text: "Diseñador Senior en UX / UI ", icon: "cursor-04.svg", position: "top-left" },
-      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-right" },
-      { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
-    ],
-    [
-      { text: "Maestro Jedi en innovación", icon: "bezier-curve-01.svg", position: "top-left" },
-      { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-right" },
-      { text: "Diseñador de productos digitales", icon: "palette.svg", position: "bottom-left" }
-    ],
-    [
-      { text: "Mupppet, Botarga, Peluche ???", icon: "type-01.svg", position: "top-left" },
-      { text: "Miembros de la Orden Sith 🤖", icon: "roller-brush.svg", position: "top-right" },
-      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "bottom-right" }
-    ],
-    [
-      { text: "Super humano digital", icon: "command.svg", position: "top-left" },
-      { text: "Diseñador Senior en UX / UI ", icon: "cursor-04.svg", position: "top-right" },
-      { text: "Maestro Jedi en innovación", icon: "bezier-curve-01.svg", position: "bottom-left" }
-    ],
-    [
-      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-left" },
-      { text: "Tu amigable diseñador de confianza 🕷️", icon: "magic-wand-02.svg", position: "top-right" },
-      { text: "Mupppet, Botarga, Peluche ???", icon: "type-01.svg", position: "bottom-right" }
-    ],
-    [
-      { text: "Diseñador de productos digitales", icon: "palette.svg", position: "top-left" },
-      { text: "Miembros de la Orden Sith 🤖", icon: "roller-brush.svg", position: "top-right" },
-      { text: "Super humano digital", icon: "command.svg", position: "bottom-left" }
-    ],
-    [
-      { text: "Maestro Jedi en innovación", icon: "bezier-curve-01.svg", position: "top-left" },
-      { text: "Creador de experiencias digitales", icon: "transform.svg", position: "top-right" },
-      { text: "Diseñador Senior en UX / UI ", icon: "cursor-04.svg", position: "bottom-right" }
-    ]
-  ];
-
   // Initialize polaroid animations
   const photoStack = document.querySelector('.photo-stack');
   if (photoStack) {
-    const tooltipEls = [
-      document.getElementById("tooltip-1"),
-      document.getElementById("tooltip-2"),
-      document.getElementById("tooltip-3")
-    ];
-
     let allPolaroids = Array.from(photoStack.querySelectorAll('.polaroid'));
     let currentIndex = 0;
     let intervalId = null;
     let isAnimating = false;
-    const ROTATION_INTERVAL = 10000; // 10 seconds
+    const ROTATION_INTERVAL = 8000; // 8 seconds
 
     function getRandomRotation() {
       const isPositive = Math.random() > 0.5;
@@ -157,91 +120,41 @@ document.addEventListener("DOMContentLoaded", () => {
       return isPositive ? rotation : -rotation;
     }
 
-    function applyRandomRotations() {
-      allPolaroids.forEach(polaroid => {
-        const rotation = getRandomRotation();
-        polaroid.style.transform = `rotate(${rotation}deg)`;
-      });
+    function getRandomPolaroid() {
+      return Math.floor(Math.random() * allPolaroids.length);
     }
 
-    function shufflePolaroids() {
-      const firstPolaroid = allPolaroids[0];
-      const rest = allPolaroids.slice(1);
-      
-      for (let i = rest.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [rest[i], rest[j]] = [rest[j], rest[i]];
-      }
-      
-      allPolaroids = [firstPolaroid, ...rest];
-      
-      photoStack.innerHTML = '';
-      allPolaroids.forEach(polaroid => {
-        photoStack.appendChild(polaroid);
-      });
-      
-      applyRandomRotations();
-    }
-
-    function breakText(text) {
-      return text;
-    }
-
-    function updateTooltips(polaroidIndex) {
-      const tips = polaroidTooltips[polaroidIndex % polaroidTooltips.length];
-      // Sets de posiciones para rotar
-      const positionSets = [
-        // 1era vez
-        ['left-anchored-high', 'right-anchored-mid', 'left-anchored-low'],
-        // 2nda vez
-        ['right-anchored-high', 'left-anchored-high', 'right-anchored-low'],
-        // 3ra vez
-        ['right-anchored-high', 'right-anchored-mid', 'left-anchored-low'],
-        // 4ta vez (diferente)
-        ['left-anchored-high', 'right-anchored-high', 'right-anchored-low']
-      ];
-      const positions = positionSets[polaroidIndex % positionSets.length];
-      tips.slice(0, 3).forEach((tip, i) => {
-        if (tooltipEls[i]) {
-          const safeText = breakText(tip.text);
-          tooltipEls[i].innerHTML = `<img src=\"images/icons/${tip.icon}\" alt=\"icon\" class=\"tooltip-icon\" loading=\"eager\" width=\"24\" height=\"24\"><span>${safeText}</span>`;
-          tooltipEls[i].className = `tooltip ${positions[i]}`;
-          tooltipEls[i].style.display = '';
-        }
-      });
-    }
-
-    function rotatePolaroids() {
+    function changePolaroid() {
       if (isAnimating) return;
       isAnimating = true;
 
       const currentPolaroid = allPolaroids[currentIndex];
-      const nextPolaroid = allPolaroids[(currentIndex + 1) % allPolaroids.length];
-      
-      nextPolaroid.classList.add('active');
+      const nextIndex = getRandomPolaroid();
+      const nextPolaroid = allPolaroids[nextIndex];
+
+      // Hide current polaroid
+      currentPolaroid.classList.remove('active');
       currentPolaroid.classList.add('out');
 
+      // Show next polaroid with entrance animation
       setTimeout(() => {
-        currentPolaroid.classList.remove('out', 'active');
-        nextPolaroid.classList.remove('out');
+        currentPolaroid.classList.remove('out');
+        nextPolaroid.classList.add('entering');
         
-        currentIndex = (currentIndex + 1) % allPolaroids.length;
-        
-        if (currentIndex === 0) {
-          shufflePolaroids();
-        }
-        
-        updateTooltips(currentIndex);
-        
-        isAnimating = false;
-      }, 400);
+        setTimeout(() => {
+          nextPolaroid.classList.remove('entering');
+          nextPolaroid.classList.add('active');
+          currentIndex = nextIndex;
+          isAnimating = false;
+        }, 600); // Match CSS transition duration
+      }, 600); // Match CSS transition duration
     }
 
     function startRotation() {
       if (intervalId) {
         clearInterval(intervalId);
       }
-      intervalId = setInterval(rotatePolaroids, ROTATION_INTERVAL);
+      intervalId = setInterval(changePolaroid, ROTATION_INTERVAL);
     }
 
     function resetRotation() {
@@ -252,44 +165,70 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function initializePolaroids() {
-      applyRandomRotations();
-      shufflePolaroids();
-      allPolaroids[0].classList.add('active');
-      updateTooltips(0);
+      // Apply random rotations to all polaroids
+      allPolaroids.forEach(polaroid => {
+        const rotation = getRandomRotation();
+        polaroid.style.transform = `translateY(30px) scale(0.8) rotate(${rotation}deg)`;
+      });
+
+      // Show first polaroid immediately
+      const firstPolaroid = allPolaroids[0];
+      firstPolaroid.classList.add('active');
       startRotation();
     }
 
-    const hero = document.querySelector('.hero');
-    if (hero) {
-      hero.addEventListener('animationend', () => {
-        initializePolaroids();
-      });
-    }
+    // Initialize polaroids immediately when DOM is ready
+    initializePolaroids();
 
     photoStack.addEventListener("click", () => {
       if (!isAnimating) {
-        rotatePolaroids();
+        changePolaroid();
         resetRotation();
       }
     });
   }
 
-  // === Animación de aparición para cards y CTA ===
-  function animateOnScroll(selector) {
-    const elements = document.querySelectorAll(selector);
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('appear')) {
-          entry.target.classList.add('appear');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    elements.forEach(el => observer.observe(el));
-  }
+  // Animate project cards appearance and enable hover effects
+  setTimeout(() => {
+    const projectCards = document.querySelectorAll('.project-card.recent');
+    projectCards.forEach((card, index) => {
+      // Animate card appearance
+      setTimeout(() => {
+        card.style.opacity = '1';
+      }, index * 200); // Stagger the appearance
+      
+      // Enable hover effects after appearance
+      setTimeout(() => {
+        card.classList.add('hover-enabled');
+        
+        // Add smooth hover transitions with JavaScript
+        card.addEventListener('mouseenter', function() {
+          card.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease';
+          if (card.classList.contains('yellow')) {
+            card.style.transform = 'rotate(8deg)';
+          } else if (card.classList.contains('red')) {
+            card.style.transform = 'rotate(-6deg)';
+          } else if (card.classList.contains('purple')) {
+            card.style.transform = 'rotate(6deg)';
+          }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          // Return to original rotation based on card position
+          const cardIndex = Array.from(card.parentNode.children).indexOf(card);
+          if (cardIndex === 0) {
+            card.style.transform = 'rotate(6deg)';
+          } else if (cardIndex === 1) {
+            card.style.transform = 'rotate(-4deg)';
+          } else if (cardIndex === 2) {
+            card.style.transform = 'rotate(4deg)';
+          }
+        });
+      }, 1000 + (index * 200)); // Enable hover after appearance animation
+    });
+  }, 2000); // Start after hero content
 
-  animateOnScroll('.project-card.recent');
-  animateOnScroll('.cta-contact');
+
 
   // Forzar scroll al tope en mobile
   if (window.innerWidth <= 640) {

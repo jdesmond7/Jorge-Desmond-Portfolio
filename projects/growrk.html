@@ -1,53 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nombre del Proyecto – Jorge Desmond</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <title>Growrk - Jorge Desmond</title>
+    <meta name="description" content="Diseño de experiencia de usuario para Growrk, herramienta SaaS para gestión de oficinas remotas globales." />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Almarai:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="../tokens-colors.css" />
     <link rel="stylesheet" href="../tokens-typography.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
-    </head>
-<body>
-  <!-- Navbar reutilizado -->
-  <nav class="navbar">
-    <div class="logo">Jorge Desmond</div>
-    <ul class="nav-links">
-      <li><a href="/index.html#works">Casos de estudio</a></li>
-      <li><a href="/index.html#illustrations">Ilustración</a></li>
-    </ul>
-  </nav>
+    <link rel="stylesheet" href="../tokens-effects.css" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <!-- Desktop Navigation Header -->
+    <header class="desktop-nav">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="../index.html" class="logo-link">JORGE DESMOND</a>
+        </div>
+        <nav class="nav-menu">
+          <ul class="nav-list">
+            <li><a href="../projects.html" class="nav-link">Proyectos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-<!-- Banner con fondo gradient-growrk -->
-<section class="project-hero gradient-growrk">
-    <div class="project-banner-wrapper">
-      <img
-        src="../images/projects/growrk/growrk-mockup-project.webp"
-        alt="Vista del dashboard de GroWrk Remote"
-        width="620"
-        height="310"
-        class="project-banner-image"
-      />
+    <div class="wrapper">
+      <!-- Project Hero -->
+      <section class="project-hero">
+        <div class="project-hero-content">
+          <div class="project-hero-text">
+            <div class="project-badge">2025 - Actual</div>
+            <h1 class="project-title">Growrk</h1>
+            <p class="project-subtitle">
+              Una herramienta SaaS para gestionar oficinas remotas globales con dashboards personalizados y un sistema de diseño escalable.
+            </p>
+            <div class="project-meta">
+              <div class="meta-item">
+                <span class="meta-label">Rol</span>
+                <span class="meta-value">Senior Product Designer</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Duración</span>
+                <span class="meta-value">12 meses</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Equipo</span>
+                <span class="meta-value">5 personas</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-hero-image">
+            <img src="../images/projects/growrk/growrk-mockup-project.webp" alt="Growrk Dashboard" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Project Content -->
+      <section class="project-content">
+        <div class="content-section">
+          <h2>El Desafío</h2>
+          <p>
+            Growrk necesitaba una plataforma que permitiera a empresas gestionar equipos distribuidos globalmente de manera eficiente. El reto principal era crear una experiencia que fuera intuitiva para usuarios con diferentes niveles de experiencia técnica, desde administradores de recursos humanos hasta managers de equipos remotos.
+          </p>
+        </div>
+
+        <div class="content-section">
+          <h2>Mi Enfoque</h2>
+          <div class="approach-grid">
+            <div class="approach-item">
+              <h3>Research</h3>
+              <p>Entrevistas con usuarios, análisis de competencia y mapeo de journey de usuarios para entender las necesidades específicas de gestión remota.</p>
+            </div>
+            <div class="approach-item">
+              <h3>Design System</h3>
+              <p>Creé un sistema de diseño escalable que permitiera consistencia visual y rápida iteración en toda la plataforma.</p>
+            </div>
+            <div class="approach-item">
+              <h3>UX Strategy</h3>
+              <p>Desarrollé flujos de usuario optimizados para reducir la complejidad y mejorar la adopción de la plataforma.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h2>Resultados</h2>
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">40%</span>
+              <span class="result-label">Reducción en tiempo de onboarding</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">85%</span>
+              <span class="result-label">Satisfacción del usuario</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">3x</span>
+              <span class="result-label">Mejora en eficiencia de gestión</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h2>Galería</h2>
+          <div class="project-gallery">
+            <img src="../images/projects/growrk/growrk-dashboard.webp" alt="Dashboard Principal" />
+            <img src="../images/projects/growrk/banner-growrk-projects.webp" alt="Gestión de Proyectos" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigation -->
+      <section class="project-navigation">
+        <a href="../projects.html" class="nav-back">
+          <img src="../images/icons/arrow-narrow-right.svg" alt="Volver" style="transform: rotate(180deg);" />
+          <span>Volver a proyectos</span>
+        </a>
+        <a href="spin.html" class="nav-next">
+          <span>Siguiente proyecto</span>
+          <img src="../images/icons/arrow-narrow-right.svg" alt="Siguiente" />
+        </a>
+      </section>
     </div>
-  </section>
 
-  <!-- Cuerpo del proyecto -->
-  <section class="project-body">
-    <h1 class="project-title">Nombre del Proyecto</h1>
-    <p class="project-text">
-      Aquí va una descripción detallada del proyecto, incluyendo contexto, desafíos,
-      soluciones, resultados y aprendizajes clave. Puedes dividir el contenido en
-      párrafos para facilitar la lectura.
-    </p>
-  </section>
+    <footer>
+      <p><span id="footer-date"></span> © - Jorge Desmond</p>
+      <p class="footer-note">Este sitio no utiliza cookies ni rastreo. Justo como debería ser la web 🍪</p>
+    </footer>
 
-  <!-- Bloque de contacto reutilizable -->
-  <section class="contact">
-    <h2 class="section-title">Contáctame</h2>
-    <p class="contact-text">
-      Actualmente estoy aceptando nuevos proyectos y me encantaría conocer el tuyo. No dudes en compartir todos los detalles posibles: alcance, tiempos y presupuesto.
-    </p>
-  </section>
-</body>
+    <script>
+      // Actualiza el footer con mes y año en español
+      (function() {
+        const meses = [
+          'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+        ];
+        const fecha = new Date();
+        let mes = meses[fecha.getMonth()];
+        mes = mes.charAt(0).toUpperCase() + mes.slice(1);
+        const anio = fecha.getFullYear();
+        document.getElementById('footer-date').textContent = `${mes} ${anio}`;
+      })();
+    </script>
+  </body>
 </html>
