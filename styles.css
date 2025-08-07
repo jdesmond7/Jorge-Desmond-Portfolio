@@ -139,8 +139,8 @@ a {
 .brands-title {
   text-align: center;
   font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: var(--text-xl);
+  font-weight: 600;
+  font-size: var(--text-lg);
   letter-spacing: 0.02em;
   color: var(--gray-700);
   margin: 0 0 20px;
@@ -183,7 +183,7 @@ a {
 
 @media (max-width: 768px) {
   .brands { padding: 36px 0 4px; }
-  .brands-title { font-size: var(--text-lg); }
+  .brands-title { font-size: var(--text-base); font-weight: 600; }
   .brands-track { gap: 40px; animation-duration: 24s; }
   .brand-logo { height: 80px; width: 80px; }
 }
