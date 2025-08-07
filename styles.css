@@ -152,6 +152,27 @@ a {
   position: relative;
 }
 
+.brands-carousel::before,
+.brands-carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 96px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.brands-carousel::before {
+  left: 0;
+  background: linear-gradient(to right, var(--orange-50), rgba(255, 252, 249, 0));
+}
+
+.brands-carousel::after {
+  right: 0;
+  background: linear-gradient(to left, var(--orange-50), rgba(255, 252, 249, 0));
+}
+
 .brands-track {
   display: flex;
   align-items: center;
