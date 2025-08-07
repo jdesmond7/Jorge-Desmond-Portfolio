@@ -160,8 +160,9 @@ a {
 }
 
 .brand-logo {
-  height: 30px;
-  width: auto;
+  height: 80px;
+  width: 80px;
+  object-fit: contain;
   opacity: 0.55;
   filter: grayscale(100%);
   transition: opacity 0.2s ease;
@@ -180,7 +181,7 @@ a {
   .brands { padding: 36px 0 4px; }
   .brands-title { font-size: var(--text-lg); }
   .brands-track { gap: 40px; animation-duration: 24s; }
-  .brand-logo { height: 24px; }
+  .brand-logo { height: 56px; width: 56px; }
 }
 
 .nav-container {
