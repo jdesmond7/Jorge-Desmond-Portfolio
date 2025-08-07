@@ -133,16 +133,17 @@ a {
 
 /* ====== Brands Section ====== */
 .brands {
-  padding: 48px 0 8px;
+  padding: 16px 0 8px;
 }
 
 .brands-title {
   text-align: center;
   font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   font-weight: 600;
-  font-size: var(--text-lg);
+  text-transform: uppercase;
+  color: var(--gray-400);
+  font-size: var(--text-sm);
   letter-spacing: 0.02em;
-  color: var(--gray-700);
   margin: 0 0 20px;
 }
 
@@ -308,7 +309,7 @@ a {
 
 .hero {
   margin-top: 5rem;
-  margin-bottom: 120px;
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
