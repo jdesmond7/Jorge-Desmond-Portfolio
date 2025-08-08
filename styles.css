@@ -133,7 +133,7 @@ a {
 
 /* ====== Brands Section ====== */
 .brands {
-  padding: 64px 0 8px;
+  padding: 24px 0 8px;
 }
 
 .brands-title {
@@ -179,7 +179,7 @@ a {
   gap: 56px;
   flex-wrap: nowrap;
   width: max-content;
-  animation: brands-marquee 28s linear infinite;
+  animation: brands-marquee 32s linear infinite;
   will-change: transform;
 }
 
@@ -206,7 +206,7 @@ a {
 @media (max-width: 768px) {
   .brands { padding: 48px 0 4px; }
   .brands-title { font-size: var(--text-base); font-weight: 600; }
-  .brands-track { gap: 40px; animation-duration: 24s; }
+  .brands-track { gap: 40px; animation-duration: 40s; }
   .brand-logo { height: 80px; width: 80px; }
 }
 
@@ -316,6 +316,121 @@ a {
 }
 
 /* ===================== */
+/*     Projects Page     */
+/* ===================== */
+
+.projects-hero {
+  padding: 140px 0 24px; /* deja espacio bajo el header fijo */
+}
+
+.projects-title {
+  font-size: var(--text-6xl);
+  line-height: var(--leading-7xl);
+  font-weight: 800;
+  color: var(--gray-900);
+}
+
+.projects-subtitle {
+  font-size: var(--text-xl);
+  line-height: var(--leading-xl);
+  color: var(--gray-700);
+  margin-top: 8px;
+}
+
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.project-card-full {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--orange-100);
+}
+
+.project-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.project-logo-full {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--gray-700);
+  font-size: var(--text-sm);
+}
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 auto;
+}
+
+.project-title {
+  font-size: var(--text-3xl);
+  line-height: var(--leading-3xl);
+  font-weight: 800;
+}
+
+.project-description {
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  color: var(--gray-800);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--gray-900);
+  background: var(--white-950);
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--gray-900);
+  color: var(--white-950);
+  height: fit-content;
+  align-self: center;
+}
+
+.project-link:hover { filter: brightness(1.1); }
+
+@media (max-width: 768px) {
+  .projects-hero { padding-top: 120px; }
+  .project-card-full { flex-direction: column; align-items: flex-start; }
+  .project-link { align-self: flex-start; }
+}
+
+/* ===================== */
 /*       Wrapper         */
 /* ===================== */
 
@@ -329,7 +444,7 @@ a {
 /* ===================== */
 
 .hero {
-  margin-top: 5rem;
+  margin-top: calc(6rem + 24px);
   margin-bottom: 32px;
   display: flex;
   flex-direction: column;
@@ -342,13 +457,13 @@ a {
 
 @media (max-width: 768px) {
   .hero {
-    margin-top: 4rem;
+    margin-top: calc(4rem + 24px);
   }
 }
 
 @media (max-width: 640px) {
   .hero {
-    margin-top: 3.5rem;
+    margin-top: calc(3.5rem + 24px);
   }
 }
 
@@ -623,10 +738,40 @@ footer {
 /*  Project Page Styles  */
 /* ===================== */
 .project-hero {
-  width: 100%;
-  height: auto;
-  display: block;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  box-sizing: border-box;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  background: radial-gradient(1200px 420px at 50% 0%, #FFD16D 0%, rgba(255, 209, 109, 0.85) 35%, rgba(255, 209, 109, 0.25) 65%, rgba(255, 209, 109, 0) 100%), linear-gradient(180deg, var(--orange-50) 0%, var(--white-950) 100%);
 }
+
+/* Project-specific gradient for Growrk hero */
+.project-hero.hero-gradient-growrk {
+  background: linear-gradient(97deg, #FFE3A5 21.02%, #FFB100 85.35%, #FC3A2F 129.58%);
+}
+
+/* Project-specific gradient for Spin hero */
+.project-hero.hero-gradient-spin {
+  background: linear-gradient(24deg, #531BC8 9.05%, #241543 92.62%);
+}
+
+/* Project-specific gradient for Grupo Salinas hero */
+.project-hero.hero-gradient-salinas {
+  background: linear-gradient(90deg, #FFC900 0%, #F49609 100%);
+}
+
+.project-hero-content { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+
+.project-hero-image { width: 100%; display: flex; align-items: center; justify-content: center; }
+.project-hero-content { height: 100%; }
+.project-hero-image { height: 100%; display: flex; align-items: center; justify-content: center; }
+.project-hero-image img { display: block; max-width: min(100%, 1100px); width: auto; height: 100%; object-fit: contain; filter: drop-shadow(0 14px 40px rgba(0,0,0,0.18)); }
 
 .project-text {
   font-family: 'Almarai', sans-serif;
@@ -710,15 +855,15 @@ footer {
 }
 
 .project-card.recent .project-logo {
-  width: 80px;
-  height: 80px;
+  width: 140px;
+  height: 140px;
   object-fit: contain;
   margin-bottom: 4px;
 }
 
 .project-card.recent .project-description {
-  font-size: var(--text-xl);
-  font-weight: 600;
+  font-size: var(--text-lg);
+  font-weight: 400;
 }
 
 .project-card.recent.expanded .project-description {
@@ -844,7 +989,7 @@ footer {
   }
   .hero-content {
     flex-direction: column-reverse;
-    gap: 16px;
+    gap: 28px;
     padding: 0;
     justify-content: center;
     align-items: center;
@@ -854,8 +999,8 @@ footer {
     padding-right: 32px;
   }
   .hero-photos {
-    width: 320px;
-    height: 340px;
+    width: 360px;
+    height: 380px;
   }
 
   .hero-text {
@@ -870,15 +1015,16 @@ footer {
     line-height: var(--leading-8xl);
     font-family: 'Bebas Neue', sans-serif;
   }
+  .intro {
+    margin-bottom: 8px;
+  }
   .name br {
-    display: none;
+    display: inline;
   }
   .name .letter.space {
-    display: inline;
-    min-width: 0.5em;
-    width: 0.5em;
-    font-size: inherit;
-    letter-spacing: 0;
+    display: none;
+    width: 0;
+    min-width: 0;
   }
   .recent-projects {
     flex-direction: column;
