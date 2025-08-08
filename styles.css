@@ -133,7 +133,7 @@ a {
 
 /* ====== Brands Section ====== */
 .brands {
-  padding: 16px 0 8px;
+  padding: 64px 0 8px;
 }
 
 .brands-title {
@@ -204,7 +204,7 @@ a {
 
 
 @media (max-width: 768px) {
-  .brands { padding: 36px 0 4px; }
+  .brands { padding: 48px 0 4px; }
   .brands-title { font-size: var(--text-base); font-weight: 600; }
   .brands-track { gap: 40px; animation-duration: 24s; }
   .brand-logo { height: 80px; width: 80px; }
