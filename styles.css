@@ -830,6 +830,7 @@ footer {
 
 .project-card.yellow { background: var(--yellow-300); }
 .project-card.red { background: var(--red-300); }
+.project-card.salinas { background: #FFBC58; }
 .project-card.purple { background: var(--purple-300); }
 
 

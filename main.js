@@ -112,6 +112,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentIndex = 0;
     let intervalId = null;
     let isAnimating = false;
+    const CLICK_DEBOUNCE_MS = 200;
+    let nextAllowedClickTs = 0;
     const ROTATION_INTERVAL = 8000; // 8 seconds
 
     function getRandomRotation() {
@@ -186,10 +188,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     initializePolaroids();
 
     photoStack.addEventListener("click", () => {
-      if (!isAnimating) {
-        changePolaroid();
-        resetRotation();
-      }
+      const now = Date.now();
+      if (now < nextAllowedClickTs) return; // debounce clicks muy rápidos
+      nextAllowedClickTs = now + CLICK_DEBOUNCE_MS;
+      // Siempre reinicia el temporizador para que el siguiente cambio automático
+      // comience a contar desde este instante
+      resetRotation();
+      // Si la animación automática está en curso, ignora el click
+      if (isAnimating) return;
+      // De lo contrario, cambia inmediatamente a la siguiente polaroid
+      changePolaroid();
     });
   }
 
@@ -210,8 +218,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.addEventListener('mouseenter', function() {
           card.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease';
           if (card.classList.contains('yellow')) {
-            card.style.transform = 'rotate(8deg)';
+            card.style.transform = 'rotate(12deg)';
           } else if (card.classList.contains('red')) {
+            card.style.transform = 'rotate(-6deg)';
+          } else if (card.classList.contains('salinas')) {
             card.style.transform = 'rotate(-6deg)';
           } else if (card.classList.contains('purple')) {
             card.style.transform = 'rotate(6deg)';
