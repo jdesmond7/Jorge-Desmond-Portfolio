@@ -120,8 +120,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       return isPositive ? rotation : -rotation;
     }
 
-    function getRandomPolaroid() {
-      return Math.floor(Math.random() * allPolaroids.length);
+    function getRandomPolaroidDifferentFrom(excludeIndex) {
+      if (allPolaroids.length <= 1) return 0;
+      let candidate = excludeIndex;
+      while (candidate === excludeIndex) {
+        candidate = Math.floor(Math.random() * allPolaroids.length);
+      }
+      return candidate;
     }
 
     function changePolaroid() {
@@ -129,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       isAnimating = true;
 
       const currentPolaroid = allPolaroids[currentIndex];
-      const nextIndex = getRandomPolaroid();
+      const nextIndex = getRandomPolaroidDifferentFrom(currentIndex);
       const nextPolaroid = allPolaroids[nextIndex];
 
       // Hide current polaroid
