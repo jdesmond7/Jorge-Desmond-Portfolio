@@ -201,47 +201,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Animate project cards appearance and enable hover effects
-  setTimeout(() => {
-    const projectCards = document.querySelectorAll('.project-card.recent');
-    projectCards.forEach((card, index) => {
-      // Animate card appearance
-      setTimeout(() => {
-        card.style.opacity = '1';
-      }, index * 200); // Stagger the appearance
-      
-      // Enable hover effects after appearance
-      setTimeout(() => {
-        card.classList.add('hover-enabled');
-        
-        // Add smooth hover transitions with JavaScript
-        card.addEventListener('mouseenter', function() {
-          card.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease';
-          if (card.classList.contains('yellow')) {
-            card.style.transform = 'rotate(12deg)';
-          } else if (card.classList.contains('red')) {
-            card.style.transform = 'rotate(-6deg)';
-          } else if (card.classList.contains('salinas')) {
-            card.style.transform = 'rotate(-6deg)';
-          } else if (card.classList.contains('purple')) {
-            card.style.transform = 'rotate(6deg)';
-          }
-        });
-        
-        card.addEventListener('mouseleave', function() {
-          // Return to original rotation based on card position
-          const cardIndex = Array.from(card.parentNode.children).indexOf(card);
-          if (cardIndex === 0) {
-            card.style.transform = 'rotate(6deg)';
-          } else if (cardIndex === 1) {
-            card.style.transform = 'rotate(-4deg)';
-          } else if (cardIndex === 2) {
-            card.style.transform = 'rotate(4deg)';
-          }
-        });
-      }, 1000 + (index * 200)); // Enable hover after appearance animation
-    });
-  }, 2000); // Start after hero content
 
 
 

@@ -35,6 +35,10 @@
     <link rel="stylesheet" href="tokens-typography.css" />
     <link rel="stylesheet" href="tokens-effects.css" />
     <link rel="stylesheet" href="styles.css" />
+    
+    <!-- Translations -->
+    <script src="translations.js"></script>
+    <script src="i18n.js" defer></script>
   </head>
   <body>
     <!-- Loading Screen -->
@@ -42,7 +46,7 @@
       <div class="loading-content">
         <div class="loading-logo">Jorge Desmond</div>
         <div class="loading-spinner"></div>
-        <div class="loading-text">Cargando...</div>
+        <div class="loading-text" data-i18n="loading.text">Cargando...</div>
       </div>
     </div>
 
@@ -54,8 +58,12 @@
         </div>
         <nav class="nav-menu">
             <ul class="nav-list">
-              <li><a href="projects.html" class="nav-link">Proyectos</a></li>
+              <li><a href="projects.html" class="nav-link" data-i18n="nav.projects">Proyectos</a></li>
             </ul>
+            <div id="lang-selector" class="lang-selector">
+              <button data-lang="es" class="lang-btn" aria-label="Español">ES</button>
+              <button data-lang="en" class="lang-btn" aria-label="English">EN</button>
+            </div>
         </nav>
       </div>
     </header>
@@ -70,7 +78,7 @@
       <section class="hero">
         <div class="hero-content">
           <div class="hero-text">
-              <p class="intro">👋🏽👋🏽 Hey, soy</p>
+              <p class="intro" data-i18n="hero.intro">👋🏽👋🏽 Hey, soy</p>
             <h1 class="name">
               <span class="letter">J</span>
               <span class="letter">O</span>
@@ -87,9 +95,10 @@
               <span class="letter">N</span>
               <span class="letter">D</span>
             </h1>
-            <p class="tagline">
-                Diseñador de productos digitales ubicado en Monterrey ⛰️🇲🇽. <br> Transformo la complejidad en claridad a través del diseño.
+            <p class="tagline tagline-semibold">
+              <span class="tagline-highlight" data-i18n="hero.tagline.highlight">Diseñador de Producto Digital</span> <span data-i18n="hero.tagline.rest">apasionado por transformar la complejidad en claridad.</span>
             </p>
+            <p class="tagline-sm" data-i18n="hero.description">Diseño experiencias significativas, eficientes y escalables, combinando UX, sistemas de diseño y automatización para ayudar a los equipos a trabajar de manera más inteligente y a que los usuarios se sientan verdaderamente empoderados.</p>
           </div>
 
           <div class="hero-photos">
@@ -110,9 +119,49 @@
       </section>
       <!------- Fin del Hero Section --------->
 
+      <!-- Sección de Proyectos -->
+      <section class="featured-projects">      
+        <article class="featured-project">
+          <div class="featured-project-content">
+            <h3 class="featured-project-title" data-i18n="featuredProjects.growrk.title">Escalando Operaciones Remotas a Través del Diseño</h3>
+            <p class="featured-project-description" data-i18n="featuredProjects.growrk.description">Lideré la estrategia de diseño de producto para la plataforma de espacios de trabajo remotos globales de GroWrk, transformando flujos de trabajo operativos complejos en dashboards intuitivos y escalables.</p>
+            <a href="projects/growrk.html" class="featured-project-button" data-i18n="featuredProjects.button">Ver caso de estudio</a>
+          </div>
+          <div class="featured-project-image growrk-bg">
+            <img src="images/projects/growrk/growrk-mockup-project.webp" alt="Growrk Dashboard" class="featured-project-img" />
+          </div>
+        </article>
+
+        <article class="featured-project">
+          <div class="featured-project-content">
+            <h3 class="featured-project-title" data-i18n="featuredProjects.spin.title">Del Primer Sistema de Diseño a una Experiencia Financiera Escalable</h3>
+            <p class="featured-project-description" data-i18n="featuredProjects.spin.description">Jugué un papel fundamental en la formación de Spin by OXXO durante sus primeras etapas, ayudando a establecer su primer sistema de diseño para traer estructura, consistencia y claridad al producto.</p>
+            <a href="projects/spin.html" class="featured-project-button" data-i18n="featuredProjects.button">Ver caso de estudio</a>
+          </div>
+          <div class="featured-project-image spin-bg">
+            <img src="images/brandlogos/logo-spin-by-oxxo.webp" alt="Spin by OXXO" class="featured-project-img" />
+          </div>
+        </article>
+
+        <article class="featured-project">
+          <div class="featured-project-content">
+            <h3 class="featured-project-title" data-i18n="featuredProjects.cocacola.title">Diseñando la Plataforma de Toma de Pedidos de Nueva Generación</h3>
+            <p class="featured-project-description" data-i18n="featuredProjects.cocacola.description">Como Lead Product Designer, guié la creación de la plataforma digital de toma de pedidos de Coca-Cola, una herramienta de extremo a extremo construida para optimizar las operaciones diarias de los equipos de ventas en campo.</p>
+            <a href="#" class="featured-project-button" data-i18n="featuredProjects.button">Ver caso de estudio</a>
+          </div>
+          <div class="featured-project-image cocacola-bg">
+            <img src="images/brandlogos/logo-cocacolafemsa.webp" alt="Coca-Cola FEMSA" class="featured-project-img" />
+          </div>
+        </article>
+      </section>
+
         <!-- Sección de Logos de Marcas -->
         <section class="brands">
-          <div class="brands-carousel" aria-label="Carrusel de logos de marcas">
+          <div class="brands-header">
+            <h2 class="brands-title-main" data-i18n="brands.title">Empresas con las que he trabajado</h2>
+            <p class="brands-description" data-i18n="brands.description">Una selección de marcas y equipos con los que he colaborado para diseñar experiencias digitales escalables y centradas en el usuario.</p>
+          </div>
+          <div class="brands-carousel" data-i18n="brands.ariaLabel" data-i18n-attr="aria-label" aria-label="Carrusel de logos de marcas">
             <div class="brands-track">
               <!-- Secuencia principal -->
               <img src="images/brandlogos/logo-growrk.webp" alt="Logo Growrk" class="brand-logo" loading="lazy" width="120" height="120" />
@@ -154,75 +203,37 @@
             </div>
           </div>
         </section>
-        <div style="height: 100px;"></div>
 
-      <!-- Proyectos recientes -->
-      <section class="recent-projects">
-        <a class="project-card recent yellow" href="projects/growrk.html">
-          <div class="project-badge">2022 - A la fecha</div>
-          <img src="images/brandlogos/logo-growrk.webp" alt="Logo Growrk" class="project-logo" />
-          <div class="project-description">
-            <p>Una herramienta SaaS para gestionar oficinas remotas globales con dashboards personalizados y un sistema de diseño escalable.</p>
-          </div>
-        </a>
-        <a class="project-card recent purple" href="projects/spin.html">
-          <div class="project-badge">2021 - 2022</div>
-          <img src="images/brandlogos/logo-spin-by-oxxo.webp" alt="Logo Spin by OXXO" class="project-logo" />
-          <div class="project-description">
-            <p>Una app financiera accesible y segura que permite enviar y recibir dinero sin cuenta bancaria desde cualquier tienda OXXO.</p>
-
-          </div>
-        </a>
-        <a class="project-card recent salinas" href="projects/tpremia.html">
-          <div class="project-badge">2020 - 2021</div>
-          <img src="images/brandlogos/logo-grupo-salinas.webp" alt="Logo Grupo Salinas" class="project-logo" />
-          <div class="project-description">
-            <p>Programa de lealtad digital unificado para marcas como Elektra y Banco Azteca, diseñado con múltiples sistemas y flujos personalizados.
-            </p>
-          </div>
-        </a>
-      </section>
-
-      <!-- CTA Contacto -->
-      <a href="mailto:hola@jorgedesmond.com" class="cta-contact" id="cta-contact-btn">
-        <div class="cta-contact-text">
-          <span class="cta-title">Trabajemos juntos</span>
-          <span class="cta-desc">
-            Actualmente estoy aceptando nuevos proyectos y me encantaría conocer el tuyo. No dudes en compartir todos los detalles posibles: alcance, tiempos y presupuesto.
-          </span>
+      <!-- Sección Let's Connect -->
+      <section class="lets-connect">
+        <h2 class="lets-connect-title" data-i18n="letsConnect.title">Conectemos</h2>
+        <p class="lets-connect-text" data-i18n="letsConnect.text1">Actualmente estoy abierto a nuevos proyectos y colaboraciones.</p>
+        <p class="lets-connect-text" data-i18n="letsConnect.text2">Cuéntame sobre tu idea, alcance, tiempos y objetivos y construyamos algo significativo juntos.</p>
+        <a href="mailto:hola@jorgedesmond.com" class="lets-connect-email" data-i18n="letsConnect.email">hola@jorgedesmond.com</a>
+        <div class="lets-connect-social">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <img src="images/social/instagram.png" alt="Instagram" class="social-icon" />
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <img src="images/social/linkedin.png" alt="LinkedIn" class="social-icon" />
+          </a>
+          <a href="#" class="social-link" aria-label="X (Twitter)">
+            <img src="images/social/x.png" alt="X" class="social-icon" />
+          </a>
         </div>
-        <span class="cta-arrow">
-          <img src="images/icons/send-01.svg" alt="Enviar correo" width="92" height="92" />
-        </span>
-      </a>
+      </section>
 
     </div>
 
 
     <footer>
       <p><span id="footer-date"></span> © - Jorge Desmond</p>
-      <p class="footer-note">Este sitio no utiliza cookies ni rastreo. Justo como debería ser la web 🍪</p>
+      <p class="footer-note" data-i18n="footer.note">Este sitio no utiliza cookies ni rastreo. Justo como debería ser la web 🍪</p>
     </footer>
 
     <script src="main.js" defer></script>
     <script>
-    document.getElementById('cta-contact-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      window.open('mailto:hola@jorgedesmond.com');
-    });
-
-    // Actualiza el footer con mes y año en español
-    (function() {
-      const meses = [
-        'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-      ];
-      const fecha = new Date();
-      let mes = meses[fecha.getMonth()];
-      mes = mes.charAt(0).toUpperCase() + mes.slice(1);
-      const anio = fecha.getFullYear();
-      document.getElementById('footer-date').textContent = `${mes} ${anio}`;
-    })();
+    // Footer date is now handled by i18n.js
     </script>
 
 
