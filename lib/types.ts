@@ -1,6 +1,14 @@
 export interface ProjectMetric {
   value: string;
-  label: string;
+  title: string;
+  description?: string;
+}
+
+export interface ProjectSummary {
+  duration?: string;
+  roles?: string;
+  team?: string;
+  tools?: string;
 }
 
 export interface Project {
@@ -18,9 +26,7 @@ export interface Project {
   publishedAt?: string;
   coverImage?: string;
   gallery?: string[];
-  roles?: string[];
-  team?: string[];
-  tools?: string[];
+  projectSummary?: ProjectSummary;
   body?: string;
   isParent?: boolean;
   showInHome?: boolean;
@@ -104,6 +110,7 @@ export interface SiteSettings {
   siteName: string;
   email: string;
   linkedin: string;
+  instagram?: string;
   navLinks: NavLink[];
   footerText: string;
 }

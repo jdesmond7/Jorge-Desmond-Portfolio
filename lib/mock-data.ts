@@ -32,7 +32,13 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       "Infraestructura de diseño completa para una plataforma B2B SaaS global: 3 generaciones de Design System, 5 plataformas y un AI Playground que genera UI con 80–90% de fidelidad desde un prompt.",
     tags: ["Design Systems", "AI Architecture", "B2B SaaS"],
-    metrics: [{ value: "50K+", label: "usuarios · 150 países" }],
+    metrics: [
+      {
+        value: "50K+",
+        title: "Usuarios en producción",
+        description: "Operación activa en más de 150 países",
+      },
+    ],
     featured: true,
     order: 1,
     publishedAt: "2024-06-01T00:00:00.000Z",
@@ -60,14 +66,23 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       "Diseñé un ecosistema descentralizado que transformó el flujo de asignación de hardware. Pasamos de un modelo rígido gestionado por managers a un Marketplace donde el empleado elige sus herramientas bajo un catálogo pre-aprobado.",
     tags: ["Marketplace", "Self-service", "B2B SaaS"],
-    metrics: [{ value: "−60%", label: "carga de soporte" }],
+    metrics: [
+      {
+        value: "−60%",
+        title: "Carga de soporte",
+        description: "Reducción tras el modelo de autoservicio",
+      },
+    ],
     order: 1,
     showInHome: true,
     publishedAt: "2024-02-01T00:00:00.000Z",
     body: "El impacto: reducción drástica en la carga de soporte, eliminación de la fricción de comunicación y una experiencia de onboarding fluida para equipos globales.",
-    roles: ["Sr. Product Designer", "Lead UI Designer"],
-    team: ["1 Product Owner", "1 PM", "5 Engineers", "2 Designers"],
-    tools: ["Figma", "Figjam", "Nuxt UI", "Tailwind", "Notion"],
+    projectSummary: {
+      duration: "2023 — 2024",
+      roles: "Sr. Product Designer · Lead UI Designer",
+      team: "1 PO · 1 PM · 5 Devs · 2 Designers",
+      tools: "Figma · Nuxt UI · Tailwind · Notion",
+    },
     learning:
       "La descentralización solo funciona con límites claros. El empleado elige, pero dentro de un catálogo que la empresa ya aprobó.",
   },
@@ -82,14 +97,23 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Equipar a equipos enteros artículo por artículo generaba cuellos de botella y errores logísticos. Diseñé una solución basada en "Paquetes Inteligentes" que permite a las empresas estandarizar y asignar configuraciones de hardware completas por rol o departamento en solo un par de clics.',
     tags: ["Automation", "Logística", "B2B SaaS"],
-    metrics: [{ value: "1-click", label: "asignación por rol" }],
+    metrics: [
+      {
+        value: "1-click",
+        title: "Asignación por rol",
+        description: "Paquetes inteligentes listos para desplegar",
+      },
+    ],
     order: 2,
     showInHome: true,
     publishedAt: "2024-04-01T00:00:00.000Z",
     body: "El impacto: reducción drástica en el tiempo de creación de órdenes masivas y optimización en la cadena de suministro internacional.",
-    roles: ["Sr. Product Designer", "Lead Design System Designer"],
-    team: ["1 Product Owner", "1 PM", "8 Engineers", "4 Designers"],
-    tools: ["Figma", "Figjam", "Design Tokens", "Cursor", "ClaudeCode"],
+    projectSummary: {
+      duration: "2023 — 2024",
+      roles: "Sr. Product Designer · Lead Design System Designer",
+      team: "1 PO · 1 PM · 8 Devs · 4 Designers",
+      tools: "Figma · Nuxt UI · Tailwind · Cursor · Notion",
+    },
     learning:
       "Estandarizar no es limitar. Los paquetes inteligentes reducen fricción sin quitar flexibilidad al negocio.",
   },
@@ -103,15 +127,24 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       "Primer Design System del producto y flujos financieros críticos — SPEI, onboarding, KYC — para una fintech que escaló a 1M de usuarios en 9 meses.",
     tags: ["Fintech", "0→1", "Mobile"],
-    metrics: [{ value: "1M+", label: "usuarios en 9 meses" }],
+    metrics: [
+      {
+        value: "1M+",
+        title: "Usuarios en 9 meses",
+        description: "Escala de fintech para no bancarizados",
+      },
+    ],
     featured: true,
     order: 2,
     showInHome: true,
     publishedAt: "2023-03-15T00:00:00.000Z",
     body: "Spin democratizó servicios financieros para millones de usuarios en México. Diseñé el primer sistema de diseño del producto y los flujos críticos de onboarding, KYC y transferencias SPEI.",
-    roles: ["Lead Product Designer", "Design System Lead"],
-    team: ["1 Product Owner", "2 PMs", "12 Engineers", "3 Designers"],
-    tools: ["Figma", "Figjam", "React Native", "Storybook", "Notion"],
+    projectSummary: {
+      duration: "2021 — 2022",
+      roles: "Lead Product Designer · Design System Lead",
+      team: "1 PO · 2 PMs · 12 Devs · 3 Designers",
+      tools: "Figma · React Native · Storybook · Notion",
+    },
     learning:
       "En fintech, la confianza se diseña en cada micro-interacción. El onboarding no es un formulario — es el primer contrato con el usuario.",
   },
@@ -125,15 +158,24 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       "Sistemas de lealtad para Elektra, Banco Azteca, ITALIKA y Presta Prenda — identidades distintas sobre una arquitectura de interacción compartida.",
     tags: ["Loyalty", "Multi-brand", "Cross-platform"],
-    metrics: [{ value: "4", label: "design systems paralelos" }],
+    metrics: [
+      {
+        value: "4",
+        title: "Design systems paralelos",
+        description: "Elektra, Banco Azteca, ITALIKA y Presta Prenda",
+      },
+    ],
     featured: true,
     order: 3,
     showInHome: true,
     publishedAt: "2022-01-10T00:00:00.000Z",
     body: "Cuatro marcas, cuatro identidades, una sola arquitectura de interacción. Diseñé sistemas de lealtad que respetan la voz de cada marca mientras comparten patrones de usabilidad probados.",
-    roles: ["Sr. UI Designer", "Design System Designer"],
-    team: ["2 Product Owners", "3 PMs", "10 Engineers", "5 Designers"],
-    tools: ["Figma", "Sketch", "Zeplin", "InVision", "Confluence"],
+    projectSummary: {
+      duration: "2020 — 2021",
+      roles: "Sr. UI Designer · Design System Designer",
+      team: "2 POs · 3 PMs · 10 Devs · 5 Designers",
+      tools: "Figma · Sketch · Zeplin · InVision · Confluence",
+    },
     learning:
       "Multi-marca no significa multi-caos. La arquitectura compartida es lo que permite que cada identidad respire sin romper la operación.",
   },
@@ -196,6 +238,7 @@ export const MOCK_SITE_SETTINGS: SiteSettings = {
   siteName: "jorge desmond",
   email: "jdesmond7@gmail.com",
   linkedin: "https://www.linkedin.com/in/jorgedesmond/",
+  instagram: "https://www.instagram.com/jorgedesmond/",
   navLinks: [
     { label: "Casos de estudio", href: "/proyectos" },
     { label: "Ilustración", href: "/ilustracion" },

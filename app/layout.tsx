@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, JetBrains_Mono, Montserrat } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
-import { getSiteSettings } from "@/lib/strapi";
+import { getHomeContent, getSiteSettings } from "@/lib/strapi";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -45,7 +45,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const settings = await getSiteSettings();
+  const [settings, home] = await Promise.all([
+    getSiteSettings(),
+    getHomeContent(),
+  ]);
 
   return (
     <html
@@ -60,7 +63,15 @@ export default async function RootLayout({
           linkedin={settings.linkedin}
         />
         <main className="flex-1">{children}</main>
-        <Footer footerText={settings.footerText} />
+        <Footer
+          navLinks={settings.navLinks}
+          email={settings.email}
+          linkedin={settings.linkedin}
+          instagram={settings.instagram}
+          footerText={settings.footerText}
+          ctaTitle={home.ctaTitle}
+          ctaSubtitle={home.ctaSubtitle}
+        />
       </body>
     </html>
   );

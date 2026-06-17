@@ -14,8 +14,10 @@ import type {
   Illustration,
   NavLink,
   Project,
+  ProjectMetric,
   ProjectNavigation,
   ProjectNavItem,
+  ProjectSummary,
   SiteSettings,
   StackItem,
   Stat,
@@ -182,17 +184,63 @@ function unwrapRelation(value: unknown): StrapiRecord | undefined {
   return undefined;
 }
 
-function mapMetrics(value: unknown): { value: string; label: string }[] {
+function mapMetrics(value: unknown): ProjectMetric[] {
   if (!Array.isArray(value)) return [];
   return value
     .map((entry) => {
       const item = unwrap(entry as StrapiRecord);
+      const title = String(item.title ?? item.label ?? "");
+      const description = item.description
+        ? String(item.description)
+        : undefined;
       return {
         value: String(item.value ?? ""),
-        label: String(item.label ?? ""),
+        title,
+        description,
       };
     })
-    .filter((m) => m.value || m.label);
+    .filter((m) => m.value || m.title);
+}
+
+function joinLegacyList(value: unknown): string | undefined {
+  if (Array.isArray(value)) {
+    const items = value.map((item) => String(item).trim()).filter(Boolean);
+    return items.length ? items.join(" · ") : undefined;
+  }
+  if (typeof value === "string" && value.trim()) return value.trim();
+  return undefined;
+}
+
+function mapProjectSummary(
+  value: unknown,
+  attrs: StrapiRecord,
+  mock?: Project,
+): ProjectSummary | undefined {
+  const item =
+    value && typeof value === "object"
+      ? unwrap(value as StrapiRecord)
+      : undefined;
+
+  const summary: ProjectSummary = {
+    duration: item?.duration
+      ? String(item.duration)
+      : (mock?.projectSummary?.duration ??
+        (attrs.year ? String(attrs.year) : undefined)),
+    roles: item?.roles
+      ? String(item.roles)
+      : joinLegacyList(attrs.roles) ?? mock?.projectSummary?.roles,
+    team: item?.team
+      ? String(item.team)
+      : joinLegacyList(attrs.team) ?? mock?.projectSummary?.team,
+    tools: item?.tools
+      ? String(item.tools)
+      : joinLegacyList(attrs.tools) ?? mock?.projectSummary?.tools,
+  };
+
+  const hasContent = Boolean(
+    summary.duration || summary.roles || summary.team || summary.tools,
+  );
+  return hasContent ? summary : undefined;
 }
 
 function mapProject(record: StrapiRecord): Project {
@@ -225,9 +273,7 @@ function mapProject(record: StrapiRecord): Project {
     body: a.body ? String(a.body) : undefined,
     coverImage: getMediaUrl(a.coverImage),
     gallery: getMediaUrls(a.gallery),
-    roles: Array.isArray(a.roles) ? (a.roles as string[]) : mock?.roles,
-    team: Array.isArray(a.team) ? (a.team as string[]) : mock?.team,
-    tools: Array.isArray(a.tools) ? (a.tools as string[]) : mock?.tools,
+    projectSummary: mapProjectSummary(a.projectSummary, a, mock),
     isParent: Boolean(a.isParent),
     showInHome: Boolean(a.showInHome),
     overviewTitle: a.overviewTitle ? String(a.overviewTitle) : undefined,
@@ -295,6 +341,9 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     siteName: String(a.siteName ?? MOCK_SITE_SETTINGS.siteName),
     email: String(a.email ?? MOCK_SITE_SETTINGS.email),
     linkedin: String(a.linkedin ?? MOCK_SITE_SETTINGS.linkedin),
+    instagram: a.instagram
+      ? String(a.instagram)
+      : MOCK_SITE_SETTINGS.instagram,
     navLinks,
     footerText: String(a.footerText ?? MOCK_SITE_SETTINGS.footerText),
   };
@@ -424,9 +473,11 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       "&populate[gallery]=true" +
       "&populate[tags]=true" +
       "&populate[metrics]=true" +
+      "&populate[projectSummary]=true" +
       "&populate[children][populate][coverImage]=true" +
       "&populate[children][populate][tags]=true" +
       "&populate[children][populate][metrics]=true" +
+      "&populate[children][populate][projectSummary]=true" +
       "&populate[parent][fields][0]=slug" +
       "&populate[parent][fields][1]=title",
   );

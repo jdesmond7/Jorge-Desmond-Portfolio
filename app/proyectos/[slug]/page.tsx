@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { CaseStudyBody } from "@/components/ui/CaseStudyBody";
 import { CaseStudySection } from "@/components/ui/CaseStudySection";
 import { CmsImage } from "@/components/ui/CmsImage";
 import { Container } from "@/components/ui/Container";
@@ -76,6 +77,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           {project.description}
         </p>
 
+        {!isParentView && project.projectSummary && (
+          <ProjectMeta {...project.projectSummary} />
+        )}
+
         {project.metrics && project.metrics.length > 0 && (
           <>
             <ProjectMetrics metrics={project.metrics} />
@@ -102,7 +107,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             />
 
             {children.length > 0 && (
-              <section className="mt-16 border-t border-mist pt-16">
+              <section className="mt-16 border-t border-mist pt-16 pb-4">
                 <h2 className="font-body mb-10 text-[clamp(24px,3.5vw,34px)] font-bold leading-[1.15] tracking-[-0.015em] text-carbon">
                   Iniciativas Clave
                 </h2>
@@ -121,18 +126,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </>
         ) : (
           <>
-            <ProjectMeta
-              duration={project.year}
-              roles={project.roles}
-              team={project.team}
-              tools={project.tools}
-            />
-
-            {project.body && (
-              <div className="mb-16 w-full whitespace-pre-line text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
-                {project.body}
-              </div>
-            )}
+            {project.body && <CaseStudyBody content={project.body} />}
 
             {galleryImages.length > 0 && (
               <section className="mb-16">
@@ -157,9 +151,15 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </>
         )}
 
-        {project.learning && <ProjectLearning text={project.learning} />}
+        <footer className="mt-24 md:mt-32">
+          {project.learning && <ProjectLearning text={project.learning} />}
 
-        <ProjectNav prev={navigation.prev} next={navigation.next} />
+          <ProjectNav
+            prev={navigation.prev}
+            next={navigation.next}
+            hasLearningAbove={Boolean(project.learning)}
+          />
+        </footer>
       </Container>
     </div>
   );

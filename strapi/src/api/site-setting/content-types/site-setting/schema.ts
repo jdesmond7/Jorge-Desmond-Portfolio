@@ -23,12 +23,18 @@ export default {
     "linkedin": {
       "type": "string"
     },
+    "instagram": {
+      "type": "string"
+    },
     "navLinks": {
       "type": "component",
       "repeatable": true,
       "component": "shared.nav-link"
     },
     "footerText": {
+      "type": "string"
+    },
+    "footerHeadline": {
       "type": "string"
     }
   }

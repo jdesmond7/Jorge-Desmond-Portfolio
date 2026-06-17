@@ -2,7 +2,8 @@ export default {
   "collectionName": "components_shared_metrics",
   "info": {
     "displayName": "Métrica",
-    "icon": "chartCircle"
+    "icon": "chartCircle",
+    "description": "Métrica con valor, título y descripción breve"
   },
   "options": {},
   "attributes": {
@@ -10,9 +11,12 @@ export default {
       "type": "string",
       "required": true
     },
-    "label": {
+    "title": {
       "type": "string",
       "required": true
+    },
+    "description": {
+      "type": "text"
     }
   }
 } as const;

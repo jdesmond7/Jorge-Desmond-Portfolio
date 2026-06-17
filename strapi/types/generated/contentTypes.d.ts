@@ -613,14 +613,12 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
     overviewTitle: Schema.Attribute.String;
     parent: Schema.Attribute.Relation<'manyToOne', 'api::proyecto.proyecto'>;
     problem: Schema.Attribute.String & Schema.Attribute.Required;
+    projectSummary: Schema.Attribute.Component<'shared.project-summary', false>;
     publishedAt: Schema.Attribute.DateTime;
-    roles: Schema.Attribute.JSON;
     showInHome: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
-    team: Schema.Attribute.JSON;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    tools: Schema.Attribute.JSON;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -644,7 +642,9 @@ export interface ApiSiteSettingSiteSetting extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email & Schema.Attribute.Required;
+    footerHeadline: Schema.Attribute.String;
     footerText: Schema.Attribute.String;
+    instagram: Schema.Attribute.String;
     linkedin: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

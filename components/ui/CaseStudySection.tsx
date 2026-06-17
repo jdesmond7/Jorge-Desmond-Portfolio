@@ -24,12 +24,9 @@ export function CaseStudySection({
         </h2>
       )}
       {body && (
-        <>
-          <div className="mb-8 border-t border-mist pt-8" />
-          <p className="w-full whitespace-pre-line text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
-            {body}
-          </p>
-        </>
+        <p className="w-full whitespace-pre-line text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
+          {body}
+        </p>
       )}
     </section>
   );

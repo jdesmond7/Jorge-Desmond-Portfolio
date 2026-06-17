@@ -4,14 +4,15 @@ import type { ProjectNavItem } from "@/lib/types";
 interface ProjectNavProps {
   prev?: ProjectNavItem;
   next?: ProjectNavItem;
+  hasLearningAbove?: boolean;
 }
 
-export function ProjectNav({ prev, next }: ProjectNavProps) {
+export function ProjectNav({ prev, next, hasLearningAbove = false }: ProjectNavProps) {
   if (!prev && !next) return null;
 
   return (
     <nav
-      className="grid grid-cols-1 gap-4 border-t border-mist pt-10 sm:grid-cols-2"
+      className={`grid grid-cols-1 gap-4 border-t border-mist sm:grid-cols-2 ${hasLearningAbove ? "mt-16 pt-16" : "pt-16"}`}
       aria-label="Navegación entre proyectos"
     >
       {prev ? (

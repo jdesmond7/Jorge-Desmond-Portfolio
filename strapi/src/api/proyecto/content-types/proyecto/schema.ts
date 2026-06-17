@@ -48,6 +48,16 @@ export default {
       "type": "string",
       "required": true
     },
+    "projectSummary": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.project-summary",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "isParent" }, false]
+        }
+      }
+    },
     "metrics": {
       "type": "component",
       "repeatable": true,
@@ -107,30 +117,6 @@ export default {
       "relation": "manyToOne",
       "target": "api::proyecto.proyecto",
       "inversedBy": "children",
-      "conditions": {
-        "visible": {
-          "==": [{ "var": "isParent" }, false]
-        }
-      }
-    },
-    "roles": {
-      "type": "json",
-      "conditions": {
-        "visible": {
-          "==": [{ "var": "isParent" }, false]
-        }
-      }
-    },
-    "team": {
-      "type": "json",
-      "conditions": {
-        "visible": {
-          "==": [{ "var": "isParent" }, false]
-        }
-      }
-    },
-    "tools": {
-      "type": "json",
       "conditions": {
         "visible": {
           "==": [{ "var": "isParent" }, false]
@@ -210,6 +196,11 @@ export default {
       "learning": {
         "edit": {
           "label": "Aprendizaje"
+        }
+      },
+      "projectSummary": {
+        "edit": {
+          "label": "Project Summary"
         }
       }
     }

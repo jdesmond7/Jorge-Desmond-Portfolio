@@ -3,11 +3,13 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface SharedMetric extends Struct.ComponentSchema {
   collectionName: 'components_shared_metrics';
   info: {
+    description: 'M\u00E9trica con valor, t\u00EDtulo y descripci\u00F3n breve';
     displayName: 'M\u00E9trica';
     icon: 'chartCircle';
   };
   attributes: {
-    label: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     value: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -21,6 +23,21 @@ export interface SharedNavLink extends Struct.ComponentSchema {
   attributes: {
     href: Schema.Attribute.String & Schema.Attribute.Required;
     label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedProjectSummary extends Struct.ComponentSchema {
+  collectionName: 'components_shared_project_summaries';
+  info: {
+    description: 'Duraci\u00F3n, rol, equipo y herramientas del proyecto';
+    displayName: 'Project Summary';
+    icon: 'layer';
+  };
+  attributes: {
+    duration: Schema.Attribute.String;
+    roles: Schema.Attribute.String;
+    team: Schema.Attribute.String;
+    tools: Schema.Attribute.String;
   };
 }
 
@@ -55,6 +72,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'shared.metric': SharedMetric;
       'shared.nav-link': SharedNavLink;
+      'shared.project-summary': SharedProjectSummary;
       'shared.stack-item': SharedStackItem;
       'shared.stat': SharedStat;
     }

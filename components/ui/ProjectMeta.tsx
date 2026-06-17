@@ -1,31 +1,27 @@
 interface ProjectMetaProps {
   duration?: string;
-  roles?: string[];
-  team?: string[];
-  tools?: string[];
-}
-
-function formatList(items: string[]) {
-  return items.join(" · ");
+  roles?: string;
+  team?: string;
+  tools?: string;
 }
 
 export function ProjectMeta({
   duration,
-  roles = [],
-  team = [],
-  tools = [],
+  roles,
+  team,
+  tools,
 }: ProjectMetaProps) {
   const items = [
     duration ? { label: "Duración", value: duration } : null,
-    roles.length ? { label: "Rol", value: formatList(roles) } : null,
-    team.length ? { label: "Equipo", value: formatList(team) } : null,
-    tools.length ? { label: "Herramientas", value: formatList(tools) } : null,
+    roles ? { label: "Rol", value: roles } : null,
+    team ? { label: "Equipo", value: team } : null,
+    tools ? { label: "Herramientas", value: tools } : null,
   ].filter((item): item is { label: string; value: string } => item !== null);
 
   if (!items.length) return null;
 
   return (
-    <div className="mb-16 overflow-hidden rounded-[var(--radius-card)] border border-mist">
+    <div className="mb-10 overflow-hidden rounded-[var(--radius-card)] border border-mist bg-white">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">
         {items.map((item, index) => (
           <div
