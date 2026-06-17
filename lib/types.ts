@@ -24,11 +24,25 @@ export interface Project {
   body?: string;
   isParent?: boolean;
   showInHome?: boolean;
-  overview?: string;
-  challenge?: string;
+  overviewTitle?: string;
+  overviewBodyText?: string;
+  challengeTitle?: string;
+  challengeBodyText?: string;
+  learning?: string;
   parentSlug?: string;
   parentTitle?: string;
   children?: Project[];
+}
+
+export interface ProjectNavItem {
+  slug: string;
+  title: string;
+  subtitle?: string;
+}
+
+export interface ProjectNavigation {
+  prev?: ProjectNavItem;
+  next?: ProjectNavItem;
 }
 
 export interface Stat {

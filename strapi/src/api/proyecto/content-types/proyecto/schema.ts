@@ -59,7 +59,15 @@ export default {
       "target": "api::tag.tag",
       "inversedBy": "proyectos"
     },
-    "overview": {
+    "overviewTitle": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "isParent" }, true]
+        }
+      }
+    },
+    "overviewBodyText": {
       "type": "text",
       "conditions": {
         "visible": {
@@ -67,7 +75,15 @@ export default {
         }
       }
     },
-    "challenge": {
+    "challengeTitle": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "isParent" }, true]
+        }
+      }
+    },
+    "challengeBodyText": {
       "type": "text",
       "conditions": {
         "visible": {
@@ -141,6 +157,9 @@ export default {
         }
       }
     },
+    "learning": {
+      "type": "text"
+    },
     "featured": {
       "type": "boolean",
       "default": false
@@ -152,6 +171,47 @@ export default {
     "showInHome": {
       "type": "boolean",
       "default": false
+    }
+  },
+  "config": {
+    "layouts": {
+      "edit": [
+        [
+          { "name": "overviewTitle", "size": 4 },
+          { "name": "overviewBodyText", "size": 8 }
+        ],
+        [
+          { "name": "challengeTitle", "size": 4 },
+          { "name": "challengeBodyText", "size": 8 }
+        ]
+      ]
+    },
+    "metadatas": {
+      "overviewTitle": {
+        "edit": {
+          "label": "Title"
+        }
+      },
+      "overviewBodyText": {
+        "edit": {
+          "label": "Body Text"
+        }
+      },
+      "challengeTitle": {
+        "edit": {
+          "label": "Title"
+        }
+      },
+      "challengeBodyText": {
+        "edit": {
+          "label": "Body Text"
+        }
+      },
+      "learning": {
+        "edit": {
+          "label": "Aprendizaje"
+        }
+      }
     }
   }
 } as const;

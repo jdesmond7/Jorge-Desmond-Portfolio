@@ -1,4 +1,5 @@
 interface ProjectMetaProps {
+  duration?: string;
   roles?: string[];
   team?: string[];
   tools?: string[];
@@ -8,40 +9,37 @@ function formatList(items: string[]) {
   return items.join(" · ");
 }
 
-function MetaSection({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
+export function ProjectMeta({
+  duration,
+  roles = [],
+  team = [],
+  tools = [],
+}: ProjectMetaProps) {
+  const items = [
+    duration ? { label: "Duración", value: duration } : null,
+    roles.length ? { label: "Rol", value: formatList(roles) } : null,
+    team.length ? { label: "Equipo", value: formatList(team) } : null,
+    tools.length ? { label: "Herramientas", value: formatList(tools) } : null,
+  ].filter((item): item is { label: string; value: string } => item !== null);
+
   if (!items.length) return null;
 
   return (
-    <div>
-      <h2 className="mb-2 text-[15px] font-semibold tracking-[-0.005em] text-carbon">
-        {title}
-      </h2>
-      <p className="text-[15px] leading-[1.5] tracking-[-0.005em] text-zinc">
-        {formatList(items)}
-      </p>
-    </div>
-  );
-}
-
-export function ProjectMeta({ roles = [], team = [], tools = [] }: ProjectMetaProps) {
-  if (!roles.length && !team.length && !tools.length) return null;
-
-  return (
-    <div className="rounded-[var(--radius-card)] bg-fog px-6 py-8 md:px-10 md:py-9">
-      <div className="grid gap-8 md:grid-cols-2 md:gap-x-12">
-        <MetaSection title="Roles (varios)" items={roles} />
-        <MetaSection title="Equipo" items={team} />
-        {tools.length > 0 && (
-          <div className="md:col-span-2">
-            <MetaSection title="Herramientas" items={tools} />
+    <div className="mb-16 overflow-hidden rounded-[var(--radius-card)] border border-mist">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">
+        {items.map((item, index) => (
+          <div
+            key={item.label}
+            className={`p-5 ${index > 0 ? "border-t border-mist sm:border-t-0 sm:border-l" : ""}`}
+          >
+            <div className="mono mb-1.5 text-[10px] uppercase tracking-[0.1em] text-ash">
+              {item.label}
+            </div>
+            <div className="text-[13px] font-semibold leading-[1.4] text-carbon">
+              {item.value}
+            </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

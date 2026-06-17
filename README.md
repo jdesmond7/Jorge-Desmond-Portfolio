@@ -73,11 +73,12 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 ## Design System
 
-Tokens en `app/globals.css` y `lib/tokens.ts`:
+Tokens (colores, tipografía, radios, gradiente y sombra) centralizados en `app/globals.css`:
 
 - **Coral** `#fc5f2b` — solo CTAs, marca y acentos
 - **Carbon** `#18181b` — nav y texto principal
-- **Inter Tight** — display weight 400, tracking negativo
+- **Bebas Neue** — display, uppercase
+- **Montserrat** — cuerpo
 - **JetBrains Mono** — labels y metadata
 
 ## Deploy

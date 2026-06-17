@@ -1,4 +1,8 @@
 import { triggerVercelDeploy } from "./utils/deploy";
+import {
+  configureProyectoCaseStudyLayout,
+  migrateProyectoCaseStudyFields,
+} from "./utils/proyecto-case-study";
 
 const BRANDS = [
   "GroWrk",
@@ -30,10 +34,14 @@ const PARENT_PROJECTS = [
     order: 1,
     isParent: true,
     publishedAt: "2024-06-01T00:00:00.000Z",
-    overview:
+    overviewTitle: "Una operación global en una sola interfaz",
+    overviewBodyText:
       "Growrk es una plataforma global de IT Asset Management (ITAM) y logística automatizada. Permite a empresas internacionales (especialmente remotas y distribuidas) comprar, almacenar, desplegar, gestionar y dar soporte a todo el hardware de sus empleados (laptops, monitores, periféricos) en más de 150 países, centralizando una operación global en una sola interfaz digital.",
-    challenge:
+    challengeTitle: "De inventario básico a infraestructura de escala global",
+    challengeBodyText:
       "Me uní a GroWrk en sus etapas iniciales con la misión de transformar una operación compleja y manual de gestión de hardware en una plataforma SaaS escalable. Mi reto evolucionó de diseñar flujos básicos de inventario a liderar la estrategia de experiencia para tres frentes críticos: Clientes, Empleados y Operaciones Internas, mientras construía la infraestructura de diseño (Design System) que permitiría al equipo crecer de 0 a escala global.",
+    learning:
+      "Un Design System no es una librería de componentes. Es la decisión colectiva de cómo un equipo quiere trabajar. Sin adopción, no existe. Sin ingeniería, no escala. Sin IA, no crece.",
   },
   {
     title: "Banca para los no bancarizados",
@@ -53,6 +61,8 @@ const PARENT_PROJECTS = [
     roles: ["Lead Product Designer", "Design System Lead"],
     team: ["1 Product Owner", "2 PMs", "12 Engineers", "3 Designers"],
     tools: ["Figma", "Figjam", "React Native", "Storybook", "Notion"],
+    learning:
+      "En fintech, la confianza se diseña en cada micro-interacción. El onboarding no es un formulario — es el primer contrato con el usuario.",
   },
   {
     title: "4 marcas. 4 sistemas. 1 framework.",
@@ -72,6 +82,8 @@ const PARENT_PROJECTS = [
     roles: ["Sr. UI Designer", "Design System Designer"],
     team: ["2 Product Owners", "3 PMs", "10 Engineers", "5 Designers"],
     tools: ["Figma", "Sketch", "Zeplin", "InVision", "Confluence"],
+    learning:
+      "Multi-marca no significa multi-caos. La arquitectura compartida es lo que permite que cada identidad respire sin romper la operación.",
   },
 ];
 
@@ -95,6 +107,8 @@ const CHILD_PROJECTS = [
     roles: ["Sr. Product Designer", "Lead UI Designer"],
     team: ["1 Product Owner", "1 PM", "5 Engineers", "2 Designers"],
     tools: ["Figma", "Figjam", "Nuxt UI", "Tailwind", "Notion"],
+    learning:
+      "La descentralización solo funciona con límites claros. El empleado elige, pero dentro de un catálogo que la empresa ya aprobó.",
   },
   {
     parentSlug: "growrk",
@@ -114,6 +128,8 @@ const CHILD_PROJECTS = [
     roles: ["Sr. Product Designer", "Lead Design System Designer"],
     team: ["1 Product Owner", "1 PM", "8 Engineers", "4 Designers"],
     tools: ["Figma", "Figjam", "Design Tokens", "Cursor", "ClaudeCode"],
+    learning:
+      "Estandarizar no es limitar. Los paquetes inteligentes reducen fricción sin quitar flexibilidad al negocio.",
   },
 ];
 
@@ -374,6 +390,8 @@ export default {
     await setPublicPermissions(strapi);
     await seedContent(strapi);
     await backfillMetricsAndTags(strapi);
+    await migrateProyectoCaseStudyFields(strapi);
+    await configureProyectoCaseStudyLayout(strapi);
 
     const CONTENT_TYPES_THAT_TRIGGER_DEPLOY = new Set([
       "api::home.home",

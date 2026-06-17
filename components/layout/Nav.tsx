@@ -45,14 +45,14 @@ function isNavLinkActive(pathname: string, href: string): boolean {
 }
 
 function navLinkClass(isActive: boolean): string {
-  return `text-[13px] font-normal tracking-[-0.005em] no-underline transition-colors hover:text-primary ${
-    isActive ? "text-primary" : "text-white/60"
+  return `rounded-[10px] px-3 py-1.5 text-[13px] font-normal tracking-[-0.005em] no-underline transition-colors hover:bg-white/10 hover:text-primary ${
+    isActive ? "bg-white/10 text-primary" : "text-white/60"
   }`;
 }
 
 function mobileNavLinkClass(isActive: boolean): string {
-  return `text-2xl font-normal tracking-[-0.015em] no-underline transition-colors hover:text-primary ${
-    isActive ? "text-primary" : "text-white/60"
+  return `rounded-[10px] px-3 py-1.5 text-2xl font-normal tracking-[-0.015em] no-underline transition-colors hover:bg-white/10 hover:text-primary ${
+    isActive ? "bg-white/10 text-primary" : "text-white/60"
   }`;
 }
 
@@ -105,7 +105,7 @@ export function Nav({
             <Link
               key={item.href}
               href={item.href}
-              className={`${navLinkClass(isNavLinkActive(pathname, item.href))} rounded-[10px] px-3 py-1.5 hover:bg-white/10`}
+              className={navLinkClass(isNavLinkActive(pathname, item.href))}
             >
               {item.label}
             </Link>

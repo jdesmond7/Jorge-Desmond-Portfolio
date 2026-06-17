@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CaseStudySection } from "@/components/ui/CaseStudySection";
 import { CmsImage } from "@/components/ui/CmsImage";
 import { Container } from "@/components/ui/Container";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { ProjectHero } from "@/components/ui/ProjectHero";
+import { ProjectLearning } from "@/components/ui/ProjectLearning";
 import { ProjectMeta } from "@/components/ui/ProjectMeta";
+import { ProjectMetrics } from "@/components/ui/ProjectMetrics";
+import { ProjectNav } from "@/components/ui/ProjectNav";
 import { Tag } from "@/components/ui/Tag";
-import { getAllProjectSlugs, getProjectBySlug } from "@/lib/strapi";
+import {
+  getAllProjectSlugs,
+  getProjectBySlug,
+  getProjectNavigation,
+} from "@/lib/strapi";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -28,107 +36,73 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function TextSection({ title, body }: { title: string; body: string }) {
-  return (
-    <section className="mb-10">
-      <h2 className="mb-3 text-[20px] font-bold tracking-[-0.015em] text-carbon">
-        {title}
-      </h2>
-      <p className="w-full whitespace-pre-line text-[16px] leading-[1.6] tracking-[-0.009em] text-zinc">
-        {body}
-      </p>
-    </section>
-  );
-}
-
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const [project, navigation] = await Promise.all([
+    getProjectBySlug(slug),
+    getProjectNavigation(slug),
+  ]);
   if (!project) notFound();
 
-  const backHref = project.parentSlug
-    ? `/proyectos/${project.parentSlug}`
-    : "/proyectos";
-  const backLabel = project.parentSlug
-    ? `← ${project.parentTitle ?? "Volver"}`
-    : "← Todos los proyectos";
-
   const children = project.children ?? [];
-  // Un proyecto con hijos vinculados se renderiza como padre aunque el
-  // toggle isParent no se haya activado en el CMS.
   const isParentView = project.isParent || children.length > 0;
+  const heroImage = project.coverImage ?? project.gallery?.[0];
+  const galleryImages =
+    project.gallery?.filter((src) => src !== heroImage) ?? [];
 
   return (
     <div>
-      {project.coverImage && (
-        <div className="relative h-[400px] w-full overflow-hidden">
-          <CmsImage
-            src={project.coverImage}
-            alt=""
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-        </div>
+      {heroImage && (
+        <ProjectHero src={heroImage} alt={project.title} />
       )}
 
       <Container
-        className={`pb-[var(--section-py)] ${project.coverImage ? "pt-10 md:pt-12" : "pt-28 md:pt-32"}`}
+        narrow
+        className={`pb-[var(--section-py)] ${heroImage ? "pt-10 md:pt-12" : "pt-28 md:pt-32"}`}
       >
-        <div className="mx-auto w-full max-w-[1072px]">
-        <Link
-          href={backHref}
-          className="mono mb-8 inline-block text-[13px] tracking-[-0.006em] text-zinc no-underline hover:text-coral"
-        >
-          {backLabel}
-        </Link>
-
-        <div className="mono mb-4 text-[11px] tracking-[-0.006em] text-ash">
-          {project.year} · {project.company}
-        </div>
-        <h1 className="font-body mb-6 w-full text-[clamp(28px,5vw,48px)] font-bold leading-[1.15] text-carbon">
-          {project.title}
-        </h1>
-        <p className="mb-8 w-full text-[17px] leading-[1.4] tracking-[-0.009em] text-zinc">
-          {project.description}
-        </p>
-
-        <div className="mb-10 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
-          ))}
-        </div>
-
-        {project.metrics && project.metrics.length > 0 && (
-          <div className="mb-12 flex flex-wrap gap-4">
-            {project.metrics.map((metric, index) => (
-              <div
-                key={`${metric.value}-${index}`}
-                className="rounded-[var(--radius-card)] bg-fog px-6 py-7"
-              >
-                <div className="font-display text-[clamp(32px,6vw,45px)] uppercase leading-none tracking-[0.02em] text-carbon">
-                  {metric.value}
-                </div>
-                <div className="font-body mt-1.5 text-[13px] text-zinc">
-                  {metric.label}
-                </div>
-              </div>
+        {project.tags.length > 0 && (
+          <div className="mb-6 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <Tag key={tag}>{tag}</Tag>
             ))}
           </div>
         )}
 
+        <h1 className="font-body mb-6 w-full text-[clamp(28px,5vw,48px)] font-normal leading-[1.06] tracking-[-0.022em] text-carbon">
+          {project.title}
+        </h1>
+
+        <p className="mb-10 w-full text-[19px] leading-[1.4] tracking-[-0.009em] text-zinc">
+          {project.description}
+        </p>
+
+        {project.metrics && project.metrics.length > 0 && (
+          <>
+            <ProjectMetrics metrics={project.metrics} />
+            <div className="mb-16 border-t border-mist" />
+          </>
+        )}
+
         {isParentView ? (
           <>
-            {project.overview && (
-              <TextSection title="Overview" body={project.overview} />
-            )}
-            {project.challenge && (
-              <TextSection title="Challenge" body={project.challenge} />
-            )}
+            <CaseStudySection
+              number="01"
+              label="Overview"
+              title={project.overviewTitle}
+              body={project.overviewBodyText}
+            />
+
+            <div className="my-16 border-t border-mist" />
+
+            <CaseStudySection
+              number="02"
+              label="Challenge"
+              title={project.challengeTitle}
+              body={project.challengeBodyText}
+            />
 
             {children.length > 0 && (
-              <section className="mt-16">
+              <section className="mt-16 border-t border-mist pt-16">
                 <h2 className="font-body mb-10 text-[clamp(24px,3.5vw,34px)] font-bold leading-[1.15] tracking-[-0.015em] text-carbon">
                   Iniciativas Clave
                 </h2>
@@ -147,24 +121,23 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </>
         ) : (
           <>
-            <div className="mb-12">
-              <ProjectMeta
-                roles={project.roles}
-                team={project.team}
-                tools={project.tools}
-              />
-            </div>
+            <ProjectMeta
+              duration={project.year}
+              roles={project.roles}
+              team={project.team}
+              tools={project.tools}
+            />
 
             {project.body && (
-              <div className="w-full whitespace-pre-line text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
+              <div className="mb-16 w-full whitespace-pre-line text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
                 {project.body}
               </div>
             )}
 
-            {project.gallery && project.gallery.length > 0 && (
-              <section className="mt-16">
+            {galleryImages.length > 0 && (
+              <section className="mb-16">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {project.gallery.map((src, index) => (
+                  {galleryImages.map((src, index) => (
                     <div
                       key={src}
                       className="relative aspect-[4/3] overflow-hidden rounded-lg bg-fog"
@@ -183,7 +156,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             )}
           </>
         )}
-        </div>
+
+        {project.learning && <ProjectLearning text={project.learning} />}
+
+        <ProjectNav prev={navigation.prev} next={navigation.next} />
       </Container>
     </div>
   );

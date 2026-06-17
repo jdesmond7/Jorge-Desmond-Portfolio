@@ -14,6 +14,8 @@ import type {
   Illustration,
   NavLink,
   Project,
+  ProjectNavigation,
+  ProjectNavItem,
   SiteSettings,
   StackItem,
   Stat,
@@ -228,8 +230,23 @@ function mapProject(record: StrapiRecord): Project {
     tools: Array.isArray(a.tools) ? (a.tools as string[]) : mock?.tools,
     isParent: Boolean(a.isParent),
     showInHome: Boolean(a.showInHome),
-    overview: a.overview ? String(a.overview) : undefined,
-    challenge: a.challenge ? String(a.challenge) : undefined,
+    overviewTitle: a.overviewTitle ? String(a.overviewTitle) : undefined,
+    overviewBodyText: a.overviewBodyText
+      ? String(a.overviewBodyText)
+      : a.overviewHighlight
+        ? String(a.overviewHighlight)
+        : a.overview
+          ? String(a.overview)
+          : undefined,
+    challengeTitle: a.challengeTitle ? String(a.challengeTitle) : undefined,
+    challengeBodyText: a.challengeBodyText
+      ? String(a.challengeBodyText)
+      : a.challengeHighlight
+        ? String(a.challengeHighlight)
+        : a.challenge
+          ? String(a.challenge)
+          : undefined,
+    learning: a.learning ? String(a.learning) : undefined,
     children: children.length ? children : undefined,
     parentSlug: parentAttrs?.slug ? String(parentAttrs.slug) : undefined,
     parentTitle: parentAttrs?.title ? String(parentAttrs.title) : undefined,
@@ -415,9 +432,102 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   );
   if (!res?.data?.length) {
     const mock = MOCK_PROJECTS.find((p) => p.slug === slug);
-    return mock ? withMockChildren(mock) : null;
+    if (!mock) return null;
+    const withChildren = withMockChildren(mock);
+    const [enriched] = await enrichProjectsWithStrapiMedia([withChildren]);
+    return enriched ?? withChildren;
   }
   return mapProject(res.data[0]);
+}
+
+function sortProjectsByOrder(projects: Project[]): Project[] {
+  return [...projects].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
+function buildFlatProjectList(topLevel: Project[]): Project[] {
+  const flat: Project[] = [];
+
+  for (const project of sortProjectsByOrder(topLevel)) {
+    flat.push(project);
+    if (project.children?.length) {
+      flat.push(
+        ...sortProjectsByOrder(project.children).map((child) => ({
+          ...child,
+          parentSlug: child.parentSlug ?? project.slug,
+          parentTitle: child.parentTitle ?? project.title,
+        })),
+      );
+    }
+  }
+
+  return flat;
+}
+
+async function getNavigableProjectsFlat(): Promise<Project[]> {
+  const res = await fetchStrapi<StrapiListResponse>(
+    "/proyectos?sort=order:asc&filters[parent][id][$null]=true" +
+      "&populate[children][sort]=order:asc" +
+      "&populate[children][fields][0]=slug" +
+      "&populate[children][fields][1]=title" +
+      "&populate[children][fields][2]=order" +
+      "&populate[children][fields][3]=company" +
+      "&populate[children][populate][tags]=true" +
+      "&fields[0]=slug&fields[1]=title&fields[2]=order&fields[3]=company&fields[4]=isParent" +
+      "&pagination[pageSize]=100",
+  );
+
+  if (!res?.data?.length) {
+    return buildFlatProjectList(
+      topLevelMockProjects().map((project) => withMockChildren(project)),
+    );
+  }
+
+  return buildFlatProjectList(res.data.map(mapProject));
+}
+
+function toNavItem(
+  target: Project,
+  current: Project,
+  direction: "prev" | "next",
+): ProjectNavItem {
+  if (
+    direction === "prev" &&
+    current.parentSlug &&
+    target.slug === current.parentSlug
+  ) {
+    return {
+      slug: target.slug,
+      title: `Volver a ${target.title}`,
+    };
+  }
+
+  const subtitle =
+    direction === "next" && target.parentSlug
+      ? (target.tags[0] ?? target.problem)
+      : undefined;
+
+  return {
+    slug: target.slug,
+    title: target.title,
+    subtitle,
+  };
+}
+
+export async function getProjectNavigation(
+  slug: string,
+): Promise<ProjectNavigation> {
+  const flat = await getNavigableProjectsFlat();
+  const index = flat.findIndex((project) => project.slug === slug);
+  if (index === -1) return {};
+
+  const current = flat[index];
+  const prevProject = index > 0 ? flat[index - 1] : undefined;
+  const nextProject = index < flat.length - 1 ? flat[index + 1] : undefined;
+
+  return {
+    prev: prevProject ? toNavItem(prevProject, current, "prev") : undefined,
+    next: nextProject ? toNavItem(nextProject, current, "next") : undefined,
+  };
 }
 
 export async function getBlogPosts(limit?: number): Promise<BlogPost[]> {

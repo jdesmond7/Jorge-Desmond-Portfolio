@@ -588,7 +588,8 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
   };
   attributes: {
     body: Schema.Attribute.RichText;
-    challenge: Schema.Attribute.Text;
+    challengeBodyText: Schema.Attribute.Text;
+    challengeTitle: Schema.Attribute.String;
     children: Schema.Attribute.Relation<'oneToMany', 'api::proyecto.proyecto'>;
     company: Schema.Attribute.String & Schema.Attribute.Required;
     coverImage: Schema.Attribute.Media<'images'>;
@@ -599,6 +600,7 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
     featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     gallery: Schema.Attribute.Media<'images', true>;
     isParent: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    learning: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -607,7 +609,8 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     metrics: Schema.Attribute.Component<'shared.metric', true>;
     order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    overview: Schema.Attribute.Text;
+    overviewBodyText: Schema.Attribute.Text;
+    overviewTitle: Schema.Attribute.String;
     parent: Schema.Attribute.Relation<'manyToOne', 'api::proyecto.proyecto'>;
     problem: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;

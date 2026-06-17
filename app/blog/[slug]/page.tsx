@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BackLink } from "@/components/ui/BackLink";
 import { Container } from "@/components/ui/Container";
 import { getAllBlogSlugs, getBlogPostBySlug } from "@/lib/strapi";
 
@@ -40,12 +40,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="pt-28 md:pt-32">
       <Container className="py-[var(--section-py)]">
-        <Link
-          href="/blog"
-          className="mono mb-8 inline-block text-[13px] tracking-[-0.006em] text-zinc no-underline hover:text-coral"
-        >
-          ← Blog
-        </Link>
+        <BackLink href="/blog">← Blog</BackLink>
 
         <div className="mono mb-4 text-[11px] tracking-[-0.006em] text-ash">
           {formatDate(post.publishedAt)}

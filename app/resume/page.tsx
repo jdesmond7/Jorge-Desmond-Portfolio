@@ -145,8 +145,8 @@ export default async function ResumePage() {
 
   return (
     <div className="pt-24 md:pt-28">
-      <Container className="pb-[var(--section-py)] pt-4 md:pt-6">
-        <div className="mx-auto grid max-w-[1072px] items-start gap-10 md:grid-cols-[1fr_320px] md:gap-14">
+      <Container narrow className="pb-[var(--section-py)] pt-4 md:pt-6">
+        <div className="grid items-start gap-10 md:grid-cols-[1fr_320px] md:gap-14">
           {/* Columna principal */}
           <div className="min-w-0">
             <Reveal>
