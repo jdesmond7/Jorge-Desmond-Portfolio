@@ -163,12 +163,57 @@ export default {
     "layouts": {
       "edit": [
         [
+          { "name": "isParent", "size": 4 },
+          { "name": "featured", "size": 4 },
+          { "name": "showInHome", "size": 4 }
+        ],
+        [
+          { "name": "coverImage", "size": 12 }
+        ],
+        [
+          { "name": "title", "size": 6 },
+          { "name": "slug", "size": 6 }
+        ],
+        [
+          { "name": "company", "size": 6 },
+          { "name": "year", "size": 6 }
+        ],
+        [
+          { "name": "description", "size": 12 }
+        ],
+        [
+          { "name": "problem", "size": 8 },
+          { "name": "order", "size": 4 }
+        ],
+        [
+          { "name": "metrics", "size": 12 }
+        ],
+        [
+          { "name": "tags", "size": 12 }
+        ],
+        [
+          { "name": "projectSummary", "size": 12 }
+        ],
+        [
           { "name": "overviewTitle", "size": 4 },
           { "name": "overviewBodyText", "size": 8 }
         ],
         [
           { "name": "challengeTitle", "size": 4 },
           { "name": "challengeBodyText", "size": 8 }
+        ],
+        [
+          { "name": "parent", "size": 6 },
+          { "name": "children", "size": 6 }
+        ],
+        [
+          { "name": "gallery", "size": 12 }
+        ],
+        [
+          { "name": "body", "size": 12 }
+        ],
+        [
+          { "name": "learning", "size": 12 }
         ]
       ]
     },
