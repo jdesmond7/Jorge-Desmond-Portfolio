@@ -156,6 +156,10 @@ const components: Components = {
     return <thead className="bg-fog">{children}</thead>;
   },
 
+  tbody({ children }) {
+    return <tbody className="bg-white">{children}</tbody>;
+  },
+
   th({ children }) {
     return (
       <th className="mono px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-ash">
@@ -166,7 +170,7 @@ const components: Components = {
 
   td({ children }) {
     return (
-      <td className="border-t border-mist px-5 py-3 align-top text-[14px] leading-[1.5] text-carbon">
+      <td className="border-t border-mist bg-white px-5 py-3 align-top text-[14px] leading-[1.5] text-carbon">
         {children}
       </td>
     );

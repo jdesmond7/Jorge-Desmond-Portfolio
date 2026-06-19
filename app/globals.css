@@ -13,6 +13,7 @@
   --color-cream: #fffcf9;
   --color-white: #ffffff;
   --color-espresso: #200200;
+  --color-ink: #120301;
 
   --font-display: var(--font-bebas), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
@@ -42,6 +43,7 @@
   --color-fog: var(--color-fog);
   --color-cream: var(--color-cream);
   --color-espresso: var(--color-espresso);
+  --color-ink: var(--color-ink);
   --font-sans: var(--font-body);
   --font-mono: var(--font-mono);
   --radius-card: var(--radius-card);
