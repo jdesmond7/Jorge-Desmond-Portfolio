@@ -1,5 +1,6 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { DecisionCard } from "./DecisionCard";
 
 interface CaseStudyBodyProps {
   content: string;
@@ -180,11 +181,21 @@ interface VersionCardData {
   note?: string;
 }
 
+interface DecisionCardData {
+  number: string;
+  title: string;
+  context: string;
+  decision: string;
+  result: string;
+}
+
 type Segment =
   | { type: "md"; text: string }
-  | { type: "version"; data: VersionCardData };
+  | { type: "version"; data: VersionCardData }
+  | { type: "decision"; data: DecisionCardData };
 
 const VERSION_HEADING = /^###\s+V\d/i;
+const DECISION_HEADING = /^###\s+\d+\s*·/;
 const BOUNDARY = /^(#{1,3}\s|---\s*$)/;
 
 function parseVersionSegment(lines: string[]): VersionCardData {
@@ -212,6 +223,31 @@ function parseVersionSegment(lines: string[]): VersionCardData {
   return { version, year, title, items, note };
 }
 
+function parseDecisionSegment(lines: string[]): DecisionCardData {
+  const headingMatch = lines[0]
+    .replace(/^###\s+/, "")
+    .match(/^(\d+)\s*·\s*(.+)$/);
+
+  const number = headingMatch?.[1]?.padStart(2, "0") ?? "01";
+  const title = headingMatch?.[2]?.trim() ?? "";
+
+  const paragraphs: string[] = [];
+  for (const line of lines.slice(1)) {
+    const trimmed = line.trim();
+    if (trimmed && !trimmed.startsWith("- ") && !trimmed.startsWith(">")) {
+      paragraphs.push(trimmed);
+    }
+  }
+
+  return {
+    number,
+    title,
+    context: paragraphs[0] ?? "",
+    decision: paragraphs[1] ?? "",
+    result: paragraphs[2] ?? "",
+  };
+}
+
 function splitSegments(content: string): Segment[] {
   const lines = content.split("\n");
   const segments: Segment[] = [];
@@ -225,7 +261,9 @@ function splitSegments(content: string): Segment[] {
   };
 
   while (i < lines.length) {
-    if (VERSION_HEADING.test(lines[i].trim())) {
+    const trimmed = lines[i].trim();
+
+    if (VERSION_HEADING.test(trimmed)) {
       flushMd();
       const block = [lines[i]];
       i += 1;
@@ -234,6 +272,15 @@ function splitSegments(content: string): Segment[] {
         i += 1;
       }
       segments.push({ type: "version", data: parseVersionSegment(block) });
+    } else if (DECISION_HEADING.test(trimmed)) {
+      flushMd();
+      const block = [lines[i]];
+      i += 1;
+      while (i < lines.length && !BOUNDARY.test(lines[i].trim())) {
+        block.push(lines[i]);
+        i += 1;
+      }
+      segments.push({ type: "decision", data: parseDecisionSegment(block) });
     } else {
       mdBuffer.push(lines[i]);
       i += 1;
@@ -287,13 +334,28 @@ function VersionCard({ version, year, title, items, note }: VersionCardData) {
 
 export function CaseStudyBody({ content }: CaseStudyBodyProps) {
   const segments = splitSegments(content);
+  let decisionIndex = 0;
 
   return (
     <div className="mb-16 w-full">
-      {segments.map((segment, index) =>
-        segment.type === "version" ? (
-          <VersionCard key={index} {...segment.data} />
-        ) : (
+      {segments.map((segment, index) => {
+        if (segment.type === "version") {
+          return <VersionCard key={index} {...segment.data} />;
+        }
+
+        if (segment.type === "decision") {
+          const currentDecisionIndex = decisionIndex;
+          decisionIndex += 1;
+          return (
+            <DecisionCard
+              key={index}
+              {...segment.data}
+              defaultOpen={currentDecisionIndex === 0}
+            />
+          );
+        }
+
+        return (
           <ReactMarkdown
             key={index}
             remarkPlugins={[remarkGfm]}
@@ -301,8 +363,8 @@ export function CaseStudyBody({ content }: CaseStudyBodyProps) {
           >
             {segment.text}
           </ReactMarkdown>
-        ),
-      )}
+        );
+      })}
     </div>
   );
 }
