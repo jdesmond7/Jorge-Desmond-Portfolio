@@ -157,16 +157,16 @@ export function Hero({ content }: HeroProps) {
 
             {/* Derecha — título + descripción + CTAs (aparece tras el scroll) */}
             <div
-              className="max-w-[540px] max-md:absolute max-md:inset-x-0 max-md:top-10 md:max-w-none lg:pl-10 lg:pt-8"
+              className="max-w-[540px] max-md:absolute max-md:inset-x-0 max-md:top-10 md:max-w-none lg:col-start-2 lg:max-w-[560px] lg:pl-10 lg:pt-8"
               style={{
                 opacity: outroOpacity,
                 transform: `translateY(${outroShift}px)`,
                 visibility: outroOpacity <= 0.01 ? "hidden" : "visible",
               }}
             >
-              <h2 className="font-display mb-4 text-[clamp(48px,12vw,96px)] uppercase leading-[0.88] tracking-[0.02em] text-white md:mb-6 md:leading-[0.9]">
+              <h2 className="font-display mb-4 text-[clamp(36px,8vw,52px)] uppercase leading-[0.88] tracking-[0.02em] text-white md:mb-6 md:text-[clamp(42px,5.5vw,58px)] md:leading-[0.9] lg:text-[clamp(46px,4.8vw,62px)]">
                 {titleLines.map((line, i) => (
-                  <span key={i} className="block">
+                  <span key={i} className="block lg:whitespace-nowrap">
                     {line}
                   </span>
                 ))}
