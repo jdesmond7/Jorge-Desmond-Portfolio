@@ -2,13 +2,22 @@ import type { ProjectMetric } from "@/lib/types";
 
 interface ProjectMetricsProps {
   metrics: ProjectMetric[];
+  className?: string;
 }
 
-export function ProjectMetrics({ metrics }: ProjectMetricsProps) {
+function metricGridClass(count: number, className?: string): string {
+  if (className) return className;
+  if (count > 4) return "sm:grid-cols-2 lg:grid-cols-3";
+  return "sm:grid-cols-2 lg:grid-cols-4";
+}
+
+export function ProjectMetrics({ metrics, className }: ProjectMetricsProps) {
   if (!metrics.length) return null;
 
   return (
-    <div className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <div
+      className={`mb-10 grid grid-cols-1 gap-3 ${metricGridClass(metrics.length, className)}`}
+    >
       {metrics.map((metric, index) => (
         <div
           key={`${metric.value}-${metric.title}-${index}`}

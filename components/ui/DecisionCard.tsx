@@ -11,6 +11,9 @@ export interface DecisionCardProps {
   defaultOpen?: boolean;
 }
 
+const bodyTextClass =
+  "text-[15px] leading-[1.7] tracking-[-0.005em] text-carbon";
+
 function Chevron({ open }: { open: boolean }) {
   return (
     <svg
@@ -58,9 +61,7 @@ export function DecisionCard({
               {title}
             </div>
             {!open && context && (
-              <p className="mt-1 text-[13px] leading-[1.6] tracking-[-0.005em] text-zinc">
-                {context}
-              </p>
+              <p className={`mt-1 ${bodyTextClass}`}>{context}</p>
             )}
           </div>
         </div>
@@ -74,9 +75,7 @@ export function DecisionCard({
               <div className="mono mb-1.5 text-[11px] uppercase tracking-[0.12em] text-ash">
                 Contexto
               </div>
-              <p className="text-[15px] leading-[1.7] tracking-[-0.005em] text-zinc">
-                {context}
-              </p>
+              <p className={bodyTextClass}>{context}</p>
             </div>
           )}
 
@@ -85,9 +84,7 @@ export function DecisionCard({
               <div className="mono mb-1.5 text-[11px] uppercase tracking-[0.12em] text-ash">
                 La decisión
               </div>
-              <p className="text-[15px] leading-[1.7] tracking-[-0.005em] text-carbon">
-                {decision}
-              </p>
+              <p className={bodyTextClass}>{decision}</p>
             </div>
           )}
 
@@ -96,9 +93,7 @@ export function DecisionCard({
               <div className="mono mb-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-coral">
                 Resultado
               </div>
-              <p className="text-[14px] leading-[1.6] tracking-[-0.005em] text-carbon">
-                {result}
-              </p>
+              <p className={bodyTextClass}>{result}</p>
             </div>
           )}
         </div>

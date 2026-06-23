@@ -1,6 +1,8 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import type { ProjectMetric } from "@/lib/types";
 import { DecisionCard } from "./DecisionCard";
+import { ProjectMetrics } from "./ProjectMetrics";
 
 interface CaseStudyBodyProps {
   content: string;
@@ -143,38 +145,6 @@ const components: Components = {
       </a>
     );
   },
-
-  table({ children }) {
-    return (
-      <div className="my-8 overflow-hidden rounded-[var(--radius-card)] border border-mist">
-        <table className="w-full border-collapse text-left">{children}</table>
-      </div>
-    );
-  },
-
-  thead({ children }) {
-    return <thead className="bg-fog">{children}</thead>;
-  },
-
-  tbody({ children }) {
-    return <tbody className="bg-white">{children}</tbody>;
-  },
-
-  th({ children }) {
-    return (
-      <th className="mono px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-ash">
-        {children}
-      </th>
-    );
-  },
-
-  td({ children }) {
-    return (
-      <td className="border-t border-mist bg-white px-5 py-3 align-top text-[14px] leading-[1.5] text-carbon">
-        {children}
-      </td>
-    );
-  },
 };
 
 interface VersionCardData {
@@ -196,11 +166,48 @@ interface DecisionCardData {
 type Segment =
   | { type: "md"; text: string }
   | { type: "version"; data: VersionCardData }
-  | { type: "decision"; data: DecisionCardData };
+  | { type: "decision"; data: DecisionCardData }
+  | { type: "metrics"; data: ProjectMetric[] };
 
 const VERSION_HEADING = /^###\s+V\d/i;
 const DECISION_HEADING = /^###\s+\d+\s*·/;
+const TABLE_ROW = /^\|/;
 const BOUNDARY = /^(#{1,3}\s|---\s*$)/;
+const TABLE_HEADER = /^(métrica|metrica|metric)$/i;
+
+function parseMetricTableBlock(lines: string[]): ProjectMetric[] {
+  const metrics: ProjectMetric[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!TABLE_ROW.test(trimmed)) continue;
+
+    const cells = trimmed
+      .split("|")
+      .map((cell) => cell.trim())
+      .filter(Boolean);
+
+    if (cells.length < 2) continue;
+    if (cells.every((cell) => /^:?-+:?$/.test(cell))) continue;
+    if (TABLE_HEADER.test(cells[0])) continue;
+
+    const value = cells[0];
+    const detail = cells[1];
+    const splitIndex = detail.indexOf(". ");
+
+    if (splitIndex > 0) {
+      metrics.push({
+        value,
+        title: detail.slice(0, splitIndex),
+        description: detail.slice(splitIndex + 2),
+      });
+    } else {
+      metrics.push({ value, title: detail });
+    }
+  }
+
+  return metrics;
+}
 
 function parseVersionSegment(lines: string[]): VersionCardData {
   const headingParts = lines[0]
@@ -285,6 +292,16 @@ function splitSegments(content: string): Segment[] {
         i += 1;
       }
       segments.push({ type: "decision", data: parseDecisionSegment(block) });
+    } else if (TABLE_ROW.test(trimmed)) {
+      flushMd();
+      const block = [lines[i]];
+      i += 1;
+      while (i < lines.length && TABLE_ROW.test(lines[i].trim())) {
+        block.push(lines[i]);
+        i += 1;
+      }
+      const metrics = parseMetricTableBlock(block);
+      if (metrics.length) segments.push({ type: "metrics", data: metrics });
     } else {
       mdBuffer.push(lines[i]);
       i += 1;
@@ -357,6 +374,10 @@ export function CaseStudyBody({ content }: CaseStudyBodyProps) {
               defaultOpen={currentDecisionIndex === 0}
             />
           );
+        }
+
+        if (segment.type === "metrics") {
+          return <ProjectMetrics key={index} metrics={segment.data} />;
         }
 
         return (
