@@ -157,7 +157,7 @@ export function Hero({ content }: HeroProps) {
 
             {/* Derecha — título + descripción + CTAs (aparece tras el scroll) */}
             <div
-              className="max-w-[540px] max-md:absolute max-md:inset-x-0 max-md:top-10 md:max-w-none lg:pl-10 lg:pt-8"
+              className="max-w-[540px] max-md:absolute max-md:inset-x-0 max-md:top-[4px] md:max-w-none lg:pl-10 lg:pt-8"
               style={{
                 opacity: outroOpacity,
                 transform: `translateY(${outroShift}px)`,

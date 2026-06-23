@@ -51,12 +51,7 @@ export default {
     "projectSummary": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.project-summary",
-      "conditions": {
-        "visible": {
-          "==": [{ "var": "isParent" }, false]
-        }
-      }
+      "component": "shared.project-summary"
     },
     "metrics": {
       "type": "component",
@@ -105,12 +100,7 @@ export default {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::proyecto.proyecto",
-      "mappedBy": "parent",
-      "conditions": {
-        "visible": {
-          "==": [{ "var": "isParent" }, true]
-        }
-      }
+      "mappedBy": "parent"
     },
     "parent": {
       "type": "relation",
@@ -163,33 +153,30 @@ export default {
     "layouts": {
       "edit": [
         [
-          { "name": "isParent", "size": 4 },
-          { "name": "featured", "size": 4 },
-          { "name": "showInHome", "size": 4 }
-        ],
-        [
-          { "name": "coverImage", "size": 12 }
-        ],
-        [
-          { "name": "title", "size": 6 },
+          { "name": "order", "size": 6 },
           { "name": "slug", "size": 6 }
         ],
         [
-          { "name": "company", "size": 6 },
-          { "name": "year", "size": 6 }
+          { "name": "isParent", "size": 6 },
+          { "name": "showInHome", "size": 6 }
         ],
         [
-          { "name": "description", "size": 12 }
+          { "name": "children", "size": 12 }
         ],
         [
-          { "name": "problem", "size": 8 },
-          { "name": "order", "size": 4 }
-        ],
-        [
-          { "name": "metrics", "size": 12 }
+          { "name": "year", "size": 4 },
+          { "name": "company", "size": 4 },
+          { "name": "problem", "size": 4 }
         ],
         [
           { "name": "tags", "size": 12 }
+        ],
+        [
+          { "name": "title", "size": 6 },
+          { "name": "description", "size": 6 }
+        ],
+        [
+          { "name": "coverImage", "size": 12 }
         ],
         [
           { "name": "projectSummary", "size": 12 }
@@ -203,13 +190,6 @@ export default {
           { "name": "challengeBodyText", "size": 8 }
         ],
         [
-          { "name": "parent", "size": 6 },
-          { "name": "children", "size": 6 }
-        ],
-        [
-          { "name": "gallery", "size": 12 }
-        ],
-        [
           { "name": "body", "size": 12 }
         ],
         [
@@ -218,24 +198,49 @@ export default {
       ]
     },
     "metadatas": {
+      "children": {
+        "edit": {
+          "label": "Linked Proyects"
+        }
+      },
+      "problem": {
+        "edit": {
+          "label": "ProjectCard Problem Label"
+        }
+      },
+      "title": {
+        "edit": {
+          "label": "Project Title"
+        }
+      },
+      "description": {
+        "edit": {
+          "label": "Project Description"
+        }
+      },
+      "coverImage": {
+        "edit": {
+          "label": "Cover Image"
+        }
+      },
       "overviewTitle": {
         "edit": {
-          "label": "Title"
+          "label": "Title Overview"
         }
       },
       "overviewBodyText": {
         "edit": {
-          "label": "Body Text"
+          "label": "Body Text Overview"
         }
       },
       "challengeTitle": {
         "edit": {
-          "label": "Title"
+          "label": "Title Challenge"
         }
       },
       "challengeBodyText": {
         "edit": {
-          "label": "Body Text"
+          "label": "Body Text Challenge"
         }
       },
       "learning": {
