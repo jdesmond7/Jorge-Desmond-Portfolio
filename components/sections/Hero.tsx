@@ -187,7 +187,7 @@ export function Hero({ content }: HeroProps) {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col gap-3 max-md:mt-[340px] sm:flex-row sm:flex-wrap">
+              <div className="flex flex-col gap-3 max-md:mt-[280px] sm:flex-row sm:flex-wrap">
                 <Button href="/proyectos" variant="primary" withArrow>
                   Ver Casos de Estudio
                 </Button>
