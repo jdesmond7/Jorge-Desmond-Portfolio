@@ -164,13 +164,13 @@ export function Hero({ content }: HeroProps) {
                 visibility: outroOpacity <= 0.01 ? "hidden" : "visible",
               }}
             >
-              <p className="font-body mb-2.5 text-[clamp(20px,2.8vw,32px)] font-bold leading-[1.2] text-white md:mb-5">
+              <h2 className="font-display mb-4 text-[clamp(48px,12vw,96px)] uppercase leading-[0.88] tracking-[0.02em] text-white md:mb-6 md:leading-[0.9]">
                 {titleLines.map((line, i) => (
                   <span key={i} className="block">
                     {line}
                   </span>
                 ))}
-              </p>
+              </h2>
               <p className="font-body mb-4 text-[15px] font-semibold leading-[1.55] text-white/90 md:mb-7 md:text-[clamp(15px,1.7vw,17px)]">
                 {content.heroSubtitle}
               </p>
