@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 import type { NavLink } from "@/lib/types";
 
@@ -65,13 +65,44 @@ export function Nav({
 }: NavProps) {
   const pathname = usePathname();
   const [scrollY, setScrollY] = useState(0);
+  const [navVisible, setNavVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const lastScrollYRef = useRef(0);
+  const menuOpenRef = useRef(menuOpen);
+
+  menuOpenRef.current = menuOpen;
 
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
+    const onScroll = () => {
+      const current = window.scrollY;
+      setScrollY(current);
+
+      if (menuOpenRef.current) {
+        setNavVisible(true);
+        lastScrollYRef.current = current;
+        return;
+      }
+
+      const delta = current - lastScrollYRef.current;
+
+      if (current < 24) {
+        setNavVisible(true);
+      } else if (delta > 6 && current > 72) {
+        setNavVisible(false);
+      } else if (delta < -6) {
+        setNavVisible(true);
+      }
+
+      lastScrollYRef.current = current;
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (menuOpen) setNavVisible(true);
+  }, [menuOpen]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -82,14 +113,25 @@ export function Nav({
 
   return (
     <>
-      <nav
-        className="fixed left-1/2 z-50 grid w-[min(94%,1120px)] -translate-x-1/2 grid-cols-[1fr_auto] items-center rounded-[var(--radius-card)] bg-carbon px-6 py-4 transition-shadow duration-300 md:grid-cols-[1fr_auto_1fr]"
-        style={{
-          top: "max(20px, env(safe-area-inset-top))",
-          boxShadow:
-            scrollY > 40 ? "rgba(0,0,0,0.18) 0px 8px 24px 0px" : "none",
-        }}
+      <div
+        className="pointer-events-none fixed left-1/2 z-50 w-[min(94%,1120px)] -translate-x-1/2"
+        style={{ top: "max(20px, env(safe-area-inset-top))" }}
       >
+        <nav
+          className={`grid grid-cols-[1fr_auto] items-center rounded-[var(--radius-card)] bg-carbon px-6 py-4 md:grid-cols-[1fr_auto_1fr] ${
+            navVisible ? "pointer-events-auto" : "pointer-events-none"
+          }`}
+          style={{
+            transform: navVisible
+              ? "translate3d(0, 0, 0)"
+              : "translate3d(0, calc(-100% - 24px), 0)",
+            transition:
+              "transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease",
+            willChange: "transform",
+            boxShadow:
+              scrollY > 40 ? "rgba(0,0,0,0.18) 0px 8px 24px 0px" : "none",
+          }}
+        >
         <Link
           href="/"
           className={`justify-self-start text-[15px] font-bold tracking-[-0.009em] no-underline transition-colors hover:text-primary ${
@@ -147,7 +189,8 @@ export function Nav({
             className={`block h-0.5 w-5 bg-white transition-transform ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
           />
         </button>
-      </nav>
+        </nav>
+      </div>
 
       {menuOpen && (
         <div
