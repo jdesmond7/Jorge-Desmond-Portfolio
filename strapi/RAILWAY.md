@@ -44,7 +44,52 @@ Después de montar el volumen, las fotos que subas **permanecerán** en futuros 
 
 Tras el redeploy con volumen:
 
-1. En los logs de Strapi no debe aparecer el aviso de uploads efímeros
-2. Sube una imagen de prueba en Admin
-3. Haz un redeploy manual del servicio Strapi
-4. La imagen debe seguir disponible en Media Library y en la API
+1. Abre **Railway → Jorge-Desmond-Portfolio → Deployments → último deploy → View logs**
+2. Busca líneas que empiezan con `[uploads]`
+3. Debes ver algo como:
+
+   ```
+   [uploads] cwd=/app
+   [uploads] directory=/app/public/uploads
+   [uploads] RAILWAY_VOLUME_MOUNT_PATH=/app/public/uploads
+   [uploads] Volume mount path matches Strapi uploads directory.
+   ```
+
+4. Si ves **`Volume mount mismatch`**, el volumen está conectado pero en la **ruta incorrecta**
+5. Sube una imagen de prueba en Admin
+6. Haz un redeploy manual del servicio Strapi
+7. La imagen debe seguir disponible en Media Library y en la API
+
+## El volumen está conectado pero las fotos se borran igual
+
+Esto casi siempre significa que el **mount path no coincide** con donde Strapi guarda archivos.
+
+1. En el canvas de Railway, haz clic en el bloque del volumen (`jorge-desmond-portfolio-vol...`), no en Postgres
+2. Revisa el **Mount Path** — debe ser exactamente:
+
+   ```
+   /app/public/uploads
+   ```
+
+   Rutas incorrectas comunes que no funcionan:
+   - `/data`
+   - `/public/uploads` (falta el prefijo `/app`)
+   - `/app/data`
+
+3. Si el log muestra `cwd=/app/strapi`, entonces el mount path correcto sería:
+
+   ```
+   /app/strapi/public/uploads
+   ```
+
+4. Corrige el mount path, guarda y redeploy
+5. Vuelve a subir las imágenes (las anteriores no se recuperan)
+
+## Cada commit borra las fotos
+
+Si haces `git push` y Railway redeploya Strapi, es normal que el contenedor se recree. Con el volumen **bien montado**, los archivos deben sobrevivir.
+
+Para que un push del frontend no redeploye Strapi:
+
+- **Settings → Deploy → Watch Paths:** `strapi/**`
+- **Root Directory:** `strapi`

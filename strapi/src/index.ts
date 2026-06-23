@@ -1,5 +1,8 @@
 import { triggerVercelDeploy } from "./utils/deploy";
-import { warnIfUploadsAreEphemeral } from "./utils/upload-storage";
+import {
+  ensureUploadsDirectoryWritable,
+  logUploadStorageDiagnostics,
+} from "./utils/upload-storage";
 import {
   configureProyectoCaseStudyLayout,
   migrateProyectoCaseStudyFields,
@@ -459,6 +462,8 @@ export default {
   register() {},
 
   async bootstrap({ strapi }) {
+    ensureUploadsDirectoryWritable(strapi);
+
     // Permisos + seed + migración primero, antes de registrar el middleware de
     // deploy, para que estas escrituras internas no disparen despliegues.
     await setPublicPermissions(strapi);
@@ -469,7 +474,7 @@ export default {
     await migrateProyectoProjectSummary(strapi);
     await configureProyectoCaseStudyLayout(strapi);
     await configureProyectoSummaryLayout(strapi);
-    warnIfUploadsAreEphemeral(strapi);
+    logUploadStorageDiagnostics(strapi);
 
     const CONTENT_TYPES_THAT_TRIGGER_DEPLOY = new Set([
       "api::home.home",

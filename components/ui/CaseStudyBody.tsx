@@ -100,7 +100,7 @@ const components: Components = {
 
   ul({ children }) {
     return (
-      <ul className="mb-6 mt-1 overflow-hidden rounded-[var(--radius-card)] border border-mist">
+      <ul className="mb-6 mt-1 overflow-hidden rounded-[var(--radius-card)] border border-mist bg-white">
         {children}
       </ul>
     );
@@ -112,7 +112,7 @@ const components: Components = {
 
   li({ children }) {
     return (
-      <li className="flex gap-2.5 border-b border-mist px-4 py-2.5 last:border-b-0">
+      <li className="flex gap-2.5 border-b border-mist bg-white px-4 py-2.5 last:border-b-0">
         <span className="mt-[3px] shrink-0 text-[12px] text-coral">✓</span>
         <span className="text-[14px] leading-[1.6] tracking-[-0.005em] text-carbon">
           {children}
