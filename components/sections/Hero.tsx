@@ -157,7 +157,7 @@ export function Hero({ content }: HeroProps) {
 
             {/* Derecha — título + descripción + CTAs (aparece tras el scroll) */}
             <div
-              className="max-w-[540px] max-md:absolute max-md:inset-x-0 max-md:top-16 md:max-w-none lg:pl-10 lg:pt-8"
+              className="max-w-[540px] max-md:absolute max-md:inset-x-0 max-md:top-6 md:max-w-none lg:pl-10 lg:pt-8"
               style={{
                 opacity: outroOpacity,
                 transform: `translateY(${outroShift}px)`,
@@ -187,7 +187,7 @@ export function Hero({ content }: HeroProps) {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col gap-3 max-md:mt-[280px] sm:flex-row sm:flex-wrap">
+              <div className="flex flex-col gap-3 max-md:mt-[340px] sm:flex-row sm:flex-wrap">
                 <Button href="/proyectos" variant="primary" withArrow>
                   Ver Casos de Estudio
                 </Button>
