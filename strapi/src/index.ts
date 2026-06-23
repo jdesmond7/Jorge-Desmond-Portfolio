@@ -1,4 +1,5 @@
 import { triggerVercelDeploy } from "./utils/deploy";
+import { warnIfUploadsAreEphemeral } from "./utils/upload-storage";
 import {
   configureProyectoCaseStudyLayout,
   migrateProyectoCaseStudyFields,
@@ -468,6 +469,7 @@ export default {
     await migrateProyectoProjectSummary(strapi);
     await configureProyectoCaseStudyLayout(strapi);
     await configureProyectoSummaryLayout(strapi);
+    warnIfUploadsAreEphemeral(strapi);
 
     const CONTENT_TYPES_THAT_TRIGGER_DEPLOY = new Set([
       "api::home.home",

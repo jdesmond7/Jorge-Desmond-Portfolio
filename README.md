@@ -100,6 +100,7 @@ Tokens (colores, tipografía, radios, gradiente y sombra) centralizados en `app/
 3. Variables de entorno (ver `strapi/.env.example`)
 4. Build: `npm run build` · Start: `npm run start`
 5. Usa Node 20 o 22 en Railway
+6. **Importante — uploads persistentes:** monta un volumen en `/app/public/uploads` y configura Watch Paths `strapi/**`. Ver [strapi/RAILWAY.md](strapi/RAILWAY.md)
 
 ### Webhook rebuild
 

@@ -25,3 +25,10 @@ build
 # Dependencies
 ############################
 node_modules/
+
+############################
+# Uploads de Strapi (producción)
+# Los archivos subidos viven aquí. En Railway debe existir un volumen en este path.
+############################
+public/uploads/*
+!public/uploads/.gitkeep

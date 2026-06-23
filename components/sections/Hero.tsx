@@ -133,11 +133,11 @@ export function Hero({ content }: HeroProps) {
           className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-black/55"
         />
 
-        <div className="relative z-[2] mx-auto flex h-[100svh] w-full max-w-[var(--container-max)] flex-col justify-start px-6 pb-10 pt-[108px] md:justify-center md:px-10 md:pb-20 md:pt-[140px] lg:px-16">
-          <div className="grid w-full grid-cols-1 items-start gap-8 md:gap-12 lg:grid-cols-2 lg:items-center lg:gap-28 xl:gap-36">
+        <div className="relative z-[2] mx-auto flex h-[100svh] w-full max-w-[var(--container-max)] flex-col justify-start px-6 pb-10 pt-[96px] md:justify-center md:px-10 md:pb-20 md:pt-[140px] lg:px-16">
+          <div className="grid w-full grid-cols-1 items-start gap-8 max-md:relative max-md:min-h-[34svh] md:gap-12 lg:grid-cols-2 lg:items-center lg:gap-28 xl:gap-36">
             {/* Izquierda — saludo + nombre (frame inicial) */}
             <div
-              className="lg:pr-6"
+              className="max-md:absolute max-md:inset-x-0 max-md:top-10 lg:pr-6"
               style={{
                 opacity: introOpacity,
                 visibility: introOpacity <= 0.01 ? "hidden" : "visible",
@@ -157,24 +157,24 @@ export function Hero({ content }: HeroProps) {
 
             {/* Derecha — título + descripción + CTAs (aparece tras el scroll) */}
             <div
-              className="max-w-[540px] md:max-w-none lg:pl-10 lg:pt-8"
+              className="max-w-[540px] max-md:absolute max-md:inset-x-0 max-md:top-10 md:max-w-none lg:pl-10 lg:pt-8"
               style={{
                 opacity: outroOpacity,
                 transform: `translateY(${outroShift}px)`,
                 visibility: outroOpacity <= 0.01 ? "hidden" : "visible",
               }}
             >
-              <p className="font-body mb-3 text-[clamp(20px,2.8vw,32px)] font-bold leading-[1.2] text-white md:mb-5">
+              <p className="font-body mb-2.5 text-[clamp(20px,2.8vw,32px)] font-bold leading-[1.2] text-white md:mb-5">
                 {titleLines.map((line, i) => (
                   <span key={i} className="block">
                     {line}
                   </span>
                 ))}
               </p>
-              <p className="font-body mb-5 text-[15px] font-semibold leading-[1.55] text-white/90 md:mb-7 md:text-[clamp(15px,1.7vw,17px)]">
+              <p className="font-body mb-4 text-[15px] font-semibold leading-[1.55] text-white/90 md:mb-7 md:text-[clamp(15px,1.7vw,17px)]">
                 {content.heroSubtitle}
               </p>
-              <ul className="mb-6 grid grid-cols-2 gap-x-4 gap-y-2.5 md:mb-8 md:flex md:flex-wrap md:gap-x-5 md:gap-y-3">
+              <ul className="mb-0 grid grid-cols-2 gap-x-4 gap-y-2 md:mb-8 md:flex md:flex-wrap md:gap-x-5 md:gap-y-3">
                 {content.trustBadges.map((badge) => (
                   <li
                     key={badge}
@@ -187,7 +187,7 @@ export function Hero({ content }: HeroProps) {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="flex flex-col gap-3 max-md:mt-[320px] sm:flex-row sm:flex-wrap">
                 <Button href="/proyectos" variant="primary" withArrow>
                   Ver Casos de Estudio
                 </Button>
