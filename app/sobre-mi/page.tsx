@@ -1,136 +1,156 @@
 import type { Metadata } from "next";
-import { Button } from "@/components/ui/Button";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { Container } from "@/components/ui/Container";
-import { ProfileCard } from "@/components/ui/ProfileCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { getAboutContent, getHomeContent } from "@/lib/strapi";
+import { getAboutContent, getSiteSettings } from "@/lib/strapi";
 
 export const metadata: Metadata = {
   title: "Sobre mí",
   description:
-    "Senior Product Designer especializado en Design Systems y arquitectura de diseño con IA.",
+    "Jorge Desmond — product designer en Monterrey. Sistemas de diseño, calistenia, ilustración y tres marcas en construcción.",
 };
 
-export default async function SobreMiPage() {
-  const [about, home] = await Promise.all([getAboutContent(), getHomeContent()]);
+const CONTACT_EMAIL = "hola@jorgedesmond.com";
+
+function AboutParagraph({
+  text,
+  linkedin,
+  instagram,
+}: {
+  text: string;
+  linkedin: string;
+  instagram?: string;
+}) {
+  if (text.startsWith("escríbeme")) {
+    return (
+      <p className="text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
+        escríbeme a{" "}
+        <a
+          href={`mailto:${CONTACT_EMAIL}`}
+          className="font-semibold text-carbon underline decoration-coral/50 underline-offset-[3px] transition-colors hover:text-coral"
+        >
+          {CONTACT_EMAIL}
+        </a>{" "}
+        o encuéntrame en{" "}
+        <a
+          href={linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-carbon underline decoration-coral/50 underline-offset-[3px] transition-colors hover:text-coral"
+        >
+          LinkedIn
+        </a>
+        {instagram ? (
+          <>
+            {" / "}
+            <a
+              href={instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-carbon underline decoration-coral/50 underline-offset-[3px] transition-colors hover:text-coral"
+            >
+              Instagram
+            </a>
+          </>
+        ) : null}
+        .
+      </p>
+    );
+  }
+
+  if (text.startsWith("con gusto")) {
+    return (
+      <p className="pt-2 text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc/80">
+        {text}
+      </p>
+    );
+  }
 
   return (
-    <div className="pt-28 md:pt-32">
-      {/* ── Intro ─────────────────────────────────────────────────────── */}
-      <Container className="py-[var(--section-py)]">
+    <p className="text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
+      {text}
+    </p>
+  );
+}
+
+export default async function SobreMiPage() {
+  const [about, site] = await Promise.all([
+    getAboutContent(),
+    getSiteSettings(),
+  ]);
+  const paragraphs = about.body.split("\n\n").filter(Boolean);
+  const mid = Math.ceil(paragraphs.length / 2);
+  const firstHalf = paragraphs.slice(0, mid);
+  const secondHalf = paragraphs.slice(mid);
+
+  return (
+    <div>
+      <div className="relative h-[min(70vw,560px)] min-h-[320px] w-full overflow-hidden">
+        <CmsImage
+          src={about.heroImage}
+          alt="Jorge Desmond en su estudio"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
+
+      <Container narrow className="pb-[var(--section-py)] pt-10 md:pt-12">
         <Reveal>
-          <div className="mono mb-5 text-[11px] uppercase tracking-[0.08em] text-zinc">
-            sobre mí
-          </div>
-          <h1 className="font-display mb-7 text-[clamp(48px,9vw,96px)] uppercase leading-none tracking-[0.02em] text-carbon">
+          <h1 className="font-display mb-10 text-[clamp(48px,9vw,80px)] uppercase leading-none tracking-[0.02em] text-carbon md:mb-12">
             {about.title}
           </h1>
         </Reveal>
-        <Reveal delay={0.1}>
-          <p className="max-w-2xl text-[17px] leading-[1.65] tracking-[-0.009em] text-zinc">
-            {home.heroSubtitle}
-          </p>
-          <div className="mt-10 flex flex-col gap-4 min-[400px]:flex-row">
-            <Button href={`mailto:${home.email}`}>Hablemos →</Button>
-            <Button href={home.linkedin} variant="outline" external>
-              LinkedIn ↗
-            </Button>
-          </div>
-        </Reveal>
-      </Container>
 
-      {/* ── Stats strip ───────────────────────────────────────────────── */}
-      <div className="bg-[var(--color-carbon)] py-16 md:py-20">
-        <Container>
-          <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
-            {home.stats.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.07}>
-                <span className="font-display block text-[clamp(40px,5.5vw,68px)] leading-none tracking-[0.02em] text-[var(--color-coral)]">
-                  {stat.value}
-                </span>
-                <span className="mono mt-2 block text-[11px] uppercase tracking-[0.07em] text-white/50">
-                  {stat.label}
-                </span>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </div>
+        <div className="flex flex-col gap-6">
+          {firstHalf.map((paragraph, i) => (
+            <Reveal key={paragraph} delay={0.05 + i * 0.04}>
+              <AboutParagraph
+                text={paragraph}
+                linkedin={site.linkedin}
+                instagram={site.instagram}
+              />
+            </Reveal>
+          ))}
+        </div>
 
-      {/* ── Quién soy + ProfileCard ────────────────────────────────────── */}
-      <Container className="grid items-start gap-12 py-[var(--section-py)] md:grid-cols-[1.2fr_0.8fr] md:gap-20">
-        <Reveal>
-          <div className="mono mb-5 text-[11px] uppercase tracking-[0.08em] text-zinc">
-            quién soy
-          </div>
-          <div className="whitespace-pre-line text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
-            {about.body}
-          </div>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <ProfileCard
-            eyebrow={about.cardEyebrow}
-            title={about.cardTitle}
-            subtitle={about.cardSubtitle}
-          />
-        </Reveal>
-      </Container>
-
-      {/* ── Disciplinas ───────────────────────────────────────────────── */}
-      <div className="bg-[var(--color-fog)] py-[var(--section-py)]">
-        <Container>
-          <Reveal>
-            <div className="mono mb-4 text-[11px] uppercase tracking-[0.08em] text-zinc">
-              lo que hago
-            </div>
-            <h2 className="font-display mb-12 text-[clamp(32px,5vw,52px)] uppercase leading-none tracking-[0.02em] text-carbon">
-              Disciplinas
-            </h2>
-          </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {home.stackItems.map((item, i) => (
-              <Reveal key={item.number} delay={i * 0.08}>
-                <div className="flex h-full flex-col gap-4 rounded-[var(--radius-card)] bg-[var(--color-white)] p-6 shadow-[var(--shadow-card)]">
-                  <span className="mono text-[11px] tracking-[0.08em] text-[var(--color-coral)]">
-                    {item.number}
-                  </span>
-                  <h3 className="font-display text-[22px] uppercase leading-none tracking-[0.02em] text-carbon">
-                    {item.name}
-                  </h3>
-                  <p className="text-[13px] leading-[1.55] tracking-[-0.004em] text-zinc">
-                    {item.items}
-                  </p>
-                  {item.isToday && (
-                    <span className="mono mt-auto inline-flex w-fit items-center rounded-[var(--radius-pill)] bg-[var(--color-coral)] px-3 py-1 text-[10px] uppercase tracking-[0.08em] text-white">
-                      hoy
-                    </span>
-                  )}
+        {about.images.length > 0 && (
+          <Reveal delay={0.15}>
+            <div
+              className={`my-12 grid gap-5 ${
+                about.images.length > 1 ? "sm:grid-cols-2" : ""
+              }`}
+            >
+              {about.images.map((src) => (
+                <div
+                  key={src}
+                  className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-mist"
+                >
+                  <CmsImage
+                    src={src}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 480px"
+                  />
                 </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
 
-      {/* ── CTA final ─────────────────────────────────────────────────── */}
-      <Container className="py-[var(--section-py)]">
-        <Reveal>
-          <div className="mono mb-4 text-[11px] uppercase tracking-[0.08em] text-zinc">
-            siguiente paso
-          </div>
-          <h2 className="font-display mb-6 text-[clamp(32px,5vw,52px)] uppercase leading-none tracking-[0.02em] text-carbon">
-            {home.ctaTitle}
-          </h2>
-          <p className="mb-10 max-w-xl text-[16px] leading-[1.65] tracking-[-0.009em] text-zinc">
-            {home.ctaSubtitle}
-          </p>
-          <div className="flex flex-col gap-4 min-[400px]:flex-row">
-            <Button href={`mailto:${home.email}`}>Hablemos →</Button>
-            <Button href={home.linkedin} variant="outline" external>
-              LinkedIn ↗
-            </Button>
-          </div>
-        </Reveal>
+        <div className="mt-6 flex flex-col gap-6">
+          {secondHalf.map((paragraph, i) => (
+            <Reveal key={paragraph} delay={0.1 + i * 0.04}>
+              <AboutParagraph
+                text={paragraph}
+                linkedin={site.linkedin}
+                instagram={site.instagram}
+              />
+            </Reveal>
+          ))}
+        </div>
       </Container>
     </div>
   );

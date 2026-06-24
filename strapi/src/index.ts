@@ -327,11 +327,10 @@ async function seedContent(strapi) {
 
   await strapi.documents("api::sobre-mi.sobre-mi").create({
     data: {
-      title: "Mismo proceso. Dos escenarios.",
-      body: "Soy Senior Product Designer con más de 8 años construyendo productos digitales que escalan. Mi trabajo vive en la intersección entre diseño de producto, sistemas de diseño y arquitectura de diseño con IA.\n\nDentro de la pantalla diseño infraestructura que reduce fricción operativa. Fuera de ella aplico la misma disciplina sistémica al entrenamiento físico. Enseño en el Tec de Monterrey porque creo que el pensamiento sistémico se comparte, no se acumula.",
-      cardTitle: "Build the body.\nOwn the process.",
-      cardSubtitle: "disciplina aplicada — dentro y fuera",
-      cardEyebrow: "built by des",
+      title: "Sobre mí",
+      heroImage: "/images/about-me.png",
+      images: [],
+      body: "soy jorge. mexicano, vivo en monterrey. entreno calistenia. dibujo cuando puedo.\n\ndiseño sistemas — los que hacen que los productos no se rompan cuando crecen. ahorita soy senior product designer en growrk remote, donde también cargo el sombrero de ai design architect. en paralelo enseño diseño en el tec de monterrey y estoy construyendo prowell, una plataforma de coaching para entrenadores de bienestar.\n\nlos últimos cinco años han sido sistemas de diseño, tokens, componentes y decisiones que se ven simples pero tienen tres capas abajo. también escribo mis propios diseños en código cuando el proyecto lo pide.\n\nantes de esto estuve en spin by oxxo, grupo salinas y un par de proyectos que me enseñaron que el diseño sin contexto de negocio es decoración.\n\nen las noches ilustro. manga, tinta, papel. sin ctrl+z.\n\ntengo tres marcas paralelas que estoy construyendo despacio y con intención: desmond.design para consultoría de sistemas, built by des para fitness, y frame & font para educación de diseño — esta última con mi socia y pareja liz.\n\nescríbeme a hola@jorgedesmond.com o encuéntrame en linkedin / instagram.\n\ncon gusto, jorge",
     },
     status: "published",
   });

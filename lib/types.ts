@@ -118,7 +118,6 @@ export interface SiteSettings {
 export interface AboutContent {
   title: string;
   body: string;
-  cardTitle: string;
-  cardSubtitle: string;
-  cardEyebrow: string;
+  heroImage: string;
+  images: string[];
 }

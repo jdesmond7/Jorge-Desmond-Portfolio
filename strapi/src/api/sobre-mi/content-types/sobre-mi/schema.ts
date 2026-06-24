@@ -20,14 +20,11 @@ export default {
       "type": "richtext",
       "required": true
     },
-    "cardTitle": {
-      "type": "text"
-    },
-    "cardSubtitle": {
+    "heroImage": {
       "type": "string"
     },
-    "cardEyebrow": {
-      "type": "string"
+    "images": {
+      "type": "json"
     }
   }
 } as const;

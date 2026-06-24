@@ -618,9 +618,10 @@ export async function getAboutContent(): Promise<AboutContent> {
   return {
     title: String(a.title ?? MOCK_ABOUT.title),
     body: String(a.body ?? MOCK_ABOUT.body),
-    cardTitle: String(a.cardTitle ?? MOCK_ABOUT.cardTitle),
-    cardSubtitle: String(a.cardSubtitle ?? MOCK_ABOUT.cardSubtitle),
-    cardEyebrow: String(a.cardEyebrow ?? MOCK_ABOUT.cardEyebrow),
+    heroImage: String(a.heroImage ?? MOCK_ABOUT.heroImage),
+    images: Array.isArray(a.images)
+      ? a.images.map(String)
+      : MOCK_ABOUT.images,
   };
 }
 
