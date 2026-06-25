@@ -4,6 +4,7 @@ import { BackLink } from "@/components/ui/BackLink";
 import { BlogBody } from "@/components/ui/BlogBody";
 import { Container } from "@/components/ui/Container";
 import { ProjectHero } from "@/components/ui/ProjectHero";
+import { BlogComments } from "@/components/sections/BlogComments";
 import { getAllBlogSlugs, getBlogPostBySlug } from "@/lib/strapi";
 
 interface PageProps {
@@ -62,6 +63,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         </p>
 
         {post.body && <BlogBody content={post.body} />}
+
+        <BlogComments postSlug={post.slug} postId={post.id} />
       </Container>
     </div>
   );

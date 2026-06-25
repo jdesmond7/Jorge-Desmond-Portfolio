@@ -37,6 +37,12 @@ export default {
     },
     "body": {
       "type": "richtext"
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comment.comment",
+      "mappedBy": "blogPost"
     }
   }
 } as const;

@@ -16,7 +16,7 @@ export default async function Home() {
     <>
       <Hero content={home} />
       <Marquee />
-      <Projects projects={projects} className="pt-[240px]" />
+      <Projects projects={projects} className="pt-[120px] md:pt-[240px]" />
       <Writing posts={posts} />
       <CTA
         title={home.ctaTitle}

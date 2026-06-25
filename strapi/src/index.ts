@@ -466,6 +466,9 @@ export default {
     // Permisos + seed + migración primero, antes de registrar el middleware de
     // deploy, para que estas escrituras internas no disparen despliegues.
     await setPublicPermissions(strapi);
+    strapi.log.info(
+      "Comments: no public permissions — use STRAPI_API_TOKEN with comment find/create/update in Next.js API.",
+    );
     await seedContent(strapi);
     await migrateProyectoMetrics(strapi);
     await backfillMetricsAndTags(strapi);

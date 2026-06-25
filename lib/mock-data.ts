@@ -1,6 +1,7 @@
 import type {
   AboutContent,
   BlogPost,
+  Comment,
   HomeContent,
   Illustration,
   Project,
@@ -287,6 +288,36 @@ export const MOCK_BLOG: BlogPost[] = [
       "Lecciones de calistenia aplicadas al diseño de producto: proceso, consistencia e iteración.",
     publishedAt: "2025-11-02",
     body: "La misma lógica que uso para progresar en calistenia — progresiones, consistencia, feedback loops — aplica directamente a cómo construyo y mantengo Design Systems.",
+  },
+];
+
+export const MOCK_COMMENTS: Array<Comment & { blogPostSlug: string }> = [
+  {
+    id: "mock-comment-1",
+    blogPostSlug: "design-systems-con-ia",
+    blogPostId: "1",
+    body: "Muy buen artículo. Me quedó claro cómo mantener coherencia cuando la IA genera componentes.",
+    authorName: "María",
+    upvotes: 3,
+    downvotes: 0,
+    reportCount: 0,
+    createdAt: "2026-06-18T10:00:00.000Z",
+    lastActivityAt: "2026-06-20T14:30:00.000Z",
+    replies: [],
+  },
+  {
+    id: "mock-comment-2",
+    blogPostSlug: "design-systems-con-ia",
+    blogPostId: "1",
+    body: "¿Tienes algún ejemplo del AI Playground en acción?",
+    authorName: "Carlos",
+    upvotes: 1,
+    downvotes: 0,
+    reportCount: 0,
+    createdAt: "2026-06-19T08:15:00.000Z",
+    lastActivityAt: "2026-06-20T14:30:00.000Z",
+    replies: [],
+    parentId: "mock-comment-1",
   },
 ];
 
