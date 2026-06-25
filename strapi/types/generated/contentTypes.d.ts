@@ -453,6 +453,7 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
   };
   attributes: {
     body: Schema.Attribute.RichText;
+    comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
     coverImage: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -470,6 +471,47 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCommentComment extends Struct.CollectionTypeSchema {
+  collectionName: 'comments';
+  info: {
+    description: 'Comentarios en entradas del blog';
+    displayName: 'Comment';
+    pluralName: 'comments';
+    singularName: 'comment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    authorEmail: Schema.Attribute.Email & Schema.Attribute.Private;
+    authorName: Schema.Attribute.String;
+    blogPost: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::blog-post.blog-post'
+    >;
+    body: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    downvotes: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    lastActivityAt: Schema.Attribute.DateTime;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::comment.comment'
+    > &
+      Schema.Attribute.Private;
+    parent: Schema.Attribute.Relation<'manyToOne', 'api::comment.comment'>;
+    publishedAt: Schema.Attribute.DateTime;
+    replies: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
+    reportCount: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    upvotes: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
   };
 }
 
@@ -674,12 +716,11 @@ export interface ApiSobreMiSobreMi extends Struct.SingleTypeSchema {
   };
   attributes: {
     body: Schema.Attribute.RichText & Schema.Attribute.Required;
-    cardEyebrow: Schema.Attribute.String;
-    cardSubtitle: Schema.Attribute.String;
-    cardTitle: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    heroImage: Schema.Attribute.String;
+    images: Schema.Attribute.JSON;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1238,6 +1279,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
+      'api::comment.comment': ApiCommentComment;
       'api::home.home': ApiHomeHome;
       'api::ilustracion.ilustracion': ApiIlustracionIlustracion;
       'api::marca.marca': ApiMarcaMarca;
