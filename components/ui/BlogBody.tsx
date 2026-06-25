@@ -1,8 +1,15 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { CmsImage } from "./CmsImage";
 
 interface BlogBodyProps {
   content: string;
+}
+
+interface HastNode {
+  type?: string;
+  tagName?: string;
+  children?: HastNode[];
 }
 
 const components: Components = {
@@ -30,11 +37,36 @@ const components: Components = {
     );
   },
 
-  p({ children }) {
+  p({ node, children }) {
+    const hast = node as HastNode;
+    const onlyImg =
+      hast?.children?.length === 1 && hast.children[0]?.tagName === "img";
+
+    if (onlyImg) {
+      return <>{children}</>;
+    }
+
     return (
       <p className="mb-5 text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
         {children}
       </p>
+    );
+  },
+
+  img({ src, alt }) {
+    if (!src || typeof src !== "string") return null;
+
+    return (
+      <figure className="my-8 w-full">
+        <CmsImage
+          src={src}
+          alt={alt ?? ""}
+          width={1072}
+          height={604}
+          sizes="(max-width: 1072px) 100vw, 1072px"
+          className="h-auto w-full max-w-full rounded-[var(--radius-card)]"
+        />
+      </figure>
     );
   },
 
@@ -94,7 +126,7 @@ const components: Components = {
 
 export function BlogBody({ content }: BlogBodyProps) {
   return (
-    <div className="w-full">
+    <div className="w-full [&_img]:h-auto [&_img]:max-w-full [&_img]:w-full">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {content}
       </ReactMarkdown>
