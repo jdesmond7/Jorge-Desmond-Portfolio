@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BackLink } from "@/components/ui/BackLink";
+import { BlogBody } from "@/components/ui/BlogBody";
 import { Container } from "@/components/ui/Container";
 import { getAllBlogSlugs, getBlogPostBySlug } from "@/lib/strapi";
 
@@ -39,24 +40,20 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <div className="pt-28 md:pt-32">
-      <Container className="py-[var(--section-py)]">
+      <Container narrow className="py-[var(--section-py)]">
         <BackLink href="/blog">← Blog</BackLink>
 
         <div className="mono mb-4 text-[11px] tracking-[-0.006em] text-ash">
           {formatDate(post.publishedAt)}
         </div>
-        <h1 className="font-body mb-6 max-w-3xl text-[clamp(28px,5vw,48px)] font-bold leading-[1.15] text-carbon">
+        <h1 className="font-body mb-6 w-full text-[clamp(28px,5vw,48px)] font-bold leading-[1.15] text-carbon">
           {post.title}
         </h1>
-        <p className="mb-10 max-w-2xl text-[17px] leading-[1.4] tracking-[-0.009em] text-zinc">
+        <p className="mb-10 w-full text-[17px] leading-[1.4] tracking-[-0.009em] text-zinc">
           {post.excerpt}
         </p>
 
-        {post.body && (
-          <div className="max-w-2xl whitespace-pre-line text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
-            {post.body}
-          </div>
-        )}
+        {post.body && <BlogBody content={post.body} />}
       </Container>
     </div>
   );
