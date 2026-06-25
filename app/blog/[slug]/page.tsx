@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { BackLink } from "@/components/ui/BackLink";
 import { BlogBody } from "@/components/ui/BlogBody";
 import { Container } from "@/components/ui/Container";
+import { ProjectHero } from "@/components/ui/ProjectHero";
 import { getAllBlogSlugs, getBlogPostBySlug } from "@/lib/strapi";
 
 interface PageProps {
@@ -39,8 +40,15 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <div className="pt-28 md:pt-32">
-      <Container narrow className="py-[var(--section-py)]">
+    <div>
+      {post.coverImage && (
+        <ProjectHero src={post.coverImage} alt={post.title} />
+      )}
+
+      <Container
+        narrow
+        className={`pb-[var(--section-py)] ${post.coverImage ? "pt-10 md:pt-12" : "pt-28 md:pt-32"}`}
+      >
         <BackLink href="/blog">← Blog</BackLink>
 
         <div className="mono mb-4 text-[11px] tracking-[-0.006em] text-ash">
