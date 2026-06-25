@@ -1,6 +1,6 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { CmsImage } from "./CmsImage";
+import { ZoomableImage } from "./ZoomableImage";
 
 interface BlogBodyProps {
   content: string;
@@ -58,7 +58,7 @@ const components: Components = {
 
     return (
       <figure className="my-8 w-full">
-        <CmsImage
+        <ZoomableImage
           src={src}
           alt={alt ?? ""}
           width={1072}

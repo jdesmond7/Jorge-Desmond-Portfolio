@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Tag } from "@/components/ui/Tag";
+import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import { getIllustrations } from "@/lib/strapi";
 
 export const metadata: Metadata = {
@@ -29,12 +29,13 @@ export default async function IlustracionPage() {
             <Reveal key={item.id} delay={i * 0.08}>
               <article className="overflow-hidden rounded-[var(--radius-card)] border border-mist bg-white">
                 <div className="relative aspect-[4/3]">
-                  <Image
+                  <ZoomableImage
                     src={item.image}
                     alt={item.title}
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, 50vw"
+                    containerClassName="h-full w-full"
                   />
                 </div>
                 <div className="p-5">

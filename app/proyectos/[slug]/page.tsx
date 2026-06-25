@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseStudyBody } from "@/components/ui/CaseStudyBody";
 import { CaseStudySection } from "@/components/ui/CaseStudySection";
-import { CmsImage } from "@/components/ui/CmsImage";
 import { Container } from "@/components/ui/Container";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ProjectHero } from "@/components/ui/ProjectHero";
@@ -11,6 +10,7 @@ import { ProjectMeta } from "@/components/ui/ProjectMeta";
 import { ProjectMetrics } from "@/components/ui/ProjectMetrics";
 import { ProjectNav } from "@/components/ui/ProjectNav";
 import { Tag } from "@/components/ui/Tag";
+import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import {
   getAllProjectSlugs,
   getProjectBySlug,
@@ -132,18 +132,15 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               <section className="mb-16">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {galleryImages.map((src, index) => (
-                    <div
+                    <ZoomableImage
                       key={src}
-                      className="relative aspect-[4/3] overflow-hidden rounded-lg bg-fog"
-                    >
-                      <CmsImage
-                        src={src}
-                        alt={`${project.title} — imagen ${index + 1}`}
-                        fill
-                        className="object-cover"
-                        sizes="(min-width: 640px) 50vw, 100vw"
-                      />
-                    </div>
+                      src={src}
+                      alt={`${project.title} — imagen ${index + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                      containerClassName="relative aspect-[4/3] overflow-hidden rounded-lg bg-fog"
+                    />
                   ))}
                 </div>
               </section>

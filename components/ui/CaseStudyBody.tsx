@@ -3,6 +3,7 @@ import remarkGfm from "remark-gfm";
 import type { ProjectMetric } from "@/lib/types";
 import { DecisionCard } from "./DecisionCard";
 import { ProjectMetrics } from "./ProjectMetrics";
+import { ZoomableImage } from "./ZoomableImage";
 
 interface CaseStudyBodyProps {
   content: string;
@@ -74,6 +75,12 @@ const components: Components = {
     const hast = node as HastNode;
     const onlyStrong =
       hast?.children?.length === 1 && hast.children[0]?.tagName === "strong";
+    const onlyImg =
+      hast?.children?.length === 1 && hast.children[0]?.tagName === "img";
+
+    if (onlyImg) {
+      return <>{children}</>;
+    }
 
     if (onlyStrong) {
       return (
@@ -87,6 +94,23 @@ const components: Components = {
       <p className="mb-5 text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
         {children}
       </p>
+    );
+  },
+
+  img({ src, alt }) {
+    if (!src || typeof src !== "string") return null;
+
+    return (
+      <figure className="my-8 w-full">
+        <ZoomableImage
+          src={src}
+          alt={alt ?? ""}
+          width={1072}
+          height={604}
+          sizes="(max-width: 1072px) 100vw, 1072px"
+          className="h-auto w-full max-w-full rounded-[var(--radius-card)]"
+        />
+      </figure>
     );
   },
 
