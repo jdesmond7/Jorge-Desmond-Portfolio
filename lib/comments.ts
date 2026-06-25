@@ -1,5 +1,5 @@
 import { MOCK_COMMENTS } from "./mock-data";
-import type { Comment, CommentSort } from "./types";
+import type { Comment } from "./types";
 
 const STRAPI_URL = process.env.STRAPI_URL?.replace(/\/$/, "");
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -143,35 +143,24 @@ export function buildCommentTree(flat: Comment[]): Comment[] {
   return roots;
 }
 
-function sortComments(comments: Comment[], sort: CommentSort): Comment[] {
+function sortCommentsByDate(comments: Comment[]): Comment[] {
   const sorted = [...comments];
 
-  sorted.sort((a, b) => {
-    if (sort === "rating") {
-      return b.upvotes - b.downvotes - (a.upvotes - a.downvotes);
-    }
-    if (sort === "activity") {
-      return (
-        new Date(b.lastActivityAt).getTime() -
-        new Date(a.lastActivityAt).getTime()
-      );
-    }
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-  });
+  sorted.sort(
+    (a, b) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
 
   return sorted.map((comment) => ({
     ...comment,
-    replies: sortComments(comment.replies, sort),
+    replies: sortCommentsByDate(comment.replies),
   }));
 }
 
-export async function getCommentsByPostSlug(
-  slug: string,
-  sort: CommentSort = "date",
-): Promise<Comment[]> {
+export async function getCommentsByPostSlug(slug: string): Promise<Comment[]> {
   if (!isStrapiConfigured()) {
     const flat = MOCK_COMMENTS.filter((comment) => comment.blogPostSlug === slug);
-    return sortComments(buildCommentTree(flat.map(stripMockSlug)), sort);
+    return sortCommentsByDate(buildCommentTree(flat.map(stripMockSlug)));
   }
 
   const res = await fetchStrapiComments<StrapiListResponse>(
@@ -182,7 +171,7 @@ export async function getCommentsByPostSlug(
 
   if (!res?.data?.length) return [];
   const tree = buildCommentTree(res.data.map(mapComment));
-  return sortComments(tree, sort);
+  return sortCommentsByDate(tree);
 }
 
 function stripMockSlug(comment: Comment & { blogPostSlug?: string }): Comment {

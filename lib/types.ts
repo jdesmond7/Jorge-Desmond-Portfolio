@@ -73,8 +73,6 @@ export interface BlogPost {
   body?: string;
 }
 
-export type CommentSort = "date" | "rating" | "activity";
-
 export interface Comment {
   id: string;
   body: string;

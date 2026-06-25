@@ -6,19 +6,13 @@ import {
   validateCommentBody,
 } from "@/lib/comments";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
-import type { CommentSort } from "@/lib/types";
 
-const SORT_VALUES: CommentSort[] = ["date", "rating", "activity"];
 const COMMENT_RATE_LIMIT = 5;
 const COMMENT_WINDOW_MS = 60 * 60 * 1000;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("slug");
-  const sortParam = searchParams.get("sort") ?? "date";
-  const sort = SORT_VALUES.includes(sortParam as CommentSort)
-    ? (sortParam as CommentSort)
-    : "date";
 
   if (!slug) {
     return NextResponse.json(
@@ -27,7 +21,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const comments = await getCommentsByPostSlug(slug, sort);
+  const comments = await getCommentsByPostSlug(slug);
   return NextResponse.json({ comments });
 }
 

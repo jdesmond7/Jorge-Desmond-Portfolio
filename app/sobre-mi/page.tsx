@@ -85,7 +85,7 @@ export default async function SobreMiPage() {
 
   return (
     <div>
-      <div className="relative h-[min(70vw,560px)] min-h-[320px] w-full overflow-hidden">
+      <div className="relative h-[min(90vw,720px)] min-h-[400px] w-full overflow-hidden md:min-h-[520px]">
         <CmsImage
           src={about.heroImage}
           alt="Jorge Desmond en su estudio"

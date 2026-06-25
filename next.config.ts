@@ -25,9 +25,29 @@ function getStrapiImagePattern() {
   return patterns;
 }
 
+function getInstagramImagePatterns() {
+  return [
+    {
+      protocol: "https" as const,
+      hostname: "**.cdninstagram.com",
+      pathname: "/**",
+    },
+    {
+      protocol: "https" as const,
+      hostname: "scontent.cdninstagram.com",
+      pathname: "/**",
+    },
+    {
+      protocol: "https" as const,
+      hostname: "**.fbcdn.net",
+      pathname: "/**",
+    },
+  ];
+}
+
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: getStrapiImagePattern(),
+    remotePatterns: [...getStrapiImagePattern(), ...getInstagramImagePatterns()],
   },
 };
 
