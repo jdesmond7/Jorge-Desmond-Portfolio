@@ -46,10 +46,10 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: {
       icon: [
         { url: "/icon.png", type: "image/png", sizes: "32x32" },
-        { url: "/favicon.ico", sizes: "48x48" },
+        { url: "/favicon.ico", sizes: "any" },
       ],
       shortcut: "/favicon.ico",
-      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+      apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
     },
   };
 }
@@ -71,6 +71,15 @@ export default async function RootLayout({
       lang={locale}
       className={`${bebasNeue.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          href="/apple-touch-icon.png"
+          sizes="180x180"
+        />
+      </head>
       <body className="flex min-h-full flex-col font-body">
         <I18nProvider locale={locale}>
           <Nav

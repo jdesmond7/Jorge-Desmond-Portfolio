@@ -3,7 +3,7 @@ export const SITE_EMAIL = "hola@jorgedesmond.com";
 
 export const LEGACY_CONTACT_EMAIL = "jdesmond7@gmail.com";
 
-export const DEFAULT_SITE_URL = "https://jorgedesmond.com";
+export const DEFAULT_SITE_URL = "https://www.jorgedesmond.com";
 
 export function getSiteUrl(): string {
   if (process.env.NEXT_PUBLIC_SITE_URL) {

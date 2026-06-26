@@ -350,16 +350,19 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     ? (a.navLinks as NavLink[])
     : MOCK_SITE_SETTINGS.navLinks;
 
-  return {
-    siteName: String(a.siteName ?? MOCK_SITE_SETTINGS.siteName),
-    email: normalizePublicEmail(a.email ?? MOCK_SITE_SETTINGS.email),
-    linkedin: String(a.linkedin ?? MOCK_SITE_SETTINGS.linkedin),
-    instagram: a.instagram
-      ? String(a.instagram)
-      : MOCK_SITE_SETTINGS.instagram,
-    navLinks,
-    footerText: String(a.footerText ?? MOCK_SITE_SETTINGS.footerText),
-  };
+  return localizeSiteSettings(
+    {
+      siteName: String(a.siteName ?? MOCK_SITE_SETTINGS.siteName),
+      email: normalizePublicEmail(a.email ?? MOCK_SITE_SETTINGS.email),
+      linkedin: String(a.linkedin ?? MOCK_SITE_SETTINGS.linkedin),
+      instagram: a.instagram
+        ? String(a.instagram)
+        : MOCK_SITE_SETTINGS.instagram,
+      navLinks,
+      footerText: String(a.footerText ?? MOCK_SITE_SETTINGS.footerText),
+    },
+    locale,
+  );
 }
 
 export async function getHomeContent(): Promise<HomeContent> {
@@ -373,26 +376,29 @@ export async function getHomeContent(): Promise<HomeContent> {
   }
 
   const a = unwrap(res.data);
-  return {
-    heroGreeting: String(a.heroGreeting ?? MOCK_HOME.heroGreeting),
-    heroName: String(a.heroName ?? MOCK_HOME.heroName),
-    heroTitle: String(a.heroTitle ?? MOCK_HOME.heroTitle),
-    heroSubtitle: String(a.heroSubtitle ?? MOCK_HOME.heroSubtitle),
-    heroImage: getMediaUrl(a.heroImage) ?? MOCK_HOME.heroImage,
-    trustBadges: Array.isArray(a.trustBadges)
-      ? (a.trustBadges as string[])
-      : MOCK_HOME.trustBadges,
-    stats: Array.isArray(a.stats) ? (a.stats as Stat[]) : MOCK_HOME.stats,
-    stackItems: Array.isArray(a.stackItems)
-      ? (a.stackItems as StackItem[])
-      : MOCK_HOME.stackItems,
-    aboutTitle: String(a.aboutTitle ?? MOCK_HOME.aboutTitle),
-    aboutTeaser: String(a.aboutTeaser ?? MOCK_HOME.aboutTeaser),
-    ctaTitle: String(a.ctaTitle ?? MOCK_HOME.ctaTitle),
-    ctaSubtitle: String(a.ctaSubtitle ?? MOCK_HOME.ctaSubtitle),
-    email: normalizePublicEmail(a.email ?? MOCK_HOME.email),
-    linkedin: String(a.linkedin ?? MOCK_HOME.linkedin),
-  };
+  return localizeHome(
+    {
+      heroGreeting: String(a.heroGreeting ?? MOCK_HOME.heroGreeting),
+      heroName: String(a.heroName ?? MOCK_HOME.heroName),
+      heroTitle: String(a.heroTitle ?? MOCK_HOME.heroTitle),
+      heroSubtitle: String(a.heroSubtitle ?? MOCK_HOME.heroSubtitle),
+      heroImage: getMediaUrl(a.heroImage) ?? MOCK_HOME.heroImage,
+      trustBadges: Array.isArray(a.trustBadges)
+        ? (a.trustBadges as string[])
+        : MOCK_HOME.trustBadges,
+      stats: Array.isArray(a.stats) ? (a.stats as Stat[]) : MOCK_HOME.stats,
+      stackItems: Array.isArray(a.stackItems)
+        ? (a.stackItems as StackItem[])
+        : MOCK_HOME.stackItems,
+      aboutTitle: String(a.aboutTitle ?? MOCK_HOME.aboutTitle),
+      aboutTeaser: String(a.aboutTeaser ?? MOCK_HOME.aboutTeaser),
+      ctaTitle: String(a.ctaTitle ?? MOCK_HOME.ctaTitle),
+      ctaSubtitle: String(a.ctaSubtitle ?? MOCK_HOME.ctaSubtitle),
+      email: normalizePublicEmail(a.email ?? MOCK_HOME.email),
+      linkedin: String(a.linkedin ?? MOCK_HOME.linkedin),
+    },
+    locale,
+  );
 }
 
 function mergeProjectMedia(base: Project, fromStrapi?: Project): Project {
@@ -462,7 +468,7 @@ export async function getProjects(): Promise<Project[]> {
       locale,
     );
   }
-  return sortProjectsByRecency(res.data.map(mapProject));
+  return localizeProjects(sortProjectsByRecency(res.data.map(mapProject)), locale);
 }
 
 /** Proyectos marcados para mostrarse en la home. */
@@ -485,7 +491,7 @@ export async function getRecentProjects(
       locale,
     );
   }
-  return res.data.map(mapProject);
+  return localizeProjects(res.data.map(mapProject), locale);
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
@@ -512,7 +518,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     const [enriched] = await enrichProjectsWithStrapiMedia([withChildren], locale);
     return localizeProject(enriched ?? withChildren, locale);
   }
-  return mapProject(res.data[0]);
+  return localizeProject(mapProject(res.data[0]), locale);
 }
 
 function sortProjectsByOrder(projects: Project[]): Project[] {
@@ -626,7 +632,7 @@ export async function getBlogPosts(limit?: number): Promise<BlogPost[]> {
   if (!res?.data?.length) {
     return MOCK_BLOG.map((post) => localizeBlogPost(post, locale));
   }
-  return res.data.map(mapBlogPost);
+  return res.data.map((record) => localizeBlogPost(mapBlogPost(record), locale));
 }
 
 export async function getBlogPostBySlug(
@@ -642,7 +648,7 @@ export async function getBlogPostBySlug(
     if (!post) return null;
     return localizeBlogPost(post, locale);
   }
-  return mapBlogPost(res.data[0]);
+  return localizeBlogPost(mapBlogPost(res.data[0]), locale);
 }
 
 export async function getAboutContent(): Promise<AboutContent> {
@@ -653,14 +659,17 @@ export async function getAboutContent(): Promise<AboutContent> {
   }
 
   const a = unwrap(res.data);
-  return {
-    title: String(a.title ?? MOCK_ABOUT.title),
-    body: String(a.body ?? MOCK_ABOUT.body),
-    heroImage: String(a.heroImage ?? MOCK_ABOUT.heroImage),
-    images: Array.isArray(a.images)
-      ? a.images.map(String)
-      : MOCK_ABOUT.images,
-  };
+  return localizeAbout(
+    {
+      title: String(a.title ?? MOCK_ABOUT.title),
+      body: String(a.body ?? MOCK_ABOUT.body),
+      heroImage: String(a.heroImage ?? MOCK_ABOUT.heroImage),
+      images: Array.isArray(a.images)
+        ? a.images.map(String)
+        : MOCK_ABOUT.images,
+    },
+    locale,
+  );
 }
 
 export async function getAllProjectSlugs(): Promise<string[]> {

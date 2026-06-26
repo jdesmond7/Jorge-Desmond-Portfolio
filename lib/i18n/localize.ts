@@ -32,7 +32,7 @@ export function localizeSiteSettings(
   if (locale === "es") return settings;
   return {
     ...settings,
-    navLinks: localizeNavLinks(EN_SITE_SETTINGS.navLinks, locale),
+    navLinks: localizeNavLinks(settings.navLinks, locale),
     footerText: EN_SITE_SETTINGS.footerText,
   };
 }

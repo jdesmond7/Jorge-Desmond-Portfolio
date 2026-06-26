@@ -136,7 +136,7 @@ export const en: Dictionary = {
     title: "Illustration",
     description: "Gallery of illustrations and personal visual explorations.",
     intro:
-      "Visual explorations outside digital product — editorial, conceptual, and personal.",
+      "Where I explore visually, outside the screen. Editorial, conceptual, personal.",
     openInstagram: (alt: string) => `Open on Instagram: ${alt}`,
   },
   resume: {

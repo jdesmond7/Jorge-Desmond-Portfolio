@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CmsImage } from "@/components/ui/CmsImage";
 import { Container } from "@/components/ui/Container";
+import { InlineMarkdown, inlineLinkClass } from "@/components/ui/InlineMarkdown";
 import { Reveal } from "@/components/ui/Reveal";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
@@ -41,7 +42,7 @@ function AboutParagraph({
         {dict.about.writePrefix}{" "}
         <a
           href={`mailto:${contactEmail}`}
-          className="font-semibold text-carbon underline decoration-coral/50 underline-offset-[3px] transition-colors hover:text-coral"
+          className={inlineLinkClass}
         >
           {contactEmail}
         </a>{" "}
@@ -50,7 +51,7 @@ function AboutParagraph({
           href={linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-semibold text-carbon underline decoration-coral/50 underline-offset-[3px] transition-colors hover:text-coral"
+          className={inlineLinkClass}
         >
           LinkedIn
         </a>
@@ -61,7 +62,7 @@ function AboutParagraph({
               href={instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-carbon underline decoration-coral/50 underline-offset-[3px] transition-colors hover:text-coral"
+              className={inlineLinkClass}
             >
               Instagram
             </a>
@@ -82,7 +83,7 @@ function AboutParagraph({
 
   return (
     <p className="text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
-      {text}
+      <InlineMarkdown content={text} />
     </p>
   );
 }
