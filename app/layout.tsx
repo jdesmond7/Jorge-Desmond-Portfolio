@@ -44,7 +44,11 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: dict.meta.siteName,
     },
     icons: {
-      icon: [{ url: "/icon.png", type: "image/png", sizes: "32x32" }],
+      icon: [
+        { url: "/icon.png", type: "image/png", sizes: "32x32" },
+        { url: "/favicon.ico", sizes: "48x48" },
+      ],
+      shortcut: "/favicon.ico",
       apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
     },
   };
