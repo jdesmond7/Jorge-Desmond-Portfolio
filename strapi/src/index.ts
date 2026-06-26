@@ -1,4 +1,5 @@
 import { triggerVercelDeploy } from "./utils/deploy";
+import { ensureEnglishLocale } from "./utils/i18n-locale";
 import {
   ensureUploadsDirectoryWritable,
   logUploadStorageDiagnostics,
@@ -523,6 +524,7 @@ export default {
 
   async bootstrap({ strapi }) {
     ensureUploadsDirectoryWritable(strapi);
+    await ensureEnglishLocale(strapi);
 
     // Permisos + seed + migración primero, antes de registrar el middleware de
     // deploy, para que estas escrituras internas no disparen despliegues.

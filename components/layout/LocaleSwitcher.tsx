@@ -56,10 +56,12 @@ export function LocaleSwitcher({
     });
   };
 
-  const buttonClass =
+  const selectedLabel = locale === "es" ? dict.nav.spanish : dict.nav.english;
+
+  const ghostClass =
     variant === "light"
-      ? "border-white/20 text-white hover:bg-white/10"
-      : "border-mist/20 text-white/80 hover:bg-white/10 hover:text-white";
+      ? "text-white/70 hover:bg-white/10 hover:text-white"
+      : "text-white/60 hover:bg-white/10 hover:text-white";
 
   const menuClass =
     variant === "light"
@@ -75,7 +77,7 @@ export function LocaleSwitcher({
     <div ref={rootRef} className={`relative ${fullWidth ? "w-full" : ""} ${className}`}>
       <button
         type="button"
-        className={`inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-pill)] border px-4 py-2 text-[13px] font-normal tracking-[-0.005em] transition-colors ${buttonClass} ${
+        className={`inline-flex min-h-11 items-center gap-1.5 rounded-[10px] px-3 py-1.5 text-[13px] font-normal tracking-[-0.005em] transition-colors ${ghostClass} ${
           fullWidth ? "w-full justify-between" : ""
         }`}
         aria-haspopup="listbox"
@@ -84,8 +86,8 @@ export function LocaleSwitcher({
         onClick={() => setOpen((value) => !value)}
         disabled={pending}
       >
-        <span className="mono text-[11px] uppercase tracking-[0.08em]">
-          {locale}
+        <span>
+          {dict.nav.language}: {selectedLabel}
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

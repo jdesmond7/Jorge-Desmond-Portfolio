@@ -18,6 +18,7 @@ import {
   localizeSiteSettings,
 } from "./i18n/localize";
 import { normalizePublicEmail } from "./site";
+import type { Locale } from "./i18n/types";
 import type {
   AboutContent,
   BlogPost,
@@ -48,7 +49,17 @@ function isStrapiConfigured(): boolean {
   return Boolean(STRAPI_URL);
 }
 
-async function fetchStrapi<T>(path: string): Promise<T | null> {
+function withLocale(path: string, locale: Locale): string {
+  const [pathname, search = ""] = path.split("?");
+  const params = new URLSearchParams(search);
+  params.set("locale", locale);
+  return `${pathname}?${params.toString()}`;
+}
+
+async function fetchStrapi<T>(
+  path: string,
+  locale?: Locale,
+): Promise<T | null> {
   if (!isStrapiConfigured()) return null;
 
   const headers: HeadersInit = {};
@@ -56,9 +67,11 @@ async function fetchStrapi<T>(path: string): Promise<T | null> {
     headers.Authorization = `Bearer ${STRAPI_TOKEN}`;
   }
 
+  const requestPath = locale ? withLocale(path, locale) : path;
+
   try {
     const isDev = process.env.NODE_ENV === "development";
-    const res = await fetch(`${STRAPI_URL}/api${path}`, {
+    const res = await fetch(`${STRAPI_URL}/api${requestPath}`, {
       headers,
       ...(isDev ? { cache: "no-store" } : { next: { revalidate: 60 } }),
     });
@@ -323,11 +336,12 @@ function mapBlogPost(record: StrapiRecord): BlogPost {
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
+  const locale = await getLocale();
   const res = await fetchStrapi<StrapiSingleResponse>(
     "/site-setting?populate[navLinks]=*",
+    locale,
   );
   if (!res?.data) {
-    const locale = await getLocale();
     return localizeSiteSettings(MOCK_SITE_SETTINGS, locale);
   }
 
@@ -336,7 +350,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     ? (a.navLinks as NavLink[])
     : MOCK_SITE_SETTINGS.navLinks;
 
-  const settings: SiteSettings = {
+  return {
     siteName: String(a.siteName ?? MOCK_SITE_SETTINGS.siteName),
     email: normalizePublicEmail(a.email ?? MOCK_SITE_SETTINGS.email),
     linkedin: String(a.linkedin ?? MOCK_SITE_SETTINGS.linkedin),
@@ -346,21 +360,20 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     navLinks,
     footerText: String(a.footerText ?? MOCK_SITE_SETTINGS.footerText),
   };
-  const locale = await getLocale();
-  return localizeSiteSettings(settings, locale);
 }
 
 export async function getHomeContent(): Promise<HomeContent> {
+  const locale = await getLocale();
   const res = await fetchStrapi<StrapiSingleResponse>(
     "/home?populate[stats]=true&populate[stackItems]=true&populate[heroImage]=true",
+    locale,
   );
   if (!res?.data) {
-    const locale = await getLocale();
     return localizeHome(MOCK_HOME, locale);
   }
 
   const a = unwrap(res.data);
-  const home: HomeContent = {
+  return {
     heroGreeting: String(a.heroGreeting ?? MOCK_HOME.heroGreeting),
     heroName: String(a.heroName ?? MOCK_HOME.heroName),
     heroTitle: String(a.heroTitle ?? MOCK_HOME.heroTitle),
@@ -380,8 +393,6 @@ export async function getHomeContent(): Promise<HomeContent> {
     email: normalizePublicEmail(a.email ?? MOCK_HOME.email),
     linkedin: String(a.linkedin ?? MOCK_HOME.linkedin),
   };
-  const locale = await getLocale();
-  return localizeHome(home, locale);
 }
 
 function mergeProjectMedia(base: Project, fromStrapi?: Project): Project {
@@ -395,11 +406,13 @@ function mergeProjectMedia(base: Project, fromStrapi?: Project): Project {
 
 async function enrichProjectsWithStrapiMedia(
   projects: Project[],
+  locale: Locale,
 ): Promise<Project[]> {
   if (!projects.length || !isStrapiConfigured()) return projects;
 
   const res = await fetchStrapi<StrapiListResponse>(
     "/proyectos?populate[coverImage]=true&populate[gallery]=true&pagination[pageSize]=200",
+    locale,
   );
   if (!res?.data?.length) return projects;
 
@@ -436,47 +449,47 @@ function withMockChildren(project: Project): Project {
 }
 
 export async function getProjects(): Promise<Project[]> {
+  const locale = await getLocale();
   const res = await fetchStrapi<StrapiListResponse>(
     "/proyectos?sort=publishedAt:desc&filters[parent][id][$null]=true&populate[coverImage]=true&populate[tags]=true&populate[metrics]=true&pagination[pageSize]=100",
+    locale,
   );
-  const locale = await getLocale();
   if (!res?.data?.length) {
     return localizeProjects(
       sortProjectsByRecency(
-        await enrichProjectsWithStrapiMedia(topLevelMockProjects()),
+        await enrichProjectsWithStrapiMedia(topLevelMockProjects(), locale),
       ),
       locale,
     );
   }
-  return localizeProjects(
-    sortProjectsByRecency(res.data.map(mapProject)),
-    locale,
-  );
+  return sortProjectsByRecency(res.data.map(mapProject));
 }
 
 /** Proyectos marcados para mostrarse en la home. */
 export async function getRecentProjects(
   limit = HOME_PROJECTS_LIMIT,
 ): Promise<Project[]> {
+  const locale = await getLocale();
   const res = await fetchStrapi<StrapiListResponse>(
     `/proyectos?sort=order:asc&filters[showInHome][$eq]=true&populate[coverImage]=true&populate[tags]=true&populate[metrics]=true&pagination[pageSize]=${limit}`,
+    locale,
   );
   if (!res?.data?.length) {
     const mockHome = MOCK_PROJECTS.filter((p) => p.showInHome);
     const fallback = mockHome.length ? mockHome : topLevelMockProjects();
-    const locale = await getLocale();
     return localizeProjects(
       await enrichProjectsWithStrapiMedia(
         sortProjectsByRecency(fallback).slice(0, limit),
+        locale,
       ),
       locale,
     );
   }
-  const locale = await getLocale();
-  return localizeProjects(res.data.map(mapProject), locale);
+  return res.data.map(mapProject);
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  const locale = await getLocale();
   const res = await fetchStrapi<StrapiListResponse>(
     `/proyectos?filters[slug][$eq]=${slug}` +
       "&populate[coverImage]=true" +
@@ -490,17 +503,16 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       "&populate[children][populate][projectSummary]=true" +
       "&populate[parent][fields][0]=slug" +
       "&populate[parent][fields][1]=title",
+    locale,
   );
   if (!res?.data?.length) {
     const mock = MOCK_PROJECTS.find((p) => p.slug === slug);
     if (!mock) return null;
     const withChildren = withMockChildren(mock);
-    const [enriched] = await enrichProjectsWithStrapiMedia([withChildren]);
-    const locale = await getLocale();
+    const [enriched] = await enrichProjectsWithStrapiMedia([withChildren], locale);
     return localizeProject(enriched ?? withChildren, locale);
   }
-  const locale = await getLocale();
-  return localizeProject(mapProject(res.data[0]), locale);
+  return mapProject(res.data[0]);
 }
 
 function sortProjectsByOrder(projects: Project[]): Project[] {
@@ -527,6 +539,7 @@ function buildFlatProjectList(topLevel: Project[]): Project[] {
 }
 
 async function getNavigableProjectsFlat(): Promise<Project[]> {
+  const locale = await getLocale();
   const res = await fetchStrapi<StrapiListResponse>(
     "/proyectos?sort=order:asc&filters[parent][id][$null]=true" +
       "&populate[children][sort]=order:asc" +
@@ -537,6 +550,7 @@ async function getNavigableProjectsFlat(): Promise<Project[]> {
       "&populate[children][populate][tags]=true" +
       "&fields[0]=slug&fields[1]=title&fields[2]=order&fields[3]=company&fields[4]=isParent" +
       "&pagination[pageSize]=100",
+    locale,
   );
 
   if (!res?.data?.length) {
@@ -603,42 +617,43 @@ export async function getProjectNavigation(
 }
 
 export async function getBlogPosts(limit?: number): Promise<BlogPost[]> {
+  const locale = await getLocale();
   const pageSize = limit ?? 100;
   const res = await fetchStrapi<StrapiListResponse>(
     `/blog-posts?sort=publishedAt:desc&populate[coverImage]=true&pagination[pageSize]=${pageSize}`,
+    locale,
   );
-  const locale = await getLocale();
-  const posts = !res?.data?.length
-    ? MOCK_BLOG
-    : res.data.map(mapBlogPost);
-  return posts.map((post) => localizeBlogPost(post, locale));
+  if (!res?.data?.length) {
+    return MOCK_BLOG.map((post) => localizeBlogPost(post, locale));
+  }
+  return res.data.map(mapBlogPost);
 }
 
 export async function getBlogPostBySlug(
   slug: string,
 ): Promise<BlogPost | null> {
+  const locale = await getLocale();
   const res = await fetchStrapi<StrapiListResponse>(
     `/blog-posts?filters[slug][$eq]=${slug}&populate[coverImage]=true`,
+    locale,
   );
   if (!res?.data?.length) {
     const post = MOCK_BLOG.find((p) => p.slug === slug) ?? null;
     if (!post) return null;
-    const locale = await getLocale();
     return localizeBlogPost(post, locale);
   }
-  const locale = await getLocale();
-  return localizeBlogPost(mapBlogPost(res.data[0]), locale);
+  return mapBlogPost(res.data[0]);
 }
 
 export async function getAboutContent(): Promise<AboutContent> {
-  const res = await fetchStrapi<StrapiSingleResponse>("/sobre-mi");
+  const locale = await getLocale();
+  const res = await fetchStrapi<StrapiSingleResponse>("/sobre-mi", locale);
   if (!res?.data) {
-    const locale = await getLocale();
     return localizeAbout(MOCK_ABOUT, locale);
   }
 
   const a = unwrap(res.data);
-  const about: AboutContent = {
+  return {
     title: String(a.title ?? MOCK_ABOUT.title),
     body: String(a.body ?? MOCK_ABOUT.body),
     heroImage: String(a.heroImage ?? MOCK_ABOUT.heroImage),
@@ -646,8 +661,6 @@ export async function getAboutContent(): Promise<AboutContent> {
       ? a.images.map(String)
       : MOCK_ABOUT.images,
   };
-  const locale = await getLocale();
-  return localizeAbout(about, locale);
 }
 
 export async function getAllProjectSlugs(): Promise<string[]> {

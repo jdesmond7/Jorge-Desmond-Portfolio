@@ -10,62 +10,126 @@ export default {
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "isParent": {
       "type": "boolean",
-      "default": false
+      "default": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "coverImage": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "slug": {
       "type": "uid",
       "targetField": "title",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "company": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "year": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "description": {
       "type": "text",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "problem": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "projectSummary": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.project-summary"
+      "component": "shared.project-summary",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "metrics": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.metric"
+      "component": "shared.metric",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "tags": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::tag.tag",
-      "inversedBy": "proyectos"
+      "inversedBy": "proyectos",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "overviewTitle": {
       "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "conditions": {
         "visible": {
           "==": [{ "var": "isParent" }, true]
@@ -74,6 +138,11 @@ export default {
     },
     "overviewBodyText": {
       "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "conditions": {
         "visible": {
           "==": [{ "var": "isParent" }, true]
@@ -82,6 +151,11 @@ export default {
     },
     "challengeTitle": {
       "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "conditions": {
         "visible": {
           "==": [{ "var": "isParent" }, true]
@@ -90,6 +164,11 @@ export default {
     },
     "challengeBodyText": {
       "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "conditions": {
         "visible": {
           "==": [{ "var": "isParent" }, true]
@@ -100,13 +179,23 @@ export default {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::proyecto.proyecto",
-      "mappedBy": "parent"
+      "mappedBy": "parent",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "parent": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::proyecto.proyecto",
       "inversedBy": "children",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
       "conditions": {
         "visible": {
           "==": [{ "var": "isParent" }, false]
@@ -119,6 +208,11 @@ export default {
       "allowedTypes": [
         "images"
       ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
       "conditions": {
         "visible": {
           "==": [{ "var": "isParent" }, false]
@@ -127,6 +221,11 @@ export default {
     },
     "body": {
       "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "conditions": {
         "visible": {
           "==": [{ "var": "isParent" }, false]
@@ -134,19 +233,39 @@ export default {
       }
     },
     "learning": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "featured": {
       "type": "boolean",
-      "default": false
+      "default": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "order": {
       "type": "integer",
-      "default": 0
+      "default": 0,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "showInHome": {
       "type": "boolean",
-      "default": false
+      "default": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   },
   "config": {
