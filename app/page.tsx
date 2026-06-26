@@ -1,5 +1,4 @@
 import { Marquee } from "@/components/ui/Marquee";
-import { CTA } from "@/components/sections/CTA";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { Writing } from "@/components/sections/Writing";
@@ -18,12 +17,6 @@ export default async function Home() {
       <Marquee />
       <Projects projects={projects} className="pt-[120px] md:pt-[240px]" />
       <Writing posts={posts} />
-      <CTA
-        title={home.ctaTitle}
-        subtitle={home.ctaSubtitle}
-        email={home.email}
-        linkedin={home.linkedin}
-      />
     </>
   );
 }

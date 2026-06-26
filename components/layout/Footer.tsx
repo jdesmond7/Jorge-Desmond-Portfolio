@@ -69,13 +69,31 @@ export function Footer({
       <div className="bg-espresso">
         <Container className="py-16 md:py-20">
           <div className="text-center">
-            <h2 className="font-display mb-5 text-[clamp(40px,6vw,56px)] uppercase leading-none tracking-[0.02em] text-white">
+            <h2 className="font-display mb-5 text-[clamp(32px,5.5vw,52px)] leading-[1.05] tracking-[0.01em] text-white">
               {ctaTitle}
             </h2>
-            <p className="mx-auto mb-9 max-w-[440px] text-[17px] font-normal leading-[1.4] text-white/70">
+            <p className="mx-auto mb-9 max-w-[480px] text-[17px] font-normal leading-[1.45] text-white/70">
               {ctaSubtitle}
             </p>
-            <Button href={`mailto:${email}`}>{email} →</Button>
+            <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+              <Button
+                href={`mailto:${email}`}
+                variant="primary"
+                className="w-full sm:w-auto"
+                withUpArrow
+              >
+                Mándame un correo
+              </Button>
+              <Button
+                href={linkedin}
+                variant="outline-light"
+                className="w-full sm:w-auto"
+                external
+                withUpArrow
+              >
+                Conecta en LinkedIn
+              </Button>
+            </div>
           </div>
         </Container>
       </div>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { type ReactNode } from "react";
 import { ArrowRight } from "./ArrowRight";
+import { ArrowUpRight } from "./ArrowUpRight";
 
 type ButtonVariant = "primary" | "ghost" | "outline" | "outline-light";
 
@@ -11,6 +12,7 @@ interface ButtonProps {
   className?: string;
   external?: boolean;
   withArrow?: boolean;
+  withUpArrow?: boolean;
 }
 
 const variants: Record<ButtonVariant, string> = {
@@ -31,15 +33,19 @@ export function Button({
   className = "",
   external,
   withArrow = false,
+  withUpArrow = false,
 }: ButtonProps) {
   const base =
     "inline-flex items-center justify-center gap-2 rounded-[var(--radius-pill)] text-[15px] no-underline min-h-11 px-8 py-3.5";
-  const classes = `${base} ${withArrow ? "group" : ""} ${variants[variant]} ${className}`;
+  const classes = `${base} ${withArrow || withUpArrow ? "group" : ""} ${variants[variant]} ${className}`;
 
   const content = (
     <>
       {children}
       {withArrow ? <ArrowRight className="arrow-slide shrink-0" /> : null}
+      {withUpArrow ? (
+        <ArrowUpRight className="shrink-0 opacity-90 transition-opacity group-hover:opacity-100" />
+      ) : null}
     </>
   );
 

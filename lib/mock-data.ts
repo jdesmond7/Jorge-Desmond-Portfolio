@@ -3,10 +3,10 @@ import type {
   BlogPost,
   Comment,
   HomeContent,
-  Illustration,
   Project,
   SiteSettings,
 } from "./types";
+import { SITE_EMAIL } from "./site";
 
 export const BRANDS = [
   "GroWrk",
@@ -228,16 +228,16 @@ export const MOCK_HOME: HomeContent = {
   aboutTitle: "Mismo proceso.\nDos escenarios.",
   aboutTeaser:
     "Dentro de la pantalla: sistemas de diseño, IA y plataformas que escalan. Fuera de ella: calistenia y fuerza con la misma lógica — proceso, consistencia, iteración. Enseño en el Tec de Monterrey porque el pensamiento sistémico se comparte, no se acumula.",
-  ctaTitle: "¿Construimos algo juntos?",
+  ctaTitle: "Construyamos algo que valga la pena.",
   ctaSubtitle:
-    "Disponible para roles de Product Design, Design Systems y arquitectura de diseño con IA.",
-  email: "jdesmond7@gmail.com",
+    "Si tienes un proyecto donde el diseño y los sistemas importan, quiero saber de él.",
+  email: SITE_EMAIL,
   linkedin: "https://www.linkedin.com/in/jorgedesmond/",
 };
 
 export const MOCK_SITE_SETTINGS: SiteSettings = {
   siteName: "jorge desmond",
-  email: "jdesmond7@gmail.com",
+  email: SITE_EMAIL,
   linkedin: "https://www.linkedin.com/in/jorgedesmond/",
   instagram: "https://www.instagram.com/jorgedesmond/",
   navLinks: [
@@ -265,7 +265,7 @@ en las noches ilustro. manga, tinta, papel. sin ctrl+z.
 
 tengo tres marcas paralelas que estoy construyendo despacio y con intención: desmond.design para consultoría de sistemas, built by des para fitness, y frame & font para educación de diseño — esta última con mi socia y pareja liz.
 
-escríbeme a hola@jorgedesmond.com o encuéntrame en linkedin / instagram.
+escríbeme a ${SITE_EMAIL} o encuéntrame en linkedin / instagram.
 
 con gusto, jorge`,
 };
@@ -318,28 +318,5 @@ export const MOCK_COMMENTS: Array<Comment & { blogPostSlug: string }> = [
     lastActivityAt: "2026-06-20T14:30:00.000Z",
     replies: [],
     parentId: "mock-comment-1",
-  },
-];
-
-export const MOCK_ILLUSTRATIONS: Illustration[] = [
-  {
-    id: "1",
-    slug: "disciplina",
-    title: "Disciplina",
-    description: "Serie personal sobre proceso y constancia.",
-    image: "/images/hero.png",
-    year: "2025",
-    tags: ["Editorial", "Personal"],
-    order: 1,
-  },
-  {
-    id: "2",
-    slug: "sistemas",
-    title: "Sistemas",
-    description: "Exploración visual de patrones y modularidad.",
-    image: "/images/hero.png",
-    year: "2024",
-    tags: ["Conceptual"],
-    order: 2,
   },
 ];

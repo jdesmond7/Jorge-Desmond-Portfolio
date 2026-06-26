@@ -316,10 +316,10 @@ async function seedContent(strapi) {
       aboutTitle: "Mismo proceso.\nDos escenarios.",
       aboutTeaser:
         "Dentro de la pantalla: sistemas de diseño, IA y plataformas que escalan. Fuera de ella: calistenia y fuerza con la misma lógica — proceso, consistencia, iteración. Enseño en el Tec de Monterrey porque el pensamiento sistémico se comparte, no se acumula.",
-      ctaTitle: "¿Construimos algo juntos?",
+      ctaTitle: "Construyamos algo que valga la pena.",
       ctaSubtitle:
-        "Disponible para roles de Product Design, Design Systems y arquitectura de diseño con IA.",
-      email: "jdesmond7@gmail.com",
+        "Si tienes un proyecto donde el diseño y los sistemas importan, quiero saber de él.",
+      email: "hola@jorgedesmond.com",
       linkedin: "https://www.linkedin.com/in/jorgedesmond/",
     },
     status: "published",
@@ -338,7 +338,7 @@ async function seedContent(strapi) {
   await strapi.documents("api::site-setting.site-setting").create({
     data: {
       siteName: "jorge desmond",
-      email: "jdesmond7@gmail.com",
+      email: "hola@jorgedesmond.com",
       linkedin: "https://www.linkedin.com/in/jorgedesmond/",
       instagram: "https://www.instagram.com/jorgedesmond/",
       footerText: "monterrey, méxico — diseñado como un sistema",
@@ -457,6 +457,67 @@ async function backfillMetricsAndTags(strapi) {
   }
 }
 
+const LEGACY_CONTACT_EMAIL = "jdesmond7@gmail.com";
+const PUBLIC_CONTACT_EMAIL = "hola@jorgedesmond.com";
+
+async function migrateContactEmail(strapi) {
+  for (const uid of ["api::home.home", "api::site-setting.site-setting"] as const) {
+    try {
+      const doc = await strapi.documents(uid).findFirst({ status: "draft" });
+      if (!doc) continue;
+
+      const email = String((doc as { email?: string }).email ?? "").toLowerCase();
+      if (email !== LEGACY_CONTACT_EMAIL) continue;
+
+      await strapi.documents(uid).update({
+        documentId: doc.documentId,
+        data: { email: PUBLIC_CONTACT_EMAIL },
+      });
+      await strapi.documents(uid).publish({ documentId: doc.documentId });
+      strapi.log.info(`Contact email migrated to ${PUBLIC_CONTACT_EMAIL} (${uid}).`);
+    } catch (err) {
+      strapi.log.error(
+        `Contact email migration failed for ${uid}: ${(err as Error)?.message ?? err}`,
+      );
+    }
+  }
+}
+
+const LEGACY_CTA_TITLE = "¿Construimos algo juntos?";
+const LEGACY_CTA_SUBTITLE =
+  "Disponible para roles de Product Design, Design Systems y arquitectura de diseño con IA.";
+const CTA_TITLE = "Construyamos algo que valga la pena.";
+const CTA_SUBTITLE =
+  "Si tienes un proyecto donde el diseño y los sistemas importan, quiero saber de él.";
+
+async function migrateHomeCtaCopy(strapi) {
+  try {
+    const doc = await strapi.documents("api::home.home").findFirst({ status: "draft" });
+    if (!doc) return;
+
+    const title = String((doc as { ctaTitle?: string }).ctaTitle ?? "");
+    const subtitle = String((doc as { ctaSubtitle?: string }).ctaSubtitle ?? "");
+    const needsTitle = title === LEGACY_CTA_TITLE || !title.trim();
+    const needsSubtitle = subtitle === LEGACY_CTA_SUBTITLE || !subtitle.trim();
+
+    if (!needsTitle && !needsSubtitle) return;
+
+    await strapi.documents("api::home.home").update({
+      documentId: doc.documentId,
+      data: {
+        ...(needsTitle ? { ctaTitle: CTA_TITLE } : {}),
+        ...(needsSubtitle ? { ctaSubtitle: CTA_SUBTITLE } : {}),
+      },
+    });
+    await strapi.documents("api::home.home").publish({ documentId: doc.documentId });
+    strapi.log.info("Home CTA copy migrated to latest version.");
+  } catch (err) {
+    strapi.log.error(
+      `Home CTA migration failed: ${(err as Error)?.message ?? err}`,
+    );
+  }
+}
+
 export default {
   register() {},
 
@@ -476,6 +537,8 @@ export default {
     await migrateProyectoProjectSummary(strapi);
     await configureProyectoCaseStudyLayout(strapi);
     await configureProyectoSummaryLayout(strapi);
+    await migrateContactEmail(strapi);
+    await migrateHomeCtaCopy(strapi);
     logUploadStorageDiagnostics(strapi);
 
     const CONTENT_TYPES_THAT_TRIGGER_DEPLOY = new Set([

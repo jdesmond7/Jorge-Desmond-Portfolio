@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, JetBrains_Mono, Montserrat } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
+import { getSiteUrl } from "@/lib/site";
 import { getHomeContent, getSiteSettings } from "@/lib/strapi";
 import "./globals.css";
 
@@ -30,9 +31,7 @@ export const metadata: Metadata = {
   },
   description:
     "Diseño sistemas que convierten complejidad operativa en productos que escalan. Design Systems, Product Design y arquitectura de diseño con IA.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: new URL(getSiteUrl()),
   openGraph: {
     type: "website",
     locale: "es_MX",
