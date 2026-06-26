@@ -133,16 +133,23 @@ export function Nav({
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
+  const formattedName = formatSiteName(siteName);
+  const mobileMenuActive = menuMounted;
 
   return (
     <>
       <div
-        className="pointer-events-none fixed left-1/2 z-50 w-[min(94%,1120px)] -translate-x-1/2"
+        className={`pointer-events-none fixed left-1/2 z-50 w-[min(94%,1120px)] -translate-x-1/2 transition-opacity duration-300 ${
+          mobileMenuActive ? "max-md:invisible max-md:opacity-0" : ""
+        }`}
         style={{ top: "max(20px, env(safe-area-inset-top))" }}
+        aria-hidden={mobileMenuActive}
       >
         <nav
           className={`grid grid-cols-[1fr_auto] items-center rounded-[var(--radius-card)] bg-carbon px-6 py-4 md:grid-cols-[1fr_auto_1fr] ${
-            navVisible ? "pointer-events-auto" : "pointer-events-none"
+            navVisible && !mobileMenuActive
+              ? "pointer-events-auto"
+              : "pointer-events-none"
           }`}
           style={{
             transform: navVisible
@@ -162,7 +169,7 @@ export function Nav({
             }`}
             onClick={closeMenu}
           >
-            {formatSiteName(siteName)}
+            {formattedName}
           </Link>
 
           <div className="hidden items-center gap-1 justify-self-center md:flex">
@@ -199,25 +206,25 @@ export function Nav({
           <button
             type="button"
             className="col-start-2 flex h-11 w-11 flex-col items-center justify-center gap-1.5 justify-self-end md:hidden"
-            aria-label={menuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
+            aria-label={dict.nav.openMenu}
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen(true)}
           >
-            <span
-              className={`block h-0.5 w-5 bg-white transition-transform duration-300 ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
-            />
-            <span
-              className={`block h-0.5 w-5 bg-white transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block h-0.5 w-5 bg-white transition-transform duration-300 ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
-            />
+            <span className="block h-0.5 w-5 bg-white" />
+            <span className="block h-0.5 w-5 bg-white" />
+            <span className="block h-0.5 w-5 bg-white" />
           </button>
         </nav>
       </div>
 
       {menuMounted && (
-        <div className="fixed inset-0 z-40 md:hidden" aria-hidden={!menuOpen}>
+        <div
+          className="fixed inset-0 z-50 md:hidden"
+          aria-hidden={!menuOpen}
+          role="dialog"
+          aria-modal="true"
+          aria-label={dict.nav.openMenu}
+        >
           <button
             type="button"
             className="absolute inset-0 bg-black/40 transition-opacity duration-300"
@@ -228,12 +235,43 @@ export function Nav({
           <div
             className="absolute inset-y-0 right-0 flex w-[min(88vw,360px)] flex-col bg-carbon px-6 shadow-2xl transition-transform duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
-              paddingTop:
-                "max(7rem, calc(env(safe-area-inset-top) + 6rem))",
+              paddingTop: "max(1.25rem, env(safe-area-inset-top))",
               transform: menuVisible ? "translateX(0)" : "translateX(100%)",
             }}
           >
-            <div className="flex flex-col gap-6">
+            <div className="mb-8 flex items-center justify-between gap-4 pt-2">
+              <Link
+                href="/"
+                className="text-[15px] font-bold tracking-[-0.009em] text-white no-underline"
+                onClick={closeMenu}
+              >
+                {formattedName}
+              </Link>
+              <button
+                type="button"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] text-white transition-colors hover:bg-white/10"
+                aria-label={dict.nav.closeMenu}
+                onClick={closeMenu}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex flex-1 flex-col gap-6 overflow-y-auto pb-8">
               {navLinks.map((item) => (
                 <Link
                   key={item.href}
@@ -263,13 +301,13 @@ export function Nav({
                 {dict.nav.linkedin}
                 <ArrowUpRight className="h-5 w-5" />
               </a>
-              <LocaleSwitcher className="self-start" />
+              <LocaleSwitcher fullWidth className="w-full" />
               <a
                 href={`mailto:${email}`}
-                className="pill-cta mt-4 inline-flex min-h-11 items-center justify-center rounded-[var(--radius-pill)] bg-coral px-8 py-4 text-[15px] font-semibold tracking-[-0.009em] text-white no-underline"
+                className="pill-cta mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-[var(--radius-pill)] bg-coral px-8 py-4 text-[15px] font-semibold tracking-[-0.009em] text-white no-underline"
                 onClick={closeMenu}
               >
-                {dict.nav.letsTalk}
+                {dict.footer.emailCta}
               </a>
             </div>
           </div>

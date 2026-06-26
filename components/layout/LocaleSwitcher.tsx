@@ -8,11 +8,13 @@ import type { Locale } from "@/lib/i18n/types";
 interface LocaleSwitcherProps {
   variant?: "dark" | "light";
   className?: string;
+  fullWidth?: boolean;
 }
 
 export function LocaleSwitcher({
   variant = "dark",
   className = "",
+  fullWidth = false,
 }: LocaleSwitcherProps) {
   const { locale, dict } = useI18n();
   const router = useRouter();
@@ -70,10 +72,12 @@ export function LocaleSwitcher({
   ];
 
   return (
-    <div ref={rootRef} className={`relative ${className}`}>
+    <div ref={rootRef} className={`relative ${fullWidth ? "w-full" : ""} ${className}`}>
       <button
         type="button"
-        className={`inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-pill)] border px-4 py-2 text-[13px] font-normal tracking-[-0.005em] transition-colors ${buttonClass}`}
+        className={`inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-pill)] border px-4 py-2 text-[13px] font-normal tracking-[-0.005em] transition-colors ${buttonClass} ${
+          fullWidth ? "w-full justify-between" : ""
+        }`}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={dict.nav.language}
@@ -104,7 +108,9 @@ export function LocaleSwitcher({
         <ul
           role="listbox"
           aria-label={dict.nav.language}
-          className={`absolute right-0 z-50 mt-2 min-w-[148px] overflow-hidden rounded-[14px] border p-1 shadow-lg ${menuClass}`}
+          className={`absolute z-50 mt-2 overflow-hidden rounded-[14px] border p-1 shadow-lg ${menuClass} ${
+            fullWidth ? "left-0 right-0" : "right-0 min-w-[148px]"
+          }`}
         >
           {options.map((option) => (
             <li key={option.value} role="option" aria-selected={locale === option.value}>
