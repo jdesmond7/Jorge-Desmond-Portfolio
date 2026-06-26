@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useI18n } from "@/components/i18n/I18nProvider";
+import type { Dictionary } from "@/lib/i18n";
 import type { Comment } from "@/lib/types";
+import { localeToDateLocale } from "@/lib/i18n/locale-utils";
 import { CommentForm } from "./CommentForm";
 
 interface CommentItemProps {
@@ -12,17 +15,21 @@ interface CommentItemProps {
   onRefresh: () => void;
 }
 
-function formatRelativeTime(dateStr: string): string {
+function formatRelativeTime(
+  dateStr: string,
+  locale: string,
+  dict: Dictionary,
+): string {
   const date = new Date(dateStr);
   const diffMs = Date.now() - date.getTime();
   const minutes = Math.floor(diffMs / 60000);
-  if (minutes < 1) return "hace un momento";
-  if (minutes < 60) return `hace ${minutes} min`;
+  if (minutes < 1) return dict.comments.time.justNow;
+  if (minutes < 60) return dict.comments.time.minutes(minutes);
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `hace ${hours} h`;
+  if (hours < 24) return dict.comments.time.hours(hours);
   const days = Math.floor(hours / 24);
-  if (days < 30) return `hace ${days} día${days === 1 ? "" : "s"}`;
-  return date.toLocaleDateString("es-MX", {
+  if (days < 30) return dict.comments.time.days(days);
+  return date.toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -53,6 +60,8 @@ export function CommentItem({
   postId,
   onRefresh,
 }: CommentItemProps) {
+  const { dict, locale } = useI18n();
+  const dateLocale = localeToDateLocale(locale);
   const [replyOpen, setReplyOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [voteError, setVoteError] = useState<string | null>(null);
@@ -63,12 +72,12 @@ export function CommentItem({
   });
 
   const score = comment.upvotes - comment.downvotes;
-  const displayName = comment.authorName?.trim() || "Anónimo";
+  const displayName = comment.authorName?.trim() || dict.comments.anonymous;
   const hasReplies = comment.replies.length > 0;
 
   async function handleVote(direction: "up" | "down") {
     if (localVote) {
-      setVoteError("Ya votaste este comentario.");
+      setVoteError(dict.comments.errors.alreadyVoted);
       return;
     }
 
@@ -81,14 +90,14 @@ export function CommentItem({
       });
       if (!res.ok) {
         const data = (await res.json()) as { error?: string };
-        setVoteError(data.error ?? "No se pudo registrar el voto.");
+        setVoteError(data.error ?? dict.comments.errors.voteFailed);
         return;
       }
       localStorage.setItem(getVoteStorageKey(comment.id), direction);
       setLocalVote(direction);
       onRefresh();
     } catch {
-      setVoteError("No se pudo registrar el voto.");
+      setVoteError(dict.comments.errors.voteFailed);
     }
   }
 
@@ -99,13 +108,13 @@ export function CommentItem({
       });
       if (!res.ok) {
         const data = (await res.json()) as { error?: string };
-        alert(data.error ?? "No se pudo reportar el comentario.");
+        alert(data.error ?? dict.comments.errors.reportFailed);
         return;
       }
-      alert("Comentario reportado. Gracias.");
+      alert(dict.comments.reported);
       onRefresh();
     } catch {
-      alert("No se pudo reportar el comentario.");
+      alert(dict.comments.errors.reportFailed);
     }
   }
 
@@ -124,7 +133,7 @@ export function CommentItem({
                 dateTime={comment.createdAt}
                 className="mono text-[11px] tracking-[-0.006em] text-ash"
               >
-                {formatRelativeTime(comment.createdAt)}
+                {formatRelativeTime(comment.createdAt, dateLocale, dict)}
               </time>
             </div>
 
@@ -134,7 +143,7 @@ export function CommentItem({
                 onClick={() => handleVote("up")}
                 disabled={Boolean(localVote)}
                 className="rounded px-1.5 py-0.5 transition-colors hover:bg-fog hover:text-carbon disabled:cursor-not-allowed disabled:opacity-50"
-                aria-label="Voto positivo"
+                aria-label={dict.comments.upvote}
               >
                 ▲
               </button>
@@ -154,7 +163,7 @@ export function CommentItem({
                 onClick={() => handleVote("down")}
                 disabled={Boolean(localVote)}
                 className="rounded px-1.5 py-0.5 transition-colors hover:bg-fog hover:text-carbon disabled:cursor-not-allowed disabled:opacity-50"
-                aria-label="Voto negativo"
+                aria-label={dict.comments.downvote}
               >
                 ▼
               </button>
@@ -175,14 +184,14 @@ export function CommentItem({
               onClick={() => setReplyOpen((open) => !open)}
               className="rounded-[var(--radius-pill)] border border-mist bg-fog px-4 py-1.5 text-[13px] font-medium text-carbon transition-colors hover:bg-mist/60"
             >
-              Responder
+              {dict.comments.reply}
             </button>
             <button
               type="button"
               onClick={handleReport}
               className="text-[13px] text-zinc transition-colors hover:text-carbon"
             >
-              Reportar
+              {dict.comments.report}
             </button>
           </div>
 
@@ -192,8 +201,8 @@ export function CommentItem({
                 postSlug={postSlug}
                 postId={postId}
                 parentId={comment.id}
-                heading="Responder"
-                submitLabel="Publicar respuesta"
+                heading={dict.comments.replyHeading}
+                submitLabel={dict.comments.replySubmit}
                 onSuccess={() => {
                   setReplyOpen(false);
                   onRefresh();
@@ -212,7 +221,9 @@ export function CommentItem({
               >
                 {collapsed ? "▶" : "▼"}{" "}
                 {comment.replies.length}{" "}
-                {comment.replies.length === 1 ? "respuesta" : "respuestas"}
+                {comment.replies.length === 1
+                  ? dict.comments.replySingular
+                  : dict.comments.replyPlural}
               </button>
               {!collapsed ? (
                 <div className="mt-2 space-y-4">

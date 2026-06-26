@@ -1,31 +1,39 @@
 import { NextResponse } from "next/server";
 import { reportComment } from "@/lib/comments";
-import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import {
+  enforceRateLimit,
+  jsonError,
+  type IdRouteContext,
+} from "@/lib/api/route-utils";
+import { getClientIp } from "@/lib/rate-limit";
 
 const REPORT_RATE_LIMIT = 10;
 const REPORT_WINDOW_MS = 60 * 60 * 1000;
+const REPORT_PER_COMMENT_WINDOW_MS = 24 * 60 * 60 * 1000;
 
-interface RouteContext {
-  params: Promise<{ id: string }>;
-}
-
-export async function POST(request: Request, context: RouteContext) {
+export async function POST(_request: Request, context: IdRouteContext) {
   const { id } = await context.params;
-  const ip = getClientIp(request);
+  const ip = getClientIp(_request);
 
-  if (!checkRateLimit(`report:${ip}`, REPORT_RATE_LIMIT, REPORT_WINDOW_MS)) {
-    return NextResponse.json(
-      { error: "Demasiados reportes. Intenta más tarde." },
-      { status: 429 },
-    );
-  }
+  const perCommentLimit = enforceRateLimit(
+    `report:${ip}:${id}`,
+    1,
+    REPORT_PER_COMMENT_WINDOW_MS,
+    "Ya reportaste este comentario.",
+  );
+  if (perCommentLimit) return perCommentLimit;
+
+  const globalLimit = enforceRateLimit(
+    `report:${ip}`,
+    REPORT_RATE_LIMIT,
+    REPORT_WINDOW_MS,
+    "Demasiados reportes. Intenta más tarde.",
+  );
+  if (globalLimit) return globalLimit;
 
   const comment = await reportComment(id);
   if (!comment) {
-    return NextResponse.json(
-      { error: "No se pudo reportar el comentario." },
-      { status: 404 },
-    );
+    return jsonError("No se pudo reportar el comentario.", 404);
   }
 
   return NextResponse.json({ comment });

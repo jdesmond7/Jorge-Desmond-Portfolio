@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useI18n } from "@/components/i18n/I18nProvider";
 
 export interface DecisionCardProps {
   number: string;
@@ -42,6 +43,7 @@ export function DecisionCard({
   result,
   defaultOpen = false,
 }: DecisionCardProps) {
+  const { dict } = useI18n();
   const [open, setOpen] = useState(defaultOpen);
 
   return (
@@ -73,7 +75,7 @@ export function DecisionCard({
           {context && (
             <div className="mb-4">
               <div className="mono mb-1.5 text-[11px] uppercase tracking-[0.12em] text-ash">
-                Contexto
+                {dict.projects.decision.context}
               </div>
               <p className={bodyTextClass}>{context}</p>
             </div>
@@ -82,7 +84,7 @@ export function DecisionCard({
           {decision && (
             <div className="mb-4">
               <div className="mono mb-1.5 text-[11px] uppercase tracking-[0.12em] text-ash">
-                La decisión
+                {dict.projects.decision.decision}
               </div>
               <p className={bodyTextClass}>{decision}</p>
             </div>
@@ -91,7 +93,7 @@ export function DecisionCard({
           {result && (
             <div className="rounded-lg bg-fog px-4 py-3.5">
               <div className="mono mb-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-coral">
-                Resultado
+                {dict.projects.decision.outcome}
               </div>
               <p className={bodyTextClass}>{result}</p>
             </div>

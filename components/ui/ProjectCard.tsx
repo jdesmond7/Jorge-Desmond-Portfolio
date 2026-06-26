@@ -3,6 +3,8 @@ import { ArrowRight } from "./ArrowRight";
 import { CmsImage } from "./CmsImage";
 import { Reveal } from "./Reveal";
 import { Tag } from "./Tag";
+import { getDictionary } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n/locale";
 import type { Project } from "@/lib/types";
 
 const PLACEHOLDER_GRADIENTS = [
@@ -18,11 +20,13 @@ interface ProjectCardProps {
   imageSide?: "alternate" | "left" | "right";
 }
 
-export function ProjectCard({
+export async function ProjectCard({
   project,
   index,
   imageSide = "alternate",
 }: ProjectCardProps) {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
   const imageFirst =
     imageSide === "alternate" ? index % 2 === 0 : imageSide === "left";
   const placeholderClass =
@@ -83,10 +87,10 @@ export function ProjectCard({
 
             <Link
               href={`/proyectos/${project.slug}`}
-              aria-label={`Leer caso de uso: ${project.title}`}
+              aria-label={dict.projects.readCaseStudyAria(project.title)}
               className="leer-link inline-flex items-center gap-1.5 self-start text-[14px] font-semibold tracking-[-0.005em] text-carbon no-underline transition-colors before:absolute before:inset-0 before:content-[''] hover:text-coral"
             >
-              Leer Caso de Uso
+              {dict.projects.readCaseStudy}
               <ArrowRight className="arrow-slide h-4 w-4 shrink-0" />
             </Link>
           </div>

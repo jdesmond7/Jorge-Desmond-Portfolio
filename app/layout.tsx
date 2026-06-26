@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, JetBrains_Mono, Montserrat } from "next/font/google";
+import { I18nProvider } from "@/components/i18n/I18nProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
+import { getDictionary } from "@/lib/i18n";
+import { getLocale, localeToOpenGraph } from "@/lib/i18n/locale";
 import { getSiteUrl } from "@/lib/site";
 import { getHomeContent, getSiteSettings } from "@/lib/strapi";
 import "./globals.css";
@@ -24,26 +27,32 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Jorge Desmond — Senior Product Designer",
-    template: "%s | Jorge Desmond",
-  },
-  description:
-    "Diseño sistemas que convierten complejidad operativa en productos que escalan. Design Systems, Product Design y arquitectura de diseño con IA.",
-  metadataBase: new URL(getSiteUrl()),
-  openGraph: {
-    type: "website",
-    locale: "es_MX",
-    siteName: "Jorge Desmond",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+
+  return {
+    title: {
+      default: `${dict.meta.siteName} — Senior Product Designer`,
+      template: `%s | ${dict.meta.siteName}`,
+    },
+    description: dict.meta.defaultDescription,
+    metadataBase: new URL(getSiteUrl()),
+    openGraph: {
+      type: "website",
+      locale: localeToOpenGraph(locale),
+      siteName: dict.meta.siteName,
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
   const [settings, home] = await Promise.all([
     getSiteSettings(),
     getHomeContent(),
@@ -51,26 +60,29 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="es"
+      lang={locale}
       className={`${bebasNeue.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-body">
-        <Nav
-          siteName={settings.siteName}
-          navLinks={settings.navLinks}
-          email={settings.email}
-          linkedin={settings.linkedin}
-        />
-        <main className="flex-1">{children}</main>
-        <Footer
-          navLinks={settings.navLinks}
-          email={settings.email}
-          linkedin={settings.linkedin}
-          instagram={settings.instagram}
-          footerText={settings.footerText}
-          ctaTitle={home.ctaTitle}
-          ctaSubtitle={home.ctaSubtitle}
-        />
+        <I18nProvider locale={locale}>
+          <Nav
+            siteName={settings.siteName}
+            navLinks={settings.navLinks}
+            email={settings.email}
+            linkedin={settings.linkedin}
+          />
+          <main className="flex-1">{children}</main>
+          <Footer
+            navLinks={settings.navLinks}
+            email={settings.email}
+            linkedin={settings.linkedin}
+            instagram={settings.instagram}
+            footerText={settings.footerText}
+            ctaTitle={home.ctaTitle}
+            ctaSubtitle={home.ctaSubtitle}
+            dict={dict}
+          />
+        </I18nProvider>
       </body>
     </html>
   );

@@ -1,10 +1,13 @@
-import { MOCK_COMMENTS } from "./mock-data";
+import "server-only";
+
+import { MOCK_BLOG, MOCK_COMMENTS } from "./mock-data";
 import type { Comment } from "./types";
 
 const STRAPI_URL = process.env.STRAPI_URL?.replace(/\/$/, "");
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
 const MAX_BODY_LENGTH = 2000;
+const MAX_AUTHOR_NAME_LENGTH = 80;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type StrapiRecord = Record<string, unknown>;
@@ -108,6 +111,17 @@ export function validateCommentBody(body: unknown): string | null {
   return null;
 }
 
+export function validateAuthorName(name: unknown): string | null {
+  if (name === undefined || name === null || name === "") return null;
+  if (typeof name !== "string") return "Nombre inválido.";
+  const trimmed = name.trim();
+  if (!trimmed) return null;
+  if (trimmed.length > MAX_AUTHOR_NAME_LENGTH) {
+    return `El nombre no puede superar ${MAX_AUTHOR_NAME_LENGTH} caracteres.`;
+  }
+  return null;
+}
+
 export function validateAuthorEmail(email: unknown): string | null {
   if (email === undefined || email === null || email === "") return null;
   if (typeof email !== "string") return "Correo inválido.";
@@ -117,14 +131,7 @@ export function validateAuthorEmail(email: unknown): string | null {
   return null;
 }
 
-export function countComments(comments: Comment[]): number {
-  return comments.reduce(
-    (total, comment) => total + 1 + countComments(comment.replies),
-    0,
-  );
-}
-
-export function buildCommentTree(flat: Comment[]): Comment[] {
+function buildCommentTree(flat: Comment[]): Comment[] {
   const byId = new Map<string, Comment>();
   const roots: Comment[] = [];
 
@@ -157,6 +164,55 @@ function sortCommentsByDate(comments: Comment[]): Comment[] {
   }));
 }
 
+async function resolveBlogPostId(slug: string): Promise<string | null> {
+  if (!isStrapiConfigured()) {
+    return MOCK_BLOG.find((post) => post.slug === slug)?.id ?? null;
+  }
+
+  const res = await fetchStrapiComments<StrapiListResponse>(
+    `/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&fields[0]=slug&pagination[pageSize]=1`,
+  );
+
+  const record = res?.data?.[0];
+  if (!record) return null;
+
+  const id = String(record.documentId ?? record.id ?? "");
+  return id || null;
+}
+
+export async function validateCommentTarget(
+  postSlug: string,
+  postId: string,
+  parentId?: string,
+): Promise<string | null> {
+  const resolvedPostId = await resolveBlogPostId(postSlug);
+  if (!resolvedPostId) return "Artículo no encontrado.";
+  if (resolvedPostId !== postId) return "Datos del artículo inválidos.";
+
+  if (!parentId) return null;
+
+  if (!isStrapiConfigured()) {
+    const parent = MOCK_COMMENTS.find((item) => item.id === parentId);
+    if (!parent) return "Comentario padre no encontrado.";
+    if (parent.blogPostSlug !== postSlug) {
+      return "El comentario padre no pertenece a este artículo.";
+    }
+    return null;
+  }
+
+  const parentRes = await fetchStrapiComments<StrapiSingleResponse>(
+    `/comments/${parentId}?populate[blogPost]=true&status=published`,
+  );
+  if (!parentRes?.data) return "Comentario padre no encontrado.";
+
+  const parent = mapComment(parentRes.data);
+  if (parent.blogPostId !== postId) {
+    return "El comentario padre no pertenece a este artículo.";
+  }
+
+  return null;
+}
+
 export async function getCommentsByPostSlug(slug: string): Promise<Comment[]> {
   if (!isStrapiConfigured()) {
     const flat = MOCK_COMMENTS.filter((comment) => comment.blogPostSlug === slug);
@@ -180,7 +236,7 @@ function stripMockSlug(comment: Comment & { blogPostSlug?: string }): Comment {
   return copy;
 }
 
-export interface CreateCommentInput {
+interface CreateCommentInput {
   postSlug: string;
   postId: string;
   body: string;
@@ -245,16 +301,9 @@ export async function createComment(
   if (!res?.data) return null;
 
   if (input.parentId) {
-    const parentRes = await fetchStrapiComments<StrapiSingleResponse>(
-      `/comments/${input.parentId}?status=published`,
-    );
-    if (parentRes?.data) {
-      const parent = mapComment(parentRes.data);
-      await mutateStrapi(`/comments/${input.parentId}`, "PUT", {
-        data: { lastActivityAt: now },
-      });
-      void parent;
-    }
+    await mutateStrapi(`/comments/${input.parentId}`, "PUT", {
+      data: { lastActivityAt: now },
+    });
   }
 
   return mapComment(res.data);
@@ -310,19 +359,6 @@ export async function reportComment(id: string): Promise<Comment | null> {
     `/comments/${id}`,
     "PUT",
     { data: { reportCount: mapped.reportCount + 1 } },
-  );
-  if (!res?.data) return null;
-  return mapComment(res.data);
-}
-
-export async function getCommentById(id: string): Promise<Comment | null> {
-  if (!isStrapiConfigured()) {
-    const comment = MOCK_COMMENTS.find((item) => item.id === id);
-    return comment ? stripMockSlug(comment) : null;
-  }
-
-  const res = await fetchStrapiComments<StrapiSingleResponse>(
-    `/comments/${id}?status=published`,
   );
   if (!res?.data) return null;
   return mapComment(res.data);

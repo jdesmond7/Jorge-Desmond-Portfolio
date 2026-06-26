@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/components/i18n/I18nProvider";
 import { Button } from "@/components/ui/Button";
 import type { HomeContent } from "@/lib/types";
 
@@ -30,6 +31,7 @@ function clamp(value: number, min: number, max: number) {
 }
 
 export function Hero({ content }: HeroProps) {
+  const { dict } = useI18n();
   const nameLines = content.heroName.split("\n");
   const titleLines = content.heroTitle.replace(/\\n/g, "\n").split("\n");
 
@@ -189,10 +191,10 @@ export function Hero({ content }: HeroProps) {
               </ul>
               <div className="flex flex-col gap-3 max-md:mt-[280px] sm:flex-row sm:flex-wrap">
                 <Button href="/proyectos" variant="primary" withArrow>
-                  Ver Casos de Estudio
+                  {dict.hero.viewProjects}
                 </Button>
                 <Button href="/resume" variant="outline-light" withArrow>
-                  Ver Resume
+                  {dict.hero.viewResume}
                 </Button>
               </div>
             </div>
@@ -205,7 +207,7 @@ export function Hero({ content }: HeroProps) {
           className="pointer-events-none absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70"
           style={{ opacity: introOpacity }}
         >
-          Scroll
+          {dict.hero.scroll}
         </div>
       </div>
     </section>

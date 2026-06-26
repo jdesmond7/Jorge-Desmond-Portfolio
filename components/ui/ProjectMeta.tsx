@@ -1,3 +1,6 @@
+import { getDictionary } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n/locale";
+
 interface ProjectMetaProps {
   duration?: string;
   roles?: string;
@@ -5,18 +8,20 @@ interface ProjectMetaProps {
   tools?: string;
 }
 
-export function ProjectMeta({
+export async function ProjectMeta({
   duration,
   roles,
   team,
   tools,
 }: ProjectMetaProps) {
-  const items = [
-    duration ? { label: "Duración", value: duration } : null,
-    roles ? { label: "Rol", value: roles } : null,
-    team ? { label: "Equipo", value: team } : null,
-    tools ? { label: "Herramientas", value: tools } : null,
-  ].filter((item): item is { label: string; value: string } => item !== null);
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+
+  const items: { label: string; value: string }[] = [];
+  if (duration) items.push({ label: dict.projects.duration, value: duration });
+  if (roles) items.push({ label: dict.projects.role, value: roles });
+  if (team) items.push({ label: dict.projects.team, value: team });
+  if (tools) items.push({ label: dict.projects.tools, value: tools });
 
   if (!items.length) return null;
 

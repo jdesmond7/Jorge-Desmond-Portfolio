@@ -11,6 +11,8 @@ import { ProjectMetrics } from "@/components/ui/ProjectMetrics";
 import { ProjectNav } from "@/components/ui/ProjectNav";
 import { Tag } from "@/components/ui/Tag";
 import { ZoomableImage } from "@/components/ui/ZoomableImage";
+import { getDictionary } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n/locale";
 import {
   getAllProjectSlugs,
   getProjectBySlug,
@@ -28,8 +30,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
   const project = await getProjectBySlug(slug);
-  if (!project) return { title: "Proyecto no encontrado" };
+  if (!project) return { title: dict.projects.notFound };
 
   return {
     title: project.title,
@@ -39,6 +43,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
   const [project, navigation] = await Promise.all([
     getProjectBySlug(slug),
     getProjectNavigation(slug),
@@ -92,7 +98,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <>
             <CaseStudySection
               number="01"
-              label="Overview"
+              label={dict.projects.overview}
               title={project.overviewTitle}
               body={project.overviewBodyText}
             />
@@ -101,7 +107,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
             <CaseStudySection
               number="02"
-              label="Challenge"
+              label={dict.projects.challenge}
               title={project.challengeTitle}
               body={project.challengeBodyText}
             />
@@ -109,7 +115,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             {children.length > 0 && (
               <section className="mt-16 border-t border-mist pt-16 pb-4">
                 <h2 className="font-body mb-10 text-[clamp(24px,3.5vw,34px)] font-bold leading-[1.15] tracking-[-0.015em] text-carbon">
-                  Iniciativas Clave
+                  {dict.projects.keyInitiatives}
                 </h2>
                 <div className="flex flex-col gap-16 md:gap-24">
                   {children.map((child, index) => (
@@ -135,7 +141,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                     <ZoomableImage
                       key={src}
                       src={src}
-                      alt={`${project.title} — imagen ${index + 1}`}
+                      alt={dict.projects.imageAlt(project.title, index + 1)}
                       fill
                       className="object-cover"
                       sizes="(min-width: 640px) 50vw, 100vw"

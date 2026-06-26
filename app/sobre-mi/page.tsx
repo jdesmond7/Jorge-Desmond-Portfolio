@@ -2,36 +2,50 @@ import type { Metadata } from "next";
 import { CmsImage } from "@/components/ui/CmsImage";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { getDictionary } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n/locale";
 import { getAboutContent, getSiteSettings } from "@/lib/strapi";
 
-export const metadata: Metadata = {
-  title: "Sobre mí",
-  description:
-    "Jorge Desmond — product designer en Monterrey. Sistemas de diseño, calistenia, ilustración y tres marcas en construcción.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
 
-const CONTACT_EMAIL = "hola@jorgedesmond.com";
+  return {
+    title: dict.about.title,
+    description: dict.about.description,
+  };
+}
 
 function AboutParagraph({
   text,
+  contactEmail,
   linkedin,
   instagram,
+  dict,
 }: {
   text: string;
+  contactEmail: string;
   linkedin: string;
   instagram?: string;
+  dict: ReturnType<typeof getDictionary>;
 }) {
-  if (text.startsWith("escríbeme")) {
+  const lower = text.toLowerCase();
+  const isContact =
+    lower.startsWith("escríbeme") || lower.startsWith("email me");
+  const isSignOff =
+    lower.startsWith("con gusto") || lower.startsWith("cheers");
+
+  if (isContact) {
     return (
       <p className="text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
-        escríbeme a{" "}
+        {dict.about.writePrefix}{" "}
         <a
-          href={`mailto:${CONTACT_EMAIL}`}
+          href={`mailto:${contactEmail}`}
           className="font-semibold text-carbon underline decoration-coral/50 underline-offset-[3px] transition-colors hover:text-coral"
         >
-          {CONTACT_EMAIL}
+          {contactEmail}
         </a>{" "}
-        o encuéntrame en{" "}
+        {dict.about.writeMiddle}{" "}
         <a
           href={linkedin}
           target="_blank"
@@ -58,10 +72,10 @@ function AboutParagraph({
     );
   }
 
-  if (text.startsWith("con gusto")) {
+  if (isSignOff) {
     return (
       <p className="pt-2 text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc/80">
-        {text}
+        {dict.about.signOff}, jorge
       </p>
     );
   }
@@ -74,6 +88,8 @@ function AboutParagraph({
 }
 
 export default async function SobreMiPage() {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
   const [about, site] = await Promise.all([
     getAboutContent(),
     getSiteSettings(),
@@ -88,7 +104,7 @@ export default async function SobreMiPage() {
       <div className="relative h-[min(90vw,720px)] min-h-[400px] w-full overflow-hidden md:min-h-[520px]">
         <CmsImage
           src={about.heroImage}
-          alt="Jorge Desmond en su estudio"
+          alt={dict.about.heroAlt}
           fill
           priority
           className="object-cover"
@@ -108,8 +124,10 @@ export default async function SobreMiPage() {
             <Reveal key={paragraph} delay={0.05 + i * 0.04}>
               <AboutParagraph
                 text={paragraph}
+                contactEmail={site.email}
                 linkedin={site.linkedin}
                 instagram={site.instagram}
+                dict={dict}
               />
             </Reveal>
           ))}
@@ -145,8 +163,10 @@ export default async function SobreMiPage() {
             <Reveal key={paragraph} delay={0.1 + i * 0.04}>
               <AboutParagraph
                 text={paragraph}
+                contactEmail={site.email}
                 linkedin={site.linkedin}
                 instagram={site.instagram}
+                dict={dict}
               />
             </Reveal>
           ))}

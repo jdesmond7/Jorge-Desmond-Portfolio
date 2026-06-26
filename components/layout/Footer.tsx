@@ -3,12 +3,8 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 import { InstagramIcon, LinkedInIcon } from "@/components/ui/SocialIcons";
+import type { Dictionary } from "@/lib/i18n";
 import type { NavLink } from "@/lib/types";
-
-const EXTRA_FOOTER_LINKS: NavLink[] = [
-  { label: "Inicio", href: "/" },
-  { label: "Resume", href: "/resume" },
-];
 
 interface FooterProps {
   navLinks: NavLink[];
@@ -18,6 +14,7 @@ interface FooterProps {
   footerText: string;
   ctaTitle: string;
   ctaSubtitle: string;
+  dict: Dictionary;
 }
 
 function FooterLink({
@@ -56,11 +53,17 @@ export function Footer({
   footerText,
   ctaTitle,
   ctaSubtitle,
+  dict,
 }: FooterProps) {
+  const extraFooterLinks: NavLink[] = [
+    { label: dict.footer.home, href: "/" },
+    { label: dict.nav.resume, href: "/resume" },
+  ];
+
   const siteMap = [
-    ...EXTRA_FOOTER_LINKS,
+    ...extraFooterLinks,
     ...navLinks.filter(
-      (link) => !EXTRA_FOOTER_LINKS.some((extra) => extra.href === link.href),
+      (link) => !extraFooterLinks.some((extra) => extra.href === link.href),
     ),
   ];
 
@@ -82,7 +85,7 @@ export function Footer({
                 className="w-full sm:w-auto"
                 withUpArrow
               >
-                Mándame un correo
+                {dict.footer.emailCta}
               </Button>
               <Button
                 href={linkedin}
@@ -91,7 +94,7 @@ export function Footer({
                 external
                 withUpArrow
               >
-                Conecta en LinkedIn
+                {dict.footer.linkedinCta}
               </Button>
             </div>
           </div>
@@ -100,69 +103,69 @@ export function Footer({
 
       <div className="bg-ink">
         <Container className="py-14 md:py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
-          <div>
-            <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
-              Mapa del sitio
-            </p>
-            <ul className="flex flex-col gap-2.5">
-              {siteMap.map((link) => (
-                <li key={link.href}>
-                  <FooterLink {...link} />
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
+            <div>
+              <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
+                {dict.footer.siteMap}
+              </p>
+              <ul className="flex flex-col gap-2.5">
+                {siteMap.map((link) => (
+                  <li key={link.href}>
+                    <FooterLink {...link} />
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
-              Contacto
-            </p>
-            <a
-              href={`mailto:${email}`}
-              className="group inline-flex items-center gap-1.5 text-[14px] text-white/70 no-underline transition-colors hover:text-white"
-            >
-              <span>Escríbeme</span>
-              <ArrowUpRight className="opacity-70 transition-opacity group-hover:opacity-100" />
-            </a>
-            <p className="mt-2 text-[14px] text-white/50">{email}</p>
-          </div>
+            <div>
+              <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
+                {dict.footer.contact}
+              </p>
+              <a
+                href={`mailto:${email}`}
+                className="group inline-flex items-center gap-1.5 text-[14px] text-white/70 no-underline transition-colors hover:text-white"
+              >
+                <span>{dict.footer.writeMe}</span>
+                <ArrowUpRight className="opacity-70 transition-opacity group-hover:opacity-100" />
+              </a>
+              <p className="mt-2 text-[14px] text-white/50">{email}</p>
+            </div>
 
-          <div>
-            <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
-              Redes
-            </p>
-            <div className="flex items-center gap-3">
-              {instagram && (
-                <a
-                  href={instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-white/40 hover:text-white"
-                >
-                  <InstagramIcon />
-                </a>
-              )}
-              {linkedin && (
-                <a
-                  href={linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-white/40 hover:text-white"
-                >
-                  <LinkedInIcon />
-                </a>
-              )}
+            <div>
+              <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
+                {dict.footer.social}
+              </p>
+              <div className="flex items-center gap-3">
+                {instagram && (
+                  <a
+                    href={instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-white/40 hover:text-white"
+                  >
+                    <InstagramIcon />
+                  </a>
+                )}
+                {linkedin && (
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-white/40 hover:text-white"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-8 text-[12px] text-white/45 md:mt-14 md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} Jorge Desmond</span>
-          <span className="mono tracking-[-0.006em]">{footerText}</span>
-        </div>
+          <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-8 text-[12px] text-white/45 md:mt-14 md:flex-row md:items-center md:justify-between">
+            <span>© {new Date().getFullYear()} Jorge Desmond</span>
+            <span className="mono tracking-[-0.006em]">{footerText}</span>
+          </div>
         </Container>
       </div>
     </footer>

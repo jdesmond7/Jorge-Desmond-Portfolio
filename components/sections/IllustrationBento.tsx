@@ -1,9 +1,10 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { useI18n } from "@/components/i18n/I18nProvider";
 import { Reveal } from "@/components/ui/Reveal";
 import { ZoomableImage } from "@/components/ui/ZoomableImage";
-import { getBentoSpan, type InstagramMedia } from "@/lib/instagram";
+import { getBentoSpan, type InstagramMedia } from "@/lib/instagram-layout";
 
 interface IllustrationBentoProps {
   items: InstagramMedia[];
@@ -128,6 +129,7 @@ function BentoPlaceholder({
 }
 
 export function IllustrationBento({ items }: IllustrationBentoProps) {
+  const { dict } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [fillers, setFillers] = useState<GapFillerRect[]>([]);
@@ -196,7 +198,7 @@ export function IllustrationBento({ items }: IllustrationBentoProps) {
         className="relative z-10 grid auto-rows-[76px] grid-flow-dense grid-cols-2 gap-2 sm:auto-rows-[88px] sm:gap-2.5 md:grid-cols-4 md:auto-rows-[96px] md:gap-3 lg:grid-cols-6 lg:auto-rows-[104px] lg:gap-3"
       >
         {items.map((item, index) => {
-          const { className } = getBentoSpan(item.width, item.height, index);
+          const { className } = getBentoSpan(index);
 
           return (
             <Reveal
@@ -219,7 +221,7 @@ export function IllustrationBento({ items }: IllustrationBentoProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute right-2 top-2 z-10 rounded-full bg-carbon/60 p-2 text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 hover:bg-carbon/80 group-hover/tile:opacity-100 focus-visible:opacity-100"
-                aria-label={`Abrir en Instagram: ${item.alt}`}
+                aria-label={dict.illustration.openInstagram(item.alt)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

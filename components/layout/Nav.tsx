@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/components/i18n/I18nProvider";
+import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 import type { NavLink } from "@/lib/types";
 
@@ -13,6 +15,8 @@ interface NavProps {
   linkedin: string;
   resume?: string;
 }
+
+const MENU_TRANSITION_MS = 420;
 
 function formatSiteName(name: string): string {
   const parts = name.trim().split(/\s+/);
@@ -63,10 +67,13 @@ export function Nav({
   linkedin,
   resume = "/resume",
 }: NavProps) {
+  const { dict } = useI18n();
   const pathname = usePathname();
   const [scrollY, setScrollY] = useState(0);
   const [navVisible, setNavVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuMounted, setMenuMounted] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
   const lastScrollYRef = useRef(0);
   const menuOpenRef = useRef(menuOpen);
 
@@ -111,6 +118,22 @@ export function Nav({
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (menuOpen) {
+      setMenuMounted(true);
+      const frame = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setMenuVisible(true));
+      });
+      return () => cancelAnimationFrame(frame);
+    }
+
+    setMenuVisible(false);
+    const timer = window.setTimeout(() => setMenuMounted(false), MENU_TRANSITION_MS);
+    return () => window.clearTimeout(timer);
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <>
       <div
@@ -132,108 +155,123 @@ export function Nav({
               scrollY > 40 ? "rgba(0,0,0,0.18) 0px 8px 24px 0px" : "none",
           }}
         >
-        <Link
-          href="/"
-          className={`justify-self-start text-[15px] font-bold tracking-[-0.009em] no-underline transition-colors hover:text-primary ${
-            pathname === "/" ? "text-primary" : "text-white"
-          }`}
-          onClick={() => setMenuOpen(false)}
-        >
-          {formatSiteName(siteName)}
-        </Link>
-
-        <div className="hidden items-center gap-1 justify-self-center md:flex">
-          {navLinks.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={navLinkClass(isNavLinkActive(pathname, item.href))}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="hidden items-center gap-6 justify-self-end md:flex">
-          <a
-            href={resume}
-            className={navLinkClass(isNavLinkActive(pathname, resume))}
+          <Link
+            href="/"
+            className={`justify-self-start text-[15px] font-bold tracking-[-0.009em] no-underline transition-colors hover:text-primary ${
+              pathname === "/" ? "text-primary" : "text-white"
+            }`}
+            onClick={closeMenu}
           >
-            Resume
-          </a>
-          <a
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${navLinkClass(false)} inline-flex items-center gap-1`}
-          >
-            LinkedIn
-            <ArrowUpRight />
-          </a>
-        </div>
+            {formatSiteName(siteName)}
+          </Link>
 
-        <button
-          type="button"
-          className="col-start-2 flex h-11 w-11 flex-col items-center justify-center gap-1.5 justify-self-end md:hidden"
-          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span
-            className={`block h-0.5 w-5 bg-white transition-transform ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
-          />
-          <span
-            className={`block h-0.5 w-5 bg-white transition-opacity ${menuOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block h-0.5 w-5 bg-white transition-transform ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
-          />
-        </button>
-        </nav>
-      </div>
-
-      {menuOpen && (
-        <div
-          className="fixed inset-0 z-40 flex flex-col bg-carbon px-6 pt-28 md:hidden"
-          style={{ paddingTop: "max(7rem, calc(env(safe-area-inset-top) + 6rem))" }}
-        >
-          <div className="flex flex-col gap-6">
+          <div className="hidden items-center gap-1 justify-self-center md:flex">
             {navLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={mobileNavLinkClass(
-                  isNavLinkActive(pathname, item.href),
-                )}
-                onClick={() => setMenuOpen(false)}
+                className={navLinkClass(isNavLinkActive(pathname, item.href))}
               >
                 {item.label}
               </Link>
             ))}
+          </div>
+
+          <div className="hidden items-center gap-4 justify-self-end md:flex">
             <a
               href={resume}
-              className={mobileNavLinkClass(isNavLinkActive(pathname, resume))}
-              onClick={() => setMenuOpen(false)}
+              className={navLinkClass(isNavLinkActive(pathname, resume))}
             >
-              Resume
+              {dict.nav.resume}
             </a>
             <a
               href={linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${mobileNavLinkClass(false)} inline-flex items-center gap-2`}
-              onClick={() => setMenuOpen(false)}
+              className={`${navLinkClass(false)} inline-flex items-center gap-1`}
             >
-              LinkedIn
-              <ArrowUpRight className="h-5 w-5" />
+              {dict.nav.linkedin}
+              <ArrowUpRight />
             </a>
-            <a
-              href={`mailto:${email}`}
-              className="pill-cta mt-4 inline-flex min-h-11 items-center justify-center rounded-[var(--radius-pill)] bg-coral px-8 py-4 text-[15px] font-semibold tracking-[-0.009em] text-white no-underline"
-              onClick={() => setMenuOpen(false)}
-            >
-              Hablemos →
-            </a>
+            <LocaleSwitcher />
+          </div>
+
+          <button
+            type="button"
+            className="col-start-2 flex h-11 w-11 flex-col items-center justify-center gap-1.5 justify-self-end md:hidden"
+            aria-label={menuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span
+              className={`block h-0.5 w-5 bg-white transition-transform duration-300 ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
+            />
+            <span
+              className={`block h-0.5 w-5 bg-white transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-0.5 w-5 bg-white transition-transform duration-300 ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            />
+          </button>
+        </nav>
+      </div>
+
+      {menuMounted && (
+        <div className="fixed inset-0 z-40 md:hidden" aria-hidden={!menuOpen}>
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/40 transition-opacity duration-300"
+            style={{ opacity: menuVisible ? 1 : 0 }}
+            aria-label={dict.nav.closeMenu}
+            onClick={closeMenu}
+          />
+          <div
+            className="absolute inset-y-0 right-0 flex w-[min(88vw,360px)] flex-col bg-carbon px-6 shadow-2xl transition-transform duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              paddingTop:
+                "max(7rem, calc(env(safe-area-inset-top) + 6rem))",
+              transform: menuVisible ? "translateX(0)" : "translateX(100%)",
+            }}
+          >
+            <div className="flex flex-col gap-6">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={mobileNavLinkClass(
+                    isNavLinkActive(pathname, item.href),
+                  )}
+                  onClick={closeMenu}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <a
+                href={resume}
+                className={mobileNavLinkClass(isNavLinkActive(pathname, resume))}
+                onClick={closeMenu}
+              >
+                {dict.nav.resume}
+              </a>
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${mobileNavLinkClass(false)} inline-flex items-center gap-2`}
+                onClick={closeMenu}
+              >
+                {dict.nav.linkedin}
+                <ArrowUpRight className="h-5 w-5" />
+              </a>
+              <LocaleSwitcher className="self-start" />
+              <a
+                href={`mailto:${email}`}
+                className="pill-cta mt-4 inline-flex min-h-11 items-center justify-center rounded-[var(--radius-pill)] bg-coral px-8 py-4 text-[15px] font-semibold tracking-[-0.009em] text-white no-underline"
+                onClick={closeMenu}
+              >
+                {dict.nav.letsTalk}
+              </a>
+            </div>
           </div>
         </div>
       )}

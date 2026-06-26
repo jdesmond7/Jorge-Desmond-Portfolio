@@ -1,18 +1,30 @@
 import type { Metadata } from "next";
 import { IllustrationBento } from "@/components/sections/IllustrationBento";
 import { Container } from "@/components/ui/Container";
+import { getDictionary } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n/locale";
 import {
   getInstagramIllustrations,
   ILLUSTRATION_INSTAGRAM_HANDLE,
   ILLUSTRATION_INSTAGRAM_URL,
 } from "@/lib/instagram";
 
-export const metadata: Metadata = {
-  title: "Ilustración",
-  description: "Galería de ilustraciones y exploraciones visuales personales.",
-};
+/** Must match instagram fetch cache — Instagram media URLs expire quickly. */
+export const revalidate = 300;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+
+  return {
+    title: dict.illustration.title,
+    description: dict.illustration.description,
+  };
+}
 
 export default async function IlustracionPage() {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
   const illustrations = await getInstagramIllustrations();
 
   return (
@@ -21,11 +33,10 @@ export default async function IlustracionPage() {
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="font-display mb-4 text-[clamp(36px,6vw,56px)] uppercase leading-none tracking-[0.02em] text-carbon">
-              Ilustración
+              {dict.illustration.title}
             </h1>
             <p className="max-w-xl text-[17px] leading-[1.4] tracking-[-0.009em] text-zinc">
-              Exploraciones visuales fuera del producto digital — editorial,
-              conceptual y personal.
+              {dict.illustration.intro}
             </p>
           </div>
 

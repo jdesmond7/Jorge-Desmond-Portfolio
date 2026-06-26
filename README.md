@@ -50,8 +50,9 @@ Abre [http://localhost:1337/admin](http://localhost:1337/admin), crea tu usuario
 
 ### 3. Conectar Next.js con Strapi
 
-1. En Strapi Admin → Settings → API Tokens → Create new API Token (Read-only)
-2. En `.env.local` del frontend:
+1. En Strapi Admin → Settings → API Tokens → Create new API Token (**Custom**)
+2. Permisos mínimos: `comment` → find, findOne, create, update (el resto del sitio usa permisos públicos de lectura)
+3. En `.env.local` del frontend:
 
 ```env
 STRAPI_URL=http://localhost:1337
@@ -89,8 +90,9 @@ Tokens (colores, tipografía, radios, gradiente y sombra) centralizados en `app/
 2. Root directory: `/` (raíz del monorepo)
 3. Variables de entorno:
    - `STRAPI_URL` — URL pública de Strapi en Railway
-   - `STRAPI_API_TOKEN` — token read-only
+   - `STRAPI_API_TOKEN` — token Custom con permisos solo en `comment`
    - `NEXT_PUBLIC_SITE_URL` — URL del sitio en producción
+   - `INSTAGRAM_USER_ID` / `INSTAGRAM_ACCESS_TOKEN` — opcional, para `/ilustracion`
 4. Crea un Deploy Hook en Vercel → Settings → Git → Deploy Hooks
 
 ### Railway (Strapi)

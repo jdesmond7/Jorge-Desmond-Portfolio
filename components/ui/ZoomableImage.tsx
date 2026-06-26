@@ -3,6 +3,7 @@
 import Image, { type ImageProps } from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useI18n } from "@/components/i18n/I18nProvider";
 import { MagnifyingGlass } from "./MagnifyingGlass";
 
 const BACKDROP_DURATION_MS = 360;
@@ -42,13 +43,14 @@ export function ZoomableImage({
   videoUrl,
   ...imageProps
 }: ZoomableImageProps) {
+  const { dict } = useI18n();
   const [isPresent, setIsPresent] = useState(false);
   const [backdropVisible, setBackdropVisible] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
   const unmountTimerRef = useRef<number | null>(null);
 
-  const altText = typeof alt === "string" ? alt : "Imagen";
+  const altText = typeof alt === "string" && alt ? alt : dict.zoom.image;
   const modalSrc = resolveSrc(imageProps.src);
   const isVideo = Boolean(videoUrl);
   const isGif = !isVideo && isGifUrl(modalSrc);
@@ -141,7 +143,7 @@ export function ZoomableImage({
         type="button"
         className={wrapperClass}
         onClick={openModal}
-        aria-label={`Ver ${altText} en tamaño completo`}
+        aria-label={dict.zoom.viewFull(altText)}
       >
         {isVideo ? (
           <video
@@ -214,7 +216,7 @@ export function ZoomableImage({
               }`}
               style={{ transitionDuration: `${CONTENT_DURATION_MS}ms` }}
               onClick={closeModal}
-              aria-label="Cerrar"
+              aria-label={dict.zoom.close}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

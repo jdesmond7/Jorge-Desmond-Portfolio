@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { SECURITY_HEADERS } from "./lib/security-headers";
 
 function getStrapiImagePattern() {
   const strapiUrls = [
@@ -27,27 +28,17 @@ function getStrapiImagePattern() {
 
 function getInstagramImagePatterns() {
   return [
-    {
-      protocol: "https" as const,
-      hostname: "**.cdninstagram.com",
-      pathname: "/**",
-    },
-    {
-      protocol: "https" as const,
-      hostname: "scontent.cdninstagram.com",
-      pathname: "/**",
-    },
-    {
-      protocol: "https" as const,
-      hostname: "**.fbcdn.net",
-      pathname: "/**",
-    },
+    { protocol: "https" as const, hostname: "*.cdninstagram.com", pathname: "/**" },
+    { protocol: "https" as const, hostname: "*.fbcdn.net", pathname: "/**" },
   ];
 }
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [...getStrapiImagePattern(), ...getInstagramImagePatterns()],
+  },
+  async headers() {
+    return [{ source: "/(.*)", headers: [...SECURITY_HEADERS] }];
   },
 };
 

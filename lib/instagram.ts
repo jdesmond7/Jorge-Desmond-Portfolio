@@ -1,16 +1,15 @@
-export const ILLUSTRATION_INSTAGRAM_URL = "https://www.instagram.com/sr.dsmd/";
-export const ILLUSTRATION_INSTAGRAM_HANDLE = "sr.dsmd";
+import "server-only";
 
-export interface InstagramMedia {
-  id: string;
-  imageUrl: string;
-  /** MP4 de Instagram para reels, loops y GIFs animados. */
-  videoUrl?: string;
-  permalink: string;
-  alt: string;
-  width: number;
-  height: number;
-}
+import {
+  ILLUSTRATION_INSTAGRAM_URL,
+  type InstagramMedia,
+} from "./instagram-layout";
+
+export {
+  ILLUSTRATION_INSTAGRAM_HANDLE,
+  ILLUSTRATION_INSTAGRAM_URL,
+  type InstagramMedia,
+} from "./instagram-layout";
 
 interface InstagramApiMedia {
   id: string;
@@ -27,6 +26,9 @@ interface InstagramApiMedia {
 interface InstagramApiResponse {
   data?: InstagramApiMedia[];
 }
+
+/** Instagram media URLs expire; refresh often. */
+const INSTAGRAM_REVALIDATE_SECONDS = 300;
 
 const MEDIA_FIELDS =
   "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,width,height,children{media_url,media_type,thumbnail_url,width,height}";
@@ -102,6 +104,14 @@ function isInstagramConfigured(): boolean {
   return Boolean(
     process.env.INSTAGRAM_USER_ID && process.env.INSTAGRAM_ACCESS_TOKEN,
   );
+}
+
+function logInstagramIssue(message: string, detail?: string) {
+  if (process.env.NODE_ENV === "development") {
+    console.warn(`[instagram] ${message}`, detail ?? "");
+    return;
+  }
+  console.error(`[instagram] ${message}`, detail ?? "");
 }
 
 function resolveChildMedia(child: InstagramApiMedia): InstagramMedia | null {
@@ -182,37 +192,54 @@ function resolveMediaItem(item: InstagramApiMedia): InstagramMedia | null {
   return null;
 }
 
-/** Patrones cuadrado o retrato — sin celdas más anchas que altas. */
-const BENTO_PATTERNS = [
-  "col-span-1 row-span-4 sm:row-span-4 md:col-span-1 md:row-span-5 lg:col-span-2 lg:row-span-5",
-  "col-span-1 row-span-3 md:col-span-1 md:row-span-4 lg:col-span-2 lg:row-span-4",
-  "col-span-2 row-span-6 md:col-span-2 md:row-span-5 lg:col-span-2 lg:row-span-6",
-  "col-span-1 row-span-4 md:col-span-2 md:row-span-4 lg:col-span-2 lg:row-span-5",
-  "col-span-2 row-span-5 md:col-span-2 md:row-span-6 lg:col-span-3 lg:row-span-6",
-  "col-span-1 row-span-3 md:col-span-1 md:row-span-3 lg:col-span-2 lg:row-span-4",
-  "col-span-2 row-span-6 md:col-span-2 md:row-span-6 lg:col-span-3 lg:row-span-7",
-  "col-span-1 row-span-4 md:col-span-1 md:row-span-5 lg:col-span-2 lg:row-span-5",
-  "col-span-1 row-span-3 md:col-span-2 md:row-span-4 lg:col-span-2 lg:row-span-4",
-  "col-span-2 row-span-5 md:col-span-2 md:row-span-5 lg:col-span-3 lg:row-span-6",
-] as const;
+async function fetchInstagramMedia(
+  userId: string,
+  token: string,
+): Promise<InstagramMedia[] | null> {
+  const url = new URL(`https://graph.instagram.com/${userId}/media`);
+  url.searchParams.set("fields", MEDIA_FIELDS);
+  url.searchParams.set("limit", "24");
+  // graph.instagram.com expects access_token as query param (Bearer is unreliable here).
+  url.searchParams.set("access_token", token);
 
-export function getBentoSpan(
-  _width: number,
-  _height: number,
-  index: number,
-): { className: string } {
-  return {
-    className: BENTO_PATTERNS[index % BENTO_PATTERNS.length]!,
+  const res = await fetch(url.toString(), {
+    next: { revalidate: INSTAGRAM_REVALIDATE_SECONDS },
+  });
+
+  const json = (await res.json()) as InstagramApiResponse & {
+    error?: { message: string; code: number };
   };
+
+  if (!res.ok) {
+    logInstagramIssue(
+      "Error de API",
+      json.error?.message ?? String(res.status),
+    );
+    return null;
+  }
+
+  if (!json.data?.length) {
+    logInstagramIssue("La API respondió sin publicaciones.");
+    return null;
+  }
+
+  const items = json.data
+    .map(resolveMediaItem)
+    .filter((item): item is InstagramMedia => item !== null);
+
+  if (!items.length) {
+    logInstagramIssue("Hay publicaciones pero ninguna es imagen compatible.");
+    return null;
+  }
+
+  return items;
 }
 
 export async function getInstagramIllustrations(): Promise<InstagramMedia[]> {
   if (!isInstagramConfigured()) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn(
-        "[instagram] INSTAGRAM_USER_ID o INSTAGRAM_ACCESS_TOKEN no configurados en .env.local (raíz del proyecto, no strapi/.env). Usando imágenes mock.",
-      );
-    }
+    logInstagramIssue(
+      "INSTAGRAM_USER_ID o INSTAGRAM_ACCESS_TOKEN no configurados. Usando imágenes mock.",
+    );
     return MOCK_INSTAGRAM_MEDIA;
   }
 
@@ -220,50 +247,10 @@ export async function getInstagramIllustrations(): Promise<InstagramMedia[]> {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN!;
 
   try {
-    const res = await fetch(
-      `https://graph.instagram.com/${userId}/media?fields=${MEDIA_FIELDS}&limit=24&access_token=${token}`,
-      { next: { revalidate: 3600 } },
-    );
-
-    const json = (await res.json()) as InstagramApiResponse & {
-      error?: { message: string; code: number };
-    };
-
-    if (!res.ok) {
-      if (process.env.NODE_ENV === "development") {
-        console.error(
-          "[instagram] Error de API:",
-          json.error?.message ?? res.status,
-        );
-      }
-      return MOCK_INSTAGRAM_MEDIA;
-    }
-
-    if (!json.data?.length) {
-      if (process.env.NODE_ENV === "development") {
-        console.warn("[instagram] La API respondió sin publicaciones.");
-      }
-      return MOCK_INSTAGRAM_MEDIA;
-    }
-
-    const items = json.data
-      .map(resolveMediaItem)
-      .filter((item): item is InstagramMedia => item !== null);
-
-    if (!items.length) {
-      if (process.env.NODE_ENV === "development") {
-        console.warn(
-          "[instagram] Hay publicaciones pero ninguna es imagen compatible.",
-        );
-      }
-      return MOCK_INSTAGRAM_MEDIA;
-    }
-
-    return items;
+    const items = await fetchInstagramMedia(userId, token);
+    return items ?? MOCK_INSTAGRAM_MEDIA;
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("[instagram] Falló la petición:", error);
-    }
+    logInstagramIssue("Falló la petición", String(error));
     return MOCK_INSTAGRAM_MEDIA;
   }
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { countComments } from "@/lib/comments";
+import { useI18n } from "@/components/i18n/I18nProvider";
+import { countComments } from "@/lib/comments-utils";
 import type { Comment } from "@/lib/types";
 import { CommentForm } from "@/components/ui/CommentForm";
 import { CommentItem } from "@/components/ui/CommentItem";
@@ -12,6 +13,7 @@ interface BlogCommentsProps {
 }
 
 export function BlogComments({ postSlug, postId }: BlogCommentsProps) {
+  const { dict } = useI18n();
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,17 +26,17 @@ export function BlogComments({ postSlug, postId }: BlogCommentsProps) {
         `/api/comments?slug=${encodeURIComponent(postSlug)}`,
       );
       if (!res.ok) {
-        setError("No se pudieron cargar los comentarios.");
+        setError(dict.blog.loadError);
         return;
       }
       const data = (await res.json()) as { comments: Comment[] };
       setComments(data.comments);
     } catch {
-      setError("No se pudieron cargar los comentarios.");
+      setError(dict.blog.loadError);
     } finally {
       setLoading(false);
     }
-  }, [postSlug]);
+  }, [postSlug, dict.blog.loadError]);
 
   useEffect(() => {
     void loadComments();
@@ -51,11 +53,11 @@ export function BlogComments({ postSlug, postId }: BlogCommentsProps) {
         id="comments-heading"
         className="mb-6 text-[19px] font-semibold text-carbon"
       >
-        Comentarios ({total})
+        {dict.blog.comments} ({total})
       </h2>
 
       {loading ? (
-        <p className="mb-8 text-[15px] text-zinc">Cargando comentarios…</p>
+        <p className="mb-8 text-[15px] text-zinc">{dict.blog.loadingComments}</p>
       ) : error ? (
         <p className="mb-8 text-[15px] text-coral" role="alert">
           {error}
@@ -73,9 +75,7 @@ export function BlogComments({ postSlug, postId }: BlogCommentsProps) {
           ))}
         </div>
       ) : (
-        <p className="mb-10 text-[15px] text-zinc">
-          Sé el primero en comentar este artículo.
-        </p>
+        <p className="mb-10 text-[15px] text-zinc">{dict.blog.emptyComments}</p>
       )}
 
       <div className="rounded-[var(--radius-card)] border border-mist bg-white p-5 sm:p-6">

@@ -87,17 +87,6 @@ export interface Comment {
   replies: Comment[];
 }
 
-export interface Illustration {
-  id: string;
-  slug: string;
-  title: string;
-  description?: string;
-  image: string;
-  year?: string;
-  tags?: string[];
-  order?: number;
-}
-
 export interface NavLink {
   label: string;
   href: string;

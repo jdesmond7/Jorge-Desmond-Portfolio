@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowRight } from "./ArrowRight";
 import { CmsImage } from "./CmsImage";
 import { Reveal } from "./Reveal";
+import { getDictionary } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n/locale";
 import type { BlogPost } from "@/lib/types";
 
 const PLACEHOLDER_GRADIENTS = [
@@ -17,7 +19,9 @@ interface ArticleCardProps {
   index: number;
 }
 
-export function ArticleCard({ post, index }: ArticleCardProps) {
+export async function ArticleCard({ post, index }: ArticleCardProps) {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
   const placeholderClass =
     PLACEHOLDER_GRADIENTS[index % PLACEHOLDER_GRADIENTS.length];
 
@@ -38,7 +42,7 @@ export function ArticleCard({ post, index }: ArticleCardProps) {
             />
           ) : null}
           <span className="absolute right-3 top-3 rounded-[var(--radius-pill)] bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-carbon">
-            Artículo
+            {dict.writing.article}
           </span>
         </div>
 
@@ -50,7 +54,7 @@ export function ArticleCard({ post, index }: ArticleCardProps) {
             {post.excerpt}
           </p>
           <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-coral">
-            Leer artículo
+            {dict.writing.readArticle}
             <ArrowRight className="arrow-slide h-4 w-4 shrink-0" />
           </span>
         </div>

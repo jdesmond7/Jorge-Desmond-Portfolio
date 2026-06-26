@@ -3,22 +3,32 @@ import {
   createComment,
   getCommentsByPostSlug,
   validateAuthorEmail,
+  validateAuthorName,
   validateCommentBody,
+  validateCommentTarget,
 } from "@/lib/comments";
-import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { enforceRateLimit, jsonError, parseJsonBody } from "@/lib/api/route-utils";
+import { getClientIp } from "@/lib/rate-limit";
 
 const COMMENT_RATE_LIMIT = 5;
+const COMMENT_READ_RATE_LIMIT = 120;
 const COMMENT_WINDOW_MS = 60 * 60 * 1000;
 
 export async function GET(request: Request) {
+  const ip = getClientIp(request);
+  const limited = enforceRateLimit(
+    `comments-read:${ip}`,
+    COMMENT_READ_RATE_LIMIT,
+    COMMENT_WINDOW_MS,
+    "Demasiadas solicitudes. Intenta más tarde.",
+  );
+  if (limited) return limited;
+
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("slug");
 
   if (!slug) {
-    return NextResponse.json(
-      { error: "Falta el parámetro slug." },
-      { status: 400 },
-    );
+    return jsonError("Falta el parámetro slug.", 400);
   }
 
   const comments = await getCommentsByPostSlug(slug);
@@ -27,22 +37,18 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  if (!checkRateLimit(`comment:${ip}`, COMMENT_RATE_LIMIT, COMMENT_WINDOW_MS)) {
-    return NextResponse.json(
-      { error: "Has publicado demasiados comentarios. Intenta más tarde." },
-      { status: 429 },
-    );
-  }
+  const limited = enforceRateLimit(
+    `comment:${ip}`,
+    COMMENT_RATE_LIMIT,
+    COMMENT_WINDOW_MS,
+    "Has publicado demasiados comentarios. Intenta más tarde.",
+  );
+  if (limited) return limited;
 
-  let payload: unknown;
-  try {
-    payload = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Cuerpo inválido." }, { status: 400 });
-  }
-
+  const payload = await parseJsonBody(request);
+  if (payload === null) return jsonError("Cuerpo inválido.", 400);
   if (!payload || typeof payload !== "object") {
-    return NextResponse.json({ error: "Cuerpo inválido." }, { status: 400 });
+    return jsonError("Cuerpo inválido.", 400);
   }
 
   const data = payload as Record<string, unknown>;
@@ -52,28 +58,27 @@ export async function POST(request: Request) {
   }
 
   const bodyError = validateCommentBody(data.body);
-  if (bodyError) {
-    return NextResponse.json({ error: bodyError }, { status: 400 });
-  }
+  if (bodyError) return jsonError(bodyError, 400);
+
+  const nameError = validateAuthorName(data.authorName);
+  if (nameError) return jsonError(nameError, 400);
 
   const emailError = validateAuthorEmail(data.authorEmail);
-  if (emailError) {
-    return NextResponse.json({ error: emailError }, { status: 400 });
-  }
+  if (emailError) return jsonError(emailError, 400);
 
   const postSlug = typeof data.postSlug === "string" ? data.postSlug : "";
   const postId = typeof data.postId === "string" ? data.postId : "";
   if (!postSlug || !postId) {
-    return NextResponse.json(
-      { error: "Faltan datos del artículo." },
-      { status: 400 },
-    );
+    return jsonError("Faltan datos del artículo.", 400);
   }
 
   const parentId =
     typeof data.parentId === "string" && data.parentId.trim()
       ? data.parentId.trim()
       : undefined;
+
+  const targetError = await validateCommentTarget(postSlug, postId, parentId);
+  if (targetError) return jsonError(targetError, 400);
 
   const authorName =
     typeof data.authorName === "string" ? data.authorName : undefined;
@@ -90,10 +95,7 @@ export async function POST(request: Request) {
   });
 
   if (!comment) {
-    return NextResponse.json(
-      { error: "No se pudo guardar el comentario." },
-      { status: 500 },
-    );
+    return jsonError("No se pudo guardar el comentario.", 500);
   }
 
   return NextResponse.json({ comment }, { status: 201 });

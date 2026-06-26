@@ -1,5 +1,6 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { isExternalHref, sanitizeHref, sanitizeImageSrc } from "@/lib/safe-url";
 import type { ProjectMetric } from "@/lib/types";
 import { DecisionCard } from "./DecisionCard";
 import { ProjectMetrics } from "./ProjectMetrics";
@@ -98,12 +99,13 @@ const components: Components = {
   },
 
   img({ src, alt }) {
-    if (!src || typeof src !== "string") return null;
+    const safeSrc = sanitizeImageSrc(typeof src === "string" ? src : undefined);
+    if (!safeSrc) return null;
 
     return (
       <figure className="my-8 w-full">
         <ZoomableImage
-          src={src}
+          src={safeSrc}
           alt={alt ?? ""}
           width={1072}
           height={604}
@@ -158,11 +160,14 @@ const components: Components = {
   },
 
   a({ href, children }) {
+    const safeHref = sanitizeHref(href);
+    if (!safeHref) return <span className="text-coral">{children}</span>;
+
     return (
       <a
-        href={href}
-        target={href?.startsWith("http") ? "_blank" : undefined}
-        rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+        href={safeHref}
+        target={isExternalHref(safeHref) ? "_blank" : undefined}
+        rel={isExternalHref(safeHref) ? "noopener noreferrer" : undefined}
         className="text-coral underline-offset-2 hover:underline"
       >
         {children}
