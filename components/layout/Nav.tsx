@@ -49,14 +49,14 @@ function isNavLinkActive(pathname: string, href: string): boolean {
 }
 
 function navLinkClass(isActive: boolean): string {
-  return `rounded-[10px] px-3 py-1.5 text-[13px] font-normal tracking-[-0.005em] no-underline transition-colors hover:bg-white/10 hover:text-primary ${
-    isActive ? "bg-white/10 text-primary" : "text-white/60"
+  return `rounded-[10px] px-3 py-1.5 text-[13px] font-normal tracking-[-0.005em] no-underline transition-colors hover:bg-white/10 hover:text-white ${
+    isActive ? "bg-white/15 text-white" : "text-white/60"
   }`;
 }
 
 function mobileNavLinkClass(isActive: boolean): string {
-  return `rounded-[10px] px-3 py-1.5 text-2xl font-normal tracking-[-0.015em] no-underline transition-colors hover:bg-white/10 hover:text-primary ${
-    isActive ? "bg-white/10 text-primary" : "text-white/60"
+  return `rounded-[10px] px-3 py-1.5 text-2xl font-normal tracking-[-0.015em] no-underline transition-colors hover:bg-white/10 hover:text-white ${
+    isActive ? "bg-white/15 text-white" : "text-white/60"
   }`;
 }
 
@@ -164,8 +164,8 @@ export function Nav({
         >
           <Link
             href="/"
-            className={`justify-self-start text-[15px] font-bold tracking-[-0.009em] no-underline transition-colors hover:text-primary ${
-              pathname === "/" ? "text-primary" : "text-white"
+            className={`justify-self-start text-[15px] font-bold tracking-[-0.009em] no-underline transition-colors hover:text-white ${
+              pathname === "/" ? "text-white" : "text-white/80"
             }`}
             onClick={closeMenu}
           >

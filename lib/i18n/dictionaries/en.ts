@@ -2,6 +2,7 @@ import type { Dictionary } from "./es";
 
 export const en: Dictionary = {
   meta: {
+    defaultTitle: "Jorge Desmond · Sr. Product Designer",
     defaultDescription:
       "I design systems that turn operational complexity into products that scale. Design Systems, Product Design, and AI design architecture.",
     siteName: "Jorge Desmond",

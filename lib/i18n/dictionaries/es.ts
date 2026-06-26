@@ -1,5 +1,6 @@
 export const es = {
   meta: {
+    defaultTitle: "Jorge Desmond · Sr. Product Designer",
     defaultDescription:
       "Diseño sistemas que convierten complejidad operativa en productos que escalan. Design Systems, Product Design y arquitectura de diseño con IA.",
     siteName: "Jorge Desmond",
@@ -123,7 +124,7 @@ export const es = {
   about: {
     title: "Sobre mí",
     description:
-      "Jorge Desmond — product designer en Monterrey. Sistemas de diseño, calistenia, ilustración y tres marcas en construcción.",
+      "Jorge Desmond · product designer en Monterrey. Sistemas de diseño, calistenia, ilustración y tres marcas en construcción.",
     heroAlt: "Jorge Desmond en su estudio",
     writePrefix: "escríbeme a",
     writeMiddle: "o encuéntrame en",
@@ -139,7 +140,7 @@ export const es = {
   resume: {
     title: "Résumé",
     description:
-      "CV de Jorge Desmond — Senior Product Designer con más de 8 años diseñando productos digitales end-to-end en B2B SaaS, fintech y marketplaces.",
+      "CV de Jorge Desmond · Senior Product Designer con más de 8 años diseñando productos digitales end-to-end en B2B SaaS, fintech y marketplaces.",
     experience: "Experiencia",
     skills: "Habilidades",
     contact: "Contacto",

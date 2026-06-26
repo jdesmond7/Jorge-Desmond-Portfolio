@@ -56,7 +56,7 @@ export function LocaleSwitcher({
     });
   };
 
-  const selectedLabel = locale === "es" ? dict.nav.spanish : dict.nav.english;
+  const localeCode = locale.toUpperCase();
 
   const ghostClass =
     variant === "light"
@@ -77,17 +77,25 @@ export function LocaleSwitcher({
     <div ref={rootRef} className={`relative ${fullWidth ? "w-full" : ""} ${className}`}>
       <button
         type="button"
-        className={`inline-flex min-h-11 items-center gap-1.5 rounded-[10px] px-3 py-1.5 text-[13px] font-normal tracking-[-0.005em] transition-colors ${ghostClass} ${
-          fullWidth ? "w-full justify-between" : ""
+        className={`inline-flex items-center gap-1.5 rounded-[10px] px-3 py-1.5 font-normal transition-colors ${ghostClass} ${
+          fullWidth
+            ? "w-full justify-between text-2xl tracking-[-0.015em]"
+            : "text-[13px] tracking-[-0.005em]"
         }`}
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label={dict.nav.language}
+        aria-label={`${dict.nav.language}: ${locale === "es" ? dict.nav.spanish : dict.nav.english}`}
         onClick={() => setOpen((value) => !value)}
         disabled={pending}
       >
-        <span>
-          {dict.nav.language}: {selectedLabel}
+        <span
+          className={
+            fullWidth
+              ? "uppercase"
+              : "mono text-[11px] uppercase tracking-[0.08em]"
+          }
+        >
+          {localeCode}
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -120,14 +128,14 @@ export function LocaleSwitcher({
                 type="button"
                 className={`flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-left text-[13px] transition-colors ${
                   locale === option.value
-                    ? "bg-white/10 text-primary"
+                    ? "bg-white/15 text-primary"
                     : "text-white/75 hover:bg-white/10 hover:text-white"
                 }`}
                 onClick={() => setLocale(option.value)}
               >
                 <span>{option.label}</span>
-                <span className="mono text-[10px] uppercase opacity-70">
-                  {option.value}
+                <span className="mono text-[10px] uppercase tracking-[0.08em] opacity-70">
+                  {option.value.toUpperCase()}
                 </span>
               </button>
             </li>

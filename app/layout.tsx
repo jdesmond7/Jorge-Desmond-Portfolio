@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: `${dict.meta.siteName} — Senior Product Designer`,
+      default: dict.meta.defaultTitle,
       template: `%s | ${dict.meta.siteName}`,
     },
     description: dict.meta.defaultDescription,
@@ -42,6 +42,10 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: localeToOpenGraph(locale),
       siteName: dict.meta.siteName,
+    },
+    icons: {
+      icon: [{ url: "/icon.png", type: "image/png", sizes: "32x32" }],
+      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
     },
   };
 }
