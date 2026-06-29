@@ -1,6 +1,5 @@
 import type { Locale } from "./types";
 import type {
-  AboutContent,
   BlogPost,
   HomeContent,
   NavLink,
@@ -8,7 +7,6 @@ import type {
   SiteSettings,
 } from "@/lib/types";
 import {
-  EN_ABOUT,
   EN_BLOG_BY_SLUG,
   EN_HOME,
   EN_PROJECTS_BY_SLUG,
@@ -40,11 +38,6 @@ export function localizeSiteSettings(
 export function localizeHome(home: HomeContent, locale: Locale): HomeContent {
   if (locale === "es") return home;
   return { ...home, ...EN_HOME };
-}
-
-export function localizeAbout(about: AboutContent, locale: Locale): AboutContent {
-  if (locale === "es") return about;
-  return { ...about, ...EN_ABOUT };
 }
 
 export function localizeBlogPost(post: BlogPost, locale: Locale): BlogPost {

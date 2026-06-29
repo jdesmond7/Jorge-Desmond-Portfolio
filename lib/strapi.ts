@@ -9,8 +9,8 @@ import {
 } from "./mock-data";
 import { getDictionary } from "./i18n";
 import { getLocale } from "./i18n/locale";
+import { EN_ABOUT } from "./i18n/content-en";
 import {
-  localizeAbout,
   localizeBlogPost,
   localizeHome,
   localizeProject,
@@ -655,21 +655,18 @@ export async function getAboutContent(): Promise<AboutContent> {
   const locale = await getLocale();
   const res = await fetchStrapi<StrapiSingleResponse>("/sobre-mi", locale);
   if (!res?.data) {
-    return localizeAbout(MOCK_ABOUT, locale);
+    return locale === "es" ? MOCK_ABOUT : EN_ABOUT;
   }
 
   const a = unwrap(res.data);
-  return localizeAbout(
-    {
-      title: String(a.title ?? MOCK_ABOUT.title),
-      body: String(a.body ?? MOCK_ABOUT.body),
-      heroImage: String(a.heroImage ?? MOCK_ABOUT.heroImage),
-      images: Array.isArray(a.images)
-        ? a.images.map(String)
-        : MOCK_ABOUT.images,
-    },
-    locale,
-  );
+  return {
+    title: String(a.title ?? MOCK_ABOUT.title),
+    body: String(a.body ?? MOCK_ABOUT.body),
+    heroImage: String(a.heroImage ?? MOCK_ABOUT.heroImage),
+    images: Array.isArray(a.images)
+      ? a.images.map(String)
+      : MOCK_ABOUT.images,
+  };
 }
 
 export async function getAllProjectSlugs(): Promise<string[]> {
