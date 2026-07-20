@@ -8,7 +8,7 @@ import { BlogComments } from "@/components/sections/BlogComments";
 import { formatDate } from "@/lib/format-date";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale, localeToDateLocale } from "@/lib/i18n/locale";
-import { getAllBlogSlugs, getBlogPostBySlug } from "@/lib/strapi";
+import { getAllBlogSlugs, getBlogPostBySlug } from "@/lib/data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;

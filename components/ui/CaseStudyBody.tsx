@@ -384,7 +384,9 @@ function VersionCard({ version, year, title, items, note }: VersionCardData) {
 
 export function CaseStudyBody({ content }: CaseStudyBodyProps) {
   const segments = splitSegments(content);
-  let decisionIndex = 0;
+  const firstDecisionIndex = segments.findIndex(
+    (segment) => segment.type === "decision",
+  );
 
   return (
     <div className="mb-16 w-full">
@@ -394,13 +396,11 @@ export function CaseStudyBody({ content }: CaseStudyBodyProps) {
         }
 
         if (segment.type === "decision") {
-          const currentDecisionIndex = decisionIndex;
-          decisionIndex += 1;
           return (
             <DecisionCard
               key={index}
               {...segment.data}
-              defaultOpen={currentDecisionIndex === 0}
+              defaultOpen={index === firstDecisionIndex}
             />
           );
         }

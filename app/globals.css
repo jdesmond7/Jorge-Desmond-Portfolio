@@ -1,9 +1,14 @@
 @import "tailwindcss";
 
 :root {
+  /* Brand */
   --color-coral: #fc5f2b;
   --color-coral-hover: #e85422;
+  --color-coral-soft: #ff8b64;
+  --color-coral-mist: #ffd9c4;
   --color-primary: var(--color-coral);
+
+  /* Neutrals */
   --color-carbon: #18181b;
   --color-black: #000000;
   --color-zinc: #71717a;
@@ -15,39 +20,79 @@
   --color-espresso: #200200;
   --color-ink: #120301;
 
+  /* Typography */
   --font-display: var(--font-bebas), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
+  --text-micro: 10px;
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 19px;
+
+  /* Layout */
+  --radius-control: 10px;
+  --radius-menu: 14px;
   --radius-card: 15px;
   --radius-pill: 9999px;
   --container-max: 1440px;
   --container-narrow: 1072px;
+  --container-nav: 1120px;
   --section-py: 75px;
+  --nav-offset: 20px;
 
-  --gradient-brand: linear-gradient(88deg, #fc5f2b, #ff8b64 70%, #ffd9c4 100%);
+  /* Effects */
+  --gradient-brand: linear-gradient(
+    88deg,
+    var(--color-coral),
+    var(--color-coral-soft) 70%,
+    var(--color-coral-mist) 100%
+  );
   --shadow-card: rgba(0, 0, 0, 0.05) 0px 2px 2px 0px;
+  --shadow-nav: rgba(0, 0, 0, 0.18) 0px 8px 24px 0px;
+  --overlay-scrim: rgba(0, 0, 0, 0.4);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-reveal: 0.8s;
+  --duration-menu: 420ms;
 }
 
 @theme inline {
   --color-coral: var(--color-coral);
   --color-coral-hover: var(--color-coral-hover);
+  --color-coral-soft: var(--color-coral-soft);
+  --color-coral-mist: var(--color-coral-mist);
   --color-primary: var(--color-primary);
   --color-carbon: var(--color-carbon);
+  --color-black: var(--color-black);
   --color-zinc: var(--color-zinc);
   --color-ash: var(--color-ash);
   --color-mist: var(--color-mist);
   --color-fog: var(--color-fog);
   --color-cream: var(--color-cream);
+  --color-white: var(--color-white);
   --color-espresso: var(--color-espresso);
   --color-ink: var(--color-ink);
   --font-sans: var(--font-body);
   --font-mono: var(--font-mono);
+  --radius-control: var(--radius-control);
+  --radius-menu: var(--radius-menu);
   --radius-card: var(--radius-card);
   --radius-pill: var(--radius-pill);
+  --shadow-card: var(--shadow-card);
+  --shadow-nav: var(--shadow-nav);
+  --text-micro: var(--text-micro);
+  --text-2xs: var(--text-2xs);
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-md: var(--text-md);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
 }
 
 * {

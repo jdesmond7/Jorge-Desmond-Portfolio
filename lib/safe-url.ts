@@ -1,3 +1,5 @@
+import { rewriteLegacyImageUrl } from "@/lib/images";
+
 const BLOCKED_PROTOCOLS = /^(javascript|data|vbscript):/i;
 
 function isRelativePath(path: string): boolean {
@@ -31,19 +33,19 @@ export function sanitizeHref(href: string | undefined): string | undefined {
   return undefined;
 }
 
-/** Allows same-origin paths and https images (Strapi, Instagram CDN). */
+/** Allows same-origin paths and https images (local /images, Instagram CDN). */
 export function sanitizeImageSrc(src: string | undefined): string | undefined {
   if (!src?.trim()) return undefined;
 
-  const trimmed = src.trim();
-  if (BLOCKED_PROTOCOLS.test(trimmed)) return undefined;
-  if (trimmed.startsWith("//")) return undefined;
+  const rewritten = rewriteLegacyImageUrl(src.trim());
+  if (BLOCKED_PROTOCOLS.test(rewritten)) return undefined;
+  if (rewritten.startsWith("//")) return undefined;
 
-  if (isRelativePath(trimmed)) return trimmed;
+  if (isRelativePath(rewritten)) return rewritten;
 
   try {
-    const { protocol } = new URL(trimmed);
-    if (protocol === "http:" || protocol === "https:") return trimmed;
+    const { protocol } = new URL(rewritten);
+    if (protocol === "http:" || protocol === "https:") return rewritten;
   } catch {
     return undefined;
   }

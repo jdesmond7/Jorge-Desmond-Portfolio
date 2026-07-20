@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { CmsImage } from "@/components/ui/CmsImage";
+import { MediaImage } from "@/components/ui/MediaImage";
 import { Container } from "@/components/ui/Container";
 import { InlineMarkdown, inlineLinkClass } from "@/components/ui/InlineMarkdown";
 import { Reveal } from "@/components/ui/Reveal";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
-import { getAboutContent, getSiteSettings } from "@/lib/strapi";
+import { getAboutContent, getSiteSettings } from "@/lib/data";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -103,7 +103,7 @@ export default async function SobreMiPage() {
   return (
     <div>
       <div className="relative h-[min(90vw,720px)] min-h-[400px] w-full overflow-hidden md:min-h-[520px]">
-        <CmsImage
+        <MediaImage
           src={about.heroImage}
           alt={dict.about.heroAlt}
           fill
@@ -146,7 +146,7 @@ export default async function SobreMiPage() {
                   key={src}
                   className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-mist"
                 >
-                  <CmsImage
+                  <MediaImage
                     src={src}
                     alt=""
                     fill

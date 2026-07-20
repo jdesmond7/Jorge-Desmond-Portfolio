@@ -49,6 +49,8 @@ export function ZoomableImage({
   const [contentVisible, setContentVisible] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
   const unmountTimerRef = useRef<number | null>(null);
+  const openFrameRef = useRef<number | null>(null);
+  const openContentTimerRef = useRef<number | null>(null);
 
   const altText = typeof alt === "string" && alt ? alt : dict.zoom.image;
   const modalSrc = resolveSrc(imageProps.src);
@@ -65,6 +67,14 @@ export function ZoomableImage({
       window.clearTimeout(unmountTimerRef.current);
       unmountTimerRef.current = null;
     }
+    if (openFrameRef.current !== null) {
+      window.cancelAnimationFrame(openFrameRef.current);
+      openFrameRef.current = null;
+    }
+    if (openContentTimerRef.current !== null) {
+      window.clearTimeout(openContentTimerRef.current);
+      openContentTimerRef.current = null;
+    }
   }, []);
 
   const openModal = useCallback(() => {
@@ -72,6 +82,25 @@ export function ZoomableImage({
     setContentVisible(false);
     setBackdropVisible(false);
     setIsPresent(true);
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      setBackdropVisible(true);
+      setContentVisible(true);
+      return;
+    }
+
+    openFrameRef.current = window.requestAnimationFrame(() => {
+      setBackdropVisible(true);
+      openFrameRef.current = null;
+    });
+    openContentTimerRef.current = window.setTimeout(() => {
+      setContentVisible(true);
+      openContentTimerRef.current = null;
+    }, CONTENT_DELAY_MS);
   }, [clearTimers]);
 
   const closeModal = useCallback(() => {
@@ -86,33 +115,6 @@ export function ZoomableImage({
       }, BACKDROP_EXIT_MS);
     }, CONTENT_EXIT_MS);
   }, [clearTimers]);
-
-  useEffect(() => {
-    if (!isPresent) return;
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) {
-      setBackdropVisible(true);
-      setContentVisible(true);
-      return;
-    }
-
-    const frame = window.requestAnimationFrame(() => {
-      setBackdropVisible(true);
-    });
-
-    const contentTimer = window.setTimeout(() => {
-      setContentVisible(true);
-    }, CONTENT_DELAY_MS);
-
-    return () => {
-      window.cancelAnimationFrame(frame);
-      window.clearTimeout(contentTimer);
-    };
-  }, [isPresent]);
 
   useEffect(() => {
     if (!isPresent) return;

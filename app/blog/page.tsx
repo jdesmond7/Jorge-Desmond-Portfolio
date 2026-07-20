@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { formatDate } from "@/lib/format-date";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale, localeToDateLocale } from "@/lib/i18n/locale";
-import { getBlogPosts } from "@/lib/strapi";
+import { getBlogPosts } from "@/lib/data";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();

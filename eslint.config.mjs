@@ -12,8 +12,6 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Strapi is a separate app; dist bundles crash ESLint (OOM)
-    "strapi/**",
   ]),
 ]);
 

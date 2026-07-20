@@ -7,12 +7,10 @@
     "clean": "rm -rf .next",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "cms": "cd strapi && PATH=\"/opt/homebrew/opt/node@22/bin:$PATH\" npm run develop",
-    "cms:build": "cd strapi && PATH=\"/opt/homebrew/opt/node@22/bin:$PATH\" npm run build",
-    "cms:start": "cd strapi && PATH=\"/opt/homebrew/opt/node@22/bin:$PATH\" npm run start"
+    "lint": "eslint"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4",

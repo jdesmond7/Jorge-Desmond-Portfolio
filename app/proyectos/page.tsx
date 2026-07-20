@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Projects } from "@/components/sections/Projects";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
-import { getProjects } from "@/lib/strapi";
+import { getProjects } from "@/lib/data";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();

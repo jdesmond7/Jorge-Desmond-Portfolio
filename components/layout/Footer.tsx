@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 import { InstagramIcon, LinkedInIcon } from "@/components/ui/SocialIcons";
 import type { Dictionary } from "@/lib/i18n";
+import { isExternalHref, sanitizeHref } from "@/lib/safe-url";
 import type { NavLink } from "@/lib/types";
 
 interface FooterProps {
@@ -23,15 +24,17 @@ function FooterLink({
   external,
 }: NavLink & { external?: boolean }) {
   const className =
-    "text-[14px] leading-snug text-white/70 no-underline transition-colors hover:text-white";
+    "text-[length:var(--text-md)] leading-snug text-white/70 no-underline transition-colors hover:text-white";
+  const safeHref = sanitizeHref(href);
+  if (!safeHref) return <span className={className}>{label}</span>;
 
-  if (external || href.startsWith("http") || href.startsWith("mailto:")) {
+  if (external || isExternalHref(safeHref) || safeHref.startsWith("mailto:")) {
     return (
       <a
-        href={href}
+        href={safeHref}
         className={className}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={isExternalHref(safeHref) ? "_blank" : undefined}
+        rel={isExternalHref(safeHref) ? "noopener noreferrer" : undefined}
       >
         {label}
       </a>
@@ -39,7 +42,7 @@ function FooterLink({
   }
 
   return (
-    <Link href={href} className={className}>
+    <Link href={safeHref} className={className}>
       {label}
     </Link>
   );
@@ -67,6 +70,10 @@ export function Footer({
     ),
   ];
 
+  const safeEmail = sanitizeHref(`mailto:${email}`) ?? `mailto:${email}`;
+  const safeLinkedin = sanitizeHref(linkedin);
+  const safeInstagram = instagram ? sanitizeHref(instagram) : undefined;
+
   return (
     <footer className="text-white">
       <div className="bg-espresso">
@@ -75,27 +82,29 @@ export function Footer({
             <h2 className="font-display mb-5 text-[clamp(32px,5.5vw,52px)] leading-[1.05] tracking-[0.01em] text-white">
               {ctaTitle}
             </h2>
-            <p className="mx-auto mb-9 max-w-[480px] text-[17px] font-normal leading-[1.45] text-white/70">
+            <p className="mx-auto mb-9 max-w-[480px] text-[length:var(--text-lg)] font-normal leading-[1.45] text-white/70">
               {ctaSubtitle}
             </p>
             <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center sm:gap-4">
               <Button
-                href={`mailto:${email}`}
+                href={safeEmail}
                 variant="primary"
                 className="w-full sm:w-auto"
                 withUpArrow
               >
                 {dict.footer.emailCta}
               </Button>
-              <Button
-                href={linkedin}
-                variant="outline-light"
-                className="w-full sm:w-auto"
-                external
-                withUpArrow
-              >
-                {dict.footer.linkedinCta}
-              </Button>
+              {safeLinkedin && (
+                <Button
+                  href={safeLinkedin}
+                  variant="outline-light"
+                  className="w-full sm:w-auto"
+                  external
+                  withUpArrow
+                >
+                  {dict.footer.linkedinCta}
+                </Button>
+              )}
             </div>
           </div>
         </Container>
@@ -105,7 +114,7 @@ export function Footer({
         <Container className="py-14 md:py-16">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
             <div>
-              <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
+              <p className="mono mb-4 text-[length:var(--text-micro)] font-bold uppercase tracking-[0.14em] text-coral">
                 {dict.footer.siteMap}
               </p>
               <ul className="flex flex-col gap-2.5">
@@ -118,27 +127,27 @@ export function Footer({
             </div>
 
             <div>
-              <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
+              <p className="mono mb-4 text-[length:var(--text-micro)] font-bold uppercase tracking-[0.14em] text-coral">
                 {dict.footer.contact}
               </p>
               <a
-                href={`mailto:${email}`}
-                className="group inline-flex items-center gap-1.5 text-[14px] text-white/70 no-underline transition-colors hover:text-white"
+                href={safeEmail}
+                className="group inline-flex items-center gap-1.5 text-[length:var(--text-md)] text-white/70 no-underline transition-colors hover:text-white"
               >
                 <span>{dict.footer.writeMe}</span>
                 <ArrowUpRight className="opacity-70 transition-opacity group-hover:opacity-100" />
               </a>
-              <p className="mt-2 text-[14px] text-white/50">{email}</p>
+              <p className="mt-2 text-[length:var(--text-md)] text-white/50">{email}</p>
             </div>
 
             <div>
-              <p className="mono mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-coral">
+              <p className="mono mb-4 text-[length:var(--text-micro)] font-bold uppercase tracking-[0.14em] text-coral">
                 {dict.footer.social}
               </p>
               <div className="flex items-center gap-3">
-                {instagram && (
+                {safeInstagram && (
                   <a
-                    href={instagram}
+                    href={safeInstagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
@@ -147,9 +156,9 @@ export function Footer({
                     <InstagramIcon />
                   </a>
                 )}
-                {linkedin && (
+                {safeLinkedin && (
                   <a
-                    href={linkedin}
+                    href={safeLinkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
@@ -162,7 +171,7 @@ export function Footer({
             </div>
           </div>
 
-          <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-8 text-[12px] text-white/45 md:mt-14 md:flex-row md:items-center md:justify-between">
+          <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-8 text-[length:var(--text-xs)] text-white/45 md:mt-14 md:flex-row md:items-center md:justify-between">
             <span>© {new Date().getFullYear()} Jorge Desmond</span>
             <span className="mono tracking-[-0.006em]">{footerText}</span>
           </div>

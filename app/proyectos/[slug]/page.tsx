@@ -17,7 +17,7 @@ import {
   getAllProjectSlugs,
   getProjectBySlug,
   getProjectNavigation,
-} from "@/lib/strapi";
+} from "@/lib/data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -96,21 +96,28 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
         {isParentView ? (
           <>
-            <CaseStudySection
-              number="01"
-              label={dict.projects.overview}
-              title={project.overviewTitle}
-              body={project.overviewBodyText}
-            />
+            {project.body && <CaseStudyBody content={project.body} />}
 
-            <div className="my-16 border-t border-mist" />
+            {(project.overviewTitle || project.overviewBodyText) && (
+              <CaseStudySection
+                number="01"
+                label={dict.projects.overview}
+                title={project.overviewTitle}
+                body={project.overviewBodyText}
+              />
+            )}
 
-            <CaseStudySection
-              number="02"
-              label={dict.projects.challenge}
-              title={project.challengeTitle}
-              body={project.challengeBodyText}
-            />
+            {(project.challengeTitle || project.challengeBodyText) && (
+              <>
+                <div className="my-16 border-t border-mist" />
+                <CaseStudySection
+                  number="02"
+                  label={dict.projects.challenge}
+                  title={project.challengeTitle}
+                  body={project.challengeBodyText}
+                />
+              </>
+            )}
 
             {children.length > 0 && (
               <section className="mt-16 border-t border-mist pt-16 pb-4">

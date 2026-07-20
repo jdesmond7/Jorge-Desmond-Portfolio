@@ -6,7 +6,7 @@ import { Nav } from "@/components/layout/Nav";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale, localeToOpenGraph } from "@/lib/i18n/locale";
 import { getSiteUrl } from "@/lib/site";
-import { getHomeContent, getSiteSettings } from "@/lib/strapi";
+import { getHomeContent, getSiteSettings } from "@/lib/data";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({

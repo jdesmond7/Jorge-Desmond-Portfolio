@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "./ArrowRight";
-import { CmsImage } from "./CmsImage";
+import { MediaImage } from "./MediaImage";
 import { Reveal } from "./Reveal";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
@@ -33,9 +33,9 @@ export async function ArticleCard({ post, index }: ArticleCardProps) {
       >
         <div className={`relative aspect-[16/10] w-full ${placeholderClass}`}>
           {post.coverImage ? (
-            <CmsImage
+            <MediaImage
               src={post.coverImage}
-              alt=""
+              alt={post.title}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

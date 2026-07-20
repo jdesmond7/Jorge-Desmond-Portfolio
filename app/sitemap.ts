@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site";
-import { getAllBlogSlugs, getAllProjectSlugs } from "@/lib/strapi";
+import { getAllBlogSlugs, getAllProjectSlugs } from "@/lib/data";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();

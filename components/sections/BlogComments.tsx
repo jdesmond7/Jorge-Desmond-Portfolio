@@ -12,36 +12,53 @@ interface BlogCommentsProps {
   postId: string;
 }
 
+type CommentsState =
+  | { status: "loading" }
+  | { status: "error"; message: string }
+  | { status: "ready"; comments: Comment[] };
+
 export function BlogComments({ postSlug, postId }: BlogCommentsProps) {
   const { dict } = useI18n();
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [state, setState] = useState<CommentsState>({ status: "loading" });
+  const loadError = dict.blog.loadError;
 
-  const loadComments = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(
-        `/api/comments?slug=${encodeURIComponent(postSlug)}`,
-      );
-      if (!res.ok) {
-        setError(dict.blog.loadError);
-        return;
-      }
-      const data = (await res.json()) as { comments: Comment[] };
-      setComments(data.comments);
-    } catch {
-      setError(dict.blog.loadError);
-    } finally {
-      setLoading(false);
-    }
-  }, [postSlug, dict.blog.loadError]);
+  const refresh = useCallback(() => {
+    setState({ status: "loading" });
+    void fetch(`/api/comments?slug=${encodeURIComponent(postSlug)}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error("load-failed");
+        return res.json() as Promise<{ comments: Comment[] }>;
+      })
+      .then((data) => {
+        setState({ status: "ready", comments: data.comments });
+      })
+      .catch(() => {
+        setState({ status: "error", message: loadError });
+      });
+  }, [postSlug, loadError]);
 
   useEffect(() => {
-    void loadComments();
-  }, [loadComments]);
+    const controller = new AbortController();
 
+    void fetch(`/api/comments?slug=${encodeURIComponent(postSlug)}`, {
+      signal: controller.signal,
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error("load-failed");
+        return res.json() as Promise<{ comments: Comment[] }>;
+      })
+      .then((data) => {
+        setState({ status: "ready", comments: data.comments });
+      })
+      .catch((err: unknown) => {
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        setState({ status: "error", message: loadError });
+      });
+
+    return () => controller.abort();
+  }, [postSlug, loadError]);
+
+  const comments = state.status === "ready" ? state.comments : [];
   const total = countComments(comments);
 
   return (
@@ -51,16 +68,18 @@ export function BlogComments({ postSlug, postId }: BlogCommentsProps) {
     >
       <h2
         id="comments-heading"
-        className="mb-6 text-[19px] font-semibold text-carbon"
+        className="mb-6 text-[length:var(--text-xl)] font-semibold text-carbon"
       >
         {dict.blog.comments} ({total})
       </h2>
 
-      {loading ? (
-        <p className="mb-8 text-[15px] text-zinc">{dict.blog.loadingComments}</p>
-      ) : error ? (
-        <p className="mb-8 text-[15px] text-coral" role="alert">
-          {error}
+      {state.status === "loading" ? (
+        <p className="mb-8 text-[length:var(--text-base)] text-zinc">
+          {dict.blog.loadingComments}
+        </p>
+      ) : state.status === "error" ? (
+        <p className="mb-8 text-[length:var(--text-base)] text-coral" role="alert">
+          {state.message}
         </p>
       ) : comments.length > 0 ? (
         <div className="mb-10 space-y-8">
@@ -70,19 +89,21 @@ export function BlogComments({ postSlug, postId }: BlogCommentsProps) {
               comment={comment}
               postSlug={postSlug}
               postId={postId}
-              onRefresh={loadComments}
+              onRefresh={refresh}
             />
           ))}
         </div>
       ) : (
-        <p className="mb-10 text-[15px] text-zinc">{dict.blog.emptyComments}</p>
+        <p className="mb-10 text-[length:var(--text-base)] text-zinc">
+          {dict.blog.emptyComments}
+        </p>
       )}
 
       <div className="rounded-[var(--radius-card)] border border-mist bg-white p-5 sm:p-6">
         <CommentForm
           postSlug={postSlug}
           postId={postId}
-          onSuccess={loadComments}
+          onSuccess={refresh}
         />
       </div>
     </section>

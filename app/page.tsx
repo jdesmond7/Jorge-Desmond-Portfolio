@@ -2,7 +2,7 @@ import { Marquee } from "@/components/ui/Marquee";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { Writing } from "@/components/sections/Writing";
-import { getBlogPosts, getHomeContent, getRecentProjects } from "@/lib/strapi";
+import { getBlogPosts, getHomeContent, getRecentProjects } from "@/lib/data";
 
 export default async function Home() {
   const [home, projects, posts] = await Promise.all([

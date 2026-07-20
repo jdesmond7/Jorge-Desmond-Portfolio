@@ -77,10 +77,10 @@ export function LocaleSwitcher({
     <div ref={rootRef} className={`relative ${fullWidth ? "w-full" : ""} ${className}`}>
       <button
         type="button"
-        className={`inline-flex items-center gap-1.5 rounded-[10px] px-3 py-1.5 font-normal transition-colors ${ghostClass} ${
+        className={`inline-flex items-center gap-1.5 rounded-[var(--radius-control)] px-3 py-1.5 font-normal transition-colors ${ghostClass} ${
           fullWidth
             ? "w-full justify-between text-2xl tracking-[-0.015em]"
-            : "text-[13px] tracking-[-0.005em]"
+            : "text-[length:var(--text-sm)] tracking-[-0.005em]"
         }`}
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -92,7 +92,7 @@ export function LocaleSwitcher({
           className={
             fullWidth
               ? "uppercase"
-              : "mono text-[11px] uppercase tracking-[0.08em]"
+              : "mono text-[length:var(--text-2xs)] uppercase tracking-[0.08em]"
           }
         >
           {localeCode}
@@ -118,7 +118,7 @@ export function LocaleSwitcher({
         <ul
           role="listbox"
           aria-label={dict.nav.language}
-          className={`absolute z-50 mt-2 overflow-hidden rounded-[14px] border p-1 shadow-lg ${menuClass} ${
+          className={`absolute z-50 mt-2 overflow-hidden rounded-[var(--radius-menu)] border p-1 shadow-[var(--shadow-card)] ${menuClass} ${
             fullWidth ? "left-0 right-0" : "right-0 min-w-[148px]"
           }`}
         >
@@ -126,7 +126,7 @@ export function LocaleSwitcher({
             <li key={option.value} role="option" aria-selected={locale === option.value}>
               <button
                 type="button"
-                className={`flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-left text-[13px] transition-colors ${
+                className={`flex w-full items-center justify-between rounded-[var(--radius-control)] px-3 py-2 text-left text-[length:var(--text-sm)] transition-colors ${
                   locale === option.value
                     ? "bg-white/15 text-primary"
                     : "text-white/75 hover:bg-white/10 hover:text-white"
@@ -134,7 +134,7 @@ export function LocaleSwitcher({
                 onClick={() => setLocale(option.value)}
               >
                 <span>{option.label}</span>
-                <span className="mono text-[10px] uppercase tracking-[0.08em] opacity-70">
+                <span className="mono text-[length:var(--text-micro)] uppercase tracking-[0.08em] opacity-70">
                   {option.value.toUpperCase()}
                 </span>
               </button>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "./ArrowRight";
-import { CmsImage } from "./CmsImage";
+import { MediaImage } from "./MediaImage";
 import { Reveal } from "./Reveal";
 import { Tag } from "./Tag";
 import { getDictionary } from "@/lib/i18n";
@@ -43,9 +43,9 @@ export async function ProjectCard({
             }`}
           >
             {project.coverImage ? (
-              <CmsImage
+              <MediaImage
                 src={project.coverImage}
-                alt=""
+                alt={project.title}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"

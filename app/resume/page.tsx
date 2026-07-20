@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
 import { RESUME_EN, RESUME_ES } from "@/lib/i18n/resume-content";
-import { getSiteSettings } from "@/lib/strapi";
+import { getSiteSettings } from "@/lib/data";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();

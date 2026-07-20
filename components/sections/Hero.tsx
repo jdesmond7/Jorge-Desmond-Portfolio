@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/Button";
 import type { HomeContent } from "@/lib/types";
 
 const HERO_POSTER = "/images/hero.png";
-// Secuencia de frames extraída del video (scrub por scroll, sin seeks de video).
-const FRAME_COUNT = 117;
+// Secuencia de frames de alta calidad (scrub por scroll, sin seeks de video).
+const FRAME_COUNT = 45;
 const framePath = (i: number) =>
-  `/video/frames/frame_${String(i).padStart(3, "0")}.jpg`;
+  `/video/hero-video_frames/frame_${String(i).padStart(3, "0")}.jpg`;
 // Porción del scroll dedicada al scrub. El resto (1 - SCRUB_PORTION) es una
 // zona de "hold" donde el frame final y el texto quedan fijos para leerlos.
 const SCRUB_PORTION = 0.62;
@@ -145,7 +145,7 @@ export function Hero({ content }: HeroProps) {
                 visibility: introOpacity <= 0.01 ? "hidden" : "visible",
               }}
             >
-              <p className="font-body mb-2 text-[15px] font-normal text-white md:mb-3 md:text-[17px]">
+              <p className="font-body mb-2 text-[length:var(--text-base)] font-normal text-white md:mb-3 md:text-[length:var(--text-lg)]">
                 {content.heroGreeting}
               </p>
               <h1 className="font-display text-[clamp(72px,17vw,128px)] uppercase leading-[0.88] tracking-[0.02em] text-white md:leading-[0.9]">
