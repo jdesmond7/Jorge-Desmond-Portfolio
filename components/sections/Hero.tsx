@@ -5,11 +5,11 @@ import { useI18n } from "@/components/i18n/I18nProvider";
 import { Button } from "@/components/ui/Button";
 import type { HomeContent } from "@/lib/types";
 
-const HERO_POSTER = "/images/hero.png";
+const HERO_POSTER = "/images/hero.webp";
 // Secuencia de frames de alta calidad (scrub por scroll, sin seeks de video).
 const FRAME_COUNT = 45;
 const framePath = (i: number) =>
-  `/video/hero-video_frames/frame_${String(i).padStart(3, "0")}.jpg`;
+  `/video/hero-frames/frame_${String(i).padStart(3, "0")}.webp`;
 // Porción del scroll dedicada al scrub. El resto (1 - SCRUB_PORTION) es una
 // zona de "hold" donde el frame final y el texto quedan fijos para leerlos.
 const SCRUB_PORTION = 0.62;
@@ -48,30 +48,70 @@ export function Hero({ content }: HeroProps) {
 
     const images: HTMLImageElement[] = [];
     let dimsSet = false;
+    let target = 0; // índice de frame objetivo (float)
+    let current = 0; // índice suavizado
+    let lastDrawn = -1;
 
     const drawFrame = (idx: number) => {
       const img = images[idx];
-      if (!img || !img.complete || !img.naturalWidth) return;
+      if (!img || !img.complete || !img.naturalWidth) return false;
       if (!dimsSet) {
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
         dimsSet = true;
       }
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      return true;
     };
 
-    // Precarga de todos los frames.
-    for (let i = 1; i <= FRAME_COUNT; i++) {
+    const loadFrame = (i: number) => {
       const img = new Image();
+      img.decoding = "async";
       img.src = framePath(i);
-      if (i === 1) img.onload = () => drawFrame(0);
       images[i - 1] = img;
+      return img;
+    };
+
+    // El primer frame se carga de inmediato para pintar el hero cuanto antes.
+    const first = loadFrame(1);
+    // Al cargar cualquier frame forzamos un redibujo por si es el objetivo actual.
+    const onFrameReady = () => {
+      lastDrawn = -1;
+    };
+    first.onload = () => {
+      drawFrame(0);
+      onFrameReady();
+    };
+
+    // El resto se precarga en segundo plano (ventana deslizante de 3) para no
+    // competir con el contenido crítico ni saturar la red en la carga inicial.
+    let nextToLoad = 2;
+    const loadNext = () => {
+      if (nextToLoad > FRAME_COUNT) return;
+      const img = loadFrame(nextToLoad);
+      nextToLoad += 1;
+      img.onload = () => {
+        onFrameReady();
+        loadNext();
+      };
+      img.onerror = () => loadNext();
+    };
+    const startBackgroundLoad = () => {
+      loadNext();
+      loadNext();
+      loadNext();
+    };
+    const w = window as Window &
+      typeof globalThis & {
+        requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void;
+      };
+    if (typeof w.requestIdleCallback === "function") {
+      w.requestIdleCallback(startBackgroundLoad, { timeout: 1500 });
+    } else {
+      window.setTimeout(startBackgroundLoad, 300);
     }
 
     let raf = 0;
-    let target = 0; // índice de frame objetivo (float)
-    let current = 0; // índice suavizado
-    let lastDrawn = -1;
 
     const onScroll = () => {
       const scrollable = section.offsetHeight - window.innerHeight;
@@ -87,8 +127,7 @@ export function Hero({ content }: HeroProps) {
       current += (target - current) * 0.2;
       if (Math.abs(target - current) < 0.01) current = target;
       const idx = clamp(Math.round(current), 0, FRAME_COUNT - 1);
-      if (idx !== lastDrawn) {
-        drawFrame(idx);
+      if (idx !== lastDrawn && drawFrame(idx)) {
         lastDrawn = idx;
       }
       raf = requestAnimationFrame(tick);

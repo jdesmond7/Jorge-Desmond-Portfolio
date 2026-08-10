@@ -10,6 +10,10 @@ function getInstagramImagePatterns() {
 
 const nextConfig: NextConfig = {
   images: {
+    // AVIF primero (mejor compresión), con WebP como respaldo.
+    formats: ["image/avif", "image/webp"],
+    // Cachea las imágenes optimizadas por 31 días para evitar re-optimizaciones.
+    minimumCacheTTL: 2678400,
     remotePatterns: [...getInstagramImagePatterns()],
   },
   async headers() {

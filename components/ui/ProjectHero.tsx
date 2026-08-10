@@ -12,7 +12,7 @@ export function ProjectHero({ src, alt }: ProjectHeroProps) {
         src={src}
         alt={alt}
         fill
-        priority
+        preload
         className="object-cover"
         sizes="100vw"
       />

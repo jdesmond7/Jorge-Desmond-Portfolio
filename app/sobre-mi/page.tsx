@@ -107,7 +107,7 @@ export default async function SobreMiPage() {
           src={about.heroImage}
           alt={dict.about.heroAlt}
           fill
-          priority
+          preload
           className="object-cover"
           sizes="100vw"
         />

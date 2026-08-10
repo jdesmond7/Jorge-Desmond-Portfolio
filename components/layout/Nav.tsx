@@ -193,12 +193,12 @@ export function Nav({
           </div>
 
           <div className="hidden items-center gap-4 justify-self-end md:flex">
-            <a
+            <Link
               href={resume}
               className={navLinkClass(isNavLinkActive(pathname, resume))}
             >
               {dict.nav.resume}
-            </a>
+            </Link>
             <a
               href={safeLinkedin}
               target={isExternalHref(safeLinkedin) ? "_blank" : undefined}
@@ -300,13 +300,13 @@ export function Nav({
                   </Link>
                 );
               })}
-              <a
+              <Link
                 href={resume}
                 className={mobileNavLinkClass(isNavLinkActive(pathname, resume))}
                 onClick={closeMenu}
               >
                 {dict.nav.resume}
-              </a>
+              </Link>
               <a
                 href={safeLinkedin}
                 target={isExternalHref(safeLinkedin) ? "_blank" : undefined}
