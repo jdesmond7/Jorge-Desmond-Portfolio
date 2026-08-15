@@ -15,7 +15,7 @@ before this i was at [spin by oxxo](https://spin.mx/) and [grupo salinas](https:
 
 at night i illustrate. i prefer analog: india ink, alcohol markers, paper. when the project calls for it, i work digital too, in procreate. no ctrl+z if i can help it.
 
-i'm building three brands, slowly and on purpose: [desmond.design](https://desmond.design/) for systems consulting, [built by des](https://builtbydes.com/) for fitness, and [frame & font](https://frameandfont.com/) for design education (this last one with my partner, in work and life, liz).
+i'm building three brands, slowly and on purpose: desmond.design for systems consulting, [built by des](https://builtbydes.com/) for fitness, and [frame & font](https://frameandfont.com/) for design education (this last one with my partner, in work and life, liz).
 
 write me at [hola@jorgedesmond.com](mailto:hola@jorgedesmond.com) or find me on [linkedin](https://linkedin.com/in/jorgedesmond) / [instagram](https://instagram.com/jorgedesmond).
 
