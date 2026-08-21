@@ -66,8 +66,6 @@ El proyecto arrancó con una fase de discovery en colaboración cercana con el e
 
 Definimos User Personas desde el inicio. No como entregable, sino como referencia constante. María Hernández, dueña de un negocio informal en el Estado de México, alfabetización digital baja-media, relación alta con OXXO. Su miedo principal: equivocarse y perder dinero. Su necesidad: entender qué pasa en cada paso.
 
-<!-- IMG: spin-persona-maria.png — Persona de María Hernández usada como referencia de diseño -->
-
 ![spin-persona-maria.png](/images/projects/oxxo-spin/spin-persona-maria.png)
 
 Esas personas aterrizaron cada decisión de diseño en comportamientos reales, no en suposiciones.
@@ -89,8 +87,6 @@ Probamos con alrededor de 50 usuarios a lo largo de toda la república mexicana,
 - ¿Podrían completar la tarea sin ayuda usuarios con baja alfabetización digital?
 
 El resultado: una tasa de aceptación del 90%. Los usuarios describieron el flujo de forma consistente como claro, confiable y fácil de entender, sin importar edad ni nivel de experiencia digital.
-
-<!-- IMG: spin-sitemap-wireframes.png — Sitemap del producto (Miro) y wireframes de baja fidelidad del flujo SPEI -->
 
 ![spin-sitemap-wireframes.png](/images/projects/oxxo-spin/spin-sitemap-wireframes.png)
 
@@ -120,8 +116,6 @@ Agregué una pantalla de confirmación explícita antes de ejecutar la transfere
 
 La marca OXXO ya cargaba con gran parte de esa confianza. El flujo la reforzó. En las pruebas, los usuarios mencionaron una y otra vez que se sentían seguros, que el proceso les daba tranquilidad. El respaldo de OXXO abría la puerta. El diseño confirmaba que podían pasar.
 
-<!-- IMG: spin-spei-flow-final.png — Flujo SPEI final: confirmación de destinatario, resumen antes de enviar, token de seguridad y comprobante -->
-
 ![spin-spei-flow-final.png](/images/projects/oxxo-spin/spin-spei-flow-final.png)
 
 > A veces el mejor diseño no es el que quita pasos. Es el que pone el paso correcto en el momento correcto.
@@ -139,8 +133,6 @@ El trabajo de UI fue deliberadamente system-first. Tipografía, color, espaciado
 La interfaz se diseñó para sentirse clara, calmada y accesible, especialmente para usuarios con baja alfabetización digital y financiera. Puse atención especial en estados y feedback (carga, éxito, error, vacíos), asegurando que acciones sensibles como las transferencias SPEI siempre vinieran acompañadas de señales visuales claras y confirmaciones.
 
 El Design System lo construí desde cero. Empezó pequeño y creció junto al producto durante la etapa de lanzamiento. Al alinear las decisiones de UI con ese sistema en evolución, el equipo redujo inconsistencias, agilizó el handoff a desarrollo, e iteró más rápido. Ese enfoque dejó las bases para que SPIN se adaptara a cambios regulatorios y funcionales con el tiempo, preservando una experiencia coherente y confiable.
-
-<!-- IMG: spin-design-system-components.png — Documentación del Primary Button (estados, márgenes, tipografía, tokens de color) y estados de transacción del sistema -->
 
 ![spin-design-system-components.png](/images/projects/oxxo-spin/spin-design-system-components.png)
 

@@ -65,8 +65,6 @@ The project kicked off with a discovery phase in close collaboration with the UX
 
 We defined User Personas from the start. Not as a deliverable, but as a constant reference. María Hernández, owner of an informal business in the State of Mexico, low-to-medium digital literacy, high relationship with OXXO. Her main fear: making a mistake and losing money. Her need: understanding what happens at every step.
 
-<!-- IMG: spin-persona-maria.png — María Hernández persona used as a design reference -->
-
 ![spin-persona-maria.png](/images/projects/oxxo-spin/spin-persona-maria.png)
 
 Those personas grounded every design decision in real behaviors, not assumptions.
@@ -88,8 +86,6 @@ We tested with around 50 users across all of Mexico, remotely. Together we defin
 - Could users with low digital literacy complete the task without help?
 
 The result: a 90% acceptance rate. Users consistently described the flow as clear, trustworthy, and easy to understand, regardless of age or level of digital experience.
-
-<!-- IMG: spin-sitemap-wireframes.png — Product sitemap (Miro) and low-fidelity wireframes of the SPEI flow -->
 
 ![spin-sitemap-wireframes.png](/images/projects/oxxo-spin/spin-sitemap-wireframes.png)
 
@@ -119,8 +115,6 @@ I added an explicit confirmation screen before executing the transfer. The user 
 
 The OXXO brand already carried much of that trust. The flow reinforced it. In testing, users mentioned again and again that they felt safe, that the process put them at ease. OXXO's backing opened the door. The design confirmed they could walk through it.
 
-<!-- IMG: spin-spei-flow-final.png — Final SPEI flow: recipient confirmation, summary before sending, security token, and receipt -->
-
 ![spin-spei-flow-final.png](/images/projects/oxxo-spin/spin-spei-flow-final.png)
 
 > Sometimes the best design isn't the one that removes steps. It's the one that puts the right step at the right moment.
@@ -138,8 +132,6 @@ The UI work was deliberately system-first. Typography, color, spacing, and compo
 The interface was designed to feel clear, calm, and accessible, especially for users with low digital and financial literacy. I paid special attention to states and feedback (loading, success, error, empty), making sure sensitive actions like SPEI transfers always came with clear visual cues and confirmations.
 
 I built the Design System from scratch. It started small and grew alongside the product during the launch stage. By aligning UI decisions with that evolving system, the team reduced inconsistencies, streamlined developer handoff, and iterated faster. That approach laid the groundwork for SPIN to adapt to regulatory and functional changes over time, preserving a coherent and reliable experience.
-
-<!-- IMG: spin-design-system-components.png — Primary Button documentation (states, margins, typography, color tokens) and system transaction states -->
 
 ![spin-design-system-components.png](/images/projects/oxxo-spin/spin-design-system-components.png)
 

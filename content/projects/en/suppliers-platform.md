@@ -69,8 +69,6 @@ Given the complexity of supplier management, I decided to run structured focus g
 
 Together we mapped the complete supplier workflow, identifying data touchpoints, manual tasks, repetitive processes, bottlenecks in quote preparation, and error-prone areas.
 
-<!-- IMG: growrk-suppliers-userflow.png — Section of the supplier user flow created during the focus groups (FigJam, 2024) -->
-
 ![growrk-suppliers-userflow.png](/images/projects/growrk-suppliers-platform/growrk-suppliers-userflow.png)
 
 This collaborative discovery phase created alignment across stakeholders and ensured the solution reflected real operational needs, not assumptions.
@@ -93,8 +91,6 @@ I proposed an automated invoice generation tool. It wasn't in the brief. I raise
 
 This required close collaboration with Engineering to define data dependencies, automation logic, permission structures, and scalability considerations. The result cut quote preparation from 20-30 minutes to 5-10.
 
-<!-- IMG: growrk-suppliers-wireframes-lowfi.png — Low-fidelity wireframes of the key sections of the supplier flow (Figma, 2024) -->
-
 ![growrk-suppliers-wireframes-lowfi.png](/images/projects/growrk-suppliers-platform/growrk-suppliers-wireframes-lowfi.png)
 
 > The best feature of the project wasn't in the original request. It came from understanding the flow, not from reading the brief.
@@ -109,11 +105,7 @@ The Junior designer developed the high-fidelity mockups under my mentorship, whi
 
 I developed the interactive prototype used in the validation sessions and presentations. In parallel, I extended the Design System with new components for supplier management and documented every change so Engineering could implement them consistently.
 
-<!-- IMG: growrk-suppliers-hifi-mockups.png — High-fidelity mockups of the key sections of the supplier flow (Figma, 2024) -->
-
 ![growrk-suppliers-hifi-mockups.png](/images/projects/growrk-suppliers-platform/growrk-suppliers-hifi-mockups.png)
-
-<!-- IMG: growrk-suppliers-badge-documentation.png — Badge component documentation in the GroWrk Design System (Figma / Notion, 2024) -->
 
 ![growrk-suppliers-badge-documentation.png](/images/projects/growrk-suppliers-platform/growrk-suppliers-badge-documentation.png)
 
@@ -142,8 +134,6 @@ That translated into roughly 2 to 3 hours saved daily at the team level.
 The internal platform served the operational teams. But seeing the efficiency gains and the structured data management, leadership identified an opportunity: extend that transparency outward, directly to the suppliers.
 
 I worked end-to-end on the Supplier App, a platform for suppliers to manage and update their own catalogs. The goal was to decentralize data updates and reduce internal operational dependency. We prepared it over 8 months between design and engineering, and gave it a year in the suppliers' hands.
-
-<!-- IMG: growrk-supplier-app-screens.png — Screens from the external Supplier App (Figma, 2025) -->
 
 ![growrk-supplier-app-screens.png](/images/projects/growrk-suppliers-platform/growrk-supplier-app-screens.png)
 

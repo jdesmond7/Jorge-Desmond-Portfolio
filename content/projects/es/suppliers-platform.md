@@ -69,8 +69,6 @@ Dada la complejidad de la gestión de proveedores, decidí conducir focus groups
 
 Juntos mapeamos el flujo completo de proveedores, identificando puntos de contacto de datos, tareas manuales, procesos repetitivos, cuellos de botella en la preparación de cotizaciones, y áreas propensas a error.
 
-<!-- IMG: growrk-suppliers-userflow.png — Sección del user flow de proveedores creado durante los focus groups (FigJam, 2024) -->
-
 ![growrk-suppliers-userflow.png](/images/projects/growrk-suppliers-platform/growrk-suppliers-userflow.png)
 
 Esta fase de discovery colaborativa creó alineación entre stakeholders y aseguró que la solución reflejara necesidades operativas reales, no suposiciones.
@@ -93,8 +91,6 @@ Propuse una herramienta de generación automática de facturas. No estaba en el 
 
 Esto requirió colaboración cercana con Ingeniería para definir dependencias de datos, lógica de automatización, estructura de permisos y consideraciones de escalabilidad. El resultado bajó la preparación de cotizaciones de 20-30 minutos a 5-10.
 
-<!-- IMG: growrk-suppliers-wireframes-lowfi.png — Wireframes de baja fidelidad de las secciones clave del flujo de proveedores (Figma, 2024) -->
-
 ![growrk-suppliers-wireframes-lowfi.png](/images/projects/growrk-suppliers-platform/growrk-suppliers-wireframes-lowfi.png)
 
 > La mejor feature del proyecto no estaba en la petición original. Salió de entender el flujo, no de leer el brief.
@@ -109,11 +105,7 @@ El diseñador Junior desarrolló los mockups de alta fidelidad bajo mi mentoría
 
 Desarrollé el prototipo interactivo usado en las sesiones de validación y las presentaciones. En paralelo, extendí el Design System con nuevos componentes para la gestión de proveedores y documenté cada cambio para que Ingeniería los implementara de forma consistente.
 
-<!-- IMG: growrk-suppliers-hifi-mockups.png — Mockups de alta fidelidad de las secciones clave del flujo de proveedores (Figma, 2024) -->
-
 ![growrk-suppliers-hifi-mockups.png](/images/projects/growrk-suppliers-platform/growrk-suppliers-hifi-mockups.png)
-
-<!-- IMG: growrk-suppliers-badge-documentation.png — Documentación del componente Badge en el Design System de GroWrk (Figma / Notion, 2024) -->
 
 ![growrk-suppliers-badge-documentation.png](/images/projects/growrk-suppliers-platform/growrk-suppliers-badge-documentation.png)
 
@@ -142,8 +134,6 @@ Eso se tradujo en aproximadamente 2 a 3 horas ahorradas al día a nivel equipo.
 La plataforma interna servía a los equipos operativos. Pero al ver las ganancias de eficiencia y la gestión estructurada de datos, el liderazgo identificó una oportunidad: extender esa transparencia hacia afuera, directo a los proveedores.
 
 Trabajé end-to-end en el Supplier App, una plataforma para que los proveedores gestionaran y actualizaran sus propios catálogos. El objetivo era descentralizar las actualizaciones de datos y reducir la dependencia operativa interna. Lo preparamos durante 8 meses entre diseño e ingeniería, y le dimos un año en manos de los proveedores.
-
-<!-- IMG: growrk-supplier-app-screens.png — Pantallas del Supplier App externo (Figma, 2025) -->
 
 ![growrk-supplier-app-screens.png](/images/projects/growrk-suppliers-platform/growrk-supplier-app-screens.png)
 
