@@ -39,7 +39,7 @@ function ConnectRow({
 }) {
   return (
     <div className="flex items-start gap-4 border-b border-mist py-3.5 last:border-0">
-      <span className="mono w-[68px] shrink-0 pt-0.5 text-[10px] uppercase tracking-[0.08em] text-ash">
+      <span className="mono w-[68px] shrink-0 pt-0.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc">
         {label}
       </span>
       <a
@@ -104,11 +104,11 @@ export default async function ResumePage() {
                         <h3 className="text-[18px] font-bold leading-[1.25] tracking-[-0.01em] text-carbon md:text-[20px]">
                           {entry.role}
                         </h3>
-                        <span className="mono shrink-0 text-[12px] tracking-[-0.006em] text-ash">
+                        <span className="mono shrink-0 text-[12px] tracking-[-0.006em] text-zinc">
                           {entry.period}
                         </span>
                       </div>
-                      <div className="mt-1 text-[14px] font-semibold tracking-[-0.005em] text-coral">
+                      <div className="mt-1 text-[14px] font-semibold tracking-[-0.005em] text-coral-text">
                         {entry.company}
                         {entry.detail ? (
                           <span className="text-zinc"> · {entry.detail}</span>
@@ -152,7 +152,7 @@ export default async function ResumePage() {
           <aside className="min-w-0 md:sticky md:top-28 md:self-start">
             <Reveal delay={0.1}>
               <div className="rounded-[var(--radius-card)] border border-mist p-6">
-                <div className="mono mb-2 text-[11px] uppercase tracking-[0.1em] text-ash">
+                <div className="mono mb-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-zinc">
                   Connect
                 </div>
                 <ConnectRow label="Email" href={`mailto:${settings.email}`}>

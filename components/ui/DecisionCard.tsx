@@ -55,7 +55,7 @@ export function DecisionCard({
         aria-expanded={open}
       >
         <div className="flex min-w-0 items-start gap-3.5">
-          <span className="mono pt-0.5 text-[11px] font-bold text-coral">
+          <span className="mono pt-0.5 text-[12px] font-bold text-coral-text">
             {number}
           </span>
           <div className="min-w-0">
@@ -74,7 +74,7 @@ export function DecisionCard({
         <div className="mt-5 pl-[26px]">
           {context && (
             <div className="mb-4">
-              <div className="mono mb-1.5 text-[11px] uppercase tracking-[0.12em] text-ash">
+              <div className="mono mb-1.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-zinc">
                 {dict.projects.decision.context}
               </div>
               <p className={bodyTextClass}>{context}</p>
@@ -83,7 +83,7 @@ export function DecisionCard({
 
           {decision && (
             <div className="mb-4">
-              <div className="mono mb-1.5 text-[11px] uppercase tracking-[0.12em] text-ash">
+              <div className="mono mb-1.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-zinc">
                 {dict.projects.decision.decision}
               </div>
               <p className={bodyTextClass}>{decision}</p>
@@ -92,7 +92,7 @@ export function DecisionCard({
 
           {result && (
             <div className="rounded-lg bg-fog px-4 py-3.5">
-              <div className="mono mb-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-coral">
+              <div className="mono mb-1.5 text-[12px] font-bold uppercase tracking-[0.12em] text-coral-text">
                 {dict.projects.decision.outcome}
               </div>
               <p className={bodyTextClass}>{result}</p>

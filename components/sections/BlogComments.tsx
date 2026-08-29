@@ -78,7 +78,7 @@ export function BlogComments({ postSlug, postId }: BlogCommentsProps) {
           {dict.blog.loadingComments}
         </p>
       ) : state.status === "error" ? (
-        <p className="mb-8 text-[length:var(--text-base)] text-coral" role="alert">
+        <p className="mb-8 text-[length:var(--text-base)] text-coral-text" role="alert">
           {state.message}
         </p>
       ) : comments.length > 0 ? (

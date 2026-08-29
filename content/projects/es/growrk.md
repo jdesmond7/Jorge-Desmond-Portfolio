@@ -1,5 +1,5 @@
 ---
-title: "De MVP caótico a sistema de diseño con IA"
+title: "GroWrk: De MVP caótico a sistema de diseño con IA"
 slug: growrk
 locale: es
 order: 1
@@ -18,15 +18,8 @@ metrics:
   - value: "50K+"
     label: "Usuarios en producción. Operación activa en más de 150 países"
 coverImage: /images/projects/growrk/banner-growrk-projects.png
+cardImage: /images/projects/growrk/growrk-card-project.png
 showInHome: true
----
-
-## De MVP caótico a sistema de diseño con IA
-
-Infraestructura de diseño completa para una plataforma B2B SaaS global: 3 generaciones de Design System, 5 plataformas y un AI Playground que genera UI con 80–90% de fidelidad desde un prompt.
-
-**50K+** · Usuarios en producción. Operación activa en más de 150 países.
-
 ---
 
 ## 01 · Overview

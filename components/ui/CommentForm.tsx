@@ -77,7 +77,7 @@ export function CommentForm({
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block">
-          <span className="mono mb-1.5 block text-[11px] tracking-[-0.006em] text-ash">
+          <span className="mono mb-1.5 block text-[12px] tracking-[-0.006em] text-zinc">
             {dict.comments.nameOptional}
           </span>
           <input
@@ -90,7 +90,7 @@ export function CommentForm({
           />
         </label>
         <label className="block">
-          <span className="mono mb-1.5 block text-[11px] tracking-[-0.006em] text-ash">
+          <span className="mono mb-1.5 block text-[12px] tracking-[-0.006em] text-zinc">
             {dict.comments.emailOptional}
           </span>
           <input
@@ -129,7 +129,7 @@ export function CommentForm({
       />
 
       {error ? (
-        <p className="text-[14px] text-coral" role="alert">
+        <p className="text-[14px] text-coral-text" role="alert">
           {error}
         </p>
       ) : null}

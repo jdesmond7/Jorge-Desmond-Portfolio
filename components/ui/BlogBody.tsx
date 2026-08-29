@@ -114,14 +114,14 @@ const components: Components = {
 
   a({ href, children }) {
     const safeHref = sanitizeHref(href);
-    if (!safeHref) return <span className="text-coral">{children}</span>;
+    if (!safeHref) return <span className="text-coral-text">{children}</span>;
 
     return (
       <a
         href={safeHref}
         target={isExternalHref(safeHref) ? "_blank" : undefined}
         rel={isExternalHref(safeHref) ? "noopener noreferrer" : undefined}
-        className="text-coral underline-offset-2 hover:underline"
+        className="text-coral-text underline-offset-2 hover:underline"
       >
         {children}
       </a>

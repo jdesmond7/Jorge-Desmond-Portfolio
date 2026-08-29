@@ -37,10 +37,10 @@ const components: Components = {
     if (parsed) {
       return (
         <div className="mb-5 mt-16 flex items-center gap-3 first:mt-0">
-          <span className="mono text-[11px] font-bold text-coral">
+          <span className="mono text-[12px] font-bold text-coral-text">
             {parsed.number}
           </span>
-          <span className="text-[11px] uppercase tracking-[0.12em] text-ash">
+          <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-zinc">
             {parsed.label}
           </span>
         </div>
@@ -58,7 +58,7 @@ const components: Components = {
     if (parsed) {
       return (
         <h3 className="mb-4 mt-10 flex items-baseline gap-3 text-[19px] font-semibold leading-[1.3] tracking-[-0.009em] text-carbon">
-          <span className="mono text-[12px] font-bold text-coral">
+          <span className="mono text-[12px] font-bold text-coral-text">
             {parsed.number}
           </span>
           <span>{parsed.label}</span>
@@ -139,7 +139,7 @@ const components: Components = {
   li({ children }) {
     return (
       <li className="flex gap-2.5 border-b border-mist bg-white px-4 py-2.5 last:border-b-0">
-        <span className="mt-[3px] shrink-0 text-[12px] text-coral">✓</span>
+        <span className="mt-[3px] shrink-0 text-[12px] text-coral-text">✓</span>
         <span className="text-[14px] leading-[1.6] tracking-[-0.005em] text-carbon">
           {children}
         </span>
@@ -161,14 +161,14 @@ const components: Components = {
 
   a({ href, children }) {
     const safeHref = sanitizeHref(href);
-    if (!safeHref) return <span className="text-coral">{children}</span>;
+    if (!safeHref) return <span className="text-coral-text">{children}</span>;
 
     return (
       <a
         href={safeHref}
         target={isExternalHref(safeHref) ? "_blank" : undefined}
         rel={isExternalHref(safeHref) ? "noopener noreferrer" : undefined}
-        className="text-coral underline-offset-2 hover:underline"
+        className="text-coral-text underline-offset-2 hover:underline"
       >
         {children}
       </a>
@@ -348,7 +348,7 @@ function VersionCard({ version, year, title, items, note }: VersionCardData) {
         <span className="rounded-pill bg-carbon px-3 py-1 text-[13px] font-bold leading-none text-white">
           {version}
         </span>
-        {year && <span className="mono text-[11px] text-ash">{year}</span>}
+        {year && <span className="mono text-[12px] text-zinc">{year}</span>}
       </div>
 
       {title && (
@@ -364,7 +364,7 @@ function VersionCard({ version, year, title, items, note }: VersionCardData) {
               key={index}
               className={`flex gap-2.5 py-2 ${index < items.length - 1 ? "border-b border-mist" : ""}`}
             >
-              <span className="mt-[3px] shrink-0 text-[12px] text-coral">✓</span>
+              <span className="mt-[3px] shrink-0 text-[12px] text-coral-text">✓</span>
               <span className="text-[14px] leading-[1.6] tracking-[-0.005em] text-carbon">
                 {item}
               </span>

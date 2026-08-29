@@ -137,7 +137,7 @@ export function Footer({
                 <span>{dict.footer.writeMe}</span>
                 <ArrowUpRight className="opacity-70 transition-opacity group-hover:opacity-100" />
               </a>
-              <p className="mt-2 text-[length:var(--text-md)] text-white/50">{email}</p>
+              <p className="mt-2 text-[length:var(--text-md)] text-white/55">{email}</p>
             </div>
 
             <div>
@@ -171,7 +171,7 @@ export function Footer({
             </div>
           </div>
 
-          <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-8 text-[length:var(--text-xs)] text-white/45 md:mt-14 md:flex-row md:items-center md:justify-between">
+          <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-8 text-[length:var(--text-xs)] text-white/50 md:mt-14 md:flex-row md:items-center md:justify-between">
             <span>© {new Date().getFullYear()} Jorge Desmond</span>
             <span className="mono tracking-[-0.006em]">{footerText}</span>
           </div>

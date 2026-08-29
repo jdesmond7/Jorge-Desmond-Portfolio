@@ -29,12 +29,12 @@ export async function ProjectNav({
           href={`/proyectos/${prev.slug}`}
           className="block rounded-[var(--radius-card)] border border-mist p-6 no-underline transition-colors hover:border-carbon"
         >
-          <div className="mono mb-2 text-[10px] uppercase tracking-[0.1em] text-ash">
+          <div className="mono mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-zinc">
             {dict.projects.prev}
           </div>
           <div className="text-[15px] font-semibold text-carbon">{prev.title}</div>
           {prev.subtitle && (
-            <div className="mt-1 text-[12px] text-coral">{prev.subtitle}</div>
+            <div className="mt-1 text-[12px] text-coral-text">{prev.subtitle}</div>
           )}
         </Link>
       ) : (
@@ -46,12 +46,12 @@ export async function ProjectNav({
           href={`/proyectos/${next.slug}`}
           className="block rounded-[var(--radius-card)] border border-mist p-6 text-left no-underline transition-colors hover:border-coral sm:text-right"
         >
-          <div className="mono mb-2 text-[10px] uppercase tracking-[0.1em] text-ash">
+          <div className="mono mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-zinc">
             {dict.projects.next}
           </div>
           <div className="text-[15px] font-semibold text-carbon">{next.title}</div>
           {next.subtitle && (
-            <div className="mt-1 text-[12px] text-coral">{next.subtitle}</div>
+            <div className="mt-1 text-[12px] text-coral-text">{next.subtitle}</div>
           )}
         </Link>
       ) : (

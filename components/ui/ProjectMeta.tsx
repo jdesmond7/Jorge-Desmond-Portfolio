@@ -33,7 +33,7 @@ export async function ProjectMeta({
             key={item.label}
             className={`p-5 ${index > 0 ? "border-t border-mist sm:border-t-0 sm:border-l" : ""}`}
           >
-            <div className="mono mb-1.5 text-[10px] uppercase tracking-[0.1em] text-ash">
+            <div className="mono mb-1.5 text-[12px] font-semibold uppercase tracking-[0.1em] text-zinc">
               {item.label}
             </div>
             <div className="text-[13px] font-semibold leading-[1.4] text-carbon">

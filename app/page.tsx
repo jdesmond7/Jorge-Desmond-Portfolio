@@ -1,22 +1,23 @@
 import { Marquee } from "@/components/ui/Marquee";
 import { Hero } from "@/components/sections/Hero";
+import { Manifesto } from "@/components/sections/Manifesto";
 import { Projects } from "@/components/sections/Projects";
-import { Writing } from "@/components/sections/Writing";
-import { getBlogPosts, getHomeContent, getRecentProjects } from "@/lib/data";
+import { Skills } from "@/components/sections/Skills";
+import { getHomeContent, getRecentProjects } from "@/lib/data";
 
 export default async function Home() {
-  const [home, projects, posts] = await Promise.all([
+  const [home, projects] = await Promise.all([
     getHomeContent(),
     getRecentProjects(),
-    getBlogPosts(5),
   ]);
 
   return (
     <>
       <Hero content={home} />
       <Marquee />
-      <Projects projects={projects} className="pt-[120px] md:pt-[240px]" />
-      <Writing posts={posts} />
+      <Skills />
+      <Manifesto />
+      <Projects projects={projects} className="pt-16 md:pt-24" />
     </>
   );
 }

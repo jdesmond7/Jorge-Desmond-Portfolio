@@ -75,7 +75,7 @@ function AboutParagraph({
 
   if (isSignOff) {
     return (
-      <p className="pt-2 text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc/80">
+      <p className="pt-2 text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
         {dict.about.signOff}, jorge
       </p>
     );

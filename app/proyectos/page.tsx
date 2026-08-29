@@ -30,7 +30,7 @@ export default async function ProyectosPage() {
           {dict.projects.listIntro}
         </p>
       </Container>
-      <Projects projects={projects} showAllLink={false} />
+      <Projects projects={projects} />
     </div>
   );
 }

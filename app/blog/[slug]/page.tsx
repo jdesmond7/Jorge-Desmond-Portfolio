@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       >
         <BackLink href="/blog">{dict.blog.back}</BackLink>
 
-        <div className="mono mb-4 text-[11px] tracking-[-0.006em] text-ash">
+        <div className="mono mb-4 text-[12px] tracking-[-0.006em] text-zinc">
           {formatDate(post.publishedAt, dateLocale)}
         </div>
         <h1 className="font-body mb-6 w-full text-[clamp(28px,5vw,48px)] font-bold leading-[1.15] text-carbon">

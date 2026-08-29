@@ -14,7 +14,6 @@ export const EN_SITE_SETTINGS: Pick<
   navLinks: [
     { label: "Case studies", href: "/proyectos" },
     { label: "Illustration", href: "/ilustracion" },
-    { label: "Blog", href: "/blog" },
     { label: "About", href: "/sobre-mi" },
   ],
   footerText: "monterrey, mexico — designed as a system",
@@ -32,9 +31,9 @@ export const EN_HOME: Pick<
   | "ctaTitle"
   | "ctaSubtitle"
 > = {
-  heroGreeting: "Hey, I'm",
+  heroGreeting: "Hi, my name is",
   heroSubtitle:
-    "From traditional Design Systems to AI design architecture. Lecturer at Tec de Monterrey. The same discipline on and off screen.",
+    "I design systems, from token to full product. I take apps from zero to one, build Design Systems that scale, and explore how AI is changing the way we design. Lecturer at Tec de Monterrey.",
   trustBadges: [
     "10+ Years exp.",
     "5 E2E Platforms",

@@ -127,7 +127,7 @@ export function CommentItem({
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2 text-[14px]">
-              <span className="font-semibold text-coral">{displayName}</span>
+              <span className="font-semibold text-coral-text">{displayName}</span>
               <span className="text-ash">·</span>
               <time
                 dateTime={comment.createdAt}
@@ -150,7 +150,7 @@ export function CommentItem({
               <span
                 className={`mono min-w-[2ch] text-center text-[12px] ${
                   score > 0
-                    ? "text-coral"
+                    ? "text-coral-text"
                     : score < 0
                       ? "text-zinc"
                       : "text-ash"
@@ -171,7 +171,7 @@ export function CommentItem({
           </div>
 
           {voteError ? (
-            <p className="mb-2 text-[13px] text-coral">{voteError}</p>
+            <p className="mb-2 text-[13px] text-coral-text">{voteError}</p>
           ) : null}
 
           <p className="whitespace-pre-wrap text-[15px] leading-[1.55] text-carbon">

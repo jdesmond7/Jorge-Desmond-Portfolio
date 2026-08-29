@@ -1,101 +1,150 @@
-import Link from "next/link";
-import { ArrowRight } from "./ArrowRight";
-import { MediaImage } from "./MediaImage";
-import { Reveal } from "./Reveal";
-import { Tag } from "./Tag";
-import { getDictionary } from "@/lib/i18n";
-import { getLocale } from "@/lib/i18n/locale";
-import type { Project } from "@/lib/types";
+"use client";
 
-const PLACEHOLDER_GRADIENTS = [
-  "bg-gradient-to-br from-coral/20 via-coral/5 to-cream",
-  "bg-gradient-to-br from-carbon/10 via-mist/50 to-cream",
-  "bg-gradient-to-br from-zinc/15 via-fog to-mist/40",
-] as const;
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { MediaImage } from "./MediaImage";
+import { getProjectCardTheme } from "@/lib/project-card-themes";
+import type { Project } from "@/lib/types";
 
 interface ProjectCardProps {
   project: Project;
   index: number;
-  /** "alternate" intercala el lado de la imagen según el índice; "right"/"left" lo fija. */
-  imageSide?: "alternate" | "left" | "right";
+  /** Full-bleed showcase (home/list). Nested keeps the card inside its parent. */
+  fullBleed?: boolean;
+  readLabel: string;
+  readAria: string;
 }
 
-export async function ProjectCard({
+export function ProjectCard({
   project,
   index,
-  imageSide = "alternate",
+  fullBleed = true,
+  readLabel,
+  readAria,
 }: ProjectCardProps) {
-  const locale = await getLocale();
-  const dict = getDictionary(locale);
-  const imageFirst =
-    imageSide === "alternate" ? index % 2 === 0 : imageSide === "left";
-  const placeholderClass =
-    PLACEHOLDER_GRADIENTS[index % PLACEHOLDER_GRADIENTS.length];
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
   const caseNumber = String(index + 1).padStart(2, "0");
+  const theme = getProjectCardTheme(project.slug);
+  const imageSrc = project.cardImage ?? project.coverImage;
+  const isDark = theme.tone === "dark";
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotion = () => setReducedMotion(mq.matches);
+    syncMotion();
+    mq.addEventListener("change", syncMotion);
+
+    const node = cardRef.current;
+    if (!node) {
+      return () => mq.removeEventListener("change", syncMotion);
+    }
+
+    if (mq.matches) {
+      setVisible(true);
+      return () => mq.removeEventListener("change", syncMotion);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setVisible(entry.isIntersecting);
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+    );
+
+    observer.observe(node);
+    return () => {
+      mq.removeEventListener("change", syncMotion);
+      observer.disconnect();
+    };
+  }, []);
+
+  const textPrimary = isDark ? "text-white" : "text-carbon";
+  const textSecondary = isDark ? "text-white/75" : "text-carbon/75";
+  const numberColor = isDark ? "text-white" : "text-carbon";
 
   return (
-    <Reveal delay={index * 0.08}>
-      <article className="project-card group relative cursor-pointer overflow-hidden rounded-[var(--radius-card)] border border-mist bg-white transition-colors duration-250 hover:border-ash/60">
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-0">
-          <div
-            className={`relative aspect-[4/3] md:aspect-auto md:min-h-[300px] ${placeholderClass} ${
-              imageFirst ? "md:order-1" : "md:order-2"
-            }`}
+    <Link
+      ref={cardRef}
+      href={`/proyectos/${project.slug}`}
+      aria-label={readAria}
+      className={`project-card group relative block cursor-pointer overflow-hidden no-underline ${
+        fullBleed ? "w-screen max-w-[100vw]" : "w-full rounded-[var(--radius-card)]"
+      }`}
+      style={{ background: theme.gradient }}
+    >
+      <div
+        className={`mx-auto grid w-full max-w-[var(--container-narrow)] grid-cols-1 items-center gap-10 px-6 py-14 md:grid-cols-2 md:gap-12 md:px-10 md:py-20 lg:gap-16 ${
+          fullBleed ? "" : "px-6 py-10 md:py-12"
+        } transition-[opacity,transform] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[opacity,transform] ${
+          reducedMotion || visible
+            ? "translate-y-0 opacity-100"
+            : "translate-y-5 opacity-0"
+        }`}
+      >
+        <div className="min-w-0">
+          <p
+            className={`mono mb-5 text-[clamp(18px,2.4vw,28px)] font-medium tracking-[0.04em] ${numberColor}`}
           >
-            {project.coverImage ? (
-              <MediaImage
-                src={project.coverImage}
-                alt={project.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-end p-6">
-                <span className="font-body text-[13px] font-semibold tracking-[-0.005em] text-carbon/40">
-                  {project.company}
-                </span>
-              </div>
-            )}
-          </div>
+            [{caseNumber}]
+          </p>
 
-          <div
-            className={`flex flex-col justify-center px-6 py-8 md:px-10 md:py-10 lg:px-12 ${
-              imageFirst ? "md:order-2" : "md:order-1"
-            }`}
+          <h3
+            className={`font-body mb-4 text-[32px] font-bold leading-[1.12] tracking-[-0.02em] ${textPrimary}`}
           >
-            {project.problem && (
-              <p className="mb-3 text-[12px] leading-normal tracking-[-0.005em] md:mb-4">
-                <span className="mono text-coral">{caseNumber}</span>{" "}
-                <span className="text-ash">{project.problem}</span>
-              </p>
-            )}
+            {project.title}
+          </h3>
 
-            <h3 className="font-body mb-3 line-clamp-2 text-[clamp(22px,2.6vw,30px)] font-bold leading-[1.15] tracking-[-0.015em] text-carbon md:mb-4">
-              {project.title}
-            </h3>
-
-            <p className="mb-5 line-clamp-3 max-w-[520px] text-[13px] leading-[1.55] tracking-[-0.005em] text-zinc md:mb-6 md:text-[14px]">
-              {project.description}
-            </p>
-
-            <div className="mb-6 flex flex-wrap gap-2 md:mb-7">
-              {project.tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </div>
-
-            <Link
-              href={`/proyectos/${project.slug}`}
-              aria-label={dict.projects.readCaseStudyAria(project.title)}
-              className="leer-link inline-flex items-center gap-1.5 self-start text-[14px] font-semibold tracking-[-0.005em] text-carbon no-underline transition-colors before:absolute before:inset-0 before:content-[''] hover:text-coral"
+          {project.problem ? (
+            <p
+              className={`mb-8 max-w-[420px] text-[15px] leading-[1.55] tracking-[-0.005em] md:mb-10 md:text-[16px] ${textSecondary}`}
             >
-              {dict.projects.readCaseStudy}
-              <ArrowRight className="arrow-slide h-4 w-4 shrink-0" />
-            </Link>
-          </div>
+              {project.problem}
+            </p>
+          ) : null}
+
+          <span
+            className={`inline-flex items-center gap-1.5 text-[14px] font-semibold tracking-[-0.005em] transition-opacity group-hover:opacity-70 ${textPrimary}`}
+          >
+            {readLabel}
+            <span aria-hidden className="arrow-slide">
+              →
+            </span>
+          </span>
         </div>
-      </article>
-    </Reveal>
+
+        <div
+          className={`flex items-center justify-center md:min-h-[360px] ${
+            project.slug === "spin-by-oxxo"
+              ? "min-h-[240px]"
+              : "min-h-[280px] max-md:overflow-visible"
+          }`}
+        >
+          {imageSrc ? (
+            <MediaImage
+              src={imageSrc}
+              alt=""
+              width={720}
+              height={560}
+              className={`h-auto w-full object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.18)] ${
+                project.slug === "spin-by-oxxo"
+                  ? "max-w-[340px] md:max-w-[380px]"
+                  : "max-w-[560px] max-md:w-[115%] max-md:max-w-none max-md:origin-center"
+              }`}
+              sizes="(max-width: 768px) 100vw, 45vw"
+              priority={index === 0}
+            />
+          ) : (
+            <div
+              className={`font-body text-[13px] font-semibold tracking-[-0.005em] ${textSecondary}`}
+            >
+              {project.company}
+            </div>
+          )}
+        </div>
+      </div>
+    </Link>
   );
 }

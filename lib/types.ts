@@ -25,6 +25,7 @@ export interface Project {
   order?: number;
   publishedAt?: string;
   coverImage?: string;
+  cardImage?: string;
   gallery?: string[];
   projectSummary?: ProjectSummary;
   body?: string;

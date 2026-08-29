@@ -95,6 +95,9 @@ function parseFrontmatter(
     coverImage: asString(data.coverImage)
       ? rewriteLegacyImageUrl(asString(data.coverImage)!)
       : undefined,
+    cardImage: asString(data.cardImage)
+      ? rewriteLegacyImageUrl(asString(data.cardImage)!)
+      : undefined,
     gallery: asStringArray(data.gallery)?.map(rewriteLegacyImageUrl),
     parentSlug: asString(data.parentSlug),
     overviewTitle: asString(data.overviewTitle),

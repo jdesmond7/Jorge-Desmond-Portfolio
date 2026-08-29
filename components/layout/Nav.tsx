@@ -24,17 +24,7 @@ const SCROLL_DELTA = 6;
 const SCROLL_SHADOW_MIN = 40;
 
 function formatSiteName(name: string): string {
-  const parts = name.trim().split(/\s+/);
-  if (parts.length < 2) {
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-  }
-  return parts
-    .map((word, i) =>
-      i === 0 || i === parts.length - 1
-        ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        : word.toLowerCase(),
-    )
-    .join(" ");
+  return name.trim().toUpperCase();
 }
 
 function normalizePath(path: string): string {
@@ -97,14 +87,23 @@ export function Nav({
         return;
       }
 
-      const delta = current - lastScrollYRef.current;
+      const heroEl = document.getElementById("hero");
+      const heroInView = heroEl
+        ? heroEl.getBoundingClientRect().bottom > 0
+        : false;
 
-      if (current < SCROLL_TOP_SHOW) {
+      if (heroInView) {
         setNavVisible(true);
-      } else if (delta > SCROLL_DELTA && current > SCROLL_HIDE_MIN) {
-        setNavVisible(false);
-      } else if (delta < -SCROLL_DELTA) {
-        setNavVisible(true);
+      } else {
+        const delta = current - lastScrollYRef.current;
+
+        if (current < SCROLL_TOP_SHOW) {
+          setNavVisible(true);
+        } else if (delta > SCROLL_DELTA && current > SCROLL_HIDE_MIN) {
+          setNavVisible(false);
+        } else if (delta < -SCROLL_DELTA) {
+          setNavVisible(true);
+        }
       }
 
       lastScrollYRef.current = current;

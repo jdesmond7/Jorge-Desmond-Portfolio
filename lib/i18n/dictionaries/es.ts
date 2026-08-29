@@ -3,7 +3,7 @@ export const es = {
     defaultTitle: "Jorge Desmond · Sr. Product Designer",
     defaultDescription:
       "Diseño sistemas que convierten complejidad operativa en productos que escalan. Design Systems, Product Design y arquitectura de diseño con IA.",
-    siteName: "Jorge Desmond",
+    siteName: "JORGE DESMOND",
   },
   nav: {
     openMenu: "Abrir menú",
@@ -136,6 +136,52 @@ export const es = {
     intro:
       "Exploraciones visuales fuera del producto digital — editorial, conceptual y personal.",
     openInstagram: (alt: string) => `Abrir en Instagram: ${alt}`,
+  },
+  manifesto: {
+    lead: "El diseño brillante no grita su presencia, es transparente.",
+    body: "Elimino la fricción y hago desaparecer la interfaz para transformarla en una experiencia inmersiva que se queda con el usuario.",
+    projectsCta: "Ver casos de estudio",
+  },
+  skills: {
+    title: "¿Qué es lo que hago?",
+    items: [
+      {
+        number: "01",
+        title: "Design Systems",
+        description:
+          "Diseño sistemas, no pantallas sueltas. Tokens, componentes y arquitectura pensados para que un producto crezca sin romperse. He construido tres generaciones de un mismo sistema, sirviendo a cinco plataformas y un equipo global. La base invisible sobre la que todo lo demás se sostiene.",
+      },
+      {
+        number: "02",
+        title: "AI Design Architecture",
+        description:
+          "Convierto las reglas de un Design System en contexto para que la IA genere interfaces fieles al sistema. Diseñé un AI Playground que produce UI con 80–90% de fidelidad desde el primer prompt. No es la IA reemplazando el criterio. Es el criterio, escalado.",
+      },
+      {
+        number: "03",
+        title: "Product Design (0 a 1)",
+        description:
+          "Llevo productos del concepto caótico al MVP listo para programar. Investigación, identidad, flujos, validación con usuarios reales y entrega documentada. Diseño para negocios, no solo para pantallas: si no entiende el contexto de negocio, es decoración.",
+      },
+      {
+        number: "04",
+        title: "Diseño y desarrollo Front-End",
+        description:
+          "Escribo mis propios diseños en código cuando el proyecto lo pide. Next.js, Tailwind, componentes reales. El handoff más limpio es el que no existe, porque el diseñador entiende lo que se puede construir.",
+      },
+      {
+        number: "05",
+        title: "Automatización de diseño",
+        description:
+          "Diseño flujos de trabajo que le quitan horas repetitivas a los equipos. De documentar un sistema para que la IA lo lea, a herramientas que convierten tareas de 30 minutos en 5. La eficiencia también se diseña.",
+      },
+      {
+        number: "06",
+        title: "Micro-interacciones y Motion",
+        description:
+          "Los detalles que hacen que un producto se sienta vivo. Transiciones con propósito, estados que responden, animaciones que guían en lugar de distraer. Nunca decoración: siempre intención.",
+      },
+    ],
   },
   resume: {
     title: "Résumé",

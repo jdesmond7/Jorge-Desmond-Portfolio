@@ -7,12 +7,12 @@ import type {
 import { SITE_EMAIL } from "./site";
 
 export const MOCK_HOME: HomeContent = {
-  heroGreeting: "Hola hola, soy",
+  heroGreeting: "Hola, mi nombre es",
   heroName: "JORGE\nDESMOND",
   heroTitle:
     "Own the process.\nBuild the system.",
   heroSubtitle:
-    "De Design Systems tradicionales a arquitectura de diseño con IA. Profesor en el Tec de Monterrey. La misma disciplina dentro y fuera de la pantalla.",
+    "Diseño sistemas, del token al producto completo. Llevo apps de cero a uno, construyo Design Systems que escalan, y exploro cómo la IA cambia la forma en que diseñamos. Profesor en el Tec de Monterrey.",
   heroImage: "/images/hero.png",
   trustBadges: [
     "10+ Años de exp.",
@@ -60,14 +60,13 @@ export const MOCK_HOME: HomeContent = {
 };
 
 export const MOCK_SITE_SETTINGS: SiteSettings = {
-  siteName: "jorge desmond",
+  siteName: "JORGE DESMOND",
   email: SITE_EMAIL,
   linkedin: "https://www.linkedin.com/in/jorgedesmond/",
   instagram: "https://www.instagram.com/jorgedesmond/",
   navLinks: [
     { label: "Casos de estudio", href: "/proyectos" },
     { label: "Ilustración", href: "/ilustracion" },
-    { label: "Blog", href: "/blog" },
     { label: "Sobre mí", href: "/sobre-mi" },
   ],
   footerText: "monterrey, méxico — diseñado como un sistema",

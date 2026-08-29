@@ -17,7 +17,7 @@ export function SectionHeader({
   return (
     <Reveal>
       {eyebrow && (
-        <p className="mono mb-3 text-[11px] uppercase tracking-[0.12em] text-ash">
+        <p className="mono mb-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-zinc">
           {eyebrow}
         </p>
       )}

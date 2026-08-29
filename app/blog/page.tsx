@@ -40,7 +40,7 @@ export default async function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="block border-b border-mist py-8 no-underline transition-colors hover:bg-fog"
               >
-                <div className="mono mb-2 text-[11px] tracking-[-0.006em] text-ash">
+                <div className="mono mb-2 text-[12px] tracking-[-0.006em] text-zinc">
                   {formatDate(post.publishedAt, dateLocale)}
                 </div>
                 <h2 className="mb-2 text-[clamp(24px,4vw,30px)] font-normal leading-[1.2] tracking-[-0.013em] text-carbon">

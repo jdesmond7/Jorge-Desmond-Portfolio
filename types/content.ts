@@ -27,6 +27,8 @@ export interface ProjectFrontmatter {
   order?: number;
   showInHome?: boolean;
   coverImage?: string;
+  /** Transparent PNG used on the home showcase cards. */
+  cardImage?: string;
   gallery?: string[];
   parentSlug?: string;
   overviewTitle?: string;

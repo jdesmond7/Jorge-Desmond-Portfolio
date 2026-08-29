@@ -124,13 +124,15 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 <h2 className="font-body mb-10 text-[clamp(24px,3.5vw,34px)] font-bold leading-[1.15] tracking-[-0.015em] text-carbon">
                   {dict.projects.keyInitiatives}
                 </h2>
-                <div className="flex flex-col gap-16 md:gap-24">
+                <div className="flex flex-col gap-10 md:gap-14">
                   {children.map((child, index) => (
                     <ProjectCard
                       key={child.id}
                       project={child}
                       index={index}
-                      imageSide="right"
+                      fullBleed={false}
+                      readLabel={dict.projects.readCaseStudy}
+                      readAria={dict.projects.readCaseStudyAria(child.title)}
                     />
                   ))}
                 </div>

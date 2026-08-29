@@ -36,7 +36,7 @@ import type {
   SiteSettings,
 } from "@/lib/types";
 
-const HOME_PROJECTS_LIMIT = 3;
+const HOME_PROJECTS_LIMIT = 4;
 
 function toUiMetrics(
   metrics: MarkdownProject["frontmatter"]["metrics"],
@@ -80,6 +80,7 @@ function toUiProject(
     order: fm.order,
     body: doc.content || undefined,
     coverImage: fm.coverImage,
+    cardImage: fm.cardImage,
     gallery: fm.gallery,
     projectSummary: toProjectSummary(doc),
     isParent: fm.type === "parent",

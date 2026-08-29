@@ -2,7 +2,7 @@
 title: "Spin by OXXO: When the corner store became a bank"
 slug: spin-by-oxxo
 locale: en
-order: 3
+order: 2
 problem: "For non-digitally-native users, moving money from a phone felt frightening"
 description: "I led the SPEI transfers flow end-to-end for OXXO's fintech app, designing for users with low digital literacy where moving money triggers fear. Validated with ~50 users across Mexico and a 90% acceptance rate. I also built the Design System from scratch as the product scaled."
 year: "2021–2022"
@@ -27,6 +27,8 @@ metrics:
   - value: "15M+"
     label: "Users reached as the product scaled"
 coverImage: /images/projects/oxxo-spin/banner-spin-projects.png
+cardImage: /images/projects/oxxo-spin/spin-card-project.png
+showInHome: true
 ---
 
 ## 01 · The context

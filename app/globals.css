@@ -8,17 +8,20 @@
   --color-coral-mist: #ffd9c4;
   --color-primary: var(--color-coral);
 
-  /* Neutrals */
+  /* Neutrals — contrast-checked on cream (#fffcf9) for WCAG AA */
   --color-carbon: #18181b;
   --color-black: #000000;
-  --color-zinc: #71717a;
-  --color-ash: #a1a1aa;
+  --color-zinc: #5f5f63;
+  --color-ash: #636366;
   --color-mist: #e4e4e7;
   --color-fog: #f4f4f5;
   --color-cream: #fffcf9;
   --color-white: #ffffff;
   --color-espresso: #200200;
   --color-ink: #120301;
+
+  /* Accessible coral for small text on light backgrounds */
+  --color-coral-text: #b8431c;
 
   /* Typography */
   --font-display: var(--font-bebas), ui-sans-serif, system-ui, sans-serif;
@@ -66,6 +69,7 @@
   --color-coral-hover: var(--color-coral-hover);
   --color-coral-soft: var(--color-coral-soft);
   --color-coral-mist: var(--color-coral-mist);
+  --color-coral-text: var(--color-coral-text);
   --color-primary: var(--color-primary);
   --color-carbon: var(--color-carbon);
   --color-black: var(--color-black);
@@ -184,6 +188,15 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .skill-expand {
+    grid-template-rows: 1fr !important;
+  }
+
+  .skill-expand p {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   *,
   .marquee-track {
     animation: none !important;
