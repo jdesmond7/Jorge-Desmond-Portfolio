@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { brand, colors } from "@/lib/design-tokens";
+import { brand } from "@/lib/design-tokens";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
@@ -20,8 +20,9 @@ export default async function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: colors.black,
-          color: colors.white,
+          background: "#FCBC08",
+          color: "#34322D",
+          borderRadius: 40,
           fontFamily: "Montserrat",
           fontSize: 72,
           fontWeight: 600,
