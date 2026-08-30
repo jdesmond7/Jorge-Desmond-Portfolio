@@ -48,7 +48,7 @@ const components: Components = {
     }
 
     return (
-      <p className="mb-5 text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
+      <p className="mb-5 text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
         {children}
       </p>
     );
@@ -82,7 +82,7 @@ const components: Components = {
 
   ul({ children }) {
     return (
-      <ul className="mb-6 list-disc space-y-2 pl-5 text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
+      <ul className="mb-6 list-disc space-y-2 pl-5 text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
         {children}
       </ul>
     );
@@ -90,7 +90,7 @@ const components: Components = {
 
   ol({ children }) {
     return (
-      <ol className="mb-6 list-decimal space-y-2 pl-5 text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
+      <ol className="mb-6 list-decimal space-y-2 pl-5 text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
         {children}
       </ol>
     );
@@ -102,7 +102,7 @@ const components: Components = {
 
   blockquote({ children }) {
     return (
-      <blockquote className="my-8 border-l-2 border-coral pl-5 italic [&>p]:mb-0 [&>p]:text-[17px] [&>p]:leading-[1.6] [&>p]:tracking-[-0.009em] [&>p]:text-carbon">
+      <blockquote className="my-8 border-l-2 border-coral pl-5 italic [&>p]:mb-0 [&>p]:text-[length:var(--text-body)] [&>p]:leading-[length:var(--leading-body)] [&>p]:tracking-[-0.009em] [&>p]:text-carbon">
         {children}
       </blockquote>
     );

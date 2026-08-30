@@ -26,7 +26,7 @@ export default async function ProyectosPage() {
         <h1 className="font-display text-[clamp(36px,6vw,56px)] uppercase leading-none tracking-[0.02em] text-carbon">
           {dict.projects.pageTitle}
         </h1>
-        <p className="font-body mt-4 max-w-xl text-[17px] font-normal leading-[1.4] text-zinc">
+        <p className="font-body mt-4 max-w-xl text-[length:var(--text-body)] font-normal leading-[length:var(--leading-body)] text-zinc">
           {dict.projects.listIntro}
         </p>
       </Container>

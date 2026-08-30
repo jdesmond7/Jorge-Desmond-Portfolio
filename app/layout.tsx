@@ -3,6 +3,7 @@ import { Bebas_Neue, JetBrains_Mono, Montserrat } from "next/font/google";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale, localeToOpenGraph } from "@/lib/i18n/locale";
 import { getSiteUrl } from "@/lib/site";
@@ -71,17 +72,19 @@ export default async function RootLayout({
             email={settings.email}
             linkedin={settings.linkedin}
           />
-          <main className="flex-1">{children}</main>
-          <Footer
-            navLinks={settings.navLinks}
-            email={settings.email}
-            linkedin={settings.linkedin}
-            instagram={settings.instagram}
-            footerText={settings.footerText}
-            ctaTitle={home.ctaTitle}
-            ctaSubtitle={home.ctaSubtitle}
-            dict={dict}
-          />
+          <PageTransition>
+            <main className="flex-1">{children}</main>
+            <Footer
+              navLinks={settings.navLinks}
+              email={settings.email}
+              linkedin={settings.linkedin}
+              instagram={settings.instagram}
+              footerText={settings.footerText}
+              ctaTitle={home.ctaTitle}
+              ctaSubtitle={home.ctaSubtitle}
+              dict={dict}
+            />
+          </PageTransition>
         </I18nProvider>
       </body>
     </html>

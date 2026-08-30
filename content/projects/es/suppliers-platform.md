@@ -2,9 +2,10 @@
 title: "GroWrk · Suppliers Platform"
 slug: suppliers-platform
 locale: es
-order: 4
+order: 2
 type: child
 parentSlug: growrk
+cardNumber: "GroWrk 1.2"
 problem: "La información de proveedores vivía dispersa en hojas de cálculo y correos manuales"
 description: "Lideré la iniciativa de UX para centralizar la gestión de proveedores de GroWrk, mentoreando a un diseñador Junior y alineando al CEO. Propuse una herramienta de facturación automática que bajó las cotizaciones de 30 a 10 minutos. El proyecto reveló una oportunidad de producto externa que construí de cero, y que enseñó tanto al funcionar como al apagarse."
 year: "2023–2024"
@@ -29,6 +30,7 @@ metrics:
   - value: "0"
     label: "Spreadsheets manuales tras la transición"
 coverImage: /images/projects/growrk-suppliers-platform/banner-growrk-suppliers.png
+cardImage: /images/projects/growrk-suppliers-platform/growrk-supplier-app-screens.png
 ---
 
 ## 01 · El problema

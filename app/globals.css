@@ -34,8 +34,10 @@
   --text-sm: 13px;
   --text-md: 14px;
   --text-base: 15px;
-  --text-lg: 17px;
-  --text-xl: 19px;
+  --text-body: 18px;
+  --leading-body: 28px;
+  --text-lg: 20px;
+  --text-xl: 22px;
 
   /* Layout */
   --radius-control: 10px;
@@ -95,6 +97,8 @@
   --text-sm: var(--text-sm);
   --text-md: var(--text-md);
   --text-base: var(--text-base);
+  --text-body: var(--text-body);
+  --leading-body: var(--leading-body);
   --text-lg: var(--text-lg);
   --text-xl: var(--text-xl);
 }
@@ -104,7 +108,11 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+.page-transition {
+  will-change: opacity;
 }
 
 body {

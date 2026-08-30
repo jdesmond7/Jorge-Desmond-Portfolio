@@ -203,7 +203,7 @@ export function Hero({ content }: HeroProps) {
                 pointerEvents: introOpacity <= 0.01 ? "none" : "auto",
               }}
             >
-              <p className="font-body mb-2 text-[17px] font-normal text-white md:mb-3 md:text-[length:var(--text-lg)]">
+              <p className="font-body mb-2 text-[length:var(--text-body)] font-normal leading-[length:var(--leading-body)] text-white md:mb-3 md:text-[length:var(--text-lg)]">
                 {content.heroGreeting}
               </p>
               <h1 className="font-display text-[clamp(84px,20vw,128px)] uppercase leading-[0.88] tracking-[0.02em] text-white md:leading-[0.9]">
@@ -232,7 +232,7 @@ export function Hero({ content }: HeroProps) {
                 ))}
               </h2>
               <div className="max-md:mt-auto max-md:pb-2">
-                <p className="font-body mb-4 text-[15px] font-semibold leading-[1.55] text-white/90 md:mb-7 md:text-[clamp(15px,1.7vw,17px)]">
+                <p className="font-body mb-4 text-[length:var(--text-body)] font-semibold leading-[length:var(--leading-body)] text-white/90 md:mb-7">
                   {content.heroSubtitle}
                 </p>
                 <ul className="mb-3 grid grid-cols-2 gap-x-4 gap-y-2 md:mb-8 md:flex md:flex-wrap md:gap-x-5 md:gap-y-3">

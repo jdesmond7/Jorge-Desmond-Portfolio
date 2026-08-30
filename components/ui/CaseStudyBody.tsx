@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { isExternalHref, sanitizeHref, sanitizeImageSrc } from "@/lib/safe-url";
 import type { ProjectMetric } from "@/lib/types";
 import { DecisionCard } from "./DecisionCard";
 import { ProjectMetrics } from "./ProjectMetrics";
+import { VersionCardsCarousel } from "./VersionCardsCarousel";
 import { ZoomableImage } from "./ZoomableImage";
 
 interface CaseStudyBodyProps {
@@ -92,7 +94,7 @@ const components: Components = {
     }
 
     return (
-      <p className="mb-5 text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
+      <p className="mb-5 text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
         {children}
       </p>
     );
@@ -149,7 +151,7 @@ const components: Components = {
 
   blockquote({ children }) {
     return (
-      <blockquote className="my-8 border-l-2 border-coral pl-5 italic [&>p]:mb-0 [&>p]:text-[17px] [&>p]:leading-[1.6] [&>p]:tracking-[-0.009em] [&>p]:text-carbon">
+      <blockquote className="my-8 border-l-2 border-coral pl-5 italic [&>p]:mb-0 [&>p]:text-[length:var(--text-body)] [&>p]:leading-[length:var(--leading-body)] [&>p]:tracking-[-0.009em] [&>p]:text-carbon">
         {children}
       </blockquote>
     );
@@ -341,84 +343,58 @@ function splitSegments(content: string): Segment[] {
   return segments;
 }
 
-function VersionCard({ version, year, title, items, note }: VersionCardData) {
-  return (
-    <div className="mb-5 rounded-[var(--radius-card)] border border-mist bg-fog p-8">
-      <div className="mb-2 flex items-center gap-2.5">
-        <span className="rounded-pill bg-carbon px-3 py-1 text-[13px] font-bold leading-none text-white">
-          {version}
-        </span>
-        {year && <span className="mono text-[12px] text-zinc">{year}</span>}
-      </div>
-
-      {title && (
-        <h3 className="mb-5 text-[19px] font-semibold leading-[1.3] tracking-[-0.009em] text-carbon">
-          {title}
-        </h3>
-      )}
-
-      {items.length > 0 && (
-        <ul className="mb-5 list-none p-0">
-          {items.map((item, index) => (
-            <li
-              key={index}
-              className={`flex gap-2.5 py-2 ${index < items.length - 1 ? "border-b border-mist" : ""}`}
-            >
-              <span className="mt-[3px] shrink-0 text-[12px] text-coral-text">✓</span>
-              <span className="text-[14px] leading-[1.6] tracking-[-0.005em] text-carbon">
-                {item}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {note && (
-        <div className="rounded-lg bg-white px-4 py-3 text-[13px] italic leading-[1.6] tracking-[-0.005em] text-zinc">
-          💡 {note}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export function CaseStudyBody({ content }: CaseStudyBodyProps) {
   const segments = splitSegments(content);
   const firstDecisionIndex = segments.findIndex(
     (segment) => segment.type === "decision",
   );
 
-  return (
-    <div className="mb-16 w-full">
-      {segments.map((segment, index) => {
-        if (segment.type === "version") {
-          return <VersionCard key={index} {...segment.data} />;
-        }
+  const nodes: ReactNode[] = [];
+  let index = 0;
 
-        if (segment.type === "decision") {
-          return (
-            <DecisionCard
-              key={index}
-              {...segment.data}
-              defaultOpen={index === firstDecisionIndex}
-            />
-          );
-        }
+  while (index < segments.length) {
+    const segment = segments[index];
 
-        if (segment.type === "metrics") {
-          return <ProjectMetrics key={index} metrics={segment.data} />;
-        }
+    if (segment.type === "version") {
+      const cards: { key: number; data: VersionCardData }[] = [];
+      while (index < segments.length && segments[index].type === "version") {
+        const versionSegment = segments[index] as Extract<
+          Segment,
+          { type: "version" }
+        >;
+        cards.push({ key: index, data: versionSegment.data });
+        index += 1;
+      }
+      nodes.push(
+        <VersionCardsCarousel key={`versions-${cards[0].key}`} cards={cards} />,
+      );
+      continue;
+    }
 
-        return (
-          <ReactMarkdown
-            key={index}
-            remarkPlugins={[remarkGfm]}
-            components={components}
-          >
-            {segment.text}
-          </ReactMarkdown>
-        );
-      })}
-    </div>
-  );
+    if (segment.type === "decision") {
+      nodes.push(
+        <DecisionCard
+          key={index}
+          {...segment.data}
+          defaultOpen={index === firstDecisionIndex}
+        />,
+      );
+    } else if (segment.type === "metrics") {
+      nodes.push(<ProjectMetrics key={index} metrics={segment.data} />);
+    } else {
+      nodes.push(
+        <ReactMarkdown
+          key={index}
+          remarkPlugins={[remarkGfm]}
+          components={components}
+        >
+          {segment.text}
+        </ReactMarkdown>,
+      );
+    }
+
+    index += 1;
+  }
+
+  return <div className="mb-16 w-full">{nodes}</div>;
 }

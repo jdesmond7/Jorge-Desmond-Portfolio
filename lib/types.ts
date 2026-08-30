@@ -35,9 +35,14 @@ export interface Project {
   overviewBodyText?: string;
   challengeTitle?: string;
   challengeBodyText?: string;
+  framingQuestion?: string;
+  framingQuestionHighlight?: string;
+  framingBody?: string;
   learning?: string;
   parentSlug?: string;
   parentTitle?: string;
+  /** Label inside the card number brackets, e.g. "GroWrk 1.1". */
+  cardNumber?: string;
   children?: Project[];
 }
 

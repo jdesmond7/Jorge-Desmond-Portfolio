@@ -45,7 +45,7 @@ export default async function IlustracionPage() {
             <span aria-hidden>↗</span>
           </a>
 
-          <p className="text-[17px] leading-[1.4] tracking-[-0.009em] text-zinc">
+          <p className="text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
             {dict.illustration.intro}
           </p>
         </div>

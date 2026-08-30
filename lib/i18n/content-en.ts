@@ -127,6 +127,9 @@ export const EN_PROJECTS_BY_SLUG: Record<
       | "overviewBodyText"
       | "challengeTitle"
       | "challengeBodyText"
+      | "framingQuestion"
+      | "framingQuestionHighlight"
+      | "framingBody"
       | "metrics"
       | "projectSummary"
     >
@@ -137,19 +140,27 @@ export const EN_PROJECTS_BY_SLUG: Record<
     problem: "When the MVP doesn't scale with the business",
     description:
       "Full design infrastructure for a global B2B SaaS platform: 3 Design System generations, 5 platforms, and an AI Playground that generates UI with 80–90% fidelity from a prompt.",
-    overviewTitle: "A global operation in a single interface",
+    overviewTitle: "A global ITAM platform that centralizes operations across more than 150 countries.",
     overviewBodyText:
-      "Growrk is a global IT Asset Management (ITAM) and automated logistics platform. It lets international companies (especially remote and distributed ones) buy, store, deploy, manage, and support all employee hardware (laptops, monitors, peripherals) in 150+ countries, centralizing a global operation in one digital interface.",
-    challengeTitle: "From basic inventory to global-scale infrastructure",
+      "GroWrk is a global IT Asset Management (ITAM) and automated logistics platform. It lets international companies, especially remote and distributed ones, buy, store, deploy, manage, and support all of their employees' hardware (laptops, monitors, peripherals) across more than 150 countries. An entire global operation, centralized in a single interface.",
+    challengeTitle: "Turning a manual operation into a SaaS platform that scales.",
     challengeBodyText:
-      "I joined GroWrk in its early stages with the mission to transform a complex, manual hardware management operation into a scalable SaaS platform. My challenge evolved from designing basic inventory flows to leading experience strategy across three critical fronts: Clients, Employees, and Internal Operations — while building the design infrastructure (Design System) that would let the team grow from zero to global scale.",
+      "I joined GroWrk in its early stages with one mission: transform a complex, manual hardware operation into a scalable SaaS platform.\n\nThe challenge grew with me. I started designing basic inventory flows and ended up leading the experience strategy across three critical fronts: Clients, Employees, and Internal Operations. All while building the design infrastructure that would let the team grow from zero to global scale.",
+    framingQuestion:
+      "How do you design infrastructure that lets a global operation grow without breaking?",
+    framingQuestionHighlight: "grow without breaking",
+    framingBody:
+      "GroWrk needed to move from manual processes to a platform that could scale across three fronts at once: the clients managing their hardware, the employees receiving it, and the internal operations moving it.\n\nThe answer wasn't a single screen, but a system of connected initiatives: a Design System that supports everything, a Playground where AI designs within the system's rules, a site that communicates the product, and an app that extends the operation to suppliers.",
     learning:
-      "A Design System isn't a component library. It's the collective decision of how a team wants to work. Without adoption, it doesn't exist. Without engineering, it doesn't scale. Without AI, it doesn't grow.",
+      "GroWrk holds a special place in my career. I joined in the early stages, when I was the only designer, and grew alongside the product for years until I became Sr. Product Designer and AI Design Architect. Watching an operation go from manual processes to a platform across more than 150 countries, and knowing that the design infrastructure I built supports part of that, is one of the most rewarding experiences I've had as a designer.\n\nHere I learned what now defines how I work: building systems isn't about designing screens, it's about designing the foundation an entire team can grow on without breaking. GroWrk wasn't just a job. It's where I became the designer I am today.",
     metrics: [
       {
         value: "50K+",
         title: "Users in production",
-        description: "Active operation in 150+ countries",
+      },
+      {
+        value: "150+",
+        title: "countries with active operation",
       },
     ],
   },

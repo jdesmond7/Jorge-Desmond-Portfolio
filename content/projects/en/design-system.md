@@ -2,9 +2,10 @@
 title: "Design System: The Engine of Scale"
 slug: design-system-engine-of-scale
 locale: en
-order: 2
+order: 3
 type: child
 parentSlug: growrk
+cardNumber: "GroWrk 1.3"
 problem: "Design and engineering teams spoke different languages"
 description: "Design Token architecture and reusable components integrated with Nuxt UI and Tailwind. The system that made everything else possible."
 year: "2022–2024"
@@ -26,6 +27,7 @@ metrics:
   - value: "5"
     label: "Platforms served: Client, Staff, Supplier, Employee, Website"
 coverImage: /images/projects/growrk-design-system/design-system-growrk.png
+cardImage: /images/projects/growrk/growrk-card-project.png
 ---
 
 ## 01 · The problem
@@ -147,20 +149,3 @@ The process took about two months, working in parallel with our normal responsib
 
 > "I can't wait to try it, you can tell it's going to save us a lot of time."
 > — Sony, Designer, GroWrk Remote
-
----
-
-## 05 · Impact
-
-**What changed, in numbers and in culture.**
-
-![impact_dashboard.png](/images/projects/growrk-design-system/impact_dashboard.png)
-
-| Metric | Description |
-|---|---|
-| ~40% | Reduction in design time. From 2–3 hours to 20 minutes on complex tables |
-| 40 | Components in V3 documented in Figma and code |
-| 300+ | Total tokens. A bilingual system: design and engineering |
-| 234 | Standardized icons. A clean library, no redundancies |
-| 34 | Documented images, used in production and centralized |
-| 5 | Platforms served: Client, Staff, Supplier, Employee, and Website |

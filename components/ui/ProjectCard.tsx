@@ -26,7 +26,8 @@ export function ProjectCard({
   const [visible, setVisible] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  const caseNumber = String(index + 1).padStart(2, "0");
+  const caseNumber =
+    project.cardNumber ?? String(index + 1).padStart(2, "0");
   const theme = getProjectCardTheme(project.slug);
   const imageSrc = project.cardImage ?? project.coverImage;
   const isDark = theme.tone === "dark";
@@ -47,16 +48,34 @@ export function ProjectCard({
       return () => mq.removeEventListener("change", syncMotion);
     }
 
+    let lastScrollY = window.scrollY;
+    let scrollingDown = true;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y !== lastScrollY) {
+        scrollingDown = y > lastScrollY;
+        lastScrollY = y;
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setVisible(true);
+        } else if (!scrollingDown) {
+          setVisible(false);
+        }
       },
       { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
     );
 
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     observer.observe(node);
     return () => {
       mq.removeEventListener("change", syncMotion);
+      window.removeEventListener("scroll", onScroll);
       observer.disconnect();
     };
   }, []);
@@ -70,18 +89,18 @@ export function ProjectCard({
       ref={cardRef}
       href={`/proyectos/${project.slug}`}
       aria-label={readAria}
-      className={`project-card group relative block cursor-pointer overflow-hidden no-underline ${
+      className={`project-card group relative block cursor-pointer overflow-hidden no-underline transition-[opacity,transform] duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,transform] ${
         fullBleed ? "w-screen max-w-[100vw]" : "w-full rounded-[var(--radius-card)]"
+      } ${
+        reducedMotion || visible
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-6 opacity-0"
       }`}
       style={{ background: theme.gradient }}
     >
       <div
-        className={`mx-auto grid w-full max-w-[var(--container-narrow)] grid-cols-1 items-center gap-10 px-6 py-14 md:grid-cols-2 md:gap-12 md:px-10 md:py-20 lg:gap-16 ${
-          fullBleed ? "" : "px-6 py-10 md:py-12"
-        } transition-[opacity,transform] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[opacity,transform] ${
-          reducedMotion || visible
-            ? "translate-y-0 opacity-100"
-            : "translate-y-5 opacity-0"
+        className={`mx-auto grid w-full grid-cols-1 items-center gap-10 px-6 py-14 md:grid-cols-2 md:gap-12 md:px-10 md:py-20 lg:gap-16 ${
+          fullBleed ? "max-w-[var(--container-narrow)]" : ""
         }`}
       >
         <div className="min-w-0">
@@ -99,7 +118,7 @@ export function ProjectCard({
 
           {project.problem ? (
             <p
-              className={`mb-8 max-w-[420px] text-[15px] leading-[1.55] tracking-[-0.005em] md:mb-10 md:text-[16px] ${textSecondary}`}
+              className={`mb-8 max-w-[420px] text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.005em] md:mb-10 ${textSecondary}`}
             >
               {project.problem}
             </p>

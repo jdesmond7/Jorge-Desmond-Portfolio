@@ -89,9 +89,13 @@ function toUiProject(
     overviewBodyText: fm.overviewBodyText,
     challengeTitle: fm.challengeTitle,
     challengeBodyText: fm.challengeBodyText,
+    framingQuestion: fm.framingQuestion,
+    framingQuestionHighlight: fm.framingQuestionHighlight,
+    framingBody: fm.framingBody,
     learning: fm.learning,
     parentSlug: fm.parentSlug,
     parentTitle: options?.parentTitle,
+    cardNumber: fm.cardNumber,
     children: options?.children,
   };
 }

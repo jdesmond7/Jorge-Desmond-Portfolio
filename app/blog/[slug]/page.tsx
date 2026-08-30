@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <h1 className="font-body mb-6 w-full text-[clamp(28px,5vw,48px)] font-bold leading-[1.15] text-carbon">
           {post.title}
         </h1>
-        <p className="mb-10 w-full text-[17px] leading-[1.4] tracking-[-0.009em] text-zinc">
+        <p className="mb-10 w-full text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
           {post.excerpt}
         </p>
 

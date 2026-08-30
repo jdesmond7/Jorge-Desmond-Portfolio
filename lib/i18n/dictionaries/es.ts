@@ -159,7 +159,7 @@ export const es = {
       },
       {
         number: "03",
-        title: "Product Design (0 a 1)",
+        title: "Product Design (Zero to One)",
         description:
           "Llevo productos del concepto caótico al MVP listo para programar. Investigación, identidad, flujos, validación con usuarios reales y entrega documentada. Diseño para negocios, no solo para pantallas: si no entiende el contexto de negocio, es decoración.",
       },

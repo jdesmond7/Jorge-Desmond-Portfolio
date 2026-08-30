@@ -38,7 +38,7 @@ function AboutParagraph({
 
   if (isContact) {
     return (
-      <p className="text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
+      <p className="text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
         {dict.about.writePrefix}{" "}
         <a
           href={`mailto:${contactEmail}`}
@@ -75,14 +75,14 @@ function AboutParagraph({
 
   if (isSignOff) {
     return (
-      <p className="pt-2 text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
+      <p className="pt-2 text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
         {dict.about.signOff}, jorge
       </p>
     );
   }
 
   return (
-    <p className="text-[17px] leading-[1.7] tracking-[-0.009em] text-zinc">
+    <p className="text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
       <InlineMarkdown content={text} />
     </p>
   );

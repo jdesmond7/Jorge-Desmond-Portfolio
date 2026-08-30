@@ -87,7 +87,7 @@ export default async function ResumePage() {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <section className="mt-8 flex flex-col gap-4 text-[16px] leading-[1.6] tracking-[-0.009em] text-zinc">
+              <section className="mt-8 flex flex-col gap-4 text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
                 {content.profile.summary.map((paragraph) => (
                   <p key={paragraph.slice(0, 32)}>{paragraph}</p>
                 ))}

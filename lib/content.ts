@@ -100,10 +100,14 @@ function parseFrontmatter(
       : undefined,
     gallery: asStringArray(data.gallery)?.map(rewriteLegacyImageUrl),
     parentSlug: asString(data.parentSlug),
+    cardNumber: asString(data.cardNumber),
     overviewTitle: asString(data.overviewTitle),
     overviewBodyText: asString(data.overviewBodyText),
     challengeTitle: asString(data.challengeTitle),
     challengeBodyText: asString(data.challengeBodyText),
+    framingQuestion: asString(data.framingQuestion),
+    framingQuestionHighlight: asString(data.framingQuestionHighlight),
+    framingBody: asString(data.framingBody),
     heroImage: asString(data.heroImage)
       ? rewriteLegacyImageUrl(asString(data.heroImage)!)
       : undefined,

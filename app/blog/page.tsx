@@ -29,7 +29,7 @@ export default async function BlogPage() {
         <h1 className="font-display mb-4 text-[clamp(36px,6vw,56px)] uppercase leading-none tracking-[0.02em] text-carbon">
           {dict.blog.title}
         </h1>
-        <p className="mb-12 w-full text-[17px] leading-[1.4] tracking-[-0.009em] text-zinc">
+        <p className="mb-12 w-full text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
           {dict.blog.intro}
         </p>
 

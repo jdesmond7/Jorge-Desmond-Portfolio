@@ -31,7 +31,7 @@ export function Skills() {
                   </h3>
                   <div className="skill-expand grid grid-rows-[0fr] transition-[grid-template-rows] duration-[550ms] ease-[var(--ease-out-expo)] group-hover:grid-rows-[1fr]">
                     <div className="overflow-hidden">
-                      <p className="max-w-[680px] pt-4 text-[15px] leading-[1.7] text-white/55 transition-[opacity,transform] duration-[450ms] ease-[var(--ease-out-expo)] group-hover:translate-y-0 group-hover:opacity-100 translate-y-1 opacity-0 md:pt-5 md:text-[16px]">
+                      <p className="max-w-[680px] pt-4 text-[length:var(--text-body)] leading-[length:var(--leading-body)] text-white/55 transition-[opacity,transform] duration-[450ms] ease-[var(--ease-out-expo)] group-hover:translate-y-0 group-hover:opacity-100 translate-y-1 opacity-0 md:pt-5">
                         {skill.description}
                       </p>
                     </div>

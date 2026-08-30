@@ -2,9 +2,10 @@
 title: "GroWrk · Suppliers Platform"
 slug: suppliers-platform
 locale: en
-order: 4
+order: 2
 type: child
 parentSlug: growrk
+cardNumber: "GroWrk 1.2"
 problem: "Supplier information lived scattered across spreadsheets and manual emails"
 description: "I led the UX initiative to centralize GroWrk's supplier management, mentoring a Junior designer and aligning the CEO. I proposed an automated invoicing tool that cut quotes from 30 to 10 minutes. The project revealed an external product opportunity I built from scratch, one that taught as much by working as by being shut down."
 year: "2023–2024"
@@ -29,6 +30,7 @@ metrics:
   - value: "0"
     label: "Manual spreadsheets after the transition"
 coverImage: /images/projects/growrk-suppliers-platform/banner-growrk-suppliers.png
+cardImage: /images/projects/growrk-suppliers-platform/growrk-supplier-app-screens.png
 ---
 
 ## 01 · The problem

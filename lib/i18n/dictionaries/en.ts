@@ -161,7 +161,7 @@ export const en: Dictionary = {
       },
       {
         number: "03",
-        title: "Product Design (0 to 1)",
+        title: "Product Design (Zero to One)",
         description:
           "I take products from chaotic concept to MVP ready to build. Research, identity, flows, validation with real users, and documented delivery. Design for business, not just screens: without business context, it's decoration.",
       },

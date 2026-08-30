@@ -13,7 +13,7 @@ export default async function NotFound() {
         <h1 className="mb-4 text-[clamp(48px,10vw,72px)] font-normal tracking-[-0.025em] text-carbon">
           404
         </h1>
-        <p className="mb-8 text-[17px] tracking-[-0.009em] text-zinc">
+        <p className="mb-8 text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
           {dict.notFound.message}
         </p>
         <Link

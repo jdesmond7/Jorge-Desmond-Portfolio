@@ -24,7 +24,7 @@ export function CaseStudySection({
         </h2>
       )}
       {body && (
-        <p className="w-full whitespace-pre-line text-[17px] leading-[1.6] tracking-[-0.009em] text-zinc">
+        <p className="w-full whitespace-pre-line text-[length:var(--text-body)] leading-[length:var(--leading-body)] tracking-[-0.009em] text-zinc">
           {body}
         </p>
       )}

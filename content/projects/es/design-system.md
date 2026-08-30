@@ -2,9 +2,10 @@
 title: "Design System: El Motor de Escala"
 slug: design-system-motor-de-escala
 locale: es
-order: 2
+order: 3
 type: child
 parentSlug: growrk
+cardNumber: "GroWrk 1.3"
 problem: "Los equipos de diseño e ingeniería hablaban idiomas distintos"
 description: "Arquitectura de Design Tokens y componentes reutilizables integrados con Nuxt UI y Tailwind, el sistema que hizo posible todo lo demás."
 year: "2022–2024"
@@ -26,6 +27,7 @@ metrics:
   - value: "5"
     label: "Plataformas servidas: Client, Staff, Supplier, Employee y Website"
 coverImage: /images/projects/growrk-design-system/design-system-growrk.png
+cardImage: /images/projects/growrk/growrk-card-project.png
 ---
 
 ## 01 · El problema
@@ -147,20 +149,3 @@ El proceso tomó cerca de dos meses, trabajando en paralelo a nuestras responsab
 
 > "Ya quiero probarla, se ve que nos va a ahorrar mucho tiempo."
 > — Sony, Diseñadora, GroWrk Remote
-
----
-
-## 05 · Impacto
-
-**Lo que cambió, en números y en cultura.**
-
-![impact_dashboard.png](/images/projects/growrk-design-system/impact_dashboard.png)
-
-| Métrica | Descripción |
-|---|---|
-| ~40% | Reducción en tiempo de diseño. De 2–3 horas a 20 minutos en tablas complejas |
-| 40 | Componentes en V3 con documentación en Figma y código |
-| 300+ | Tokens totales. Sistema bilingüe: diseño e ingeniería |
-| 234 | Iconos homologados. Librería limpia, sin redundancias |
-| 34 | Imágenes documentadas, usadas en producción y centralizadas |
-| 5 | Plataformas servidas: Client, Staff, Supplier, Employee y Website |

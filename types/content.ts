@@ -31,10 +31,15 @@ export interface ProjectFrontmatter {
   cardImage?: string;
   gallery?: string[];
   parentSlug?: string;
+  /** Label inside the card number brackets, e.g. "GroWrk 1.1". */
+  cardNumber?: string;
   overviewTitle?: string;
   overviewBodyText?: string;
   challengeTitle?: string;
   challengeBodyText?: string;
+  framingQuestion?: string;
+  framingQuestionHighlight?: string;
+  framingBody?: string;
   heroImage?: string;
   images?: string[];
 }
