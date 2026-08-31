@@ -19,7 +19,7 @@ Michal Malewicz lo dijo hace poco en un artículo que generó bastante ruido: la
 
 ![malewicz-ui-direction.png](/images/blog/malewicz-ui-direction.png)
 
-*Imagen: Michal Malewicz — UI Design Direction 2026–2027 (Medium, mayo 2026). Fuente: [michalmalewicz.medium.com](https://michalmalewicz.medium.com/ui-design-direction-2026-2027-2b4b6eb88336). Usada con fines referenciales.* 
+*Imagen: Michal Malewicz - UI Design Direction 2026-2027 (Medium, mayo 2026). Fuente: [michalmalewicz.medium.com](https://michalmalewicz.medium.com/ui-design-direction-2026-2027-2b4b6eb88336). Usada con fines referenciales.* 
 
 Cada vez que alguien aplica un efecto nuevo a un ícono lo llaman "morphism" y lo tratan como si fuera una nueva era del diseño. Disco-morphism, metal-morphism, squircle-morphism. La mayoría son solo materiales aplicados sobre la misma estructura de siempre. Un disfraz, no un lenguaje.
 
@@ -97,4 +97,4 @@ Viene una era interesante. La mejor forma de prepararse no es seguir las tendenc
 
 **Referencias**
 
-Malewicz, M. (mayo 2026). *UI Design Direction 2026–2027.* Medium / Hype4. [michalmalewicz.medium.com](https://michalmalewicz.medium.com/ui-design-direction-2026-2027-2b4b6eb88336)
+Malewicz, M. (mayo 2026). *UI Design Direction 2026-2027.* Medium / Hype4. [michalmalewicz.medium.com](https://michalmalewicz.medium.com/ui-design-direction-2026-2027-2b4b6eb88336)

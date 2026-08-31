@@ -26,7 +26,7 @@ function mixColor(
 }
 
 function wordVisual(local: number) {
-  // local < 0: still ahead — invisible
+  // local < 0: still ahead - invisible
   // 0..1: fades in to primary
   // 1..2.2: holds primary then settles to text-default
   // > 2.2: carbon

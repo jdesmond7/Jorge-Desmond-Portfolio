@@ -85,7 +85,7 @@ function getCardStyle(offset: number) {
   }
 
   const direction = offset < 0 ? -1 : 1;
-  const xShift = direction * 420;
+  const xShift = direction * 520;
 
   return {
     transform: `translate(calc(-50% + ${xShift}px), 0) rotate(${direction * 7}deg) scale(0.9)`,

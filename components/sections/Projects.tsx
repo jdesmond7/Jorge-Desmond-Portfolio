@@ -1,3 +1,4 @@
+import { Container } from "@/components/ui/Container";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
@@ -13,23 +14,21 @@ export async function Projects({ projects, className = "" }: ProjectsProps) {
   const dict = getDictionary(locale);
 
   return (
-    <section id="trabajo" className={`overflow-x-clip ${className}`}>
-      <div className="flex flex-col">
-        {projects.map((project, index) => (
-          <div
-            key={project.id}
-            className="relative left-1/2 w-screen -translate-x-1/2"
-          >
+    <section id="trabajo" className={className}>
+      <Container narrow>
+        <div className="flex flex-col gap-6 md:gap-8">
+          {projects.map((project, index) => (
             <ProjectCard
+              key={project.id}
               project={project}
               index={index}
-              fullBleed
+              fullBleed={false}
               readLabel={dict.projects.readCaseStudy}
               readAria={dict.projects.readCaseStudyAria(project.title)}
             />
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Container>
     </section>
   );
 }

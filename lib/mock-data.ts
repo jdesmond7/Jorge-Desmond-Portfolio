@@ -13,12 +13,12 @@ export const MOCK_HOME: HomeContent = {
     "Own the process.\nBuild the system.",
   heroSubtitle:
     "Diseño sistemas, del token al producto completo. Llevo apps de cero a uno, construyo Design Systems que escalan, y exploro cómo la IA cambia la forma en que diseñamos. Profesor en el Tec de Monterrey.",
-  heroImage: "/images/hero.png",
+  heroImage: "/images/hero.webp",
   trustBadges: [
     "10+ Años de exp.",
     "5 Plataformas E2E",
     "50K+ Usuarios",
-    "150+ Paises",
+    "150+ Países",
   ],
   stats: [
     { value: "8+", label: "años de experiencia" },
@@ -51,7 +51,7 @@ export const MOCK_HOME: HomeContent = {
   ],
   aboutTitle: "Mismo proceso.\nDos escenarios.",
   aboutTeaser:
-    "Dentro de la pantalla: sistemas de diseño, IA y plataformas que escalan. Fuera de ella: calistenia y fuerza con la misma lógica — proceso, consistencia, iteración. Enseño en el Tec de Monterrey porque el pensamiento sistémico se comparte, no se acumula.",
+    "Dentro de la pantalla: sistemas de diseño, IA y plataformas que escalan. Fuera de ella: calistenia y fuerza con la misma lógica - proceso, consistencia, iteración. Enseño en el Tec de Monterrey porque el pensamiento sistémico se comparte, no se acumula.",
   ctaTitle: "Construyamos algo que valga la pena.",
   ctaSubtitle:
     "Si tienes un proyecto donde el diseño y los sistemas importan, quiero saber de él.",
@@ -69,28 +69,28 @@ export const MOCK_SITE_SETTINGS: SiteSettings = {
     { label: "Ilustración", href: "/ilustracion" },
     { label: "Sobre mí", href: "/sobre-mi" },
   ],
-  footerText: "monterrey, méxico — diseñado como un sistema",
+  footerText: "monterrey, méxico - diseñado como un sistema",
 };
 
 export const MOCK_ABOUT: AboutContent = {
   title: "Sobre mí",
   heroImage: "/images/about-me.png",
   images: [],
-  body: `soy jorge. mexicano, vivo en monterrey. entreno calistenia. dibujo cuando puedo.
+  body: `Soy jorge. Mexicano, vivo en Monterrey. Entreno calistenia. Dibujo cuando puedo.
 
-diseño sistemas — los que hacen que los productos no se rompan cuando crecen. ahorita soy senior product designer en growrk remote, donde también cargo el sombrero de ai design architect. en paralelo enseño diseño en el tec de monterrey y estoy construyendo prowell, una plataforma de coaching para entrenadores de bienestar.
+Diseño sistemas, los que hacen que los productos no se rompan cuando crecen. Ahorita soy Senior Product Designer en GroWrk Remote, donde también cargo el sombrero de AI Design Architect. En paralelo enseño diseño en el Tec de Monterrey y estoy construyendo Prowell, una plataforma de coaching para entrenadores de bienestar.
 
-los últimos cinco años han sido sistemas de diseño, tokens, componentes y decisiones que se ven simples pero tienen tres capas abajo. también escribo mis propios diseños en código cuando el proyecto lo pide.
+Los últimos cinco años han sido sistemas de diseño, tokens, componentes y decisiones que se ven simples pero tienen tres capas abajo. También escribo mis propios diseños en código cuando el proyecto lo pide.
 
-antes de esto estuve en spin by oxxo, grupo salinas y un par de proyectos que me enseñaron que el diseño sin contexto de negocio es decoración.
+Antes de esto estuve en SPIN by OXXO y Grupo Salinas. Aprendí que el diseño sin contexto de negocio es decoración.
 
-en las noches ilustro. manga, tinta, papel. sin ctrl+z.
+En las noches ilustro. Prefiero lo análogo: tinta china, plumones de alcohol, papel. Cuando el proyecto lo pide, también trabajo en digital con Procreate. Sin Ctrl+Z de preferencia.
 
-tengo tres marcas paralelas que estoy construyendo despacio y con intención: desmond.design para consultoría de sistemas, built by des para fitness, y frame & font para educación de diseño — esta última con mi socia y pareja liz.
+Tengo tres marcas que estoy construyendo despacio y con intención: desmond.design para consultoría de sistemas, Built by Des para fitness, y Frame & Font para educación de diseño (esta última con mi socia y pareja Liz).
 
-escríbeme a ${SITE_EMAIL} o encuéntrame en linkedin / instagram.
+Escríbeme a ${SITE_EMAIL} o encuéntrame en LinkedIn / Instagram.
 
-con gusto, jorge`,
+Con gusto, jorge`,
 };
 
 export const MOCK_COMMENTS: Array<Comment & { blogPostSlug: string }> = [

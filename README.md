@@ -1,4 +1,4 @@
-# Portafolio — Jorge Desmond
+# Portafolio - Jorge Desmond
 
 Portafolio personal estático con Next.js, Design System propio y contenido en Markdown local.
 
@@ -39,7 +39,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 | `/` | Home |
 | `/proyectos` | Casos de estudio |
 | `/proyectos/[slug]` | Detalle de proyecto |
-| `/ilustracion` | Galería (Instagram Graph API) |
+| `/ilustracion` | Galería de ilustraciones locales |
 | `/blog` | Blog |
 | `/blog/[slug]` | Artículo |
 | `/sobre-mi` | Bio extendida |
@@ -49,11 +49,11 @@ Abre [http://localhost:3000](http://localhost:3000).
 
 Tokens centralizados en `app/globals.css`:
 
-- **Coral** — CTAs, marca y acentos
-- **Carbon** — nav y texto principal
-- **Bebas Neue** — display / hero name
-- **Montserrat** — cuerpo y saludo
-- **JetBrains Mono** — labels y metadata
+- **Coral** - CTAs, marca y acentos
+- **Carbon** - nav y texto principal
+- **Bebas Neue** - display / hero name
+- **Montserrat** - cuerpo y saludo
+- **JetBrains Mono** - labels y metadata
 
 ## Contenido
 
@@ -63,8 +63,7 @@ Proyectos y About viven en Markdown. El locale activo (`es` | `en`) elige la car
 
 1. Conecta el repo en [vercel.com](https://vercel.com)
 2. Variables de entorno:
-   - `NEXT_PUBLIC_SITE_URL` — URL del sitio en producción
-   - `INSTAGRAM_USER_ID` / `INSTAGRAM_ACCESS_TOKEN` — opcional, para `/ilustracion`
+   - `NEXT_PUBLIC_SITE_URL` - URL del sitio en producción
 
 ## Scripts
 

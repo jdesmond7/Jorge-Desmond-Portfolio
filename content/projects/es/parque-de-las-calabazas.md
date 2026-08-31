@@ -1,49 +1,95 @@
 ---
-title: "Parque de las calabazas: Una experiencia inmersiva"
+title: "Parque de las Calabazas: Inmersión sin sacrificar rendimiento"
 slug: parque-de-las-calabazas
 locale: es
-order: 3
-problem: "Un sitio inmersivo suele sacrificar el SEO. Este tenía que lograr ambos."
-description: "Diseño de un sitio inmersivo para Parque de las Calabazas que equilibra experiencia editorial rica con rendimiento y SEO, para atraer visitas y convertirlas en boletos."
-year: "2024"
-client: "Parque de las Calabazas"
-duration: "Proyecto freelance"
-roles: "Product Designer · Front-End"
-team: "Diseño y desarrollo"
-tools: "Figma · Next.js · Tailwind"
-tags: ["Web Design", "Immersive Experience", "SEO", "Front-End", "B2C", "Brand Experience"]
-learning: "La inmersión y el SEO no son opuestos. Cuando la narrativa, el performance y la estructura de contenido se diseñan juntos, la experiencia puede ser memorable y encontrable."
-coverImage: /images/projects/pdlc/pdlc-card-project.png
+order: 7
+type: child
+problem: "Un sitio inmersivo suele pelearse con el SEO. Este tenía que ganar en los dos"
+description: "Sitio web inmersivo para la edición 2026 del Parque de las Calabazas, un parque temático de otoño y Halloween en dos sedes (Parque Fundidora, Monterrey, y Foro Valle Oriente, San Pedro). Diseño y desarrollo freelance en HTML incrustado sobre WordPress, con microanimaciones, multimedia y una arquitectura que escaló de una a dos sedes, priorizando experiencia y SEO por igual."
+year: "2026"
+client: "Parque de las Calabazas (proyecto freelance)"
+duration: "11 días (20-31 ago 2026)"
+roles: "Diseño y desarrollo web (freelance)"
+team: "Contacto directo con el equipo de diseño del evento"
+tools: "WordPress · HTML · CSS · JavaScript"
+tags: ["Web Design", "Front-End", "UX/UI", "Motion Design", "SEO", "WordPress", "Freelance", "Immersive Experience"]
+learning: "Lo bonito y lo funcional no tienen por qué pelearse. El reto de este proyecto no fue hacer un sitio inmersivo, cualquiera llena una página de animaciones. Fue lograr que esa inmersión se sintiera limpia, moderna y fácil de entender, sin sacrificar el SEO ni el rendimiento. La experiencia visual atrae, pero la claridad es la que convierte. Un buen sitio de atracción no es el más espectacular: es el que el usuario entiende sin esfuerzo."
+metrics:
+  - value: "11 días"
+    label: "Del concepto al sitio listo para lanzar"
+  - value: "2 sedes"
+    label: "Arquitectura escalada desde el sitio de una sola sede del año anterior"
+  - value: "100%"
+    label: "Concepto, gráficos y multimedia generados nuevos para cada sección"
+  - value: "HTML"
+    label: "Incrustado sobre WordPress para priorizar diseño sin perder SEO"
+coverImage: /images/projects/pdlc/banner-pdlc-projects.png
 cardImage: /images/projects/pdlc/pdlc-card-project.png
 showInHome: true
 ---
 
-## 01 · Overview
+## 01 · El contexto
 
-**Un parque temático de temporada necesitaba una presencia digital que se sintiera como la visita… y que Google también pudiera leer.**
+El Parque de las Calabazas es un parque temático que celebra el otoño y Halloween: experiencias, actividades, música y sets fotográficos para toda la familia.
 
-Parque de las Calabazas es una experiencia física intensa: atmósfera, recorridos, fotografía, venta de boletos. El sitio tenía que trasladar esa sensación a la pantalla sin convertirse en un micrositio “bonito pero invisible”.
+Me contrataron como freelance para generar la experiencia web de la edición 2026 (PDLC2026). El objetivo era claro: llevar el sitio a una experiencia inmersiva que reflejara la magia del evento físico, y atraer visitantes desde la primera pantalla.
 
----
-
-## 02 · Challenge
-
-**Un sitio inmersivo suele sacrificar el SEO. Este tenía que lograr ambos.**
-
-La tensión era clara: efectos, narrativa visual y storytelling de alto impacto contra indexación, velocidad, estructura de contenido y conversión a compra. El diseño no podía elegir un solo lado.
+El punto de partida era mínimo. El año anterior el sitio tenía tres secciones (Home, Amenidades y Preguntas Frecuentes) para una sola sede. Para 2026 el evento crecía a dos sedes, así que el sitio tenía que volverse más robusto sin volverse más complicado de usar.
 
 ---
 
-## 03 · Approach
+<!-- section-columns -->
 
-**Diseñé la experiencia como capas: atmósfera primero, semántica siempre.**
+## 02 · Mi rol
 
-La interfaz prioriza una entrada inmersiva, pero el contenido crítico —fechas, ubicación, precios, CTA de boletos— vive en una estructura legible para usuarios y buscadores. El handoff a código se hizo pensando en performance y SEO desde el día uno.
+Diseño y desarrollo, de punta a punta.
+
+Trabajé como freelance con contacto directo con el equipo de diseño del evento. Ellos me compartieron el material multimedia del año anterior y algunos gráficos de apoyo. A partir de ahí, bajé un concepto único para el proyecto, y con el concepto claro generé gráficos y elementos multimedia nuevos para cada sección del sitio.
+
+Diseño y desarrollo en las mismas manos: definí la experiencia y la construí en HTML incrustado sobre WordPress. Esa decisión técnica fue deliberada, priorizar el diseño sin renunciar al SEO que da WordPress.
+
+## 03 · El reto
+
+Inmersión que se sienta limpia, no saturada.
+
+El cliente dio libertad creativa casi total. El reto real no fue técnico ni de alcance: fue de criterio. Un sitio inmersivo puede caer fácil en el exceso, animaciones por todas partes, multimedia que pesa, una experiencia impresionante en los primeros cinco segundos e insoportable en el uso real.
+
+Mi meta fue lo contrario: que la inmersión se sintiera limpia, moderna y fácil de entender. Usé UX y UI para optimizar cada pantalla, de modo que lo visual atrajera y la estructura guiara. La experiencia tenía que ser única, pero sobre todo intuitiva.
 
 ---
 
-## 04 · Outcome
+## 04 · La arquitectura
 
-**Una web que vende la experiencia y también se encuentra.**
+De un sitio de una sede a uno de dos, sin duplicar la complejidad para el usuario.
 
-El resultado es un sitio con personalidad de marca fuerte, recorrido visual claro y caminos de conversión explícitos, sin renunciar a la base técnica que necesita un producto de temporada para ser descubierto.
+El sitio del año anterior era lineal: tres secciones, una sede. Para 2026, con dos sedes, la estructura tenía que crecer sin perder claridad. La resolví con una arquitectura de un Home central (una portada de "Elige tu sede") del que se despliegan los dos sitios: Parque Fundidora (Monterrey) y Foro Valle Oriente (San Pedro), cada uno con sus propias secciones de Inicio, Amenidades y Preguntas Frecuentes.
+
+Cada sede tiene su propio contenido, fechas, precios y amenidades, pero comparten identidad y navegación. El usuario elige su sede desde el inicio y entra a un flujo dedicado, sin mezclar información de ambas. Duplicar la cantidad de pantallas no significó duplicar la fricción: cada camino se siente simple porque solo muestra lo relevante para esa sede.
+
+<!-- pdlc-architecture -->
+
+---
+
+## 05 · La experiencia
+
+Microanimaciones, multimedia y un recorrido que se siente como el parque.
+
+Con el concepto definido, construí la capa de experiencia: microanimaciones que dan vida a la navegación, multimedia original por sección, y un ritmo visual que traslada la atmósfera del evento a la pantalla. Cada elemento gráfico se generó nuevo, alineado al concepto único del proyecto, en lugar de reutilizar el material del año anterior.
+
+Todo bajo la misma premisa: la animación guía, no distrae. Los estados responden, las transiciones tienen propósito, y el peso visual nunca compromete la velocidad de carga ni la comprensión.
+
+<!-- VIDEO: /images/projects/pdlc/pdlc-experiencia.mp4 - Recorrido por el sitio con microanimaciones y multimedia original -->
+
+Lo inmersivo no está peleado con lo claro. El truco es que cada animación tenga una razón de ser.
+
+---
+
+## 06 · Estado actual
+
+Sitio terminado, esperando lanzamiento.
+
+El sitio pasó por sus últimos ajustes y está listo. Al ser un proyecto de temporada, el lanzamiento se alinea con el arranque del evento 2026, así que aún no hay métricas de uso.
+
+Lo que sí hay es un producto entregado en 11 días: del concepto a un sitio completo, inmersivo y listo para recibir a los primeros visitantes. Un proyecto express que demuestra que la velocidad y el criterio de diseño no están peleados.
+
+<!-- LIVE: https://www.parquedelascalabazas.com -->

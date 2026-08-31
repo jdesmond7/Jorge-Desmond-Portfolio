@@ -9,6 +9,7 @@ import { formatDate } from "@/lib/format-date";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale, localeToDateLocale } from "@/lib/i18n/locale";
 import { getAllBlogSlugs, getBlogPostBySlug } from "@/lib/data";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -26,10 +27,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = await getBlogPostBySlug(slug);
   if (!post) return { title: dict.blog.notFound };
 
-  return {
+  return buildPageMetadata({
     title: post.title,
     description: post.excerpt,
-  };
+    path: `/blog/${slug}`,
+    image: post.coverImage,
+    type: "article",
+  });
 }
 
 export default async function BlogPostPage({ params }: PageProps) {

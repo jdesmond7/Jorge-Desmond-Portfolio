@@ -5,8 +5,8 @@ locale: en
 order: 1
 type: parent
 problem: "A manual hardware operation that had to become a global SaaS platform"
-description: "Complete design infrastructure for a global B2B SaaS platform: 3 generations of Design System, 5 platforms, and an AI Playground that generates UI at 80–90% fidelity from a single prompt."
-year: "2019–2024"
+description: "Complete design infrastructure for a global B2B SaaS platform: 3 generations of Design System, 5 platforms, and an AI Playground where any employee generates prototypes faithful to the system from a prompt."
+year: "2019-2024"
 client: "GroWrk Remote"
 duration: "5 years"
 roles: "Sr. Product Designer · AI Design Architect"
@@ -18,10 +18,10 @@ learning: |
 
   Here I learned what now defines how I work: building systems isn't about designing screens, it's about designing the foundation an entire team can grow on without breaking. GroWrk wasn't just a job. It's where I became the designer I am today.
 metrics:
-  - value: "50K+"
-    label: "Users in production"
-  - value: "150+"
-    label: "countries with active operation"
+  - value: "50K+ users"
+    label: "Active on the platform"
+  - value: "+150 countries"
+    label: "with active operations"
 coverImage: /images/projects/growrk/banner-growrk-projects.png
 cardImage: /images/projects/growrk/growrk-card-project.png
 showInHome: true

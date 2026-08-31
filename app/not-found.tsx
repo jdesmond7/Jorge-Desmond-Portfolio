@@ -1,7 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+
+  return buildPageMetadata({
+    title: "404",
+    description: dict.notFound.message,
+    path: "/404",
+  });
+}
 
 export default async function NotFound() {
   const locale = await getLocale();

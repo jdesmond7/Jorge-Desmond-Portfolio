@@ -6,13 +6,13 @@ export interface InstagramMedia {
   imageUrl: string;
   /** MP4 de Instagram para reels, loops y GIFs animados. */
   videoUrl?: string;
-  permalink: string;
+  permalink?: string;
   alt: string;
   width: number;
   height: number;
 }
 
-/** Patrones cuadrado o retrato — sin celdas más anchas que altas. */
+/** Patrones cuadrado o retrato - sin celdas más anchas que altas. */
 const BENTO_PATTERNS = [
   "col-span-1 row-span-4 sm:row-span-4 md:col-span-1 md:row-span-5 lg:col-span-2 lg:row-span-5",
   "col-span-1 row-span-3 md:col-span-1 md:row-span-4 lg:col-span-2 lg:row-span-4",

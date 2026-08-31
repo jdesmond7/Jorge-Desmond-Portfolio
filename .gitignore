@@ -44,3 +44,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# source videos (optimized .mp4 versions are used in production)
+public/images/**/*.mov

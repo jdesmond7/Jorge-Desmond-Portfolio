@@ -59,16 +59,17 @@ const components: Components = {
     if (!safeSrc) return null;
 
     return (
-      <figure className="my-8 w-full">
+      <div className="my-8 w-full">
         <ZoomableImage
           src={safeSrc}
           alt={alt ?? ""}
+          caption={alt ?? ""}
           width={1072}
           height={604}
           sizes="(max-width: 1072px) 100vw, 1072px"
           className="h-auto w-full max-w-full rounded-[var(--radius-card)]"
         />
-      </figure>
+      </div>
     );
   },
 

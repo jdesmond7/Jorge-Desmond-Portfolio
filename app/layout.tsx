@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, JetBrains_Mono, Montserrat } from "next/font/google";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale, localeToOpenGraph } from "@/lib/i18n/locale";
-import { getSiteUrl } from "@/lib/site";
+import { getSiteUrl, SITE_EMAIL } from "@/lib/site";
 import { getHomeContent, getSiteSettings } from "@/lib/data";
+import {
+  absoluteUrl,
+  buildPageMetadata,
+  DEFAULT_OG_IMAGE,
+} from "@/lib/seo/metadata";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -31,16 +37,22 @@ const jetbrainsMono = JetBrains_Mono({
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const dict = getDictionary(locale);
+  const base = buildPageMetadata({
+    title: dict.meta.defaultTitle,
+    description: dict.meta.defaultDescription,
+    path: "/",
+    image: DEFAULT_OG_IMAGE,
+  });
 
   return {
+    ...base,
     title: {
       default: dict.meta.defaultTitle,
       template: `%s | ${dict.meta.siteName}`,
     },
-    description: dict.meta.defaultDescription,
     metadataBase: new URL(getSiteUrl()),
     openGraph: {
-      type: "website",
+      ...base.openGraph,
       locale: localeToOpenGraph(locale),
       siteName: dict.meta.siteName,
     },
@@ -65,6 +77,18 @@ export default async function RootLayout({
       className={`${bebasNeue.variable} ${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-body">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Jorge Desmond",
+            url: getSiteUrl(),
+            email: SITE_EMAIL,
+            jobTitle: "Senior Product Designer",
+            sameAs: [settings.linkedin, settings.instagram].filter(Boolean),
+            image: absoluteUrl(DEFAULT_OG_IMAGE),
+          }}
+        />
         <I18nProvider locale={locale}>
           <Nav
             siteName={settings.siteName}

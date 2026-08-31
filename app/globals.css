@@ -8,7 +8,7 @@
   --color-coral-mist: #ffd9c4;
   --color-primary: var(--color-coral);
 
-  /* Neutrals — contrast-checked on cream (#fffcf9) for WCAG AA */
+  /* Neutrals - contrast-checked on cream (#fffcf9) for WCAG AA */
   --color-carbon: #18181b;
   --color-black: #000000;
   --color-zinc: #5f5f63;
@@ -213,5 +213,220 @@ body {
 
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* PDLC site architecture diagram */
+.pdlc-architecture {
+  --pdlc-amber: #f0b429;
+  --pdlc-amber-line: #e0a82e;
+  --pdlc-dark: #4a4a4a;
+  --pdlc-cream: #fdf6e3;
+  --pdlc-cream-border: #f0d98c;
+  --pdlc-text-dark: #2a2a2a;
+  --pdlc-text-muted: #6b6b6b;
+  --pdlc-stub: #d0d0d0;
+}
+
+.pdlc-architecture__diagram {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.pdlc-architecture__row {
+  display: flex;
+  justify-content: center;
+}
+
+.pdlc-architecture__node-root {
+  background: var(--pdlc-amber);
+  border-radius: 14px;
+  padding: 18px 44px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(240, 180, 41, 0.3);
+}
+
+.pdlc-architecture__node-root h3 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--pdlc-text-dark);
+}
+
+.pdlc-architecture__node-root p {
+  font-size: 13px;
+  color: #7a5c10;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.pdlc-architecture__fork {
+  position: relative;
+  height: 46px;
+}
+
+.pdlc-architecture__fork-down-c {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2.5px;
+  height: 14px;
+  background: var(--pdlc-amber-line);
+  transform: translateX(-50%);
+}
+
+.pdlc-architecture__fork-h {
+  position: absolute;
+  top: 14px;
+  left: 25%;
+  right: 25%;
+  height: 2.5px;
+  background: var(--pdlc-amber-line);
+}
+
+.pdlc-architecture__fork-down-l,
+.pdlc-architecture__fork-down-r {
+  position: absolute;
+  top: 14px;
+  width: 2.5px;
+  height: 32px;
+  background: var(--pdlc-amber-line);
+}
+
+.pdlc-architecture__fork-down-l {
+  left: 25%;
+}
+
+.pdlc-architecture__fork-down-r {
+  right: 25%;
+}
+
+.pdlc-architecture__venues {
+  display: flex;
+  gap: 72px;
+}
+
+.pdlc-architecture__venue-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.pdlc-architecture__node-venue {
+  background: var(--pdlc-dark);
+  border-radius: 12px;
+  padding: 18px 16px;
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.pdlc-architecture__node-venue h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.pdlc-architecture__node-venue span {
+  font-size: 12px;
+  color: #c9c9c9;
+  display: block;
+  margin-top: 3px;
+}
+
+.pdlc-architecture__subfork {
+  position: relative;
+  height: 30px;
+  width: 100%;
+}
+
+.pdlc-architecture__subfork-down-c,
+.pdlc-architecture__subfork-s1,
+.pdlc-architecture__subfork-s2,
+.pdlc-architecture__subfork-s3 {
+  position: absolute;
+  top: 0;
+  width: 2.5px;
+  height: 14px;
+  background: var(--pdlc-stub);
+}
+
+.pdlc-architecture__subfork-down-c,
+.pdlc-architecture__subfork-s2 {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pdlc-architecture__subfork-h {
+  position: absolute;
+  top: 14px;
+  left: 16.6%;
+  right: 16.6%;
+  height: 2.5px;
+  background: var(--pdlc-stub);
+}
+
+.pdlc-architecture__subfork-s1 {
+  top: 14px;
+  left: 16.6%;
+  height: 16px;
+}
+
+.pdlc-architecture__subfork-s2 {
+  top: 14px;
+  height: 16px;
+}
+
+.pdlc-architecture__subfork-s3 {
+  top: 14px;
+  right: 16.6%;
+  height: 16px;
+}
+
+.pdlc-architecture__pages {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.pdlc-architecture__node-page {
+  flex: 1;
+  background: var(--pdlc-cream);
+  border: 1.5px solid var(--pdlc-cream-border);
+  border-radius: 10px;
+  padding: 15px 6px;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--pdlc-text-dark);
+}
+
+.pdlc-architecture__caption {
+  text-align: center;
+  font-style: italic;
+  color: var(--pdlc-text-muted);
+  font-size: 14px;
+  margin-top: 24px;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .pdlc-architecture__venues {
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .pdlc-architecture__fork-h,
+  .pdlc-architecture__fork-down-l,
+  .pdlc-architecture__fork-down-r {
+    display: none;
+  }
+
+  .pdlc-architecture__fork {
+    height: 20px;
   }
 }

@@ -8,18 +8,23 @@ parentSlug: growrk
 cardNumber: "GroWrk 1.2"
 problem: "Supplier information lived scattered across spreadsheets and manual emails"
 description: "I led the UX initiative to centralize GroWrk's supplier management, mentoring a Junior designer and aligning the CEO. I proposed an automated invoicing tool that cut quotes from 30 to 10 minutes. The project revealed an external product opportunity I built from scratch, one that taught as much by working as by being shut down."
-year: "2023–2024"
+year: "2023-2024"
 client: "GroWrk Remote · Los Angeles, California, United States"
-duration: "1 year (2023–2024)"
+duration: "1 year (2023-2024)"
 roles: "UX Lead · Product Designer"
 team: "Junior UI Designer, Product Owner, CEO, Engineering"
 tools: "Figma · FigJam · Notion"
 tags: ["Product Design", "UX Research", "Design Systems", "B2B", "Enterprise UX", "Workflow Automation", "Team Leadership", "Web App"]
-learning: "Great product design doesn't end at the interface. Designing for a B2B ecosystem means understanding why someone would, or wouldn't, do the work your product asks of them. The internal platform worked because the team felt the time savings in their own day. The external app shut down because suppliers had no incentive to use it. Same design quality, opposite result. The difference wasn't in the screens, it was in the incentives."
+learning: |
+  Great product design doesn't end at the interface. It requires understanding operational realities, aligning incentives, anticipating resistance to change, and building systems that can evolve over time.
+
+  What began as an internal efficiency improvement became a strategic product capability. And the part that didn't work taught me as much as the part that did. The internal platform worked because the team felt the time savings in their own day. The external app shut down because suppliers had no incentive to use it. Same design quality, opposite result.
+
+  The difference wasn't in the screens. It was in the incentives. Designing for a B2B ecosystem isn't designing pretty screens: it's understanding why someone would, or wouldn't, do the work your product asks of them.
 metrics:
-  - value: "60–75%"
+  - value: "60-75%"
     label: "Reduction in quote preparation time"
-  - value: "2–3 hrs"
+  - value: "2-3 hrs"
     label: "Saved daily at the team level"
   - value: "100%"
     label: "Centralized supplier data management"
@@ -30,7 +35,7 @@ metrics:
   - value: "0"
     label: "Manual spreadsheets after the transition"
 coverImage: /images/projects/growrk-suppliers-platform/banner-growrk-suppliers.png
-cardImage: /images/projects/growrk-suppliers-platform/growrk-supplier-app-screens.png
+cardImage: /images/projects/growrk-suppliers-platform/laptop-mockups-vol01-touchbar-02.png
 ---
 
 ## 01 · The problem
@@ -85,7 +90,7 @@ With the workflow defined, I started exploring structural solutions. The low-fid
 
 Before moving to high fidelity, we ran a working session with Engineering to validate technical feasibility and identify automation opportunities. That's where the most important decision of the project came up.
 
-### The automated invoicing tool
+**The automated invoicing tool**
 
 The initial scope focused on viewing and updating data. But while mapping the flow, I saw a pain point nobody had put on the table: the team drafted each quote by hand, in plain-text emails. Between 20 and 30 minutes per quote.
 
@@ -129,7 +134,7 @@ That translated into roughly 2 to 3 hours saved daily at the team level.
 
 ---
 
-## 07 · The next bet — Supplier App
+## 07 · The next bet - Supplier App
 
 **The internal success revealed a bigger opportunity. We chased it. It didn't work. And that's a result too.**
 
@@ -144,30 +149,3 @@ It didn't work. After several improvements they themselves requested, adoption n
 The underlying reason was two things. First, there was no clear incentive: keeping their inventory on our platform was extra work with no direct benefit for them. Second, most already had their own system and saw no reason to migrate. The problem wasn't the design. It was the incentive structure of the ecosystem.
 
 From a product perspective, it was a huge opportunity: building a solution from scratch, defining flows for a new user type, and validating assumptions about ownership, responsibility, and system integration. The product was shut down. The lesson wasn't.
-
----
-
-## 08 · Final reflection
-
-**Great product design goes beyond the interface.**
-
-This initiative reinforced something for me: great product design isn't just about executing screens. It requires understanding operational realities, aligning incentives, anticipating resistance to change, and building systems that can evolve over time.
-
-What began as an internal efficiency improvement became a strategic product capability. And the part that didn't work taught me as much as the part that did. Designing for a B2B ecosystem isn't designing pretty screens: it's understanding why someone would, or wouldn't, do the work your product asks of them.
-
----
-
-## 09 · Impact
-
-**What changed, in numbers.**
-
-> Note: Project developed between 2023 and 2024. The external Supplier App stayed in operation for roughly a year before being shut down due to low adoption.
-
-| Metric | Description |
-|---|---|
-| 60–75% | Reduction in quote preparation time |
-| 2–3 hrs | Saved daily at the team level |
-| 100% | Centralized supplier data management |
-| 1 month | Full adoption of the internal platform |
-| New | Automated invoicing tool (own initiative) |
-| 0 | Manual spreadsheets after the transition |

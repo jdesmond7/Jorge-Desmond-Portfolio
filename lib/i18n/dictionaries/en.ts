@@ -61,10 +61,11 @@ export const en: Dictionary = {
     role: "Role",
     team: "Team",
     tools: "Tools",
-    learning: "Key learning",
+    learning: "Personal learning",
     overview: "Overview",
     challenge: "Challenge",
-    imageAlt: (title: string, n: number) => `${title} — image ${n}`,
+    imageAlt: (title: string, n: number) => `${title} - image ${n}`,
+    visitLiveSite: "Visit the site in its current state",
     decision: {
       context: "Context",
       decision: "The decision",
@@ -126,7 +127,7 @@ export const en: Dictionary = {
   about: {
     title: "About",
     description:
-      "Jorge Desmond — product designer in Monterrey. Design systems, calisthenics, illustration, and three brands in the making.",
+      "Jorge Desmond - product designer in Monterrey. Design systems, calisthenics, illustration, and three brands in the making.",
     heroAlt: "Jorge Desmond in his studio",
     writePrefix: "email me at",
     writeMiddle: "or find me on",
@@ -140,7 +141,7 @@ export const en: Dictionary = {
     openInstagram: (alt: string) => `Open on Instagram: ${alt}`,
   },
   manifesto: {
-    lead: "Brilliant design doesn't shout its presence — it's transparent.",
+    lead: "Brilliant design doesn't shout its presence - it's transparent.",
     body: "I remove friction and make the interface disappear, turning it into an immersive experience that stays with the user.",
     projectsCta: "View case studies",
   },
@@ -157,7 +158,7 @@ export const en: Dictionary = {
         number: "02",
         title: "AI Design Architecture",
         description:
-          "I turn Design System rules into context so AI generates interfaces faithful to the system. I built an AI Playground that produces UI at 80–90% fidelity from the first prompt. Not AI replacing judgment — judgment, scaled.",
+          "I turn Design System rules into context so AI can generate product with them. I built an AI Playground where any employee describes an idea and gets a prototype faithful to the system, ready to review. Not AI replacing judgment - judgment, scaled.",
       },
       {
         number: "03",
@@ -169,7 +170,7 @@ export const en: Dictionary = {
         number: "04",
         title: "Design & Front-End Development",
         description:
-          "I write my own designs in code when the project calls for it. Next.js, Tailwind, real components. The cleanest handoff is the one that doesn't exist — because the designer understands what can be built.",
+          "I write my own designs in code when the project calls for it. Next.js, Tailwind, real components. The cleanest handoff is the one that doesn't exist - because the designer understands what can be built.",
       },
       {
         number: "05",
@@ -181,14 +182,14 @@ export const en: Dictionary = {
         number: "06",
         title: "Micro-interactions & Motion",
         description:
-          "The details that make a product feel alive. Transitions with purpose, responsive states, animations that guide instead of distract. Never decoration — always intention.",
+          "The details that make a product feel alive. Transitions with purpose, responsive states, animations that guide instead of distract. Never decoration - always intention.",
       },
     ],
   },
   resume: {
     title: "Résumé",
     description:
-      "Jorge Desmond's CV — Senior Product Designer with 8+ years designing end-to-end digital products in B2B SaaS, fintech, and marketplaces.",
+      "Jorge Desmond's CV - Senior Product Designer with 8+ years designing end-to-end digital products in B2B SaaS, fintech, and marketplaces.",
     experience: "Experience",
     skills: "Skills",
     contact: "Contact",

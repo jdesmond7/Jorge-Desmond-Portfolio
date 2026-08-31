@@ -6,15 +6,17 @@ import { formatDate } from "@/lib/format-date";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale, localeToDateLocale } from "@/lib/i18n/locale";
 import { getBlogPosts } from "@/lib/data";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const dict = getDictionary(locale);
 
-  return {
+  return buildPageMetadata({
     title: dict.blog.title,
     description: dict.blog.description,
-  };
+    path: "/blog",
+  });
 }
 
 export default async function BlogPage() {

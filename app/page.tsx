@@ -17,7 +17,7 @@ export default async function Home() {
       <Marquee />
       <Skills />
       <Manifesto />
-      <Projects projects={projects} className="pt-16 md:pt-24" />
+      <Projects projects={projects} className="pt-16 pb-16 md:pt-24 md:pb-24" />
     </>
   );
 }

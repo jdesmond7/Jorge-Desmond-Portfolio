@@ -34,10 +34,31 @@ export const RESUME_ES: ResumeContent = {
   },
   experience: [
     {
+      role: "Profesor de Cátedra",
+      company: "Tecnológico de Monterrey (ITESM), Campus Monterrey",
+      period: "Ago. 2025 - Actualidad",
+      bullets: [
+        "Imparto cátedras de Diseño de Producto, Diseño Visual (creación de producto digital), Configuración del Objeto y Experimentación con Dibujo, enfocadas en metodologías de diseño para productos físicos y digitales.",
+        "Enseño a los alumnos las bases de la creación de producto, desde la conceptualización hasta la materialización, aplicando procesos de diseño reales.",
+        "Dirijo un curso de representación que va del dibujo tradicional al digital, dando a los estudiantes técnicas para comunicar y prototipar sus ideas.",
+      ],
+    },
+    {
+      role: "Lead Product Designer",
+      company: "Renova (freelance)",
+      period: "Sep. 2025 - Feb. 2026",
+      bullets: [
+        "Materialicé la idea de dos emprendedores en una app de comunidad y apoyo para personas en proceso de divorcio, diseñando de cero la identidad de marca, el naming y el tono de voz del producto.",
+        "Diseñé los flujos happy path para prototipar y validar rápido, más una versión con permisos diferenciados para expertos (abogados, psicólogos, médicos).",
+        "Validé un prototipo funcional con 6 expertos y 6 usuarios meta mediante entrevistas semiestructuradas, iterando hacia la versión final.",
+        "Construí el Design System y apoyé en la selección del equipo de desarrollo, entregando pantallas y documentación para una implementación sin fricción.",
+      ],
+    },
+    {
       role: "Lead Product Designer",
       detail: "Design Systems & Product Strategy",
       company: "GroWrk",
-      period: "Abr. 2022 – Actualidad",
+      period: "Abr. 2022 - Actualidad",
       bullets: [
         "Lideré el diseño de plataformas internas y herramientas para proveedores, transformando flujos fragmentados en sistemas escalables.",
         "Definí estrategia UX y arquitectura de producto, mejorando la toma de decisiones y reduciendo fricción operativa.",
@@ -48,7 +69,7 @@ export const RESUME_ES: ResumeContent = {
     {
       role: "Senior Product Designer",
       company: "Spin by OXXO",
-      period: "Feb. 2021 – Abr. 2022",
+      period: "Feb. 2021 - Abr. 2022",
       bullets: [
         "Lideré el diseño de flujos financieros clave como transferencias SPEI, onboarding y dashboards bajo restricciones regulatorias y de seguridad.",
         "Colaboré con UX Research para definir journeys y validar soluciones mediante pruebas de usabilidad.",
@@ -59,7 +80,7 @@ export const RESUME_ES: ResumeContent = {
     {
       role: "Lead Product Designer",
       company: "Grupo Salinas",
-      period: "Abr. 2020 – Feb. 2021",
+      period: "Abr. 2020 - Feb. 2021",
       bullets: [
         "Diseñé sistemas de recompensas cross-platform en ecosistemas financieros y retail (Banco Azteca, Italika, Elektra, Presta Prenda).",
         "Definí patrones de interacción escalables para múltiples productos y tipos de usuario.",
@@ -69,7 +90,7 @@ export const RESUME_ES: ResumeContent = {
     {
       role: "Senior Product Designer",
       company: "FEMSA",
-      period: "Ago. 2018 – Abr. 2020",
+      period: "Ago. 2018 - Abr. 2020",
       bullets: [
         "Lideré iniciativas de UX en plataformas a gran escala en LATAM (OXXO Club, e-commerce).",
         "Facilité workshops multidisciplinarios para alinear diseño, ingeniería y negocio.",
@@ -110,15 +131,36 @@ export const RESUME_EN: ResumeContent = {
     tagline: "End-to-End Product Design · Scalable Systems",
     summary: [
       "Product Designer with 8+ years leading end-to-end digital product design in B2B SaaS, fintech, and marketplace platforms. I specialize in solving complex, ambiguous problems through systems that reduce friction and help users make better decisions.",
-      "I work closely with Product and Engineering to define what to build — not just how it looks — contributing to strategy, architecture, and product validation. My focus is turning operational complexity into intuitive, scalable experiences with measurable impact.",
+      "I work closely with Product and Engineering to define what to build - not just how it looks - contributing to strategy, architecture, and product validation. My focus is turning operational complexity into intuitive, scalable experiences with measurable impact.",
     ],
   },
   experience: [
     {
+      role: "Adjunct Professor",
+      company: "Tecnológico de Monterrey (ITESM), Campus Monterrey",
+      period: "Aug. 2025 - Present",
+      bullets: [
+        "Teach Product Design, Visual Design (digital product creation), Object Configuration, and Drawing Experimentation courses, focused on design methodologies for physical and digital products.",
+        "Teach students the foundations of product creation, from conceptualization to materialization, applying real design processes.",
+        "Lead a representation course spanning traditional to digital drawing, giving students techniques to communicate and prototype their ideas.",
+      ],
+    },
+    {
+      role: "Lead Product Designer",
+      company: "Renova (freelance)",
+      period: "Sep. 2025 - Feb. 2026",
+      bullets: [
+        "Turned two entrepreneurs' idea into a community and support app for people going through divorce, designing brand identity, naming, and product tone of voice from scratch.",
+        "Designed happy path flows for rapid prototyping and validation, plus a version with differentiated permissions for experts (lawyers, psychologists, doctors).",
+        "Validated a functional prototype with 6 experts and 6 target users through semi-structured interviews, iterating toward the final version.",
+        "Built the Design System and supported development team selection, delivering screens and documentation for friction-free implementation.",
+      ],
+    },
+    {
       role: "Lead Product Designer",
       detail: "Design Systems & Product Strategy",
       company: "GroWrk",
-      period: "Apr. 2022 – Present",
+      period: "Apr. 2022 - Present",
       bullets: [
         "Led design for internal platforms and vendor tools, turning fragmented flows into scalable systems.",
         "Defined UX strategy and product architecture, improving decision-making and reducing operational friction.",
@@ -129,9 +171,9 @@ export const RESUME_EN: ResumeContent = {
     {
       role: "Senior Product Designer",
       company: "Spin by OXXO",
-      period: "Feb. 2021 – Apr. 2022",
+      period: "Feb. 2021 - Apr. 2022",
       bullets: [
-        "Led design for critical financial flows — SPEI transfers, onboarding, and dashboards — under regulatory and security constraints.",
+        "Led design for critical financial flows - SPEI transfers, onboarding, and dashboards - under regulatory and security constraints.",
         "Partnered with UX Research to define journeys and validate solutions through usability testing.",
         "Contributed to product architecture and interaction patterns during rapid growth (1M+ users in 9 months).",
         "Designed and maintained the product's first Design System for cross-platform scalability.",
@@ -140,7 +182,7 @@ export const RESUME_EN: ResumeContent = {
     {
       role: "Lead Product Designer",
       company: "Grupo Salinas",
-      period: "Apr. 2020 – Feb. 2021",
+      period: "Apr. 2020 - Feb. 2021",
       bullets: [
         "Designed cross-platform rewards systems across financial and retail ecosystems (Banco Azteca, Italika, Elektra, Presta Prenda).",
         "Defined scalable interaction patterns across multiple products and user types.",
@@ -150,7 +192,7 @@ export const RESUME_EN: ResumeContent = {
     {
       role: "Senior Product Designer",
       company: "FEMSA",
-      period: "Aug. 2018 – Apr. 2020",
+      period: "Aug. 2018 - Apr. 2020",
       bullets: [
         "Led UX initiatives on large-scale LATAM platforms (OXXO Club, e-commerce).",
         "Facilitated cross-functional workshops to align design, engineering, and business.",

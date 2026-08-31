@@ -3,29 +3,29 @@ import { IllustrationBento } from "@/components/sections/IllustrationBento";
 import { Container } from "@/components/ui/Container";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
+import { getLocalIllustrations } from "@/lib/illustrations";
 import {
-  getInstagramIllustrations,
   ILLUSTRATION_INSTAGRAM_HANDLE,
   ILLUSTRATION_INSTAGRAM_URL,
-} from "@/lib/instagram";
-
-/** Must match instagram fetch cache — Instagram media URLs expire quickly. */
-export const revalidate = 300;
+} from "@/lib/instagram-layout";
+import { buildPageMetadata, DEFAULT_OG_IMAGE } from "@/lib/seo/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const dict = getDictionary(locale);
 
-  return {
+  return buildPageMetadata({
     title: dict.illustration.title,
     description: dict.illustration.description,
-  };
+    path: "/ilustracion",
+    image: DEFAULT_OG_IMAGE,
+  });
 }
 
 export default async function IlustracionPage() {
   const locale = await getLocale();
   const dict = getDictionary(locale);
-  const illustrations = await getInstagramIllustrations();
+  const illustrations = getLocalIllustrations(locale);
 
   return (
     <div className="pt-28 md:pt-32">

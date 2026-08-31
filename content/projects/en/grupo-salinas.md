@@ -4,16 +4,16 @@ slug: grupo-salinas
 locale: en
 order: 4
 problem: "Four brands, four distinct customers, one loyalty program"
-description: "Loyalty systems for Elektra, Banco Azteca, ITALIKA, and Presta Prenda — distinct identities on a shared interaction architecture."
-year: "2020–2021"
+description: "Loyalty systems for Elektra, Banco Azteca, ITALIKA, and Presta Prenda - distinct identities on a shared interaction architecture."
+year: "2020-2021"
 client: "Grupo Salinas"
-duration: "2020 — 2021"
+duration: "2020 - 2021"
 roles: "Sr. UI Designer · Design System Designer"
 team: "2 POs · 3 PMs · 10 Devs · 5 Designers"
 tools: "Figma · Sketch · Zeplin · InVision · Confluence"
 tags: ["Product Design", "Loyalty", "Multi-brand", "Design Systems", "UI Design", "B2C"]
 learning: "Multi-brand doesn't mean multi-chaos. Shared architecture is what lets each identity breathe without breaking operations."
-coverImage: /images/projects/grupo-salinas/grupo-salinas-card-project.png
+coverImage: /images/projects/grupo-salinas/banner-grupo-salinas-projects.png
 cardImage: /images/projects/grupo-salinas/grupo-salinas-card-project.png
 showInHome: true
 ---

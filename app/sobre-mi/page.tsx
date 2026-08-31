@@ -6,15 +6,18 @@ import { Reveal } from "@/components/ui/Reveal";
 import { getDictionary } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/locale";
 import { getAboutContent, getSiteSettings } from "@/lib/data";
+import { buildPageMetadata, DEFAULT_OG_IMAGE } from "@/lib/seo/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const dict = getDictionary(locale);
 
-  return {
+  return buildPageMetadata({
     title: dict.about.title,
     description: dict.about.description,
-  };
+    path: "/sobre-mi",
+    image: DEFAULT_OG_IMAGE,
+  });
 }
 
 function AboutParagraph({

@@ -47,7 +47,7 @@ export const es = {
       "Casos de estudio de productos digitales en B2B SaaS, fintech y ecosistemas multi-marca.",
     listIntro:
       "Proyectos donde diseñé sistemas, flujos críticos y arquitectura de producto a escala.",
-    readCaseStudy: "Leer Caso de Uso",
+    readCaseStudy: "Leer caso de estudio",
     readCaseStudyAria: (title: string) => `Leer caso de uso: ${title}`,
     keyInitiatives: "Iniciativas Clave",
     notFound: "Proyecto no encontrado",
@@ -59,10 +59,11 @@ export const es = {
     role: "Rol",
     team: "Equipo",
     tools: "Herramientas",
-    learning: "Aprendizaje central",
+    learning: "Aprendizaje personal",
     overview: "Overview",
     challenge: "Challenge",
-    imageAlt: (title: string, n: number) => `${title} — imagen ${n}`,
+    imageAlt: (title: string, n: number) => `${title} - imagen ${n}`,
+    visitLiveSite: "Ver sitio en su estado actual",
     decision: {
       context: "Contexto",
       decision: "La decisión",
@@ -134,7 +135,7 @@ export const es = {
     title: "Ilustración",
     description: "Galería de ilustraciones y exploraciones visuales personales.",
     intro:
-      "Exploraciones visuales fuera del producto digital — editorial, conceptual y personal.",
+      "Exploraciones visuales fuera del producto digital - editorial, conceptual y personal.",
     openInstagram: (alt: string) => `Abrir en Instagram: ${alt}`,
   },
   manifesto: {
@@ -155,7 +156,7 @@ export const es = {
         number: "02",
         title: "AI Design Architecture",
         description:
-          "Convierto las reglas de un Design System en contexto para que la IA genere interfaces fieles al sistema. Diseñé un AI Playground que produce UI con 80–90% de fidelidad desde el primer prompt. No es la IA reemplazando el criterio. Es el criterio, escalado.",
+          "Convierto las reglas de un Design System en contexto para que la IA genere producto con él. Diseñé un AI Playground donde cualquier empleado describe una idea y recibe un prototipo fiel al sistema, listo para revisar. No es la IA reemplazando el criterio. Es el criterio, escalado.",
       },
       {
         number: "03",

@@ -8,18 +8,23 @@ parentSlug: growrk
 cardNumber: "GroWrk 1.2"
 problem: "La información de proveedores vivía dispersa en hojas de cálculo y correos manuales"
 description: "Lideré la iniciativa de UX para centralizar la gestión de proveedores de GroWrk, mentoreando a un diseñador Junior y alineando al CEO. Propuse una herramienta de facturación automática que bajó las cotizaciones de 30 a 10 minutos. El proyecto reveló una oportunidad de producto externa que construí de cero, y que enseñó tanto al funcionar como al apagarse."
-year: "2023–2024"
+year: "2023-2024"
 client: "GroWrk Remote · Los Angeles, California, United States"
-duration: "1 año (2023–2024)"
+duration: "1 año (2023-2024)"
 roles: "UX Lead · Product Designer"
 team: "Diseñador UI Junior, Product Owner, CEO, Ingeniería"
 tools: "Figma · FigJam · Notion"
 tags: ["Product Design", "UX Research", "Design Systems", "B2B", "Enterprise UX", "Workflow Automation", "Team Leadership", "Web App"]
-learning: "El buen diseño de producto no termina en la interfaz. Diseñar para un ecosistema B2B es entender por qué alguien haría, o no haría, el trabajo que tu producto le pide. La plataforma interna funcionó porque el equipo sintió el ahorro en su propio día. El app externo se apagó porque los proveedores no tenían incentivo para usarlo. Misma calidad de diseño, resultado opuesto. La diferencia no estuvo en las pantallas, estuvo en los incentivos."
+learning: |
+  El buen diseño de producto no termina en la interfaz. Requiere entender las realidades operativas, alinear incentivos, anticipar la resistencia al cambio, y construir sistemas que puedan evolucionar con el tiempo.
+
+  Lo que empezó como una mejora de eficiencia interna se convirtió en una capacidad estratégica de producto. Y la parte que no funcionó me enseñó tanto como la que sí. La plataforma interna funcionó porque el equipo sintió el ahorro en su propio día. El app externo se apagó porque los proveedores no tenían incentivo para usarlo. Misma calidad de diseño, resultado opuesto.
+
+  La diferencia no estuvo en las pantallas. Estuvo en los incentivos. Diseñar para un ecosistema B2B no es diseñar pantallas bonitas: es entender por qué alguien haría, o no haría, el trabajo que tu producto le pide.
 metrics:
-  - value: "60–75%"
+  - value: "60-75%"
     label: "Reducción en tiempo de preparación de cotizaciones"
-  - value: "2–3 hrs"
+  - value: "2-3 hrs"
     label: "Ahorradas al día a nivel equipo"
   - value: "100%"
     label: "Gestión de datos de proveedores centralizada"
@@ -30,7 +35,7 @@ metrics:
   - value: "0"
     label: "Spreadsheets manuales tras la transición"
 coverImage: /images/projects/growrk-suppliers-platform/banner-growrk-suppliers.png
-cardImage: /images/projects/growrk-suppliers-platform/growrk-supplier-app-screens.png
+cardImage: /images/projects/growrk-suppliers-platform/laptop-mockups-vol01-touchbar-02.png
 ---
 
 ## 01 · El problema
@@ -85,7 +90,7 @@ Con el flujo de trabajo definido, empecé a explorar soluciones estructurales. L
 
 Antes de pasar a alta fidelidad, hicimos una sesión de trabajo con Ingeniería para validar viabilidad técnica e identificar oportunidades de automatización. Ahí surgió la decisión más importante del proyecto.
 
-### La herramienta de facturas automáticas
+**La herramienta de facturas automáticas**
 
 El alcance inicial se enfocaba en visualizar y actualizar datos. Pero al mapear el flujo, vi un dolor que nadie había puesto sobre la mesa: el equipo redactaba cada cotización a mano, en correos de texto plano. Entre 20 y 30 minutos por cotización.
 
@@ -129,7 +134,7 @@ Eso se tradujo en aproximadamente 2 a 3 horas ahorradas al día a nivel equipo.
 
 ---
 
-## 07 · La siguiente apuesta — Supplier App
+## 07 · La siguiente apuesta - Supplier App
 
 **El éxito interno reveló una oportunidad más grande. La perseguimos. No funcionó. Y eso también es un resultado.**
 
@@ -144,31 +149,3 @@ No funcionó. Tras varias mejoras que ellos mismos pidieron, la adopción nunca 
 La razón de fondo fueron dos cosas. Primero, no había incentivo claro: mantener su inventario en nuestra plataforma era trabajo extra sin un beneficio directo para ellos. Segundo, la mayoría ya tenía su propio sistema y no veía razón para migrar. El problema no era el diseño. Era la estructura de incentivos del ecosistema.
 
 Desde la perspectiva de producto, fue una oportunidad enorme: construir una solución desde cero, definir flujos para un tipo de usuario nuevo, y validar supuestos sobre ownership, responsabilidad e integración de sistemas. El producto se apagó. El aprendizaje no.
-
----
-
-## 08 · Reflexión final
-
-**El buen diseño de producto va más allá de la interfaz.**
-
-Esta iniciativa me reforzó algo: el gran diseño de producto no se trata solo de ejecutar pantallas. Requiere entender las realidades operativas, alinear incentivos, anticipar la resistencia al cambio, y construir sistemas que puedan evolucionar con el tiempo.
-
-Lo que empezó como una mejora de eficiencia interna se convirtió en una capacidad estratégica de producto. Y la parte que no funcionó me enseñó tanto como la que sí. Diseñar para un ecosistema B2B no es diseñar pantallas bonitas: es entender por qué alguien haría, o no haría, el trabajo que tu producto le pide.
-
----
-
-## 09 · Impacto
-
-**Lo que cambió, en números.**
-
-> Nota: Proyecto desarrollado entre 2023 y 2024. El Supplier App externo se mantuvo en operación aproximadamente un año antes de apagarse por baja adopción.
-
-| Métrica | Descripción |
-|---|---|
-| 60–75% | Reducción en tiempo de preparación de cotizaciones |
-| 2–3 hrs | Ahorradas al día a nivel equipo |
-| 100% | Gestión de datos de proveedores centralizada |
-| 1 mes | Adopción completa de la plataforma interna |
-| Nueva | Herramienta de facturación automática (iniciativa propia) |
-| 0 | Spreadsheets manuales tras la transición |
-

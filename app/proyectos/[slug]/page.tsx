@@ -17,6 +17,7 @@ import {
   getProjectBySlug,
   getProjectNavigation,
 } from "@/lib/data";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -34,10 +35,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const project = await getProjectBySlug(slug);
   if (!project) return { title: dict.projects.notFound };
 
-  return {
+  return buildPageMetadata({
     title: project.title,
     description: project.description,
-  };
+    path: `/proyectos/${slug}`,
+    image: project.coverImage ?? project.cardImage,
+  });
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
@@ -104,7 +107,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               />
             )}
 
-            {project.body && <CaseStudyBody content={project.body} />}
+            {project.body && (
+              <CaseStudyBody
+                content={project.body}
+                locale={locale}
+                liveSiteLabel={dict.projects.visitLiveSite}
+              />
+            )}
 
             {children.length > 0 && (
               <section className="mt-16 border-t border-mist pt-16 pb-4">
@@ -125,22 +134,36 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </>
         ) : (
           <>
-            {project.body && <CaseStudyBody content={project.body} />}
+            {project.body && (
+              <CaseStudyBody
+                content={project.body}
+                locale={locale}
+                liveSiteLabel={dict.projects.visitLiveSite}
+              />
+            )}
 
             {galleryImages.length > 0 && (
               <section className="mb-16">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {galleryImages.map((src, index) => (
+                  {galleryImages.map((src, index) => {
+                    const imageCaption = dict.projects.imageAlt(
+                      project.title,
+                      index + 1,
+                    );
+
+                    return (
                     <ZoomableImage
                       key={src}
                       src={src}
-                      alt={dict.projects.imageAlt(project.title, index + 1)}
+                      alt={imageCaption}
+                      caption={imageCaption}
                       fill
                       className="object-cover"
                       sizes="(min-width: 640px) 50vw, 100vw"
                       containerClassName="relative aspect-[4/3] overflow-hidden rounded-lg bg-fog"
                     />
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
             )}

@@ -1,0 +1,452 @@
+{
+  "primary": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        1,
+        0.6941176652908325,
+        0
+      ],
+      "alpha": 1,
+      "hex": "#FFB100"
+    },
+    "$description": "Amber accented color to apply to backgrounds, borders, texts and icons.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4017:66237",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:e4db4be2dc307cef4b490b73cd9ddd86217cd263/-1:-1",
+        "targetVariableName": "primary/500",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "secondary": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.23137255012989044,
+        0.5098039507865906,
+        0.9647058844566345
+      ],
+      "alpha": 1,
+      "hex": "#3B82F6"
+    },
+    "$description": "Blue accented color to apply to backgrounds, borders, texts and icons.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4035:8127",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:3e61ba991be6d77ab467223f7beba19cbfe0606a/-1:-1",
+        "targetVariableName": "secondary/500",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "success": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.13333334028720856,
+        0.772549033164978,
+        0.3686274588108063
+      ],
+      "alpha": 1,
+      "hex": "#22C55E"
+    },
+    "$description": "Green accented color to apply to backgrounds, borders, texts and icons.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4017:100167",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:8dc933be05e6176a777d1a71f08b7956acdcf058/-1:-1",
+        "targetVariableName": "success/500",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "info": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.38823530077934265,
+        0.4000000059604645,
+        0.9450980424880981
+      ],
+      "alpha": 1,
+      "hex": "#6366F1"
+    },
+    "$description": "Indigo accented color to apply to backgrounds, borders, texts and icons.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4017:100171",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:42caa3ad2b62b1be4a161bca3f96b8b13a535ab0/-1:-1",
+        "targetVariableName": "info/500",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "warning": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.9764705896377563,
+        0.45098039507865906,
+        0.08627451211214066
+      ],
+      "alpha": 1,
+      "hex": "#F97316"
+    },
+    "$description": "Orange accented color to apply to backgrounds, borders, texts and icons.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4017:100173",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:8a5dcf7b0b5210554c62199f733c462e00d8b7bd/-1:-1",
+        "targetVariableName": "warning/500",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "error": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.9372549057006836,
+        0.2666666805744171,
+        0.2666666805744171
+      ],
+      "alpha": 1,
+      "hex": "#EF4444"
+    },
+    "$description": "Red accented color to apply to backgrounds, borders, texts and icons.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4017:100174",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:2c0f611b08936d98d4a24895a39c398adc23f96c/-1:-1",
+        "targetVariableName": "error/500",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "text-inverted": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        1,
+        1,
+        1
+      ],
+      "alpha": 1,
+      "hex": "#FFFFFF"
+    },
+    "$description": "White color texts used for dark backgrounds to ensure high contrast and readability.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:6370:41311",
+      "com.figma.scopes": [
+        "ALL_FILLS"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:a2fbd922a5beb34adf716cd82e4ea54f14ddf8f3/-1:-1",
+        "targetVariableName": "color/white",
+        "targetVariableSetId": "VariableCollectionId:a4b57d2add54b598ba1cb3d6b6a81da6da02526f/-1:-1",
+        "targetVariableSetName": "_Primitive"
+      }
+    }
+  },
+  "text-dimmed": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.6117647290229797,
+        0.6392157077789307,
+        0.686274528503418
+      ],
+      "alpha": 1,
+      "hex": "#9CA3AF"
+    },
+    "$description": "Gray color for less important, tertiary text that should fade slightly into the background. Used for disabled and placeholders texts.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4015:5643",
+      "com.figma.scopes": [
+        "ALL_FILLS"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:babf4d500d6bc6aa8afe26e9b7ef2b18ca7d6929/-1:-1",
+        "targetVariableName": "neutral/400",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "text-toned": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.29411765933036804,
+        0.3333333432674408,
+        0.38823530077934265
+      ],
+      "alpha": 1,
+      "hex": "#4B5563"
+    },
+    "$description": "Gray color for secondary text content that provides context but isn't the main focus.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4225:45445",
+      "com.figma.scopes": [
+        "ALL_FILLS"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:1aa8af5b4810581730730afc946b40a6cb55b078/-1:-1",
+        "targetVariableName": "neutral/600",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "text-default": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.12156862765550613,
+        0.16078431904315948,
+        0.21568627655506134
+      ],
+      "alpha": 1,
+      "hex": "#1F2937"
+    },
+    "$description": "The standard, gray color for most body text.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4014:5176",
+      "com.figma.scopes": [
+        "ALL_FILLS"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:caedf041cb46b18fd3afd75e1bae4d3925384886/-1:-1",
+        "targetVariableName": "neutral/800",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "bg-default": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        1,
+        1,
+        1
+      ],
+      "alpha": 1,
+      "hex": "#FFFFFF"
+    },
+    "$description": "The standard, white background for main content areas.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4017:100175",
+      "com.figma.scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:a2fbd922a5beb34adf716cd82e4ea54f14ddf8f3/-1:-1",
+        "targetVariableName": "color/white",
+        "targetVariableSetId": "VariableCollectionId:a4b57d2add54b598ba1cb3d6b6a81da6da02526f/-1:-1",
+        "targetVariableSetName": "_Primitive"
+      }
+    }
+  },
+  "bg-muted": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.9529411792755127,
+        0.95686274766922,
+        0.9647058844566345
+      ],
+      "alpha": 1,
+      "hex": "#F3F4F6"
+    },
+    "$description": "Gray color for hover states or low emphasis elements.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4017:100176",
+      "com.figma.scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:2dc849d1387e22da1c459d64cd6a6fb1ee4e17d9/-1:-1",
+        "targetVariableName": "neutral/100",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "bg-elevated": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.8980392217636108,
+        0.9058823585510254,
+        0.9215686321258545
+      ],
+      "alpha": 1,
+      "hex": "#E5E7EB"
+    },
+    "$description": "Gray color for disable states or mid emphasis elements.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4031:52126",
+      "com.figma.scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:df49c3fe519e458182702c43296a1649b983567f/-1:-1",
+        "targetVariableName": "neutral/200",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "bg-accented": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.8196078538894653,
+        0.8352941274642944,
+        0.8588235378265381
+      ],
+      "alpha": 1,
+      "hex": "#D1D5DB"
+    },
+    "$description": "Gray color for high emphasis elements.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4335:20464",
+      "com.figma.scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:15e0e73cd9ca55086e6888fcdb75b1be18f71e7e/-1:-1",
+        "targetVariableName": "neutral/300",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "bg-inverted": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.12156862765550613,
+        0.16078431904315948,
+        0.21568627655506134
+      ],
+      "alpha": 1,
+      "hex": "#1F2937"
+    },
+    "$description": "Gray color for high emphasis elements.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4028:22013",
+      "com.figma.scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:caedf041cb46b18fd3afd75e1bae4d3925384886/-1:-1",
+        "targetVariableName": "neutral/800",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "border-default": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.8980392217636108,
+        0.9058823585510254,
+        0.9215686321258545
+      ],
+      "alpha": 1,
+      "hex": "#E5E7EB"
+    },
+    "$description": "The standard color for dividing lines and simple borders.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4017:100177",
+      "com.figma.scopes": [
+        "STROKE"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:df49c3fe519e458182702c43296a1649b983567f/-1:-1",
+        "targetVariableName": "neutral/200",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "border-inverted": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.12156862765550613,
+        0.16078431904315948,
+        0.21568627655506134
+      ],
+      "alpha": 1,
+      "hex": "#1F2937"
+    },
+    "$description": "A dark gray color used in high-contrast or inverted themes.",
+    "$extensions": {
+      "com.figma.variableId": "VariableID:4038:108589",
+      "com.figma.scopes": [
+        "STROKE"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:caedf041cb46b18fd3afd75e1bae4d3925384886/-1:-1",
+        "targetVariableName": "neutral/800",
+        "targetVariableSetId": "VariableCollectionId:9ed3551bf6d44cc4bb4a79ee64c6dd986379cbf0/-1:-1",
+        "targetVariableSetName": "Semantic"
+      }
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "Light"
+  }
+}

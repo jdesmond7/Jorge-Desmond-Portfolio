@@ -1,4 +1,4 @@
-/** Correo público del portafolio — única dirección visible en el sitio. */
+/** Correo público del portafolio - única dirección visible en el sitio. */
 export const SITE_EMAIL = "hola@jorgedesmond.com";
 
 export const LEGACY_CONTACT_EMAIL = "jdesmond7@gmail.com";

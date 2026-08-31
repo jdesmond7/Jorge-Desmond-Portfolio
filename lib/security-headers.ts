@@ -1,9 +1,3 @@
-const INSTAGRAM_HOSTS = [
-  "https://graph.instagram.com",
-  "https://*.cdninstagram.com",
-  "https://*.fbcdn.net",
-].join(" ");
-
 const isDev = process.env.NODE_ENV === "development";
 
 /**
@@ -16,10 +10,10 @@ const CONTENT_SECURITY_POLICY = isDev
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'",
       "style-src 'self' 'unsafe-inline'",
-      `img-src 'self' data: blob: ${INSTAGRAM_HOSTS}`,
+      "img-src 'self' data: blob:",
       "font-src 'self' data:",
-      `media-src 'self' blob: ${INSTAGRAM_HOSTS}`,
-      `connect-src 'self' ws: wss: ${INSTAGRAM_HOSTS}`,
+      "media-src 'self' blob:",
+      "connect-src 'self' ws: wss:",
       "worker-src 'self' blob:",
       "frame-ancestors 'self'",
       "base-uri 'self'",
@@ -30,10 +24,10 @@ const CONTENT_SECURITY_POLICY = isDev
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline'",
-      `img-src 'self' data: blob: ${INSTAGRAM_HOSTS}`,
+      "img-src 'self' data: blob:",
       "font-src 'self' data:",
-      `media-src 'self' blob: ${INSTAGRAM_HOSTS}`,
-      `connect-src 'self' ${INSTAGRAM_HOSTS}`,
+      "media-src 'self' blob:",
+      "connect-src 'self'",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",

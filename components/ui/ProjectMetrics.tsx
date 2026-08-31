@@ -23,7 +23,7 @@ export function ProjectMetrics({ metrics, className }: ProjectMetricsProps) {
           key={`${metric.value}-${metric.title}-${index}`}
           className="rounded-[var(--radius-card)] border border-mist bg-white px-6 py-5"
         >
-          <div className="text-[clamp(28px,4vw,40px)] font-bold leading-none tracking-[-0.02em] text-carbon">
+          <div className="text-[24px] font-bold leading-[1.1] tracking-[-0.02em] text-primary">
             {metric.value}
           </div>
           <div className="mt-1.5 text-[14px] font-semibold leading-snug text-carbon">

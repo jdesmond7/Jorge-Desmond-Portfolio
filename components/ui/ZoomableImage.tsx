@@ -28,6 +28,12 @@ function resolveSrc(src: ImageProps["src"]): string {
 interface ZoomableImageProps extends ImageProps {
   containerClassName?: string;
   videoUrl?: string;
+  /** Visible caption below the image and in fullscreen. Falls back to `alt` when omitted. */
+  caption?: string;
+  /** When false, hides the inline caption but keeps it in fullscreen. Default: true. */
+  showCaption?: boolean;
+  /** Cropped inline preview; fullscreen still shows the full image. */
+  compactPreview?: boolean;
 }
 
 function isGifUrl(url: string): boolean {
@@ -35,12 +41,19 @@ function isGifUrl(url: string): boolean {
 }
 
 const mediaFillClass = "absolute inset-0 h-full w-full";
+const captionClassName =
+  "mt-3 text-[13px] leading-snug tracking-[-0.005em] text-zinc";
+const modalCaptionClassName =
+  "mt-3 max-w-full px-2 text-center text-[13px] leading-snug tracking-[-0.005em] text-white/85";
 
 export function ZoomableImage({
   containerClassName = "",
   className = "",
   alt = "",
+  caption,
+  showCaption = true,
   videoUrl,
+  compactPreview = false,
   ...imageProps
 }: ZoomableImageProps) {
   const { dict } = useI18n();
@@ -53,10 +66,20 @@ export function ZoomableImage({
   const openContentTimerRef = useRef<number | null>(null);
 
   const altText = typeof alt === "string" && alt ? alt : dict.zoom.image;
+  const captionText =
+    caption !== undefined
+      ? caption.trim()
+      : typeof alt === "string"
+        ? alt.trim()
+        : "";
   const modalSrc = resolveSrc(imageProps.src);
   const isVideo = Boolean(videoUrl);
   const isGif = !isVideo && isGifUrl(modalSrc);
+  const useCompactPreview = compactPreview && !isVideo && !isGif;
   const mediaClassName = `${mediaFillClass} ${className}`.trim();
+  const previewClassName = useCompactPreview
+    ? `object-cover object-top ${className}`.trim()
+    : className;
 
   const clearTimers = useCallback(() => {
     if (closeTimerRef.current !== null) {
@@ -135,12 +158,18 @@ export function ZoomableImage({
 
   useEffect(() => clearTimers, [clearTimers]);
 
-  const wrapperClass = imageProps.fill
-    ? `group relative block h-full w-full cursor-zoom-in overflow-hidden border-0 bg-transparent p-0 ${containerClassName}`
-    : `group relative block w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-card)] border-0 bg-transparent p-0 ${containerClassName}`;
+  const wrapperClass = useCompactPreview
+    ? `group relative block h-[240px] w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-card)] border-0 bg-transparent p-0 ${containerClassName}`
+    : imageProps.fill
+      ? `group relative block min-h-0 flex-1 cursor-zoom-in overflow-hidden border-0 bg-transparent p-0 ${containerClassName}`
+      : `group relative block w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-card)] border-0 bg-transparent p-0 ${containerClassName}`;
+  const figureClassName = imageProps.fill
+    ? "flex h-full w-full min-h-0 flex-col"
+    : "block w-full";
 
   return (
     <>
+      <figure className={figureClassName}>
       <button
         type="button"
         className={wrapperClass}
@@ -161,6 +190,19 @@ export function ZoomableImage({
         ) : isGif ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={modalSrc} alt={altText} className={mediaClassName} />
+        ) : useCompactPreview ? (
+          <Image
+            alt={alt}
+            src={imageProps.src}
+            fill
+            sizes={
+              typeof imageProps.sizes === "string"
+                ? imageProps.sizes
+                : "(max-width: 1072px) 100vw, 1072px"
+            }
+            unoptimized={isExternalUrl(imageProps.src)}
+            className={previewClassName}
+          />
         ) : (
           <Image
             alt={alt}
@@ -182,6 +224,11 @@ export function ZoomableImage({
           <MagnifyingGlass className="h-8 w-8 text-white drop-shadow-sm" />
         </span>
       </button>
+
+      {showCaption && captionText ? (
+        <figcaption className={captionClassName}>{captionText}</figcaption>
+      ) : null}
+      </figure>
 
       {isPresent &&
         (modalSrc || videoUrl) &&
@@ -237,37 +284,40 @@ export function ZoomableImage({
               </svg>
             </button>
 
-            {isVideo ? (
-              <video
-                src={videoUrl}
-                poster={modalSrc !== videoUrl ? modalSrc : undefined}
-                autoPlay
-                loop
-                muted
-                playsInline
-                aria-label={altText}
-                className={`relative z-[101] max-h-[90vh] max-w-[min(1200px,95vw)] object-contain transition-[opacity,transform] ease-out ${
-                  contentVisible
-                    ? "scale-100 opacity-100"
-                    : "pointer-events-none scale-[0.985] opacity-0"
-                }`}
-                style={{ transitionDuration: `${CONTENT_DURATION_MS}ms` }}
-                onClick={(event) => event.stopPropagation()}
-              />
-            ) : (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                src={modalSrc}
-                alt={altText}
-                className={`relative z-[101] max-h-[90vh] max-w-[min(1200px,95vw)] object-contain transition-[opacity,transform] ease-out ${
-                  contentVisible
-                    ? "scale-100 opacity-100"
-                    : "pointer-events-none scale-[0.985] opacity-0"
-                }`}
-                style={{ transitionDuration: `${CONTENT_DURATION_MS}ms` }}
-                onClick={(event) => event.stopPropagation()}
-              />
-            )}
+            <div
+              className={`relative z-[101] flex max-h-[90vh] max-w-[min(1200px,95vw)] flex-col items-center transition-[opacity,transform] ease-out ${
+                contentVisible
+                  ? "scale-100 opacity-100"
+                  : "pointer-events-none scale-[0.985] opacity-0"
+              }`}
+              style={{ transitionDuration: `${CONTENT_DURATION_MS}ms` }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              {isVideo ? (
+                <video
+                  src={videoUrl}
+                  poster={modalSrc !== videoUrl ? modalSrc : undefined}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label={altText}
+                  className="max-h-[calc(90vh-2.5rem)] w-auto max-w-full object-contain"
+                />
+              ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={modalSrc}
+                  alt={altText}
+                  className="max-h-[calc(90vh-2.5rem)] w-auto max-w-full object-contain"
+                />
+              )}
+              {captionText ? (
+                <figcaption className={modalCaptionClassName}>
+                  {captionText}
+                </figcaption>
+              ) : null}
+            </div>
           </div>,
           document.body,
         )}

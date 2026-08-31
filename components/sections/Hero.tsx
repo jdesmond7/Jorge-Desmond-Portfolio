@@ -193,7 +193,7 @@ export function Hero({ content }: HeroProps) {
 
         <div className="relative z-[2] mx-auto flex h-[100svh] w-full max-w-[var(--container-max)] flex-col justify-start px-6 pb-10 pt-[96px] md:justify-center md:px-10 md:pb-20 md:pt-[140px] lg:px-16">
           <div className="grid w-full grid-cols-1 items-start gap-8 max-md:relative max-md:min-h-0 max-md:flex-1 md:gap-12 lg:grid-cols-2 lg:items-center lg:gap-28 xl:gap-36">
-            {/* Izquierda — saludo + nombre (frame inicial) */}
+            {/* Izquierda - saludo + nombre (frame inicial) */}
             <div
               className="max-md:absolute max-md:inset-x-0 max-md:top-6 lg:pr-6"
               style={{
@@ -215,7 +215,7 @@ export function Hero({ content }: HeroProps) {
               </h1>
             </div>
 
-            {/* Derecha — título + descripción + CTAs (aparece tras el scroll) */}
+            {/* Derecha - título + descripción + CTAs (aparece tras el scroll) */}
             <div
               className="max-w-[540px] max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:top-0 max-md:flex max-md:flex-col max-md:pt-6 md:max-w-none lg:col-start-2 lg:max-w-[560px] lg:pl-10 lg:pt-8"
               style={{

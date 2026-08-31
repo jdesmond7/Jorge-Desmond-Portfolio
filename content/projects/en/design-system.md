@@ -8,16 +8,16 @@ parentSlug: growrk
 cardNumber: "GroWrk 1.3"
 problem: "Design and engineering teams spoke different languages"
 description: "Design Token architecture and reusable components integrated with Nuxt UI and Tailwind. The system that made everything else possible."
-year: "2022–2024"
+year: "2022-2026"
 client: "GroWrk Remote"
 roles: "Sr. Product Designer · Design System Lead"
 tags: ["Design Systems", "Design Tokens", "Component Library", "Figma", "NUXT UI", "AI-Assisted Design", "Design Ops", "B2B SaaS"]
-learning: "A Design System isn't a component library. It's the collective decision of how a team wants to work. Without adoption, it doesn't exist. Without engineering, it doesn't scale. Without AI, it doesn't grow."
+learning: "A Design System isn't a component library. It's the collective decision of how a team wants to work. Without adoption, it doesn't exist. Without engineering, it doesn't scale. A perfect component in Figma that nobody uses is worth less than an imperfect one the whole team adopts. The real work wasn't drawing components - it was getting an entire team to speak the same language."
 metrics:
   - value: "~40%"
-    label: "Reduction in design time (2–3 hrs to 20 min on complex tables)"
+    label: "Reduction in design time (2-3 hrs to 20 min on complex tables)"
   - value: "40"
-    label: "Components in V3 documented in Figma and code"
+    label: "Components in V2 documented in Figma and code"
   - value: "300+"
     label: "Total tokens. Bilingual system: design and engineering"
   - value: "234"
@@ -27,7 +27,7 @@ metrics:
   - value: "5"
     label: "Platforms served: Client, Staff, Supplier, Employee, Website"
 coverImage: /images/projects/growrk-design-system/design-system-growrk.png
-cardImage: /images/projects/growrk/growrk-card-project.png
+cardImage: /images/projects/growrk-design-system/growrk-design-system-card.png
 ---
 
 ## 01 · The problem
@@ -40,112 +40,115 @@ The real problem became visible in year three, when we tried to update the visua
 
 We needed a single source of truth. One that design and engineering could share, without stopping the product while we built it.
 
-![design_eng_gap_before_after.png](/images/projects/growrk-design-system/design_eng_gap_before_after.png)
-
 ---
 
-## 02 · The process — 3 versions, 3 lessons
+## 02 · The process - 3 stages, 3 lessons
 
 **A Design System isn't built in one shot. It's cultivated.**
 
-![ds_evolution_timeline.png](/images/projects/growrk-design-system/ds_evolution_timeline.png)
+The system went through two iterations on the same foundation, then a full technological restart. Each stage solved the limit of the one before it.
 
-### V1 · 2022 · The system nobody asked for but everyone needed
-- Built in parallel with product development, without freezing features
-- 31 base components documented in Figma
-- 6 token categories: colors, typography, shadows, radii, spacing
-- 250 tokens total. Every component with at least 2 variables
-- Buttons with up to 60 variables to cover every possible state
-- A dedicated library of 330 icons
-- The only real user: me
+### V1 · 2022 · The first version
+- Built in parallel with the product, without freezing features
+- 31 base components, 250 tokens across 6 categories, 330 icons
+- The only user: me
 
-> The system existed. The problem was that I was the only one using it.
+> The system existed, but nobody else was using it.
 
-### V2 · 2023 · The moment the system revealed its own problem
-
-- The visual identity update exposed the inconsistencies piled up in production
-- Each developer had built their own button. Their own way
-- The Figma DS and the code were still parallel worlds
+### V1.2 · 2023 · A refinement on the same base
+- The visual identity update exposed inconsistencies piled up in production: every developer had built their own button
 - First real adoption by other designers on the team
-- The Jr. designer started using it, and her questions fed straight back into the system
-- First conversations with devs to migrate components to Storybook (not completed)
+- The Jr. designer started using it and her questions fed straight back into the system
+- First conversations with devs to migrate components to Storybook
+- The Figma DS and the code were still parallel worlds
 
-> A perfect DS in Figma doesn't exist if engineering doesn't implement it.
+> It wasn't a new system: a refinement on the same base.
 
-### V3 · 2024 · A single source of truth for design and engineering
+### V2 · 2026 · The restart
+- A new file on new technology: NUXT UI + Tailwind, a shared base with engineering from the start
+- 40 components with behavior defined in both code and Figma
+- ~300 tokens on a shared naming system
+- For the first time, design and engineering worked in the same language
 
-- Strategic migration to NUXT UI + Tailwind. A shared base with engineering from the start
-- 40 components documented with behavior defined in both code and Figma
-- ~300 tokens. A bilingual system: design and engineering on the same naming
-- Icon audit: from 330 down to 234 standardized and actively used
-- Image library: 34 documented assets, used in production and centralized
-- Per-component workshops to build custom components on top of NUXT
-- ProductCard as the flagship case: composed from multiple NUXT components, reusable across every platform
-
-> For the first time, design and engineering spoke the same language.
+> This is the version I still maintain and scale today.
 
 ![design-system-growrk.png](/images/projects/growrk-design-system/design-system-growrk.png)
 
 ---
 
-## 03 · Key decisions
+## 03 · Tokens
 
-**The decisions that don't show up on the screens.**
+**The atomic layer of the system.**
 
-A Design System isn't a component library. It's a series of decisions about how you want a team to work. These are the ones that shaped the outcome most.
+I defined more than 300 tokens for color, typography, spacing, radii, and shadows, organized in a naming system shared by design and engineering. A change in one token propagates across the entire product without manually editing a single screen.
 
-### 01 · Treating the DS as a product, not a deliverable
+Color tokens were structured as primitives (base brand values) mapped to semantic tokens. This removed manual overrides between themes and reduced the risk of human error in production-ready designs. Spacing and radii were standardized on fixed scales, and breakpoints were defined as variables to automate responsive behavior.
 
-At first, the Design System was my project. I built it, I maintained it, and nobody else felt it was theirs.
-
-I changed the process: before publishing any new component, I'd bring it to the team in a workshop. Collective decisions about functionality, variants, and states. If everyone took part in defining it, everyone adopted it.
-
-The Jr. designer didn't just start using the system. She started proposing improvements. Her questions fed directly into every version of the DS. The debate over an input's outline wasn't wasted time: it was the process of making the system belong to everyone.
-
-### 02 · The ProductCard: a custom component on a NUXT base
-
-NUXT UI handled standard components well. The problem was that GroWrk's product cards had specific requirements that UTable or UCard didn't cover natively.
-
-We developed a workshop process to build custom components on top of NUXT. The ProductCard combined multiple existing components into a new one, with properties reusable across every platform. When an extra capability was needed, it was added as a variant, not as a new component.
-
-The result: a piece that scales. Less consistency debt, faster implementation.
-
-### 03 · Migrating to NUXT/Tailwind: letting go of the custom DS
-
-We had a well-built Figma Design System. But responsiveness was a constant pain for engineering: every custom component required code maintenance that the design team didn't control.
-
-The migration was an engineering initiative. I chose to embrace it instead of defending my ground. My stance was clear: what's best for the product over the system I had built. I adapted NUXT to GroWrk's visual language and documented every adjustment in Figma and in code.
-
-For the first time, design and engineering worked on the same base. Responsiveness stopped being a conflict. The bilingual system closed a three-year gap.
-
-### 04 · Cleaning up the icons: from 330 to 234
-
-The original library accumulated 330 icons over two years. Many were redundant, others were outdated, and several had never made it to production.
-
-In V3 we ran a full audit of real usage. We removed redundancies, standardized styles, and documented the 234 icons in active use. Each one with naming consistent with the NUXT system.
-
-Fewer icons, more clarity. The team no longer wastes time deciding which of the three versions of the user icon to use.
+<!-- ds-token-explorer -->
 
 ---
 
-## 04 · The next layer — AI Design Architecture
+## 04 · Components
+
+**From token to composed component.**
+
+On top of the tokens we built the library: 40 components documented in Figma and code, each with its variants and states. The goal of the refactor was to reduce duplicated variants and compose instead of multiply.
+
+<!-- ds-component-playground -->
+
+
+---
+
+## 05 · Documentation
+
+**A component without documentation is a suggestion, not a standard.**
+
+The single source of truth lives in Notion, connected to Figma and to code. Every component has its own entry with the same structure, so anyone - design, engineering, or someone who just joined - knows exactly how and when to use it without asking.
+
+![components-documentation-notion.png](/images/projects/growrk-design-system/components-documentation-notion.png)
+
+Each entry documents:
+
+- **Usage rules.** The conditions under which the component applies, and those under which it doesn't.
+- **Exact tokens.** The precise values that live in Figma (color, spacing, typography, radii), linked to their token - not copied by hand.
+- **Usage context.** Which screens and flows use it, and for what purpose.
+- **Do's and Don'ts.** Concrete examples of correct and incorrect use, to close the door on interpretation.
+- **Change history.** A log of every modification the component has gone through, with date and reason. Plus space to propose future changes that get discussed with the team before they ship.
+
+The history is what keeps the system alive. No component changes by unilateral decision: every adjustment is documented and reviewed with the team. That stops the DS from fragmenting over time - which is exactly the problem we started with.
+
+> [!info] Documentation isn't the end of the design work. It's what makes it reusable.
+
+---
+
+## 06 · Key decisions
+
+**A Design System is a series of decisions about how you want a team to work.**
+
+### Treat the DS as a product, not a deliverable.
+
+At the start the system was my project: I built and maintained it alone. I changed the process and introduced workshops per component before publishing, with collective decisions on functionality, variants, and states. Adoption stopped being an imposition: whoever helps define it, adopts it. The Jr. designer went from using the system to proposing improvements that fed back into every version.
+
+### ProductCard: custom on a NUXT base.
+
+NUXT UI covered the standard components, but GroWrk's product cards required logic that UTable or UCard didn't cover natively. I built ProductCard by combining multiple NUXT components into one reusable piece. New needs land as a variant, not as a new component. Less consistency debt, faster implementation.
+
+### Migrate to NUXT/Tailwind.
+
+The custom Figma DS was well built, but responsive behavior demanded code maintenance that design didn't control. The migration was an engineering initiative, and I chose to embrace it rather than defend the in-house system. I adapted NUXT to GroWrk's visual language and documented every adjustment in Figma and code. Responsive stopped being a conflict, and the bilingual system closed a three-year gap.
+
+### Icon audit: from 330 to 234.
+
+The library had accumulated 330 icons over two years, many redundant or unused in production. A full audit of real usage removed redundancies, standardized styles, and left 234 active icons with consistent naming. The team stopped wasting time choosing between three versions of the same icon.
+
+---
+
+## 07 · The next layer - Designing with AI
 
 **What if the Design System could design with you?**
 
-With all the DS documentation centralized in Notion and Figma, a natural question came up: could we turn those rules into context for an AI model that generated UI directly from them?
+With the system mature and documentation centralized, the rules were already written and in order. The next step was to turn them into context so AI could generate UI faithful to the system from the first prompt.
 
-Together with the PM, we built an AI Playground: a code project that holds all the DS rules (design.md, rules.md, skills.md) as injected context. Any team member can describe a screen in natural language and get back a proposal that follows GroWrk's design system.
+That exploration became a project in its own right. The Design System was the foundation that made it possible: without well-defined tokens, components, and rules, there would be no context to give the AI.
 
-The process took about two months, working in parallel with our normal responsibilities. As more capable models reached the market, the quality of the generated proposals improved steadily.
-
-**First prompt:** 80–90% fidelity to the DS from the first output
-
-**With AI audit:** 99–100% fidelity after automated review
-
-![ai_playground_fidelity.png](/images/projects/growrk-design-system/ai_playground_fidelity.png)
-
-> "We think this is a tool that's going to change the way we design."
-> — PM, GroWrk Remote
-
-> "I can't wait to try it, you can tell it's going to save us a lot of time."
-> — Sony, Designer, GroWrk Remote
+[Read the full case: AI Playground →](/proyectos/ai-playground)
