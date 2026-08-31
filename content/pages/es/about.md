@@ -6,7 +6,7 @@ page_title: "Sobre mí - Jorge Desmond"
 heroImage: "/images/about-me.png"
 ---
 
-Soy jorge. Mexicano, vivo en Monterrey. Entreno calistenia. Dibujo cuando puedo.
+Soy Jorge Desmond. Mexicano, vivo en Monterrey. Entreno calistenia. Dibujo cuando puedo.
 
 Diseño sistemas, los que hacen que los productos no se rompan cuando crecen. Ahorita soy Senior Product Designer en [GroWrk Remote](https://growrk.com/), donde también cargo el sombrero de AI Design Architect. En paralelo enseño diseño en el [Tec de Monterrey](https://tec.mx/) y estoy construyendo [Prowell](https://prowell.app/), una plataforma de coaching para entrenadores de bienestar.
 
@@ -20,4 +20,4 @@ Tengo tres marcas que estoy construyendo despacio y con intención: desmond.desi
 
 Escríbeme a [hola@jorgedesmond.com](mailto:hola@jorgedesmond.com) o encuéntrame en [LinkedIn](https://linkedin.com/in/jorgedesmond) / [Instagram](https://instagram.com/jorgedesmond).
 
-Con gusto, jorge
+Con gusto, Jorge Desmond
